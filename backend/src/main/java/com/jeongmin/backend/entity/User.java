@@ -27,4 +27,12 @@ public class User extends BaseTimeEntity {
     @Column(length = 30)
     private String nickname;
 
+    public static User create(String provider, String providerId, String nickname) {
+        User user = new User();
+        user.provider = provider;
+        user.providerId = providerId;
+        user.nickname = nickname;
+        return user;
+    }
+
 }
