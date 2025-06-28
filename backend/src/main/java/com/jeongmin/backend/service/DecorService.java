@@ -1,8 +1,6 @@
 package com.jeongmin.backend.service;
 
-import com.jeongmin.backend.dto.DecorCreateRequest;
-import com.jeongmin.backend.dto.DecorResponse;
-import com.jeongmin.backend.dto.DecorSearchRequest;
+import com.jeongmin.backend.dto.*;
 import com.jeongmin.backend.entity.Decor;
 import com.jeongmin.backend.entity.DecorType;
 import com.jeongmin.backend.entity.User;
@@ -39,6 +37,15 @@ public class DecorService {
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
         return earthRadius * c;
+    }
+
+    public DecorDetailResponse getDecorById(Long decorId) {
+        Decor decor = getActiveDecorById(decorId);
+        List<FeedbackDto> feedbacks = decor.getFeedbacks().stream()
+                .map(FeedbackDto::from)
+                .toList();
+
+        return DecorDetailResponse.from(decor, feedbacks);
     }
 
     @Transactional
