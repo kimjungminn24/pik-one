@@ -23,6 +23,24 @@ public class DecorService {
     private final DecorRepository decorRepository;
     private final UserRepository userRepository;
 
+    private static double calculateDistance(
+            double lat1, double lng1,
+            double lat2, double lng2
+    ) {
+        double earthRadius = 6371000;
+
+        double dLat = Math.toRadians(lat2 - lat1);
+        double dLng = Math.toRadians(lng2 - lng1);
+
+        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2)
+                + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
+                * Math.sin(dLng / 2) * Math.sin(dLng / 2);
+
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+        return earthRadius * c;
+    }
+
     public List<DecorResponse> searchDecorInBoundary(DecorSearchRequest request) {
         return decorRepository.findByBoundaryAndType(
                         request.northLat(),
@@ -44,6 +62,10 @@ public class DecorService {
         User user = userRepository.findByProviderAndProviderId("naver", providerId)
                 .orElseThrow(() -> new IllegalArgumentException("유저를 찾을 수 없습니다."));
 
+        if (checkDecorExistsNearby(request.lat(), request.lng(), request.type())) {
+            throw new IllegalStateException("이미 해당 위치에 같은 타입의 Decor가 존재합니다.");
+        }
+
         Decor decor = Decor.createNewDecor(
                 request.lat(),
                 request.lng(),
@@ -58,5 +80,23 @@ public class DecorService {
 
     }
 
+    public boolean checkDecorExistsNearby(Double lat, Double lng, DecorType type) {
+        double latRange = 50.0 / 111000.0;
+        double lngRange = 50.0 / 111000.0;
+
+        List<Decor> nearby = decorRepository.findByBoundaryAndType(
+                lat + latRange,
+                lat - latRange,
+                lng + lngRange,
+                lng - lngRange,
+                type
+        );
+
+        return nearby.stream()
+                .anyMatch(d -> calculateDistance(
+                        d.getLat(), d.getLng(),
+                        lat, lng
+                ) <= 50);
+    }
 }
 
