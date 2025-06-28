@@ -1,8 +1,6 @@
 package com.jeongmin.backend.service;
 
-import com.jeongmin.backend.dto.DecorCreateRequest;
-import com.jeongmin.backend.dto.DecorResponse;
-import com.jeongmin.backend.dto.DecorSearchRequest;
+import com.jeongmin.backend.dto.*;
 import com.jeongmin.backend.entity.Decor;
 import com.jeongmin.backend.entity.DecorType;
 import com.jeongmin.backend.entity.User;
@@ -41,11 +39,18 @@ public class DecorService {
         return earthRadius * c;
     }
 
+    public DecorDetailResponse getDecorById(Long decorId) {
+        Decor decor = getActiveDecorById(decorId);
+        List<FeedbackDto> feedbacks = decor.getFeedbacks().stream()
+                .map(FeedbackDto::from)
+                .toList();
+
+        return DecorDetailResponse.from(decor, feedbacks);
+    }
+
     @Transactional
     public void deleteDecor(Long decorId) {
-        Decor decor = decorRepository.findById(decorId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 Decor를 찾을 수 없습니다."));
-
+        Decor decor = getActiveDecorById(decorId);
 
         User user = getCurrentUser();
 
@@ -109,6 +114,11 @@ public class DecorService {
                         d.getLat(), d.getLng(),
                         lat, lng
                 ) <= 50);
+    }
+
+    private Decor getActiveDecorById(Long decorId) {
+        return decorRepository.findByIdAndDeletedAtIsNull(decorId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 Decor를 찾을 수 없거나 삭제된 상태입니다."));
     }
 
     private User getCurrentUser() {

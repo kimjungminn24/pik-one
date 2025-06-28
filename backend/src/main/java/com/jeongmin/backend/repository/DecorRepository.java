@@ -9,15 +9,18 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface DecorRepository extends JpaRepository<Decor, Long> {
+
 
     @Query("""
             SELECT d FROM Decor d
             WHERE d.lat BETWEEN :southLat AND :northLat
             AND d.lng BETWEEN :westLng AND :eastLng
             AND d.type = :type
+            AND d.deletedAt IS NULL
             """)
     List<Decor> findByBoundaryAndType(
             @Param("northLat") double northLat,
@@ -26,5 +29,8 @@ public interface DecorRepository extends JpaRepository<Decor, Long> {
             @Param("westLng") double westLng,
             @Param("type") DecorType type
     );
+
+    Optional<Decor> findByIdAndDeletedAtIsNull(Long id);
+
 
 }
