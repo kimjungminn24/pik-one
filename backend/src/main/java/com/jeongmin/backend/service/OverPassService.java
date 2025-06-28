@@ -1,5 +1,6 @@
 package com.jeongmin.backend.service;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jeongmin.backend.client.OverpassFeignClient;
@@ -10,90 +11,102 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 @RequiredArgsConstructor
 public class OverPassService {
 
-    private final OverpassFeignClient overpassFeignClient;
+    private static final double SEARCH_RADIUS = 100.0;
+
+    private final OverpassFeignClient overpassClient;
     private final ObjectMapper objectMapper;
 
     public LocationCheckResponse checkLocationDecorTypes(LocationCheckRequest request) throws Exception {
-        String query = String.format("""
+        String query = buildOverpassQuery(request.lat(), request.lng());
+        String rawResponse = overpassClient.fetchOverpassData(query);
+
+        Set<DecorType> detectedDecorTypes = parseDecorTypesFromResponse(rawResponse);
+
+        boolean isRegisterable = isLocationRegisterable(detectedDecorTypes, request.type());
+
+        return new LocationCheckResponse(isRegisterable, new ArrayList<>(detectedDecorTypes));
+    }
+
+    private String buildOverpassQuery(double lat, double lng) {
+        return String.format("""
                 [out:json];
                 (
                   node(around:%f,%f,%f);
                   way(around:%f,%f,%f);
                 );
                 out center;
-                """, 100.0, request.lat(), request.lng(), 100.0, request.lat(), request.lng());
+                """, SEARCH_RADIUS, lat, lng, SEARCH_RADIUS, lat, lng);
+    }
 
-        String response = overpassFeignClient.fetchOverpassData(query);
-
+    private Set<DecorType> parseDecorTypesFromResponse(String response) throws Exception {
         JsonNode root = objectMapper.readTree(response);
         JsonNode elements = root.get("elements");
 
-        Set<DecorType> nearbyDecorTypes = new HashSet<>();
-
-        if (elements != null && elements.isArray()) {
-            for (JsonNode element : elements) {
-                JsonNode tagsNode = element.get("tags");
-                if (tagsNode == null) continue;
-
-                Map<String, String> tags = new HashMap<>();
-                Iterator<Map.Entry<String, JsonNode>> fields = tagsNode.fields();
-                while (fields.hasNext()) {
-                    Map.Entry<String, JsonNode> entry = fields.next();
-                    tags.put(entry.getKey(), entry.getValue().asText());
-                }
-
-                Set<String> simpleTags = new HashSet<>();
-                for (Map.Entry<String, String> entry : tags.entrySet()) {
-                    System.out.println(entry.getKey() + ": " + entry.getValue());
-                    simpleTags.add(entry.getKey() + "=" + entry.getValue());
-                }
-
-                for (DecorType decorType : DecorType.values()) {
-                    List<String> tagConditions = decorType.getTags();
-
-                    boolean matched = false;
-                    for (String tagCondition : tagConditions) {
-                        if (tagCondition.contains("AND")) {
-                            Map<String, String> conditionMap = new HashMap<>();
-                            String[] conditions = tagCondition.split("AND");
-                            for (String cond : conditions) {
-                                String[] kv = cond.trim().split("=");
-                                if (kv.length == 2) {
-                                    conditionMap.put(kv[0].trim(), kv[1].trim());
-                                }
-                            }
-
-                            matched = true;
-                            for (Map.Entry<String, String> condEntry : conditionMap.entrySet()) {
-                                String key = condEntry.getKey();
-                                String value = condEntry.getValue();
-                                if (!value.equals(tags.get(key))) {
-                                    matched = false;
-                                    break;
-                                }
-                            }
-                        } else {
-                            matched = simpleTags.contains(tagCondition);
-                        }
-
-                        if (matched) {
-                            nearbyDecorTypes.add(decorType);
-                            break;
-                        }
-                    }
-                }
-            }
+        if (elements == null || !elements.isArray()) {
+            return Collections.emptySet();
         }
 
-        boolean isRegisterable = nearbyDecorTypes.isEmpty()
-                || (nearbyDecorTypes.size() == 1 && nearbyDecorTypes.contains(request.type()));
-
-        return new LocationCheckResponse(isRegisterable, new ArrayList<>(nearbyDecorTypes));
+        return StreamSupport.stream(elements.spliterator(), false)
+                .map(this::extractTags)
+                .map(tags -> findMatchingDecorType(tags, convertToSimpleTags(tags)))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toSet());
     }
 
+    private Map<String, String> extractTags(JsonNode element) {
+        JsonNode tagsNode = element.get("tags");
+        if (tagsNode == null || tagsNode.isNull()) {
+            return Collections.emptyMap();
+        }
+
+        return objectMapper.convertValue(tagsNode, new TypeReference<>() {
+        });
+    }
+
+    private Set<String> convertToSimpleTags(Map<String, String> tags) {
+        return tags.entrySet().stream()
+                .map(e -> e.getKey() + "=" + e.getValue())
+                .collect(Collectors.toSet());
+    }
+
+    private DecorType findMatchingDecorType(Map<String, String> tags, Set<String> simpleTags) {
+        return Arrays.stream(DecorType.values())
+                .filter(decorType -> isDecorTypeMatched(decorType, tags, simpleTags))
+                .findFirst()
+                .orElse(null);
+    }
+
+    private boolean isDecorTypeMatched(DecorType decorType, Map<String, String> tags, Set<String> simpleTags) {
+        return decorType.getTags().stream()
+                .anyMatch(condition -> isConditionMatched(condition, tags, simpleTags));
+    }
+
+    private boolean isConditionMatched(String condition, Map<String, String> tags, Set<String> simpleTags) {
+        return isAndCondition(condition)
+                ? isAndConditionMatched(condition, tags)
+                : simpleTags.contains(condition);
+    }
+
+    private boolean isAndCondition(String condition) {
+        return condition.contains("AND");
+    }
+
+    private boolean isAndConditionMatched(String condition, Map<String, String> tags) {
+        return Arrays.stream(condition.split("AND"))
+                .map(String::trim)
+                .map(kv -> kv.split("="))
+                .allMatch(kv -> kv.length == 2 && kv[1].trim().equals(tags.get(kv[0].trim())));
+    }
+
+    private boolean isLocationRegisterable(Set<DecorType> detectedDecorTypes, DecorType requestedType) {
+        return detectedDecorTypes.isEmpty()
+                || (detectedDecorTypes.size() == 1 && detectedDecorTypes.contains(requestedType));
+    }
 }
