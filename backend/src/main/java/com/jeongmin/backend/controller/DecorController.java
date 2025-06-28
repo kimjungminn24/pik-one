@@ -28,4 +28,10 @@ public class DecorController {
         DecorResponse response = decorService.createNewDecor(request);
         return ResponseEntity.ok(response);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteDecor(@PathVariable("id") Long decorId) {
+        decorService.deleteDecor(decorId);
+        return ResponseEntity.noContent().build();
+    }
 }

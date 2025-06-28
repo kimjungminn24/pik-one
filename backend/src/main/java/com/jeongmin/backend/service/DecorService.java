@@ -41,6 +41,22 @@ public class DecorService {
         return earthRadius * c;
     }
 
+    @Transactional
+    public void deleteDecor(Long decorId) {
+        Decor decor = decorRepository.findById(decorId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 Decor를 찾을 수 없습니다."));
+
+        String providerId = SecurityUtil.getCurrentProviderId();
+        User user = userRepository.findByProviderAndProviderId("naver", providerId)
+                .orElseThrow(() -> new IllegalArgumentException("유저를 찾을 수 없습니다."));
+
+        if (!decor.getUser().equals(user)) {
+            throw new IllegalStateException("해당 Decor를 삭제할 권한이 없습니다.");
+        }
+
+        decorRepository.delete(decor);
+    }
+
     public List<DecorResponse> searchDecorInBoundary(DecorSearchRequest request) {
         return decorRepository.findByBoundaryAndType(
                         request.northLat(),
