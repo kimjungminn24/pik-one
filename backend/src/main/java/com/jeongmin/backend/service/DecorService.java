@@ -43,9 +43,7 @@ public class DecorService {
 
     @Transactional
     public void deleteDecor(Long decorId) {
-        Decor decor = decorRepository.findById(decorId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 Decor를 찾을 수 없습니다."));
-
+        Decor decor = getActiveDecorById(decorId);
 
         User user = getCurrentUser();
 
@@ -109,6 +107,11 @@ public class DecorService {
                         d.getLat(), d.getLng(),
                         lat, lng
                 ) <= 50);
+    }
+
+    private Decor getActiveDecorById(Long decorId) {
+        return decorRepository.findByIdAndDeletedAtIsNull(decorId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 Decor를 찾을 수 없거나 삭제된 상태입니다."));
     }
 
     private User getCurrentUser() {
