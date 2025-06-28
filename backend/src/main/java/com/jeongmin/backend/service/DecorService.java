@@ -46,9 +46,8 @@ public class DecorService {
         Decor decor = decorRepository.findById(decorId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 Decor를 찾을 수 없습니다."));
 
-        String providerId = SecurityUtil.getCurrentProviderId();
-        User user = userRepository.findByProviderAndProviderId("naver", providerId)
-                .orElseThrow(() -> new IllegalArgumentException("유저를 찾을 수 없습니다."));
+
+        User user = getCurrentUser();
 
         if (!decor.getUser().equals(user)) {
             throw new IllegalStateException("해당 Decor를 삭제할 권한이 없습니다.");
@@ -73,10 +72,7 @@ public class DecorService {
     @Transactional
     public DecorResponse createNewDecor(DecorCreateRequest request) {
 
-        String providerId = SecurityUtil.getCurrentProviderId();
-
-        User user = userRepository.findByProviderAndProviderId("naver", providerId)
-                .orElseThrow(() -> new IllegalArgumentException("유저를 찾을 수 없습니다."));
+        User user = getCurrentUser();
 
         if (checkDecorExistsNearby(request.lat(), request.lng(), request.type())) {
             throw new IllegalStateException("이미 해당 위치에 같은 타입의 Decor가 존재합니다.");
@@ -113,6 +109,13 @@ public class DecorService {
                         d.getLat(), d.getLng(),
                         lat, lng
                 ) <= 50);
+    }
+
+    private User getCurrentUser() {
+        String providerId = SecurityUtil.getCurrentProviderId();
+
+        return userRepository.findByProviderAndProviderId("naver", providerId)
+                .orElseThrow(() -> new IllegalArgumentException("유저를 찾을 수 없습니다."));
     }
 }
 
