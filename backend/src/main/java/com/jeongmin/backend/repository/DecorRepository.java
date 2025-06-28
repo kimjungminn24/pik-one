@@ -33,23 +33,4 @@ public interface DecorRepository extends JpaRepository<Decor, Long> {
     Optional<Decor> findByIdAndDeletedAtIsNull(Long id);
 
 
-//    @Query(value = """
-//            SELECT *,
-//              (6371000 * acos(
-//                cos(radians(:lat)) * cos(radians(lat)) *
-//                cos(radians(lng) - radians(:lng)) +
-//                sin(radians(:lat)) * sin(radians(lat))
-//              )) AS distance
-//            FROM decor
-//            WHERE type = :type
-//            HAVING distance <= :distance
-//            """, nativeQuery = true)
-//    List<Decor> findNearbyDecorNative(
-//            @Param("lat") Double lat,
-//            @Param("lng") Double lng,
-//            @Param("type") String type,
-//            @Param("distance") Double distance
-//    );
-
-
 }
