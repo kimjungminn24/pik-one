@@ -42,5 +42,15 @@ public class Decor {
     @OneToMany(mappedBy = "decor", cascade = CascadeType.ALL)
     private List<Feedback> feedbacks = new ArrayList<>();
 
+    public static Decor createNewDecor(Double lat, Double lng, DecorType type, String content, User user) {
+        Decor decor = new Decor();
+        decor.lat = lat;
+        decor.lng = lng;
+        decor.type = type;
+        decor.content = content;
+        decor.user = user;
+        return decor;
+    }
+
 
 }

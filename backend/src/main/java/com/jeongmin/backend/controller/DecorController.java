@@ -1,15 +1,13 @@
 package com.jeongmin.backend.controller;
 
 
+import com.jeongmin.backend.dto.DecorCreateRequest;
 import com.jeongmin.backend.dto.DecorResponse;
 import com.jeongmin.backend.dto.DecorSearchRequest;
 import com.jeongmin.backend.service.DecorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,4 +23,15 @@ public class DecorController {
         return ResponseEntity.ok(response);
     }
 
+    @PostMapping
+    public ResponseEntity<DecorResponse> postDecor(@RequestBody DecorCreateRequest request) {
+        DecorResponse response = decorService.createNewDecor(request);
+        return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteDecor(@PathVariable("id") Long decorId) {
+        decorService.deleteDecor(decorId);
+        return ResponseEntity.noContent().build();
+    }
 }
