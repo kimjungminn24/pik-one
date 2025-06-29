@@ -20,3 +20,7 @@
 .leaflet-control.locate-button:hover {
   background-color: #f0f0f0;
 }
+.leaflet-top.leaflet-right .leaflet-control.locate-button {
+  margin-right: 10px;
+  margin-top: 10px;
+}
