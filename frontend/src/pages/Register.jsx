@@ -1,0 +1,77 @@
+import React, { useState } from "react";
+import { decorList } from "../decorList";
+import TagListComponent from "../components/TagListComponent";
+import { useLocationStore } from "../store/useLocationStore";
+import { useCreateDecor } from "../hooks/useDecor";
+import MapComponent from "../components/map/MapComponent";
+
+export default function Register() {
+  const [content, setContent] = useState("");
+  const { lat, lng } = useLocationStore();
+  const [selectedTag, setSelectedTag] = useState("");
+  const { mutate, isPending } = useCreateDecor();
+
+  const handleTagClick = (item) => {
+    setSelectedTag(item.name);
+  };
+  const handleSubmit = () => {
+    if (!lat || !lng) {
+      alert("위치를 찍어주세요.");
+      return;
+    }
+    if (!content || !selectedTag) {
+      alert("모든 필드를 입력해주세요.");
+      return;
+    }
+
+    mutate({
+      lat: parseFloat(lat),
+      lng: parseFloat(lng),
+      type: selectedTag,
+      content,
+    });
+
+    setContent("");
+    setSelectedTag("");
+  };
+
+  return (
+    <div className="page-layout">
+      <div className="map-wrapper">
+        <MapComponent />
+      </div>
+      <div className="register-container">
+        <div className="form-group">
+          <div className="location-display">
+            {lat && lng
+              ? `📍 위도 ${parseFloat(lat).toFixed(5)} / 경도 ${parseFloat(
+                  lng
+                ).toFixed(5)}`
+              : "위치를 선택해주세요"}
+          </div>
+        </div>
+
+        <div className="form-group">
+          <input
+            type="text"
+            placeholder="간단한 설명을 입력하세요"
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+          />
+        </div>
+
+        <TagListComponent
+          items={decorList}
+          isSelected={(item) => selectedTag === item.name}
+          onTagClick={handleTagClick}
+        />
+
+        <div className="button-box">
+          <button onClick={handleSubmit} disabled={isPending}>
+            {isPending ? "등록 중..." : "등록하기"}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
