@@ -1,17 +1,17 @@
 import React from "react";
-import Tag from "./Tag";
+import Tag from "./TagComponent";
 
-export default function TagListComponent({ items, selectedTags, onTagClick }) {
+export default function TagListComponent({ items, isSelected, onTagClick }) {
   return (
-    <ul>
+    <div className="taglist">
       {items.map((item) => (
         <Tag
-          key={item.ko}
+          key={item.name}
           item={item}
           onClick={onTagClick}
-          isSelected={selectedTags.includes(item.ko)}
+          isSelected={isSelected(item)}
         />
       ))}
-    </ul>
+    </div>
   );
 }

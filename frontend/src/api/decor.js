@@ -22,3 +22,27 @@ export const getDecorByTypeAndPosition = async ({
 
   return data;
 };
+
+export const createNewDecor = async ({ lat, lng, type, content }) => {
+  const res = await fetch(`${BASE_URL}`, {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      lat,
+      lng,
+      type,
+      content,
+    }),
+  });
+
+  if (!res.ok) {
+    const error = await res.text();
+    throw new Error(`등록 실패: ${error}`);
+  }
+
+  const data = await res.json();
+  return data;
+};

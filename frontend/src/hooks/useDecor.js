@@ -1,5 +1,5 @@
-import { useQueries } from "@tanstack/react-query";
-import { getDecorByTypeAndPosition } from "../api/decor";
+import { useQueries, useMutation } from "@tanstack/react-query";
+import { getDecorByTypeAndPosition, createNewDecor } from "../api/decor";
 
 export const useDecor = (params = {}, isEnabled = true) => {
   const { northLat, southLat, eastLng, westLng, types = [] } = params ?? {};
@@ -34,4 +34,10 @@ export const useDecor = (params = {}, isEnabled = true) => {
   const data = results.flatMap((r) => r.data ?? []);
 
   return { data, isLoading, isError, error };
+};
+
+export const useCreateDecor = () => {
+  return useMutation({
+    mutationFn: createNewDecor,
+  });
 };

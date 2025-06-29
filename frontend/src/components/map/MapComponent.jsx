@@ -11,12 +11,7 @@ export default function MapComponent({ searchResults = [] }) {
     <MapContainer
       center={[37.5665, 126.978]}
       zoom={13}
-      style={{
-        height: "400px",
-        width: "100%",
-        borderRadius: "12px",
-        overflow: "hidden",
-      }}
+      className="leaflet-container"
     >
       <TileLayer
         attribution="&copy; OpenStreetMap contributors"

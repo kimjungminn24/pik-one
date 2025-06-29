@@ -27,7 +27,7 @@
 @media (max-width: 640px) {
   .tag-container {
     padding: 0.2rem 0.5rem;
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     margin: 0.2rem;
   }
 
@@ -39,4 +39,10 @@
   background-color: #a5f3fc;
   color: #0f172a;
   font-weight: bold;
+}
+
+.taglist {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
