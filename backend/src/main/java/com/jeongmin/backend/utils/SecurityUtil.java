@@ -16,4 +16,12 @@ public class SecurityUtil {
 
         return authentication.getPrincipal().toString();
     }
+
+    public static boolean isLogin() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        return authentication != null
+                && authentication.isAuthenticated()
+                && !"anonymousUser".equals(authentication.getPrincipal());
+    }
 }
