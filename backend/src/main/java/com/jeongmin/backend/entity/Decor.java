@@ -54,4 +54,8 @@ public class Decor extends BaseTimeEntity {
     }
 
 
+    public void addFeedback(Feedback feedback) {
+        feedbacks.add(feedback);
+    }
+
 }

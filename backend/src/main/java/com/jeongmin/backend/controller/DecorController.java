@@ -41,4 +41,11 @@ public class DecorController {
         DecorDetailResponse response = decorService.getDecorById(decorId);
         return ResponseEntity.ok(response);
     }
+
+    @PostMapping("/feedback")
+    public ResponseEntity<FeedbackDto> postFeedback(@RequestBody FeedbackCreateRequest request) {
+        FeedbackDto response = decorService.createNewFeedback(request);
+        return ResponseEntity.ok(response);
+    }
+
 }
