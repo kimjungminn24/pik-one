@@ -19,7 +19,9 @@ export default function MapComponent({
     <>
       <MapContainer
         center={[37.5665, 126.978]}
-        zoom={13}
+        zoom={15}
+        minZoom={13}
+        maxZoom={18}
         className="leaflet-container"
       >
         <TileLayer
