@@ -1,7 +1,9 @@
 package com.jeongmin.backend.service;
 
+import com.jeongmin.backend.dto.LoginResponse;
 import com.jeongmin.backend.entity.User;
 import com.jeongmin.backend.repository.UserRepository;
+import com.jeongmin.backend.utils.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,9 @@ public class UserService {
         userRepository.save(newUser);
     }
 
+    public LoginResponse checkLogin() {
+        return new LoginResponse(SecurityUtil.isLogin());
+    }
 
     private String generateRandomNickname() {
         return String.format("%s_%s", NICKNAME_PREFIX, UUID.randomUUID().toString().substring(0, 8));
