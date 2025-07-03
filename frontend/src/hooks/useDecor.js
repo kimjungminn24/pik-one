@@ -1,5 +1,9 @@
-import { useQueries, useMutation } from "@tanstack/react-query";
-import { getDecorByTypeAndPosition, createNewDecor } from "../api/decor";
+import { useQueries, useMutation, useQuery } from "@tanstack/react-query";
+import {
+  getDecorByTypeAndPosition,
+  createNewDecor,
+  createNewFeedback,
+} from "../api/decor";
 
 export const useDecor = (params = {}, isEnabled = true) => {
   const { northLat, southLat, eastLng, westLng, types = [] } = params ?? {};
@@ -41,3 +45,13 @@ export const useCreateDecor = () => {
     mutationFn: createNewDecor,
   });
 };
+
+export function useCreateFeedback(onSuccessCallback) {
+  return useMutation({
+    mutationFn: createNewFeedback,
+    onSuccess: (data) => {
+      onSuccessCallback?.(data);
+    },
+  });
+}
+

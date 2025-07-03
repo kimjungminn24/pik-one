@@ -46,3 +46,26 @@ export const createNewDecor = async ({ lat, lng, type, content }) => {
   const data = await res.json();
   return data;
 };
+
+export const createNewFeedback = async ({ decorId, feedbackType, content }) => {
+  const res = await fetch(`${BASE_URL}/feedback`, {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      decorId,
+      feedbackType,
+      content,
+    }),
+  });
+
+  if (!res.ok) {
+    const error = await res.text();
+    throw new Error(`등록 실패: ${error}`);
+  }
+
+  const data = await res.json();
+  return data;
+};
