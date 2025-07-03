@@ -4,6 +4,7 @@ import TagListComponent from "../components/TagListComponent";
 import { useLocationStore } from "../store/useLocationStore";
 import { useCreateDecor } from "../hooks/useDecor";
 import MapComponent from "../components/map/MapComponent";
+import { toast } from "react-toastify";
 
 export default function Register() {
   const [content, setContent] = useState("");
@@ -16,20 +17,32 @@ export default function Register() {
   };
   const handleSubmit = () => {
     if (!lat || !lng) {
-      alert("위치를 찍어주세요.");
+      toast.error("위치를 찍어주세요.");
       return;
     }
     if (!content || !selectedTag) {
-      alert("모든 필드를 입력해주세요.");
+      toast.error("모든 필드를 입력해주세요.");
       return;
     }
 
-    mutate({
-      lat: parseFloat(lat),
-      lng: parseFloat(lng),
-      type: selectedTag,
-      content,
-    });
+    mutate(
+      {
+        lat: parseFloat(lat),
+        lng: parseFloat(lng),
+        type: selectedTag,
+        content,
+      },
+      {
+        onSuccess: () => {
+          toast.success("모종이 등록되었어요!");
+          setContent("");
+          setSelectedTag("");
+        },
+        onError: () => {
+          toast.error("등록 중 오류가 발생했어요.");
+        },
+      }
+    );
 
     setContent("");
     setSelectedTag("");

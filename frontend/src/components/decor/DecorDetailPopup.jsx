@@ -8,6 +8,8 @@ import FeedbackList from "./FeedbackList";
 import FeedbackButtons from "./FeedbackButtons";
 import FeedbackForm from "./FeedbackForm";
 
+import { toast } from "react-toastify";
+
 export default function DecorDetailPopup({ data }) {
   const [feedback, setFeedback] = useState("");
   const [selectedType, setSelectedType] = useState("");
@@ -42,6 +44,7 @@ export default function DecorDetailPopup({ data }) {
   };
 
   const onSuccess = (newFeedback) => {
+    toast.success("피드백이 성공적으로 등록되었어요!");
     setFeedbacks((prev) => [...prev, newFeedback]);
     if (newFeedback.type === "HELPFUL") setHelpfulCount((prev) => prev + 1);
     else setNotFoundCount((prev) => prev + 1);
@@ -53,7 +56,7 @@ export default function DecorDetailPopup({ data }) {
 
   const handleSubmit = () => {
     if (!feedback.trim() || !selectedType) {
-      alert("버튼과 피드백을 모두 입력해주세요.");
+      toast.error("버튼과 피드백을 모두 입력해주세요.");
       return;
     }
 
