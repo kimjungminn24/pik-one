@@ -7,6 +7,7 @@ import { FetchOnMove } from "./FetchOnMove";
 import { useDecorDetail } from "../../hooks/useDecor";
 import DecorDetailPopup from "../decor/DecorDetailPopup";
 import { createCustomIcon } from "../../utils/markerIcon";
+import { SearchBox } from "./SearchBox";
 
 export default function MapComponent({
   searchResults = [],
@@ -24,6 +25,8 @@ export default function MapComponent({
         maxZoom={18}
         className="leaflet-container"
       >
+        <SearchBox />
+
         <TileLayer
           attribution="&copy; OpenStreetMap contributors"
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
