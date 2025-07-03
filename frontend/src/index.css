@@ -4,6 +4,7 @@
 @import "./css/header.css";
 @import "./css/map.css";
 @import "./css/decor.css";
+@import "react-toastify/dist/ReactToastify.css";
 
 body {
   font-family: "CookieRun", -apple-system, BlinkMacSystemFont, "Segoe UI",
