@@ -1,10 +1,7 @@
 package com.jeongmin.backend.service;
 
 import com.jeongmin.backend.dto.*;
-import com.jeongmin.backend.entity.Decor;
-import com.jeongmin.backend.entity.DecorType;
-import com.jeongmin.backend.entity.Feedback;
-import com.jeongmin.backend.entity.User;
+import com.jeongmin.backend.entity.*;
 import com.jeongmin.backend.repository.DecorRepository;
 import com.jeongmin.backend.repository.FeedbackRepository;
 import com.jeongmin.backend.repository.UserRepository;
@@ -48,7 +45,16 @@ public class DecorService {
                 .map(FeedbackDto::from)
                 .toList();
 
-        return DecorDetailResponse.from(decor, feedbacks);
+        int notFoundCount = (int) feedbacks.stream()
+                .filter(f -> f.type() == FeedbackType.NOT_FOUND)
+                .count();
+
+        int helpfulCount = (int) feedbacks.stream()
+                .filter(f -> f.type() == FeedbackType.HELPFUL)
+                .count();
+
+
+        return DecorDetailResponse.from(decor, feedbacks, helpfulCount, notFoundCount);
     }
 
     @Transactional
