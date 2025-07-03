@@ -47,6 +47,14 @@ export const createNewDecor = async ({ lat, lng, type, content }) => {
   return data;
 };
 
+export const fetchDecorDetail = async (id) => {
+  const res = await fetch(`${BASE_URL}/${id}`, {
+    credentials: "include",
+  });
+  if (!res.ok) throw new Error("상세 정보 조회 실패");
+  return res.json();
+};
+
 export const createNewFeedback = async ({ decorId, feedbackType, content }) => {
   const res = await fetch(`${BASE_URL}/feedback`, {
     method: "POST",

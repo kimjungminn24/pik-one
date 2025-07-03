@@ -2,6 +2,7 @@ import { useQueries, useMutation, useQuery } from "@tanstack/react-query";
 import {
   getDecorByTypeAndPosition,
   createNewDecor,
+  fetchDecorDetail,
   createNewFeedback,
 } from "../api/decor";
 
@@ -55,3 +56,11 @@ export function useCreateFeedback(onSuccessCallback) {
   });
 }
 
+export const useDecorDetail = (id, enabled) => {
+  return useQuery({
+    queryKey: ["decor", id],
+    queryFn: () => fetchDecorDetail(id),
+    enabled,
+    staleTime: 1000 * 60 * 5,
+  });
+};
