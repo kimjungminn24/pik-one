@@ -1,7 +1,7 @@
 import { useMapEvents, Marker } from "react-leaflet";
 import { useState } from "react";
 import { useLocationStore } from "../../store/useLocationStore";
-import { customIcon } from "../../utils/markerIcon";
+import { createCustomIcon } from "../../utils/markerIcon";
 
 export function LocationMarker() {
   const setLocation = useLocationStore((state) => state.setLocation);
@@ -15,5 +15,7 @@ export function LocationMarker() {
     },
   });
 
-  return position ? <Marker position={position} icon={customIcon} /> : null;
+  return position ? (
+    <Marker position={position} icon={createCustomIcon("DEFAULT")} />
+  ) : null;
 }
