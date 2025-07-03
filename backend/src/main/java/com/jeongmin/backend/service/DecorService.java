@@ -3,8 +3,10 @@ package com.jeongmin.backend.service;
 import com.jeongmin.backend.dto.*;
 import com.jeongmin.backend.entity.Decor;
 import com.jeongmin.backend.entity.DecorType;
+import com.jeongmin.backend.entity.Feedback;
 import com.jeongmin.backend.entity.User;
 import com.jeongmin.backend.repository.DecorRepository;
+import com.jeongmin.backend.repository.FeedbackRepository;
 import com.jeongmin.backend.repository.UserRepository;
 import com.jeongmin.backend.utils.SecurityUtil;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +21,7 @@ public class DecorService {
 
 
     private final DecorRepository decorRepository;
+    private final FeedbackRepository feedbackRepository;
     private final UserRepository userRepository;
 
     private static double calculateDistance(
@@ -114,6 +117,27 @@ public class DecorService {
                         d.getLat(), d.getLng(),
                         lat, lng
                 ) <= 50);
+    }
+
+    @Transactional
+    public FeedbackDto createNewFeedback(FeedbackCreateRequest request) {
+        Decor decor = getActiveDecorById(request.decorId());
+        User user = getCurrentUser();
+
+        if (feedbackRepository.existsByUserAndDecor(user, decor)) {
+            throw new IllegalStateException("이미 해당 Decor에 피드백을 남겼습니다.");
+        }
+
+        Feedback feedback = Feedback.create(
+                request.feedbackType(),
+                request.content(),
+                user,
+                decor
+        );
+
+        decor.addFeedback(feedback);
+        feedbackRepository.save(feedback);
+        return FeedbackDto.from(feedback);
     }
 
     private Decor getActiveDecorById(Long decorId) {

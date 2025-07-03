@@ -28,4 +28,13 @@ public class Feedback extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "decor_id", nullable = false)
     private Decor decor;
+
+    public static Feedback create(FeedbackType type, String content, User user, Decor decor) {
+        Feedback feedback = new Feedback();
+        feedback.type = type;
+        feedback.content = content;
+        feedback.user = user;
+        feedback.decor = decor;
+        return feedback;
+    }
 }
