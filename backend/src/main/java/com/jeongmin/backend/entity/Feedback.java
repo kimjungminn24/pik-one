@@ -33,8 +33,17 @@ public class Feedback extends BaseTimeEntity {
         Feedback feedback = new Feedback();
         feedback.type = type;
         feedback.content = content;
-        feedback.user = user;
         feedback.decor = decor;
+        decor.addFeedback(feedback);
+        user.addFeedback(feedback);
         return feedback;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setDecor(Decor decor) {
+        this.decor = decor;
     }
 }

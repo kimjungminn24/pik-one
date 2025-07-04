@@ -49,13 +49,17 @@ public class Decor extends BaseTimeEntity {
         decor.lng = lng;
         decor.type = type;
         decor.content = content;
-        decor.user = user;
+        user.addDecor(decor);
         return decor;
     }
 
-
     public void addFeedback(Feedback feedback) {
         feedbacks.add(feedback);
+        feedback.setDecor(this);
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
 }

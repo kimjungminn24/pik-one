@@ -5,6 +5,9 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @Table(
@@ -27,12 +30,28 @@ public class User extends BaseTimeEntity {
     @Column(length = 30)
     private String nickname;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Decor> decors = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Feedback> feedbacks = new ArrayList<>();
+
     public static User create(String provider, String providerId, String nickname) {
         User user = new User();
         user.provider = provider;
         user.providerId = providerId;
         user.nickname = nickname;
         return user;
+    }
+
+    public void addDecor(Decor decor) {
+        decors.add(decor);
+        decor.setUser(this);
+    }
+
+    public void addFeedback(Feedback feedback) {
+        feedbacks.add(feedback);
+        feedback.setUser(this);
     }
 
 }
