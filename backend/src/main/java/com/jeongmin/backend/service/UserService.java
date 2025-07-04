@@ -1,6 +1,8 @@
 package com.jeongmin.backend.service;
 
 import com.jeongmin.backend.dto.DecorDetailResponse;
+import com.jeongmin.backend.dto.FeedbackDto;
+import com.jeongmin.backend.dto.FeedbackResponse;
 import com.jeongmin.backend.dto.LoginResponse;
 import com.jeongmin.backend.entity.User;
 import com.jeongmin.backend.repository.UserRepository;
@@ -37,6 +39,14 @@ public class UserService {
                                 .toList()
                 ))
                 .toList();
+    }
+
+    public List<FeedbackResponse> getMyFeedback() {
+        if (!SecurityUtil.isLogin()) {
+            throw new IllegalStateException("로그인이 필요합니다.");
+        }
+        User user = getCurrentUser();
+        return user.getFeedbacks().stream().map(FeedbackResponse::from).toList();
     }
 
 
