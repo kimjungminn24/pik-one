@@ -2,6 +2,7 @@ package com.jeongmin.backend.controller;
 
 
 import com.jeongmin.backend.dto.DecorDetailResponse;
+import com.jeongmin.backend.dto.FeedbackResponse;
 import com.jeongmin.backend.dto.LoginResponse;
 import com.jeongmin.backend.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +31,12 @@ public class UserController {
     public ResponseEntity<List<DecorDetailResponse>> getMyDecors() {
         List<DecorDetailResponse> response = userService.getMyDecors();
         return ResponseEntity.ok(response);
+    }
 
+    @GetMapping("/me/feedbacks")
+    public ResponseEntity<List<FeedbackResponse>> getMyFeedbacks() {
+        List<FeedbackResponse> response = userService.getMyFeedback();
+        return ResponseEntity.ok(response);
     }
 
 }
