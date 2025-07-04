@@ -94,6 +94,19 @@ export const createNewFeedback = async ({ decorId, feedbackType, content }) => {
   return data;
 };
 
+export const fetchMyDecors = async () => {
+  const res = await fetch(`${BASE_URL}/me`, {
+    credentials: "include",
+  });
+
+  if (!res.ok) {
+    throw new Error("Not authenticated");
+  }
+  const data = await res.json();
+
+  return data;
+};
+
 export const fetchMyFeedbacks = async () => {
   const res = await fetch(`${BASE_URL}/me/feedbacks`, {
     credentials: "include",

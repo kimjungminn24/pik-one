@@ -11,7 +11,9 @@ import {
   createNewFeedback,
   deleteDecor,
   fetchMyDecors,
+  fetchMyFeedbacks,
 } from "../api/decor";
+
 import { toast } from "react-toastify";
 
 export const useDecor = (params = {}, isEnabled = true) => {
@@ -50,8 +52,13 @@ export const useDecor = (params = {}, isEnabled = true) => {
 };
 
 export const useCreateDecor = () => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: createNewDecor,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["my-decors"] });
+    },
   });
 };
 
@@ -90,6 +97,13 @@ export const useDeleteDecor = () => {
   });
 };
 
+export const useMyDecorsQuery = () => {
+  return useQuery({
+    queryKey: ["my-decors"],
+    queryFn: fetchMyDecors,
+    retry: false,
+  });
+};
 
 export const useMyFeedbacksQuery = () => {
   return useQuery({
