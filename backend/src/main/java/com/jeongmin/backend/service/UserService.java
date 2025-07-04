@@ -1,8 +1,5 @@
 package com.jeongmin.backend.service;
 
-import com.jeongmin.backend.dto.DecorDetailResponse;
-import com.jeongmin.backend.dto.FeedbackDto;
-import com.jeongmin.backend.dto.FeedbackResponse;
 import com.jeongmin.backend.dto.LoginResponse;
 import com.jeongmin.backend.entity.User;
 import com.jeongmin.backend.repository.UserRepository;
@@ -10,7 +7,6 @@ import com.jeongmin.backend.utils.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -24,29 +20,6 @@ public class UserService {
         if (!userRepository.existsByProviderAndProviderId(provider, providerId)) {
             saveNewUser(provider, providerId);
         }
-    }
-
-    public List<DecorDetailResponse> getMyDecors() {
-        if (!SecurityUtil.isLogin()) {
-            throw new IllegalStateException("로그인이 필요합니다.");
-        }
-        User user = getCurrentUser();
-        return user.getDecors().stream()
-                .map(decor -> DecorDetailResponse.from(
-                        decor,
-                        decor.getFeedbacks().stream()
-                                .map(FeedbackDto::from)
-                                .toList()
-                ))
-                .toList();
-    }
-
-    public List<FeedbackResponse> getMyFeedback() {
-        if (!SecurityUtil.isLogin()) {
-            throw new IllegalStateException("로그인이 필요합니다.");
-        }
-        User user = getCurrentUser();
-        return user.getFeedbacks().stream().map(FeedbackResponse::from).toList();
     }
 
 
