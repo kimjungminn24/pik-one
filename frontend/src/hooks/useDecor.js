@@ -1,4 +1,9 @@
-import { useQueries, useMutation, useQuery } from "@tanstack/react-query";
+import {
+  useQueries,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import {
   getDecorByTypeAndPosition,
   createNewDecor,
@@ -51,9 +56,11 @@ export const useCreateDecor = () => {
 };
 
 export function useCreateFeedback(onSuccessCallback) {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: createNewFeedback,
     onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ["my-feedbacks"] });
       onSuccessCallback?.(data);
     },
   });
@@ -83,3 +90,11 @@ export const useDeleteDecor = () => {
   });
 };
 
+
+export const useMyFeedbacksQuery = () => {
+  return useQuery({
+    queryKey: ["my-feedbacks"],
+    queryFn: fetchMyFeedbacks,
+    retry: false,
+  });
+};
