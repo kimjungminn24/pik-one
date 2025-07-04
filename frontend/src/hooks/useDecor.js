@@ -4,7 +4,10 @@ import {
   createNewDecor,
   fetchDecorDetail,
   createNewFeedback,
+  deleteDecor,
+  fetchMyDecors,
 } from "../api/decor";
+import { toast } from "react-toastify";
 
 export const useDecor = (params = {}, isEnabled = true) => {
   const { northLat, southLat, eastLng, westLng, types = [] } = params ?? {};
@@ -64,3 +67,19 @@ export const useDecorDetail = (id, enabled) => {
     staleTime: 1000 * 60 * 5,
   });
 };
+
+export const useDeleteDecor = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: deleteDecor,
+    onSuccess: () => {
+      toast.success("모종이 삭제되었습니다.");
+      queryClient.invalidateQueries({ queryKey: ["my-decors"] });
+    },
+    onError: () => {
+      toast.error("모종 삭제에 실패했습니다.");
+    },
+  });
+};
+

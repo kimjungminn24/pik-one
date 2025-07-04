@@ -47,6 +47,22 @@ export const createNewDecor = async ({ lat, lng, type, content }) => {
   return data;
 };
 
+export const deleteDecor = async ({ id }) => {
+  const res = await fetch(`${BASE_URL}/${id}`, {
+    method: "DELETE",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to delete decor");
+  }
+
+  return res.status === 204 ? null : await res.json();
+};
+
 export const fetchDecorDetail = async (id) => {
   const res = await fetch(`${BASE_URL}/${id}`, {
     credentials: "include",
