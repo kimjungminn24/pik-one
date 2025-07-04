@@ -1,4 +1,10 @@
-export default function DecorInfoSection({ type, lat, lng, probability }) {
+export default function DecorInfoSection({
+  type,
+  lat,
+  lng,
+  probability,
+  content,
+}) {
   return (
     <div className="decor-info">
       <div className="decor-header">
@@ -8,7 +14,7 @@ export default function DecorInfoSection({ type, lat, lng, probability }) {
         </span>
       </div>
 
-      <p className="decor-content">{type} 관련 위치</p>
+      <p className="decor-content">{content} </p>
 
       <div className="decor-coordinates">
         <p>📍 위도: {lat}</p>
