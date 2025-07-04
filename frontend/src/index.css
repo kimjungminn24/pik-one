@@ -4,6 +4,9 @@
 @import "./css/header.css";
 @import "./css/map.css";
 @import "./css/decor.css";
+@import "./css/home.css";
+@import "./css/mypage.css";
+
 @import "react-toastify/dist/ReactToastify.css";
 
 body {
