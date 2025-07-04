@@ -1,5 +1,7 @@
+const BASE_URL = "http://localhost:8080/user";
+
 export const fetchUser = async () => {
-  const res = await fetch("http://localhost:8080/user/login/check", {
+  const res = await fetch(`${BASE_URL}/login/check`, {
     credentials: "include",
   });
 
