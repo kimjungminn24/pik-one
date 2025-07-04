@@ -1,10 +1,7 @@
 package com.jeongmin.backend.controller;
 
 
-import com.jeongmin.backend.dto.DecorCreateRequest;
-import com.jeongmin.backend.dto.DecorDetailResponse;
-import com.jeongmin.backend.dto.DecorResponse;
-import com.jeongmin.backend.dto.DecorSearchRequest;
+import com.jeongmin.backend.dto.*;
 import com.jeongmin.backend.service.DecorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -45,6 +42,19 @@ public class DecorController {
     @PostMapping("/feedback")
     public ResponseEntity<FeedbackDto> postFeedback(@RequestBody FeedbackCreateRequest request) {
         FeedbackDto response = decorService.createNewFeedback(request);
+        return ResponseEntity.ok(response);
+    }
+
+
+    @GetMapping("/me")
+    public ResponseEntity<List<DecorDetailResponse>> getMyDecors() {
+        List<DecorDetailResponse> response = decorService.getMyDecors();
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/me/feedbacks")
+    public ResponseEntity<List<FeedbackResponse>> getMyFeedbacks() {
+        List<FeedbackResponse> response = decorService.getMyFeedback();
         return ResponseEntity.ok(response);
     }
 
