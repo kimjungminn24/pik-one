@@ -141,6 +141,31 @@ public class DecorService {
         return FeedbackDto.from(feedback);
     }
 
+    public List<DecorDetailResponse> getMyDecors() {
+        if (!SecurityUtil.isLogin()) {
+            throw new IllegalStateException("로그인이 필요합니다.");
+        }
+        User user = getCurrentUser();
+        List<Decor> decors = decorRepository.findByUserAndDeletedAtIsNull(user);
+        return decors.stream()
+                .map(decor -> DecorDetailResponse.from(
+                        decor,
+                        decor.getFeedbacks().stream()
+                                .map(FeedbackDto::from)
+                                .toList()
+                ))
+                .toList();
+    }
+
+    public List<FeedbackResponse> getMyFeedback() {
+        if (!SecurityUtil.isLogin()) {
+            throw new IllegalStateException("로그인이 필요합니다.");
+        }
+        User user = getCurrentUser();
+        return user.getFeedbacks().stream().map(FeedbackResponse::from).toList();
+    }
+
+
     private Decor getActiveDecorById(Long decorId) {
         return decorRepository.findByIdAndDeletedAtIsNull(decorId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 Decor를 찾을 수 없거나 삭제된 상태입니다."));
