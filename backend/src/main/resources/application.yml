@@ -1,0 +1,38 @@
+server:
+  port: 8080
+spring:
+  config:
+    import: optional:env[.env]
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  security:
+    oauth2:
+      client:
+        registration:
+          naver:
+            client-id: ${NAVER_CLIENT_ID}
+            client-secret: ${NAVER_CLIENT_SECRET}
+            redirect-uri: ${NAVER_REDIRECT_URI}
+            authorization-grant-type: ${NAVER_AUTHORIZATION_GRANT_TYPE}
+        provider:
+          naver:
+            authorization-uri: ${NAVER_AUTHORIZATION_URL}
+            token-uri: ${NAVER_TOKEN_URL}
+            user-info-uri: ${NAVER_USER_INFO_URL}
+            user-name-attribute: ${NAVER_USER_NAME_ATTRIBUTE}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    generate-ddl: true
+
+
+jwt:
+  secret: ${JWT_SECRET_KEY}
+  expiration: ${JWT_EXPIRATION_TIME}
+
+app:
+  front-url: ${FRONTEND_URL}
+

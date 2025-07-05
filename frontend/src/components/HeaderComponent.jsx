@@ -17,7 +17,7 @@ export default function Header() {
   };
 
   const handleLogin = () => {
-    window.location.href = "http://localhost:8080/oauth2/authorization/naver";
+    window.location.href = `${process.env.REACT_APP_BACKEND_URL}/oauth2/authorization/naver`;
   };
 
   return (
@@ -30,7 +30,6 @@ export default function Header() {
         <nav className="nav">
           <Link to="/register">모종 등록</Link>
           <Link to="/find">모종 찾기</Link>
-          <Link to="/range">반경 내 모종</Link>
           {isLogin ? (
             <Link to="/mypage"> 내 정보</Link>
           ) : (
@@ -50,9 +49,7 @@ export default function Header() {
         <Link to="/find" onClick={toggleMenu}>
           모종 찾기
         </Link>
-        <Link to="/range" onClick={toggleMenu}>
-          반경 내 모종
-        </Link>
+
         {isLogin ? (
           <Link to="/mypage" onClick={toggleMenu}>
             내 정보
