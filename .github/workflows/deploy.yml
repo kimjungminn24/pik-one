@@ -14,11 +14,19 @@ jobs:
 
       - name: Setup SSH
         run: |
+          echo "[🔍 디버깅]  경로생성 "
           mkdir -p ~/.ssh
+
+          echo "[🔍 디버깅]  키옮김 "
           printf "%s\n" "${{ secrets.EC2_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
 
+          echo "[🔍 디버깅] 파일 존재 확인"
+          ls -la ~/.ssh
+
+          echo "[🔍 디버깅] 키 앞부분 미리보기"
+          head -n 5 ~/.ssh/id_rsa || echo "키 없음"
       - name: Build Frontend
         run: |
           cd frontend
