@@ -1,6 +1,6 @@
 import { handleFetchError } from "../utils/handleFetchError";
 
-const BASE_URL = "http://localhost:8080/decors";
+const BASE_URL = `${process.env.REACT_APP_BACKEND_URL}/decors`;
 
 export const getDecorByTypeAndPosition = async ({
   northLat,

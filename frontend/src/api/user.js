@@ -1,6 +1,6 @@
 import { handleFetchError } from "../utils/handleFetchError";
 
-const BASE_URL = "http://localhost:8080/user";
+const BASE_URL = `${process.env.REACT_APP_BACKEND_URL}/user`;
 
 export const fetchUser = async () => {
   const res = await fetch(`${BASE_URL}/login/check`, {
