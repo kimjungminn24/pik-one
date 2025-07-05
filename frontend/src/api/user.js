@@ -1,3 +1,5 @@
+import { handleFetchError } from "../utils/handleFetchError";
+
 const BASE_URL = "http://localhost:8080/user";
 
 export const fetchUser = async () => {
@@ -6,7 +8,7 @@ export const fetchUser = async () => {
   });
 
   if (!res.ok) {
-    throw new Error("Not authenticated");
+    await handleFetchError(res);
   }
   const data = await res.json();
 

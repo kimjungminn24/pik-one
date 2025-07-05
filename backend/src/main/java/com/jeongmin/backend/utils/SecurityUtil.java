@@ -1,5 +1,7 @@
 package com.jeongmin.backend.utils;
 
+import com.jeongmin.backend.exception.ErrorCode;
+import com.jeongmin.backend.exception.RestApiException;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -11,7 +13,7 @@ public class SecurityUtil {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication == null || authentication.getPrincipal() == null) {
-            throw new IllegalStateException("현재 로그인 상태가 아닙니다.");
+            throw new RestApiException(ErrorCode.LOGIN_REQUIRED);
         }
 
         return authentication.getPrincipal().toString();

@@ -38,9 +38,6 @@ export default function Register() {
           setContent("");
           setSelectedTag("");
         },
-        onError: () => {
-          toast.error("등록 중 오류가 발생했어요.");
-        },
       }
     );
 

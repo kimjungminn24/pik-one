@@ -5,6 +5,8 @@ import com.jeongmin.backend.entity.Decor;
 import com.jeongmin.backend.entity.DecorType;
 import com.jeongmin.backend.entity.Feedback;
 import com.jeongmin.backend.entity.User;
+import com.jeongmin.backend.exception.ErrorCode;
+import com.jeongmin.backend.exception.RestApiException;
 import com.jeongmin.backend.repository.DecorRepository;
 import com.jeongmin.backend.repository.FeedbackRepository;
 import com.jeongmin.backend.repository.UserRepository;
@@ -59,7 +61,7 @@ public class DecorService {
         User user = getCurrentUser();
 
         if (!decor.getUser().equals(user)) {
-            throw new IllegalStateException("해당 Decor를 삭제할 권한이 없습니다.");
+            throw new RestApiException(ErrorCode.NO_PERMISSION_DECOR_DELETE);
         }
 
         decorRepository.delete(decor);
@@ -84,7 +86,7 @@ public class DecorService {
         User user = getCurrentUser();
 
         if (checkDecorExistsNearby(request.lat(), request.lng(), request.type())) {
-            throw new IllegalStateException("이미 해당 위치에 같은 타입의 Decor가 존재합니다.");
+            throw new RestApiException(ErrorCode.DUPLICATE_DECOR);
         }
 
         Decor decor = Decor.createNewDecor(
@@ -126,7 +128,7 @@ public class DecorService {
         User user = getCurrentUser();
 
         if (feedbackRepository.existsByUserAndDecor(user, decor)) {
-            throw new IllegalStateException("이미 해당 Decor에 피드백을 남겼습니다.");
+            throw new RestApiException(ErrorCode.DUPLICATE_FEEDBACK);
         }
 
         Feedback feedback = Feedback.create(
@@ -143,7 +145,7 @@ public class DecorService {
 
     public List<DecorDetailResponse> getMyDecors() {
         if (!SecurityUtil.isLogin()) {
-            throw new IllegalStateException("로그인이 필요합니다.");
+            throw new RestApiException(ErrorCode.LOGIN_REQUIRED);
         }
         User user = getCurrentUser();
         List<Decor> decors = decorRepository.findByUserAndDeletedAtIsNull(user);
@@ -159,7 +161,7 @@ public class DecorService {
 
     public List<FeedbackResponse> getMyFeedback() {
         if (!SecurityUtil.isLogin()) {
-            throw new IllegalStateException("로그인이 필요합니다.");
+            throw new RestApiException(ErrorCode.LOGIN_REQUIRED);
         }
         User user = getCurrentUser();
         return user.getFeedbacks().stream().map(FeedbackResponse::from).toList();
@@ -168,14 +170,16 @@ public class DecorService {
 
     private Decor getActiveDecorById(Long decorId) {
         return decorRepository.findByIdAndDeletedAtIsNull(decorId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 Decor를 찾을 수 없거나 삭제된 상태입니다."));
+                .orElseThrow(() -> new RestApiException(ErrorCode.DECOR_NOT_FOUND));
     }
 
     private User getCurrentUser() {
+        if (!SecurityUtil.isLogin()) {
+            throw new RestApiException(ErrorCode.LOGIN_REQUIRED);
+        }
         String providerId = SecurityUtil.getCurrentProviderId();
-
         return userRepository.findByProviderAndProviderId("naver", providerId)
-                .orElseThrow(() -> new IllegalArgumentException("유저를 찾을 수 없습니다."));
+                .orElseThrow(() -> new RestApiException(ErrorCode.USER_NOT_FOUND));
     }
 }
 

@@ -2,6 +2,8 @@ package com.jeongmin.backend.service;
 
 import com.jeongmin.backend.dto.LoginResponse;
 import com.jeongmin.backend.entity.User;
+import com.jeongmin.backend.exception.ErrorCode;
+import com.jeongmin.backend.exception.RestApiException;
 import com.jeongmin.backend.repository.UserRepository;
 import com.jeongmin.backend.utils.SecurityUtil;
 import lombok.RequiredArgsConstructor;
@@ -30,17 +32,16 @@ public class UserService {
     }
 
     public LoginResponse checkLogin() {
-        return new LoginResponse(SecurityUtil.isLogin());
+        boolean check = SecurityUtil.isLogin();
+        if (!check) {
+            throw new RestApiException(ErrorCode.LOGIN_REQUIRED);
+        }
+        return new LoginResponse(true);
     }
 
     private String generateRandomNickname() {
         return String.format("%s_%s", NICKNAME_PREFIX, UUID.randomUUID().toString().substring(0, 8));
     }
 
-    private User getCurrentUser() {
-        String providerId = SecurityUtil.getCurrentProviderId();
 
-        return userRepository.findByProviderAndProviderId("naver", providerId)
-                .orElseThrow(() -> new IllegalArgumentException("유저를 찾을 수 없습니다."));
-    }
 }

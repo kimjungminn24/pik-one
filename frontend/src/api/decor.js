@@ -1,3 +1,5 @@
+import { handleFetchError } from "../utils/handleFetchError";
+
 const BASE_URL = "http://localhost:8080/decors";
 
 export const getDecorByTypeAndPosition = async ({
@@ -15,8 +17,7 @@ export const getDecorByTypeAndPosition = async ({
   );
 
   if (!res.ok) {
-    const error = await res.text();
-    throw new Error(`조회 실패: ${error}`);
+    await handleFetchError(res);
   }
   const data = await res.json();
 
@@ -39,8 +40,7 @@ export const createNewDecor = async ({ lat, lng, type, content }) => {
   });
 
   if (!res.ok) {
-    const error = await res.text();
-    throw new Error(`등록 실패: ${error}`);
+    await handleFetchError(res);
   }
 
   const data = await res.json();
@@ -57,7 +57,7 @@ export const deleteDecor = async ({ id }) => {
   });
 
   if (!res.ok) {
-    throw new Error("Failed to delete decor");
+    await handleFetchError(res);
   }
 
   return res.status === 204 ? null : await res.json();
@@ -67,7 +67,9 @@ export const fetchDecorDetail = async (id) => {
   const res = await fetch(`${BASE_URL}/${id}`, {
     credentials: "include",
   });
-  if (!res.ok) throw new Error("상세 정보 조회 실패");
+  if (!res.ok) {
+    await handleFetchError(res);
+  }
   return res.json();
 };
 
@@ -86,8 +88,7 @@ export const createNewFeedback = async ({ decorId, feedbackType, content }) => {
   });
 
   if (!res.ok) {
-    const error = await res.text();
-    throw new Error(`등록 실패: ${error}`);
+    await handleFetchError(res);
   }
 
   const data = await res.json();
@@ -100,7 +101,7 @@ export const fetchMyDecors = async () => {
   });
 
   if (!res.ok) {
-    throw new Error("Not authenticated");
+    await handleFetchError(res);
   }
   const data = await res.json();
 
@@ -113,7 +114,7 @@ export const fetchMyFeedbacks = async () => {
   });
 
   if (!res.ok) {
-    throw new Error("Not authenticated");
+    await handleFetchError(res);
   }
   const data = await res.json();
 

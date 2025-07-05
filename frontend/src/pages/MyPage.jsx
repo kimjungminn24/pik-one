@@ -1,18 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useMyDecorsQuery } from "../hooks/useDecor";
-import { toast } from "react-toastify";
 import { decorList } from "../decorList";
 import DecorCard from "../components/DecorCard";
 import MyDecorPopup from "../components/MyDecorPopup";
 export default function MyPage() {
-  const { data, isLoading, isError } = useMyDecorsQuery();
+  const { data, isLoading } = useMyDecorsQuery();
   const [selectedDecor, setSelectedDecor] = useState(null);
-
-  useEffect(() => {
-    if (isError) {
-      toast.error("데이터를 불러오는 중 오류가 발생했습니다.");
-    }
-  }, [isError]);
 
   if (isLoading) return <div> 로딩 중...</div>;
 
