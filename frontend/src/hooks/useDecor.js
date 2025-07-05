@@ -91,9 +91,6 @@ export const useDeleteDecor = () => {
       toast.success("모종이 삭제되었습니다.");
       queryClient.invalidateQueries({ queryKey: ["my-decors"] });
     },
-    onError: () => {
-      toast.error("모종 삭제에 실패했습니다.");
-    },
   });
 };
 
