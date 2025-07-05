@@ -1,11 +1,8 @@
-import { ToastContainer, toast } from "react-toastify";
-
 function App() {
   return (
     <div className="App">
-      <header className="App-header"></header>
+      <header className="App-header">프롱트화면</header>
     </div>
-      <ToastContainer position="top-right" autoClose={3000} />
   );
 }
 
