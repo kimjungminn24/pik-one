@@ -81,6 +81,7 @@ export default function DecorDetailPopup({ data }) {
         lat={data.lat}
         lng={data.lng}
         probability={probability}
+        content={data.content}
       />
 
       <div className="feedback-list">

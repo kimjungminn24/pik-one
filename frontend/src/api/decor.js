@@ -47,6 +47,22 @@ export const createNewDecor = async ({ lat, lng, type, content }) => {
   return data;
 };
 
+export const deleteDecor = async ({ id }) => {
+  const res = await fetch(`${BASE_URL}/${id}`, {
+    method: "DELETE",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to delete decor");
+  }
+
+  return res.status === 204 ? null : await res.json();
+};
+
 export const fetchDecorDetail = async (id) => {
   const res = await fetch(`${BASE_URL}/${id}`, {
     credentials: "include",
@@ -75,5 +91,31 @@ export const createNewFeedback = async ({ decorId, feedbackType, content }) => {
   }
 
   const data = await res.json();
+  return data;
+};
+
+export const fetchMyDecors = async () => {
+  const res = await fetch(`${BASE_URL}/me`, {
+    credentials: "include",
+  });
+
+  if (!res.ok) {
+    throw new Error("Not authenticated");
+  }
+  const data = await res.json();
+
+  return data;
+};
+
+export const fetchMyFeedbacks = async () => {
+  const res = await fetch(`${BASE_URL}/me/feedbacks`, {
+    credentials: "include",
+  });
+
+  if (!res.ok) {
+    throw new Error("Not authenticated");
+  }
+  const data = await res.json();
+
   return data;
 };

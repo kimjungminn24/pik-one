@@ -1,10 +1,20 @@
-import { useQueries, useMutation, useQuery } from "@tanstack/react-query";
+import {
+  useQueries,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import {
   getDecorByTypeAndPosition,
   createNewDecor,
   fetchDecorDetail,
   createNewFeedback,
+  deleteDecor,
+  fetchMyDecors,
+  fetchMyFeedbacks,
 } from "../api/decor";
+
+import { toast } from "react-toastify";
 
 export const useDecor = (params = {}, isEnabled = true) => {
   const { northLat, southLat, eastLng, westLng, types = [] } = params ?? {};
@@ -42,15 +52,22 @@ export const useDecor = (params = {}, isEnabled = true) => {
 };
 
 export const useCreateDecor = () => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: createNewDecor,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["my-decors"] });
+    },
   });
 };
 
 export function useCreateFeedback(onSuccessCallback) {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: createNewFeedback,
     onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ["my-feedbacks"] });
       onSuccessCallback?.(data);
     },
   });
@@ -62,5 +79,36 @@ export const useDecorDetail = (id, enabled) => {
     queryFn: () => fetchDecorDetail(id),
     enabled,
     staleTime: 1000 * 60 * 5,
+  });
+};
+
+export const useDeleteDecor = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: deleteDecor,
+    onSuccess: () => {
+      toast.success("모종이 삭제되었습니다.");
+      queryClient.invalidateQueries({ queryKey: ["my-decors"] });
+    },
+    onError: () => {
+      toast.error("모종 삭제에 실패했습니다.");
+    },
+  });
+};
+
+export const useMyDecorsQuery = () => {
+  return useQuery({
+    queryKey: ["my-decors"],
+    queryFn: fetchMyDecors,
+    retry: false,
+  });
+};
+
+export const useMyFeedbacksQuery = () => {
+  return useQuery({
+    queryKey: ["my-feedbacks"],
+    queryFn: fetchMyFeedbacks,
+    retry: false,
   });
 };
