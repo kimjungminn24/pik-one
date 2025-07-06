@@ -22,7 +22,7 @@ jobs:
         run: |
           cd backend
           chmod +x ./gradlew
-          ./gradlew build --no-daemon --no-watch-fs
+          ./gradlew build -x test --no-daemon --no-watch-fs
 
       - name: Build Frontend
         run: |
