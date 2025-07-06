@@ -34,7 +34,7 @@ export default function Header() {
             <Link to="/mypage"> 내 정보</Link>
           ) : (
             <button onClick={handleLogin} className="login-button-wrapper">
-              <img src="/btn.png" className="login-button" />
+              <img src="/btn.png" alt="로그인버튼" className="login-button" />
             </button>
           )}
         </nav>
@@ -58,7 +58,7 @@ export default function Header() {
           </Link>
         ) : (
           <button onClick={handleLogin} className="login-button-wrapper">
-            <img src="/btn.png" className="login-button" />
+            <img src="/btn.png" alt="로그인버튼" className="login-button" />
           </button>
         )}
       </div>
