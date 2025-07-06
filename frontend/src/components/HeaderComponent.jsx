@@ -24,7 +24,7 @@ export default function Header() {
     <header className="header">
       <div className="container">
         <div className="logo">
-          <Link to="/">픽픽</Link>
+          <Link to="/">단독스팟</Link>
         </div>
 
         <nav className="nav">
@@ -33,7 +33,9 @@ export default function Header() {
           {isLogin ? (
             <Link to="/mypage"> 내 정보</Link>
           ) : (
-            <button onClick={handleLogin}>네이버 로그인</button>
+            <button onClick={handleLogin} className="login-button-wrapper">
+              <img src="/btn.png" className="login-button" />
+            </button>
           )}
         </nav>
 
@@ -55,7 +57,9 @@ export default function Header() {
             내 정보
           </Link>
         ) : (
-          <button onClick={handleLogin}>네이버 로그인</button>
+          <button onClick={handleLogin} className="login-button-wrapper">
+            <img src="/btn.png" className="login-button" />
+          </button>
         )}
       </div>
     </header>

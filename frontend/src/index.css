@@ -4,6 +4,7 @@
 @import "./css/map.css";
 @import "./css/decor.css";
 @import "./css/mypage.css";
+@import "./css/home.css";
 
 @import "react-toastify/dist/ReactToastify.css";
 
@@ -34,7 +35,7 @@ code {
   font-weight: bold;
 }
 .emoji {
-  font-family: "TossFace";
+  font-family: "CookieRun", "TossFace";
 }
 .main {
   padding-top: 60px;
@@ -70,4 +71,7 @@ button:disabled {
   display: flex;
   justify-content: center;
   margin-top: 1rem;
+}
+a {
+  text-decoration: none;
 }
