@@ -47,7 +47,8 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           source: "backend/build/libs/*.jar"
-          target: "~/app/pik-one/backend/build/libs"
+          target: "/home/ubuntu/app/pik-one/backend"
+          strip_components: 3
 
       - name: SSH into EC2 and deploy
         uses: appleboy/ssh-action@v0.1.6
@@ -57,13 +58,14 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           script: |
             echo "[.env 생성]"
-            echo "${{ secrets.BACKEND_ENV }}" > ~/app/pik-one/backend/.env
+            echo "${{ secrets.BACKEND_ENV }}" > /home/ubuntu/app/pik-one/backend/.env
 
             echo "[백엔드 실행]"
             pkill -f "java -jar" || true
-            nohup java -jar ~/app/pik-one/backend/build/libs/*.jar > ~/app/pik-one/backend/log.txt 2>&1 &
+            nohup java -jar /home/ubuntu/app/pik-one/backend/*.jar > /home/ubuntu/app/pik-one/backend/log.txt 2>&1 &
+            sleep 5
+            tail -n 20 /home/ubuntu/app/pik-one/backend/log.txt
 
             echo "[프론트 배포]"
             sudo rm -rf /var/www/html/*
             sudo cp -r /tmp/frontend-build/* /var/www/html/
-            sudo rm -rf /tmp/frontend-build
