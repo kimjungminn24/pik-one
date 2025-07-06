@@ -7,7 +7,6 @@ import Find from "./pages/Find";
 import MyPage from "./pages/MyPage";
 import { useUserQuery } from "./hooks/useUser";
 import { ToastContainer, toast } from "react-toastify";
-import Login from "./pages/Login";
 import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
@@ -44,7 +43,6 @@ function App() {
               </PrivateRoute>
             }
           />
-          <Route path="/login" element={<Login />} />
         </Routes>
       </div>
       <ToastContainer position="top-right" autoClose={3000} />
