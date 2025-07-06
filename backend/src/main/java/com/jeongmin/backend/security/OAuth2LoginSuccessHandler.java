@@ -1,11 +1,11 @@
 package com.jeongmin.backend.security;
 
 import com.jeongmin.backend.jwt.JwtProvider;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseCookie;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -40,19 +40,18 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
 
         String token = jwtProvider.createAccessToken(providerId);
 
-        Cookie cookie = createAccessTokenCookie(token);
-        response.addCookie(cookie);
-
+        ResponseCookie cookie = createAccessTokenCookie(token);
+        response.addHeader("Set-Cookie", cookie.toString());
         response.sendRedirect(frontUrl);
     }
 
-    private Cookie createAccessTokenCookie(String token) {
-        Cookie cookie = new Cookie(ACCESS_TOKEN_COOKIE_NAME,
-                URLEncoder.encode(token, StandardCharsets.UTF_8));
-        cookie.setHttpOnly(true);
-        cookie.setPath("/");
-        cookie.setMaxAge((int) jwtProvider.getAccessTokenExpirySeconds());
-        cookie.setSecure(true);
-        return cookie;
+    private ResponseCookie createAccessTokenCookie(String token) {
+        return ResponseCookie.from(ACCESS_TOKEN_COOKIE_NAME, URLEncoder.encode(token, StandardCharsets.UTF_8))
+                .httpOnly(true)
+                .secure(true)
+                .sameSite("None")
+                .path("/")
+                .maxAge(jwtProvider.getAccessTokenExpirySeconds())
+                .build();
     }
 }

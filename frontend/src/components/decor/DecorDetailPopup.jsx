@@ -72,6 +72,7 @@ export default function DecorDetailPopup({ data }) {
     setHelpfulCount(data.helpfulCount ?? 0);
     setNotFoundCount(data.notFoundCount ?? 0);
     resetFeedbackState();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data.id]);
 
   return (

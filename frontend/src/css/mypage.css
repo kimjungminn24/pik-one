@@ -4,6 +4,13 @@
   gap: 16px;
   margin-top: 1rem;
 }
+.uniform-box {
+  width: 100%;
+  max-width: 300px;
+  height: 60px;
+  border-radius: 12px;
+  box-sizing: border-box;
+}
 
 .decor-card {
   background-color: #f8fff8;

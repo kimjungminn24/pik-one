@@ -24,12 +24,13 @@
 }
 
 .logo {
-  font-size: 24px;
+  font-size: 2rem;
   font-weight: bold;
 }
 
 .nav {
   display: flex;
+  align-items: center;
   gap: 24px;
 }
 
@@ -66,6 +67,21 @@
 
 .mobile-menu a:last-child {
   border-bottom: none;
+}
+
+.login-button-wrapper {
+  all: unset;
+  cursor: pointer;
+  display: block;
+  width: 120px;
+  height: auto;
+}
+
+.login-button {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
 }
 
 @media (max-width: 768px) {
