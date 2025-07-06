@@ -36,13 +36,14 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           script: |
             echo "[코드 최신화]"
-            cd ~/backend
+            cd ~/app/pik-one/backend
             git pull origin main
 
             echo "[.env 생성]"
-            echo "${{ secrets.BACKEND_ENV }}" > ~/backend/.env
+            echo "${{ secrets.BACKEND_ENV }}" > ~/app/pik-one/backend/.env
 
             echo "[백엔드 배포]"
+            cd ~/app
             ./deploy.sh
 
             echo "[프론트 배포]"
