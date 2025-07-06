@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Home() {
@@ -16,7 +16,7 @@ export default function Home() {
     <div className="home-container">
       <div className="content-row">
         <div className="intro-section">
-          <img src="/cute.gif" className="home-gif" />
+          <img src="/cute.gif" alt="피크민짤" className="home-gif" />
           <p className="home-description">
             나만의 단독 스팟을 등록하고, 다른 사람의 스팟도 발견해보세요!
           </p>
