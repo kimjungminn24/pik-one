@@ -12,6 +12,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: "temurin"
+          java-version: "17"
+
+      - name: Build Backend (JAR only)
+        run: |
+          cd backend
+          chmod +x ./gradlew
+          ./gradlew build --no-daemon --no-watch-fs
+
       - name: Build Frontend
         run: |
           cd frontend
@@ -28,6 +40,15 @@ jobs:
           source: "frontend/build/*"
           target: "/tmp/frontend-build"
 
+      - name: Copy backend JAR to EC2
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_KEY }}
+          source: "backend/build/libs/*.jar"
+          target: "~/app/pik-one/backend/build/libs"
+
       - name: SSH into EC2 and deploy
         uses: appleboy/ssh-action@v0.1.6
         with:
@@ -35,16 +56,12 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           script: |
-            echo "[코드 최신화]"
-            cd ~/app/pik-one/backend
-            git pull origin main
-
             echo "[.env 생성]"
             echo "${{ secrets.BACKEND_ENV }}" > ~/app/pik-one/backend/.env
 
-            echo "[백엔드 배포]"
-            cd ~/app
-            ./deploy.sh
+            echo "[백엔드 실행]"
+            pkill -f "java -jar" || true
+            nohup java -jar ~/app/pik-one/backend/build/libs/*.jar > ~/app/pik-one/backend/log.txt 2>&1 &
 
             echo "[프론트 배포]"
             sudo rm -rf /var/www/html/*
