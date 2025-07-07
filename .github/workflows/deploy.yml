@@ -18,11 +18,35 @@ jobs:
           distribution: "temurin"
           java-version: "17"
 
-      - name: Build Backend (JAR only)
-        run: |
-          cd backend
-          chmod +x ./gradlew
-          ./gradlew build -x test --no-daemon --no-watch-fs
+      - name: Grant permission
+        run: chmod +x ./gradlew
+        working-directory: ./backend
+
+      - name: Build project
+        run: ./gradlew bootJar
+        working-directory: ./backend
+        env:
+          DB_URL: ${{ secrets.DB_URL }}
+          DB_USERNAME: ${{ secrets.DB_USERNAME }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+
+          NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}
+          NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
+          NAVER_REDIRECT_URI: ${{ secrets.NAVER_REDIRECT_URI }}
+          NAVER_AUTHORIZATION_GRANT_TYPE: ${{ secrets.NAVER_AUTHORIZATION_GRANT_TYPE }}
+          NAVER_AUTHORIZATION_URL: ${{ secrets.NAVER_AUTHORIZATION_URL }}
+          NAVER_TOKEN_URL: ${{ secrets.NAVER_TOKEN_URL }}
+          NAVER_USER_INFO_URL: ${{ secrets.NAVER_USER_INFO_URL }}
+          NAVER_USER_NAME_ATTRIBUTE: ${{ secrets.NAVER_USER_NAME_ATTRIBUTE }}
+
+          JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
+          JWT_EXPIRATION_TIME: ${{ secrets.JWT_EXPIRATION_TIME }}
+
+          FRONTEND_URL: ${{ secrets.FRONTEND_URL }}
+
+          GITHUB_OWNER: ${{ secrets.GITHUB_OWNER }}
+          GITHUB_REPO: ${{ secrets.GITHUB_REPO }}
+          GITHUB_ISSUE_NUMBER: ${{ secrets.GITHUB_ISSUE_NUMBER }}
 
       - name: Build Frontend
         run: |
@@ -50,38 +74,29 @@ jobs:
           target: "/home/ubuntu/app/pik-one/backend"
           strip_components: 3
 
-      - name: SSH into EC2 and deploy
+      - name: Run application on EC2
         uses: appleboy/ssh-action@v0.1.6
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
-          envs: DB_URL,DB_USERNAME,DB_PASSWORD,NAVER_CLIENT_ID,NAVER_CLIENT_SECRET,NAVER_REDIRECT_URI,NAVER_AUTHORIZATION_GRANT_TYPE,NAVER_AUTHORIZATION_URL,NAVER_TOKEN_URL,NAVER_USER_INFO_URL,NAVER_USER_NAME_ATTRIBUTE,JWT_SECRET_KEY,JWT_EXPIRATION_TIME,FRONTEND_URL
           script: |
+            echo "[기존 8080 포트 프로세스 종료 시도]"
+            if lsof -i:8080 -t >/dev/null; then
+              kill -9 $(lsof -i:8080 -t)
+              echo "[기존 프로세스 종료됨]"
+            else
+              echo "[8080 포트에서 실행 중인 프로세스 없음]"
+            fi
+
             echo "[백엔드 실행 준비]"
-            pkill -f "java -jar" || true
             cd /home/ubuntu/app/pik-one/backend || { echo "[경로 이동 실패]"; exit 1; }
 
-            echo "[백엔드 실행]"
-            setsid env \
-              DB_URL="$DB_URL" \
-              DB_USERNAME="$DB_USERNAME" \
-              DB_PASSWORD="$DB_PASSWORD" \
-              NAVER_CLIENT_ID="$NAVER_CLIENT_ID" \
-              NAVER_CLIENT_SECRET="$NAVER_CLIENT_SECRET" \
-              NAVER_REDIRECT_URI="$NAVER_REDIRECT_URI" \
-              NAVER_AUTHORIZATION_GRANT_TYPE="$NAVER_AUTHORIZATION_GRANT_TYPE" \
-              NAVER_AUTHORIZATION_URL="$NAVER_AUTHORIZATION_URL" \
-              NAVER_TOKEN_URL="$NAVER_TOKEN_URL" \
-              NAVER_USER_INFO_URL="$NAVER_USER_INFO_URL" \
-              NAVER_USER_NAME_ATTRIBUTE="$NAVER_USER_NAME_ATTRIBUTE" \
-              JWT_SECRET_KEY="$JWT_SECRET_KEY" \
-              JWT_EXPIRATION_TIME="$JWT_EXPIRATION_TIME" \
-              FRONTEND_URL="$FRONTEND_URL" \
-              java -jar backend-0.0.1-SNAPSHOT.jar > log.txt 2>&1 < /dev/null &
+            echo "[새로운 애플리케이션 실행]"
+            nohup bash -c "source /home/ubuntu/.bashrc && java -jar backend-0.0.1-SNAPSHOT.jar" > /home/ubuntu/app/pik-one/backend/log.txt 2>&1 < /dev/null &
 
             echo "[백엔드 로그 출력]"
-            tail -n 20 log.txt
+            tail -n 20 /home/ubuntu/app/pik-one/backend/log.txt
 
             echo "[프론트 배포]"
             sudo rm -rf /var/www/html/*
