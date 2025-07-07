@@ -28,7 +28,7 @@ public class SecurityConfig {
     private final OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
 
 
-    @Value("${app.frontend-url}")
+    @Value("${app.front-url}")
     private String frontendUrl;
 
     @Bean
