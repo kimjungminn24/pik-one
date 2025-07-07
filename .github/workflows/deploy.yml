@@ -61,25 +61,25 @@ jobs:
             pkill -f "java -jar" || true
             cd /home/ubuntu/app/pik-one/backend || { echo "[경로 이동 실패]"; exit 1; }
 
-            echo "[환경변수 주입]"
-            env \
-            DB_URL="${{ secrets.DB_URL }}" \
-            DB_USERNAME="${{ secrets.DB_USERNAME }}" \
-            DB_PASSWORD="${{ secrets.DB_PASSWORD }}" \
-            NAVER_CLIENT_ID="${{ secrets.NAVER_CLIENT_ID }}" \
-            NAVER_CLIENT_SECRET="${{ secrets.NAVER_CLIENT_SECRET }}" \
-            NAVER_REDIRECT_URI="${{ secrets.NAVER_REDIRECT_URI }}" \
-            NAVER_AUTHORIZATION_GRANT_TYPE="${{ secrets.NAVER_AUTHORIZATION_GRANT_TYPE }}" \
-            NAVER_AUTHORIZATION_URL="${{ secrets.NAVER_AUTHORIZATION_URL }}" \
-            NAVER_TOKEN_URL="${{ secrets.NAVER_TOKEN_URL }}" \
-            NAVER_USER_INFO_URL="${{ secrets.NAVER_USER_INFO_URL }}" \
-            NAVER_USER_NAME_ATTRIBUTE="${{ secrets.NAVER_USER_NAME_ATTRIBUTE }}" \
-            JWT_SECRET_KEY="${{ secrets.JWT_SECRET_KEY }}" \
-            JWT_EXPIRATION_TIME="${{ secrets.JWT_EXPIRATION_TIME }}" \
-            FRONTEND_URL="${{ secrets.FRONTEND_URL }}" \
-            nohup java -jar backend-0.0.1-SNAPSHOT.jar > log.txt 2>&1 &
 
-            sleep 5
+            echo "[백엔드 실행]"
+            env \
+              DB_URL="${{ secrets.DB_URL }}" \
+              DB_USERNAME="${{ secrets.DB_USERNAME }}" \
+              DB_PASSWORD="${{ secrets.DB_PASSWORD }}" \
+              NAVER_CLIENT_ID="${{ secrets.NAVER_CLIENT_ID }}" \
+              NAVER_CLIENT_SECRET="${{ secrets.NAVER_CLIENT_SECRET }}" \
+              NAVER_REDIRECT_URI="${{ secrets.NAVER_REDIRECT_URI }}" \
+              NAVER_AUTHORIZATION_GRANT_TYPE="${{ secrets.NAVER_AUTHORIZATION_GRANT_TYPE }}" \
+              NAVER_AUTHORIZATION_URL="${{ secrets.NAVER_AUTHORIZATION_URL }}" \
+              NAVER_TOKEN_URL="${{ secrets.NAVER_TOKEN_URL }}" \
+              NAVER_USER_INFO_URL="${{ secrets.NAVER_USER_INFO_URL }}" \
+              NAVER_USER_NAME_ATTRIBUTE="${{ secrets.NAVER_USER_NAME_ATTRIBUTE }}" \
+              JWT_SECRET_KEY="${{ secrets.JWT_SECRET_KEY }}" \
+              JWT_EXPIRATION_TIME="${{ secrets.JWT_EXPIRATION_TIME }}" \
+              FRONTEND_URL="${{ secrets.FRONTEND_URL }}" \
+              setsid java -jar backend-0.0.1-SNAPSHOT.jar > log.txt 2>&1 < /dev/null &
+              
             echo "[백엔드 로그 출력]"
             tail -n 20 log.txt
 
