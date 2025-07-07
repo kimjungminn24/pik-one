@@ -19,6 +19,10 @@ jobs:
           distribution: "temurin"
           java-version: "17"
 
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
+        working-directory: ./backend
+
       - name: Build Backend
         run: ./gradlew bootJar
         working-directory: ./backend
