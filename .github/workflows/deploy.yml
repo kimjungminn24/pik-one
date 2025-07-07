@@ -60,15 +60,25 @@ jobs:
           source: "frontend/build/*"
           target: "/tmp/frontend-build"
 
-      - name: Copy backend JAR and env.sh to EC2
+      - name: Copy backend JAR to EC2
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
-          source: "backend/build/libs/backend-0.0.1-SNAPSHOT.jar,backend/env.sh"
+          source: "backend/build/libs/backend-0.0.1-SNAPSHOT.jar"
           target: "/home/ubuntu/app/pik-one/backend"
-          strip_components: 2
+          strip_components: 3
+
+      - name: Copy env.sh to EC2 (separately)
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_KEY }}
+          source: "backend/env.sh"
+          target: "/home/ubuntu/app/pik-one/backend"
+          strip_components: 1
 
       - name: SSH into EC2 and deploy
         uses: appleboy/ssh-action@v0.1.6
