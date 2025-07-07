@@ -36,20 +36,20 @@ jobs:
 
       - name: Create env.sh file
         run: |
-          echo "export DB_URL='${{ secrets.DB_URL }}'" > env.sh
-          echo "export DB_USERNAME='${{ secrets.DB_USERNAME }}'" >> env.sh
-          echo "export DB_PASSWORD='${{ secrets.DB_PASSWORD }}'" >> env.sh
-          echo "export NAVER_CLIENT_ID='${{ secrets.NAVER_CLIENT_ID }}'" >> env.sh
-          echo "export NAVER_CLIENT_SECRET='${{ secrets.NAVER_CLIENT_SECRET }}'" >> env.sh
-          echo "export NAVER_REDIRECT_URI='${{ secrets.NAVER_REDIRECT_URI }}'" >> env.sh
-          echo "export NAVER_AUTHORIZATION_GRANT_TYPE='${{ secrets.NAVER_AUTHORIZATION_GRANT_TYPE }}'" >> env.sh
-          echo "export NAVER_AUTHORIZATION_URL='${{ secrets.NAVER_AUTHORIZATION_URL }}'" >> env.sh
-          echo "export NAVER_TOKEN_URL='${{ secrets.NAVER_TOKEN_URL }}'" >> env.sh
-          echo "export NAVER_USER_INFO_URL='${{ secrets.NAVER_USER_INFO_URL }}'" >> env.sh
-          echo "export NAVER_USER_NAME_ATTRIBUTE='${{ secrets.NAVER_USER_NAME_ATTRIBUTE }}'" >> env.sh
-          echo "export JWT_SECRET_KEY='${{ secrets.JWT_SECRET_KEY }}'" >> env.sh
-          echo "export JWT_EXPIRATION_TIME='${{ secrets.JWT_EXPIRATION_TIME }}'" >> env.sh
-          echo "export FRONTEND_URL='${{ secrets.FRONTEND_URL }}'" >> env.sh
+          echo "export DB_URL='${{ secrets.DB_URL }}'" > backend/env.sh
+          echo "export DB_USERNAME='${{ secrets.DB_USERNAME }}'" >> backend/env.sh
+          echo "export DB_PASSWORD='${{ secrets.DB_PASSWORD }}'" >> backend/env.sh
+          echo "export NAVER_CLIENT_ID='${{ secrets.NAVER_CLIENT_ID }}'" >> backend/env.sh
+          echo "export NAVER_CLIENT_SECRET='${{ secrets.NAVER_CLIENT_SECRET }}'" >> backend/env.sh
+          echo "export NAVER_REDIRECT_URI='${{ secrets.NAVER_REDIRECT_URI }}'" >> backend/env.sh
+          echo "export NAVER_AUTHORIZATION_GRANT_TYPE='${{ secrets.NAVER_AUTHORIZATION_GRANT_TYPE }}'" >> backend/env.sh
+          echo "export NAVER_AUTHORIZATION_URL='${{ secrets.NAVER_AUTHORIZATION_URL }}'" >> backend/env.sh
+          echo "export NAVER_TOKEN_URL='${{ secrets.NAVER_TOKEN_URL }}'" >> backend/env.sh
+          echo "export NAVER_USER_INFO_URL='${{ secrets.NAVER_USER_INFO_URL }}'" >> backend/env.sh
+          echo "export NAVER_USER_NAME_ATTRIBUTE='${{ secrets.NAVER_USER_NAME_ATTRIBUTE }}'" >> backend/env.sh
+          echo "export JWT_SECRET_KEY='${{ secrets.JWT_SECRET_KEY }}'" >> backend/env.sh
+          echo "export JWT_EXPIRATION_TIME='${{ secrets.JWT_EXPIRATION_TIME }}'" >> backend/env.sh
+          echo "export FRONTEND_URL='${{ secrets.FRONTEND_URL }}'" >> backend/env.sh
 
       - name: Copy frontend build to EC2
         uses: appleboy/scp-action@v0.1.4
@@ -66,9 +66,9 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
-          source: "backend/build/libs/backend-0.0.1-SNAPSHOT.jar,env.sh"
+          source: "backend/build/libs/backend-0.0.1-SNAPSHOT.jar,backend/env.sh"
           target: "/home/ubuntu/app/pik-one/backend"
-          strip_components: 3
+          strip_components: 2
 
       - name: SSH into EC2 and deploy
         uses: appleboy/ssh-action@v0.1.6
