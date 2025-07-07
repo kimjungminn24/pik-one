@@ -58,36 +58,32 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           script: |
             echo "[백엔드 실행 준비]"
-             pkill -f "java -jar" || true
-             cd /home/ubuntu/app/pik-one/backend || { echo "[경로 이동 실패]"; exit 1; }
+            pkill -f "java -jar" || true
+            cd /home/ubuntu/app/pik-one/backend || { echo "[경로 이동 실패]"; exit 1; }
 
-             echo "[환경변수 주입]"
-             export DB_URL="${{ secrets.DB_URL }}"
-             export DB_USERNAME="${{ secrets.DB_USERNAME }}"
-             export DB_PASSWORD="${{ secrets.DB_PASSWORD }}"
+            echo "[환경변수 주입]"
+            env \
+            DB_URL="${{ secrets.DB_URL }}" \
+            DB_USERNAME="${{ secrets.DB_USERNAME }}" \
+            DB_PASSWORD="${{ secrets.DB_PASSWORD }}" \
+            NAVER_CLIENT_ID="${{ secrets.NAVER_CLIENT_ID }}" \
+            NAVER_CLIENT_SECRET="${{ secrets.NAVER_CLIENT_SECRET }}" \
+            NAVER_REDIRECT_URI="${{ secrets.NAVER_REDIRECT_URI }}" \
+            NAVER_AUTHORIZATION_GRANT_TYPE="${{ secrets.NAVER_AUTHORIZATION_GRANT_TYPE }}" \
+            NAVER_AUTHORIZATION_URL="${{ secrets.NAVER_AUTHORIZATION_URL }}" \
+            NAVER_TOKEN_URL="${{ secrets.NAVER_TOKEN_URL }}" \
+            NAVER_USER_INFO_URL="${{ secrets.NAVER_USER_INFO_URL }}" \
+            NAVER_USER_NAME_ATTRIBUTE="${{ secrets.NAVER_USER_NAME_ATTRIBUTE }}" \
+            JWT_SECRET_KEY="${{ secrets.JWT_SECRET_KEY }}" \
+            JWT_EXPIRATION_TIME="${{ secrets.JWT_EXPIRATION_TIME }}" \
+            FRONTEND_URL="${{ secrets.FRONTEND_URL }}" \
+            nohup java -jar backend-0.0.1-SNAPSHOT.jar > log.txt 2>&1 &
 
-             export NAVER_CLIENT_ID="${{ secrets.NAVER_CLIENT_ID }}"
-             export NAVER_CLIENT_SECRET="${{ secrets.NAVER_CLIENT_SECRET }}"
-             export NAVER_REDIRECT_URI="${{ secrets.NAVER_REDIRECT_URI }}"
-             export NAVER_AUTHORIZATION_GRANT_TYPE="${{ secrets.NAVER_AUTHORIZATION_GRANT_TYPE }}"
-             export NAVER_AUTHORIZATION_URL="${{ secrets.NAVER_AUTHORIZATION_URL }}"
-             export NAVER_TOKEN_URL="${{ secrets.NAVER_TOKEN_URL }}"
-             export NAVER_USER_INFO_URL="${{ secrets.NAVER_USER_INFO_URL }}"
-             export NAVER_USER_NAME_ATTRIBUTE="${{ secrets.NAVER_USER_NAME_ATTRIBUTE }}"
+            sleep 5
+            echo "[백엔드 로그 출력]"
+            tail -n 20 log.txt
 
-             export JWT_SECRET_KEY="${{ secrets.JWT_SECRET_KEY }}"
-             export JWT_EXPIRATION_TIME="${{ secrets.JWT_EXPIRATION_TIME }}"
-
-             export FRONTEND_URL="${{ secrets.FRONTEND_URL }}"
-
-             echo "[Spring Boot 백엔드 실행]"
-             nohup java -jar backend-0.0.1-SNAPSHOT.jar > log.txt 2>&1 &
-
-             sleep 5
-             echo "[백엔드 로그 출력]"
-             tail -n 20 log.txt
-
-             echo "[프론트 배포]"
-             sudo rm -rf /var/www/html/*
-             sudo cp -r /tmp/frontend-build/* /var/www/html/
-             sudo rm -rf /tmp/frontend-build
+            echo "[프론트 배포]"
+            sudo rm -rf /var/www/html/*
+            sudo cp -r /tmp/frontend-build/* /var/www/html/
+            sudo rm -rf /tmp/frontend-build
