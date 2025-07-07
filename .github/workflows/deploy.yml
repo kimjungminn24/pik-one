@@ -89,6 +89,7 @@ jobs:
           script: |
             echo "[환경 변수 로드]"
             source /home/ubuntu/app/pik-one/backend/env.sh
+            rm /home/ubuntu/app/pik-one/backend/env.sh
 
             echo "[기존 백엔드 종료]"
             if lsof -i:8080 -t >/dev/null; then
