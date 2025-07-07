@@ -28,7 +28,7 @@ public class SecurityConfig {
     private final OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
 
 
-    @Value("${FRONTEND_URL}")
+    @Value("${app.frontend-url}")
     private String frontendUrl;
 
     @Bean
@@ -45,7 +45,7 @@ public class SecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/login", "/oauth2/**", "/decors/**").permitAll()
+                        .requestMatchers("/", "/user/login/check", "/oauth2/**", "/decors/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .oauth2Login(oauth2 -> oauth2
