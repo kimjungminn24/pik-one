@@ -59,7 +59,7 @@ jobs:
           script: |
             echo "[백엔드 실행 준비]"
              pkill -f "java -jar" || true
-             cd /home/ubuntu/app/pik-one/backend
+             cd /home/ubuntu/app/pik-one/backend || { echo "[경로 이동 실패]"; exit 1; }
 
              echo "[환경변수 주입]"
              export DB_URL="${{ secrets.DB_URL }}"
