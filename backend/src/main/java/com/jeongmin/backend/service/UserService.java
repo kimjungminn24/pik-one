@@ -6,7 +6,9 @@ import com.jeongmin.backend.exception.ErrorCode;
 import com.jeongmin.backend.exception.RestApiException;
 import com.jeongmin.backend.repository.UserRepository;
 import com.jeongmin.backend.utils.SecurityUtil;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -16,6 +18,7 @@ import java.util.UUID;
 public class UserService {
 
     private static final String NICKNAME_PREFIX = "pikmin";
+    private static final String ACCESS_TOKEN_COOKIE_NAME = "access_token";
     private final UserRepository userRepository;
 
     public void registerIfNotExists(String provider, String providerId) {
@@ -37,6 +40,18 @@ public class UserService {
             throw new RestApiException(ErrorCode.LOGIN_REQUIRED);
         }
         return new LoginResponse(true);
+    }
+
+    public void logout(HttpServletResponse response) {
+        ResponseCookie cookie = ResponseCookie.from(ACCESS_TOKEN_COOKIE_NAME, "")
+                .httpOnly(true)
+                .secure(true)
+                .sameSite("None")
+                .path("/")
+                .maxAge(0)
+                .build();
+
+        response.addHeader("Set-Cookie", cookie.toString());
     }
 
     private String generateRandomNickname() {
