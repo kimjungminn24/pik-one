@@ -14,3 +14,14 @@ export const fetchUser = async () => {
 
   return data;
 };
+
+export const logout = async () => {
+  const res = await fetch(`${BASE_URL}/logout`, {
+    credentials: "include",
+  });
+
+  if (!res.ok) {
+    await handleFetchError(res);
+  }
+  return true;
+};

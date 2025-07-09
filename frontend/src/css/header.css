@@ -34,16 +34,6 @@
   gap: 24px;
 }
 
-.nav a {
-  text-decoration: none;
-  color: #333;
-  transition: color 0.3s;
-}
-
-.nav a:hover {
-  color: dodgerblue;
-}
-
 .menu-icon {
   display: none;
   font-size: 24px;
@@ -56,17 +46,6 @@
   background-color: white;
   border-top: 1px solid #eee;
   padding: 16px;
-}
-
-.mobile-menu a {
-  padding: 8px 0;
-  text-decoration: none;
-  color: #333;
-  border-bottom: 1px solid #f0f0f0;
-}
-
-.mobile-menu a:last-child {
-  border-bottom: none;
 }
 
 .login-button-wrapper {
@@ -96,4 +75,40 @@
   .mobile-menu.show {
     display: flex;
   }
+}
+
+.logout-button {
+  all: unset;
+  cursor: pointer;
+}
+
+.nav-item,
+.mobile-item {
+  text-decoration: none;
+  color: #333;
+  transition: color 0.3s;
+  background: none;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+
+.nav-item:hover,
+.mobile-item:hover {
+  color: dodgerblue;
+  background-color: transparent !important;
+}
+
+.mobile-menu a,
+.mobile-menu button.mobile-item {
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+  text-align: left;
+  width: 100%;
+}
+
+.mobile-menu a:last-child,
+.mobile-menu button.mobile-item:last-child {
+  border-bottom: none;
 }
