@@ -23,38 +23,36 @@ export default function MyDecorPopup({ data, onClose }) {
     }
   };
   return (
-    <div className="popup-container">
-      <div className="mypopup-container">
-        <div className="mypopup-left">
-          <div className="mypopup-left-upper">
-            <button
-              onClick={handleDelete}
-              disabled={isPending}
-              className="delete-button"
-            >
-              {isPending ? "삭제 중..." : "삭제"}
-            </button>
-            {data.helpfulCount > 0 && (
-              <div className="helpful-count">
-                {data.helpfulCount}명에게 도움이 되었어요! 😊
-              </div>
-            )}
-          </div>
-          <DecorInfoSection
-            type={data.type}
-            lat={data.lat}
-            lng={data.lng}
-            probability={probability}
-            content={data.content}
-          />
+    <div className="my-decor-popup">
+      <div className="my-decor-popup__content">
+        <div className="my-decor-popup__header">
+          <button
+            onClick={handleDelete}
+            disabled={isPending}
+            className="delete-button my-decor-popup__delete-button"
+          >
+            {isPending ? "삭제 중..." : "삭제"}
+          </button>
+          {data.helpfulCount > 0 && (
+            <div className="my-decor-popup__helpful-message">
+              {data.helpfulCount}명에게 도움이 되었어요! 😊
+            </div>
+          )}
+        </div>
+        <DecorInfoSection
+          type={data.type}
+          lat={data.lat}
+          lng={data.lng}
+          probability={probability}
+          content={data.content}
+        />
 
-          <div className="feedback-list">
-            <FeedbackList feedbacks={data.feedbacks} />
-          </div>
+        <div className="feedback-list">
+          <FeedbackList feedbacks={data.feedbacks} />
         </div>
-        <div className="mypopup-right">
-          <SingleMapComponent lng={data.lng} lat={data.lat} type={data.type} />
-        </div>
+      </div>
+      <div className="my-decor-popup__map">
+        <SingleMapComponent lng={data.lng} lat={data.lat} type={data.type} />
       </div>
     </div>
   );

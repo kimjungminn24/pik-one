@@ -13,27 +13,27 @@ export default function Home() {
   const randomMessage = messages[Math.floor(Math.random() * messages.length)];
 
   return (
-    <div className="home-container">
-      <div className="content-row">
-        <div className="intro-section">
-          <img src="/cute.gif" alt="피크민짤" className="home-gif" />
-          <p className="home-description">
+    <div className="home">
+      <div className="home__content-row">
+        <div>
+          <img src="/cute.gif" alt="피크민짤" className="home__gif" />
+          <p className="home__description">
             나만의 단독 스팟을 등록하고, 다른 사람의 스팟도 발견해보세요!
           </p>
-          <p className="inspiration-text emoji">{randomMessage}</p>
+          <p className="home__inspiration-text emoji">{randomMessage}</p>
         </div>
 
-        <div className="button-group">
+        <div className="home__button-group">
           <button
             onClick={() => navigate("/register")}
-            className="home-button peach uniform-box emoji"
+            className="home__button peach emoji"
           >
             단독 스팟을 등록해보세요 🌿
           </button>
 
           <button
             onClick={() => navigate("/find")}
-            className="home-button blue uniform-box emoji"
+            className="home__button blue emoji"
           >
             단독 스팟을 검색해보세요 🔍
           </button>
