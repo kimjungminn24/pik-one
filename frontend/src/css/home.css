@@ -17,8 +17,12 @@
   padding: 60px 20px;
   min-height: 80vh;
   box-sizing: border-box;
-
-  background: linear-gradient(to bottom, #f0fff0 0%, #f5fdfb 40%, #ffffff 100%);
+  background: linear-gradient(
+    to bottom,
+    var(--color-bg-gradient-start) 0%,
+    var(--color-bg-gradient-mid) 40%,
+    var(--color-bg-gradient-end) 100%
+  );
 }
 
 .content-row {
@@ -42,14 +46,14 @@
   font-size: 1.2rem;
   font-weight: 500;
   margin-top: 20px;
-  color: #555;
+  color: var(--color-text-secondary);
 }
 
 .inspiration-text {
   margin-top: 20px;
   font-style: italic;
   font-size: 1rem;
-  color: #777;
+  color: var(--color-text-muted);
   text-align: center;
 }
 
@@ -66,53 +70,46 @@
   font-size: 1.1rem;
   font-weight: 600;
   border: none;
-  color: white;
+  color: var(--color-btn-text);
   cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px var(--color-shadow-mid);
   transition: all 0.3s ease;
 }
 
 .home-button:hover {
   transform: scale(1.05);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 14px var(--color-shadow-strong);
 }
 
 .green {
-  background-color: #66bb6a;
+  background-color: var(--color-success-light);
 }
 .green:hover {
-  background-color: #43a047;
+  background-color: var(--color-success-dark);
 }
 
 .blue {
-  background-color: #42a5f5;
+  background-color: var(--color-primary);
 }
 .blue:hover {
-  background-color: #1e88e5;
-}
-
-.purple {
-  background-color: #ab47bc;
-}
-.purple:hover {
-  background-color: #8e24aa;
+  background-color: var(--color-primary-hover);
 }
 
 .peach {
-  background-color: #ffb74d;
+  background-color: var(--color-warning);
 }
 .peach:hover {
-  background-color: #ffa726;
+  background-color: var(--color-warning-dark);
 }
 
 .feedback-input {
   font-size: 1rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-border-muted);
   resize: none;
   padding: 0 12px;
   line-height: 1.3;
   overflow: hidden;
-  background: white;
+  background: var(--color-bg-white);
 }
 
 @media (max-width: 1024px) {

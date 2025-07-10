@@ -3,7 +3,7 @@
   align-items: center;
   padding: 0.3rem 0.6rem;
   margin: 0.4rem;
-  background-color: #f3f4f6;
+  background-color: var(--color-bg-gray);
   border-radius: 9999px;
   font-size: 0.75rem;
   font-weight: 500;
@@ -11,7 +11,7 @@
 }
 
 .tag-container:hover {
-  background-color: #e5e7eb;
+  background-color: var(--color-bg-gray-hover);
   cursor: pointer;
 }
 
@@ -21,7 +21,7 @@
 }
 
 .tag-name {
-  color: #111827;
+  color: var(--color-text-default);
 }
 
 @media (max-width: 640px) {
@@ -36,9 +36,8 @@
   }
 }
 .tag-container.selected {
-  background-color: #a5f3fc;
-  color: #0f172a;
-  font-weight: bold;
+  background-color: var(--color-selected);
+  color: var(--color-text-default);
 }
 
 .taglist {

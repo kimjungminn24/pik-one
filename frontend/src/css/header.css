@@ -6,8 +6,8 @@
 
 .header {
   width: 100%;
-  background-color: white;
-  border-bottom: 1px solid #eee;
+  background-color: var(--color-bg-white);
+  border-bottom: 1px solid var(--color-border);
   position: fixed;
   top: 0;
   left: 0;
@@ -43,8 +43,8 @@
 .mobile-menu {
   display: none;
   flex-direction: column;
-  background-color: white;
-  border-top: 1px solid #eee;
+  background-color: var(--color-bg-white);
+  border-top: 1px solid var(--color-border-light);
   padding: 16px;
 }
 
@@ -85,7 +85,7 @@
 .nav-item,
 .mobile-item {
   text-decoration: none;
-  color: #333;
+  color: var(--color-text-default);
   transition: color 0.3s;
   background: none;
   border: none;
@@ -96,14 +96,14 @@
 
 .nav-item:hover,
 .mobile-item:hover {
-  color: dodgerblue;
+  color: var(--color-primary);
   background-color: transparent !important;
 }
 
 .mobile-menu a,
 .mobile-menu button.mobile-item {
   padding: 8px 0;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid var(--color-border-lighter);
   text-align: left;
   width: 100%;
 }
