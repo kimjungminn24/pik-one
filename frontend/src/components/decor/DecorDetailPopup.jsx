@@ -76,7 +76,7 @@ export default function DecorDetailPopup({ data }) {
   }, [data.id]);
 
   return (
-    <div className="popup-container">
+    <>
       <DecorInfoSection
         type={data.type}
         lat={data.lat}
@@ -106,6 +106,6 @@ export default function DecorDetailPopup({ data }) {
           onSubmit={handleSubmit}
         />
       )}
-    </div>
+    </>
   );
 }

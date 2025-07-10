@@ -1,4 +1,4 @@
-.tag-container {
+.tag {
   display: inline-flex;
   align-items: center;
   padding: 0.3rem 0.6rem;
@@ -10,38 +10,39 @@
   transition: background-color 0.2s ease-in-out;
 }
 
-.tag-container:hover {
+.tag:hover {
   background-color: var(--color-bg-gray-hover);
   cursor: pointer;
 }
 
-.tag-emoji {
+.tag__emoji {
   margin-left: 0.5rem;
   font-size: 1.2rem;
 }
 
-.tag-name {
+.tag__name {
   color: var(--color-text-default);
 }
 
+.tag-selected {
+  background-color: var(--color-selected);
+  color: var(--color-text-default);
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 @media (max-width: 640px) {
-  .tag-container {
+  .tag {
     padding: 0.2rem 0.5rem;
     font-size: 0.6rem;
     margin: 0.2rem;
   }
 
-  .tag-emoji {
+  .tag__emoji {
     font-size: 1rem;
   }
-}
-.tag-container.selected {
-  background-color: var(--color-selected);
-  color: var(--color-text-default);
-}
-
-.taglist {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
 }

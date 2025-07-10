@@ -1,9 +1,3 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 .header {
   width: 100%;
   background-color: var(--color-bg-white);
@@ -14,7 +8,7 @@
   z-index: 9999;
 }
 
-.container {
+.header__container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 16px;
@@ -23,24 +17,24 @@
   align-items: center;
 }
 
-.logo {
+.header__logo {
   font-size: 2rem;
   font-weight: bold;
 }
 
-.nav {
+.header__nav {
   display: flex;
   align-items: center;
   gap: 24px;
 }
 
-.menu-icon {
+.header__menu-icon {
   display: none;
   font-size: 24px;
   cursor: pointer;
 }
 
-.mobile-menu {
+.header__mobile-menu {
   display: none;
   flex-direction: column;
   background-color: var(--color-bg-white);
@@ -48,7 +42,7 @@
   padding: 16px;
 }
 
-.login-button-wrapper {
+.header__login-wrapper {
   all: unset;
   cursor: pointer;
   display: block;
@@ -56,34 +50,20 @@
   height: auto;
 }
 
-.login-button {
+.header__login-button {
   width: 100%;
   height: auto;
   object-fit: contain;
   display: block;
 }
 
-@media (max-width: 768px) {
-  .nav {
-    display: none;
-  }
-
-  .menu-icon {
-    display: block;
-  }
-
-  .mobile-menu.show {
-    display: flex;
-  }
-}
-
-.logout-button {
+.header__logout-button {
   all: unset;
   cursor: pointer;
 }
 
-.nav-item,
-.mobile-item {
+.header__nav-item,
+.header__mobile-item {
   text-decoration: none;
   color: var(--color-text-default);
   transition: color 0.3s;
@@ -94,21 +74,35 @@
   padding: 0;
 }
 
-.nav-item:hover,
-.mobile-item:hover {
+.header__nav-item:hover,
+.header__mobile-item:hover {
   color: var(--color-primary);
   background-color: transparent !important;
 }
 
-.mobile-menu a,
-.mobile-menu button.mobile-item {
+.header__mobile-menu a,
+.header__mobile-menu .header__mobile-item {
   padding: 8px 0;
   border-bottom: 1px solid var(--color-border-lighter);
   text-align: left;
   width: 100%;
 }
 
-.mobile-menu a:last-child,
-.mobile-menu button.mobile-item:last-child {
+.header__mobile-menu a:last-child,
+.header__mobile-menu .header__mobile-item:last-child {
   border-bottom: none;
+}
+
+@media (max-width: 768px) {
+  .header__nav {
+    display: none;
+  }
+
+  .header__menu-icon {
+    display: block;
+  }
+
+  .header__mobile-menu.show {
+    display: flex;
+  }
 }

@@ -47,12 +47,12 @@ export default function Register() {
 
   return (
     <div className="page-layout">
-      <div className="map-wrapper">
+      <div className="page-section">
         <MapComponent />
       </div>
       <div className="register-container">
         <div className="form-group">
-          <div className="location-display">
+          <div className="register-form__location-display">
             {lat && lng
               ? `📍 위도 ${parseFloat(lat).toFixed(5)} / 경도 ${parseFloat(
                   lng
@@ -63,6 +63,7 @@ export default function Register() {
 
         <div className="form-group">
           <input
+            className="register-form__input"
             type="text"
             placeholder="간단한 설명을 입력하세요"
             value={content}

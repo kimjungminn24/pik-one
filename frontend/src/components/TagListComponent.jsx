@@ -3,7 +3,7 @@ import Tag from "./TagComponent";
 
 export default function TagListComponent({ items, isSelected, onTagClick }) {
   return (
-    <div className="taglist">
+    <div className="tag-list">
       {items.map((item) => (
         <Tag
           key={item.name}

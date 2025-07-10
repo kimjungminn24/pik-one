@@ -30,14 +30,14 @@ export default function Find() {
 
   return (
     <div className="page-layout">
-      <div className="map-wrapper">
+      <div className="page-section">
         <MapComponent
           searchResults={searchResults}
           showLocationMarker={false}
         />
       </div>
 
-      <div className="register-container">
+      <div className="page-section">
         <TagListComponent
           items={decorList}
           isSelected={(item) => selectedTags.includes(item.name)}

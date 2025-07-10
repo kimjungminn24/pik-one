@@ -17,7 +17,7 @@ export default function SingleMapComponent({ lat, lng, type }) {
       center={[lat, lng]}
       zoom={17}
       scrollWheelZoom={false}
-      className="leaflet-mini-container"
+      className="single-map"
       dragging={false}
       doubleClickZoom={false}
       zoomControl={false}

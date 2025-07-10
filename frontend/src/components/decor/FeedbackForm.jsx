@@ -8,6 +8,7 @@ export default function FeedbackForm({
   return (
     <>
       <textarea
+        className="feedback-form__textarea"
         placeholder="피드백을 입력해주세요"
         value={feedback}
         onChange={onChange}
@@ -15,7 +16,7 @@ export default function FeedbackForm({
       />
 
       <button
-        className="submit-button"
+        className="feedback-form__submit-button"
         onClick={onSubmit}
         disabled={isPending || !selectedType || feedback.trim() === ""}
       >

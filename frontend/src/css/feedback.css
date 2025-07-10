@@ -1,0 +1,113 @@
+.feedback-form__textarea {
+  width: 100%;
+  height: 60px;
+  margin-top: 10px;
+  padding: 8px;
+  border: 1px solid var(--color-border-muted);
+  border-radius: 6px;
+  resize: none;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.feedback-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.feedback-buttons__button {
+  flex: 1;
+  border: 1px solid var(--color-border-muted);
+  background-color: var(--color-bg-light);
+  color: var(--color-text-default);
+  padding: 0.4rem 0.6rem;
+  border-radius: 0.4rem;
+  display: flex;
+  margin: 0.3rem;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s;
+}
+
+.feedback-buttons__button--helpful {
+  border-color: var(--color-info);
+  color: var(--color-info);
+}
+
+.feedback-buttons__button--not-found {
+  border-color: var(--color-danger);
+  color: var(--color-danger);
+}
+
+.feedback-buttons__button--helpful.feedback-buttons__button--selected {
+  background-color: var(--color-info);
+  color: var(--color-btn-text);
+}
+
+.feedback-buttons__button--not-found.feedback-buttons__button--selected {
+  background-color: var(--color-danger);
+  color: var(--color-btn-text);
+}
+
+.feedback-buttons__count-badge {
+  background-color: var(--color-count-bg);
+  color: var(--color-text-default);
+  font-size: 0.75rem;
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 2px 6px;
+  margin-left: 6px;
+}
+
+.feedback-form__submit-button {
+  width: 100%;
+  margin-top: 8px;
+  font-weight: bold;
+}
+
+.feedback-form__submit-button:disabled {
+  background-color: var(--color-border-muted);
+}
+
+.feedback-list {
+  margin-top: 0.5rem;
+  padding: 1rem;
+  background-color: var(--color-bg-lighter);
+  border-radius: 8px;
+  max-height: 120px;
+  overflow-y: auto;
+  font-size: 13px;
+  margin-bottom: 0.5rem;
+}
+
+.feedback-list__item {
+  margin-bottom: 6px;
+}
+
+.feedback-list__label {
+  display: inline-block;
+  color: var(--color-info);
+  margin-right: 4px;
+}
+
+.feedback-list__label:before {
+  content: "💬";
+}
+
+.feedback-list__content {
+  color: var(--color-text-dark);
+}
+
+.feedback-list__empty {
+  color: var(--color-text-placeholder);
+}
+
+.feedback-list__label--helpful {
+  color: var(--color-info);
+}
+
+.feedback-list__label--not-found {
+  color: var(--color-danger);
+}

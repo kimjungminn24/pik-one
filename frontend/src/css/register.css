@@ -1,68 +1,4 @@
-html,
-body,
-#root {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-.page-layout {
-  display: flex;
-  gap: 1rem;
-  align-items: stretch;
-  flex-wrap: nowrap;
-  min-height: 80vh;
-  margin: 1.4rem;
-}
-
-.map-wrapper,
-.register-container {
-  flex: 1;
-  min-width: 25rem;
-  background-color: white;
-  padding: 1.2rem;
-  border-radius: 0.75rem;
-  box-shadow: 0 0.25rem 0.75rem var(--color-shadow-mid);
-  display: flex;
-  flex-direction: column;
-}
-
-.map-wrapper {
-  min-height: 31.25rem;
-}
-
-.register-container {
-  min-height: 31.25rem;
-}
-
-.leaflet-container {
-  flex: 1;
-  width: 100%;
-  border-radius: 0.75rem;
-  overflow: hidden;
-}
-
-.location-box {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.location-field {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-  min-width: 7.5rem;
-  flex: 1;
-}
-
-.location-field span {
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: var(--color-text-secondary);
-}
-
-input[type="text"] {
+.register-form__input {
   width: 100%;
   margin-bottom: 0.4rem;
   padding: 0.7rem 1rem;
@@ -77,59 +13,29 @@ input[type="text"] {
   transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
 }
 
-input[type="text"]::placeholder {
+.register-form__input::placeholder {
   color: var(--color-text-placeholder);
 }
 
-input[type="text"]:focus {
+.register-form__input:focus {
   border-color: #38bdf8;
   background-color: #fff;
   box-shadow: 0 0 0 0.1875rem var(--color-shadow-focus);
 }
 
-.location-display {
+.register-form__location-display {
   font-size: 0.9rem;
   color: var(--color-text-dark);
   margin-bottom: 0.5rem;
 }
 
-label {
-  font-size: 0.9rem;
-}
-
 @media (max-width: 48rem) {
-  .page-layout {
-    flex-direction: column;
-  }
-
-  .map-wrapper,
-  .register-container {
-    min-height: 25rem;
-  }
-
-  .location-box {
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .location-field {
-    width: 100%;
-  }
-
-  input[type="text"] {
+  .register-form__input {
     font-size: 0.7rem;
     padding: 0.45rem 0.7rem;
   }
 
-  .location-field span {
-    font-size: 0.7rem;
-  }
-
-  .location-display {
-    font-size: 0.7rem;
-  }
-
-  label {
+  .register-form__location-display {
     font-size: 0.7rem;
   }
 }

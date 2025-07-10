@@ -23,7 +23,7 @@ export default function MapComponent({
         zoom={15}
         minZoom={13}
         maxZoom={18}
-        className="leaflet-container"
+        className="map__container"
       >
         <SearchBox />
 
@@ -48,8 +48,11 @@ export default function MapComponent({
         <FetchOnMove />
       </MapContainer>
       {selectedId && data && !isLoading && !isError && (
-        <div className="mobile-popup-panel">
-          <button className="close-button" onClick={() => setSelectedId(null)}>
+        <div className="popup">
+          <button
+            className="popup__close-button"
+            onClick={() => setSelectedId(null)}
+          >
             ✕
           </button>
           <DecorDetailPopup data={data} />

@@ -6,6 +6,8 @@
 @import "./css/decor.css";
 @import "./css/mypage.css";
 @import "./css/home.css";
+@import "./css/feedback.css";
+@import "./css/popup.css";
 
 @import "react-toastify/dist/ReactToastify.css";
 
@@ -34,45 +36,4 @@ code {
   font-family: "CookieRun";
   src: url("./fonts/cookie-bold.ttf") format("truetype");
   font-weight: bold;
-}
-.emoji {
-  font-family: "CookieRun", "TossFace";
-}
-.main {
-  padding-top: 60px;
-}
-
-button {
-  font-family: "CookieRun", sans-serif;
-  width: fit-content;
-  padding: 0.3rem 0.5rem;
-  background-color: #38bdf8;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.2s, transform 0.1s;
-}
-
-button:hover {
-  background-color: #0ea5e9;
-}
-
-button:active {
-  transform: scale(0.98);
-}
-
-button:disabled {
-  background-color: #bae6fd;
-  color: #fff;
-  cursor: not-allowed;
-}
-.button-box {
-  display: flex;
-  justify-content: center;
-  margin-top: 1rem;
-}
-a {
-  text-decoration: none;
 }

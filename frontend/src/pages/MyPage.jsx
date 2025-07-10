@@ -11,7 +11,7 @@ export default function MyPage() {
 
   return (
     <div className="page-layout">
-      <div className="register-container">
+      <div className="page-section">
         <div>
           <h2>📍 내가 찾은 장소들</h2>
           {data && data.length > 0 ? (
@@ -39,9 +39,9 @@ export default function MyPage() {
       </div>
 
       {selectedDecor && (
-        <div className="mobile-popup-panel">
+        <div className="popup">
           <button
-            className="close-button"
+            className="popup__close-button"
             onClick={() => setSelectedDecor(null)}
           >
             ✕
