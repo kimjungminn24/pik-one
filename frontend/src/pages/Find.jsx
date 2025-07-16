@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import { decorList } from "../decorList";
 import TagListComponent from "../components/TagListComponent";
 import { useLocationStore } from "../store/useLocationStore";
-import MapComponent from "../components/map/MapComponent";
 import { useDebouncedValue } from "../hooks/useDebouncedValue";
 import { useDecor } from "../hooks/useDecor";
 
+const LazyMap = React.lazy(() => import("../components/map/MapComponent"));
 export default function Find() {
   const [selectedTags, setSelectedTags] = useState([]);
 
@@ -31,10 +31,9 @@ export default function Find() {
   return (
     <div className="page-layout">
       <div className="page-section">
-        <MapComponent
-          searchResults={searchResults}
-          showLocationMarker={false}
-        />
+        <Suspense fallback={<div>지도를 불러오는 중...</div>}>
+          <LazyMap searchResults={searchResults} showLocationMarker={false} />
+        </Suspense>
       </div>
 
       <div className="page-section">

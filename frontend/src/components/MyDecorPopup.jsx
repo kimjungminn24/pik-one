@@ -1,9 +1,9 @@
 import DecorInfoSection from "./decor/DecorInfoSection";
 import FeedbackList from "./decor//FeedbackList";
-import SingleMapComponent from "./map/SingleMapComponent";
 import { useDeleteDecor } from "../hooks/useDecor";
 import React, { Suspense } from "react";
 import "../css/popup.scss";
+const LazyMap = React.lazy(() => import("./map/SingleMapComponent"));
 export default function MyDecorPopup({ data, onClose }) {
   const total = data.helpfulCount + data.notFoundCount;
   const probability =
@@ -53,7 +53,9 @@ export default function MyDecorPopup({ data, onClose }) {
         </div>
       </div>
       <div className="my-decor-popup__map">
-        <SingleMapComponent lng={data.lng} lat={data.lat} type={data.type} />
+        <Suspense fallback={<div>지도를 불러오는 중...</div>}>
+          <LazyMap lng={data.lng} lat={data.lat} type={data.type} />
+        </Suspense>
       </div>
     </div>
   );

@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import { decorList } from "../decorList";
 import TagListComponent from "../components/TagListComponent";
 import { useLocationStore } from "../store/useLocationStore";
 import { useCreateDecor } from "../hooks/useDecor";
-import MapComponent from "../components/map/MapComponent";
 import { toast } from "react-toastify";
 import "../css/register.scss";
+
+const LazyMap = React.lazy(() => import("../components/map/MapComponent"));
 
 export default function Register() {
   const [content, setContent] = useState("");
@@ -49,7 +50,9 @@ export default function Register() {
   return (
     <div className="page-layout">
       <div className="page-section">
-        <MapComponent />
+        <Suspense fallback={<div>지도를 불러오는 중...</div>}>
+          <LazyMap />
+        </Suspense>
       </div>
       <div className="register-container">
         <div className="form-group">
