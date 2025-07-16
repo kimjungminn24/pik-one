@@ -1,3 +1,5 @@
+import "../../css/feedback.scss";
+
 export default function FeedbackList({ feedbacks }) {
   if (feedbacks.length === 0) {
     return (

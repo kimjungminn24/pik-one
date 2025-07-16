@@ -1,5 +1,6 @@
 import React from "react";
 import Tag from "./TagComponent";
+import "../css/tag.scss";
 
 export default function TagListComponent({ items, isSelected, onTagClick }) {
   return (

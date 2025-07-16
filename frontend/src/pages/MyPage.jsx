@@ -3,6 +3,8 @@ import { useMyDecorsQuery } from "../hooks/useDecor";
 import { decorList } from "../decorList";
 import DecorCard from "../components/DecorCard";
 import MyDecorPopup from "../components/MyDecorPopup";
+import "../css/mypage.scss";
+
 export default function MyPage() {
   const { data, isLoading } = useMyDecorsQuery();
   const [selectedDecor, setSelectedDecor] = useState(null);

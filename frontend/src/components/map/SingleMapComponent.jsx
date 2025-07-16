@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { createCustomIcon } from "../../utils/markerIcon";
-
+import "../../css/map.scss";
 function MapUpdater({ lat, lng }) {
   const map = useMap();
   useEffect(() => {

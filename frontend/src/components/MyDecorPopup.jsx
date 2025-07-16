@@ -2,7 +2,8 @@ import DecorInfoSection from "./decor/DecorInfoSection";
 import FeedbackList from "./decor//FeedbackList";
 import SingleMapComponent from "./map/SingleMapComponent";
 import { useDeleteDecor } from "../hooks/useDecor";
-
+import React, { Suspense } from "react";
+import "../css/popup.scss";
 export default function MyDecorPopup({ data, onClose }) {
   const total = data.helpfulCount + data.notFoundCount;
   const probability =

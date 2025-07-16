@@ -8,6 +8,7 @@ import { useDecorDetail } from "../../hooks/useDecor";
 import DecorDetailPopup from "../decor/DecorDetailPopup";
 import { createCustomIcon } from "../../utils/markerIcon";
 import { SearchBox } from "./SearchBox";
+import "../../css/map.scss";
 
 export default function MapComponent({
   searchResults = [],

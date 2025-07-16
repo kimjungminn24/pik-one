@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useUserStore } from "../store/useUserStore";
 import { useLogoutMutation } from "../hooks/useUser";
+import "../css/header.scss";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);

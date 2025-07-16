@@ -5,6 +5,7 @@ import { useLocationStore } from "../store/useLocationStore";
 import { useCreateDecor } from "../hooks/useDecor";
 import MapComponent from "../components/map/MapComponent";
 import { toast } from "react-toastify";
+import "../css/register.scss";
 
 export default function Register() {
   const [content, setContent] = useState("");
