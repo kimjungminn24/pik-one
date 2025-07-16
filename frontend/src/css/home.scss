@@ -13,23 +13,6 @@
   );
 }
 
-.home__content-row {
-  display: flex;
-  align-items: center;
-  gap: 60px;
-  flex-wrap: wrap;
-  justify-content: center;
-  text-align: center;
-  padding: 40px;
-  border-radius: 20px;
-}
-
-.home__gif {
-  width: 320px;
-  height: auto;
-  border-radius: 16px;
-}
-
 .home__description {
   font-size: 1.2rem;
   font-weight: 500;
@@ -88,10 +71,6 @@
   .home__content-row {
     padding: 30px 20px;
     gap: 40px;
-  }
-
-  .home__gif {
-    width: 200px;
   }
 
   .home__button-group {
