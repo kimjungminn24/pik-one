@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { createCustomIcon } from "../../utils/markerIcon";
-
+import "../../css/map.scss";
 function MapUpdater({ lat, lng }) {
   const map = useMap();
   useEffect(() => {
@@ -17,7 +17,7 @@ export default function SingleMapComponent({ lat, lng, type }) {
       center={[lat, lng]}
       zoom={17}
       scrollWheelZoom={false}
-      className="leaflet-mini-container"
+      className="single-map"
       dragging={false}
       doubleClickZoom={false}
       zoomControl={false}

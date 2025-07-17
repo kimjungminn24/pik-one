@@ -1,0 +1,148 @@
+:root {
+  /* Primary */
+  --color-primary: #007bff;
+  --color-primary-hover: #0056b3;
+
+  /* Status Colors */
+  --color-success: #4caf50;
+  --color-danger: #dc2626;
+  --color-warning: #ffb74d;
+  --color-info: #2563eb;
+  --color-selected: #a5f3fc;
+  --color-danger-lighter: #e53935;
+  --color-warning-hover: #ff8828;
+  /* Text */
+  --color-text-default: #333;
+  --color-text-secondary: #555;
+  --color-text-placeholder: #9ca3af;
+  --color-text-muted: #777;
+  --color-text-dark: #374151;
+  --color-icon-muted: #666;
+  --color-icon-hover: #111;
+
+  /* Border */
+  --color-border: #ddd;
+  --color-border-muted: #ccc;
+  --color-border-accent: #2563eb;
+
+  /* Background */
+  --color-bg-white: #ffffff;
+  --color-bg-light: #f9f9f9;
+  --color-bg-lighter: #f9fafb;
+  --color-bg-gray: #f3f4f6;
+  --color-bg-gray-hover: #e5e7eb;
+  --color-bg-gradient-start: #f0fff0;
+  --color-bg-gradient-mid: #f5fdfb;
+  --color-bg-gradient-end: #ffffff;
+
+  /* Shadow */
+  --color-shadow-light: rgba(0, 0, 0, 0.05);
+  --color-shadow-mid: rgba(0, 0, 0, 0.08);
+  --color-shadow-deep: rgba(0, 0, 0, 0.12);
+  --color-shadow-strong: rgba(0, 0, 0, 0.15);
+  --color-shadow-focus: rgba(56, 189, 248, 0.3);
+
+  /* Button Text */
+  --color-btn-text: white;
+  --color-count-bg: #e2e8f0;
+
+  --space-xs: 0.25rem; /* 4px */
+  --space-sm: 0.5rem; /* 8px */
+  --space-md: 1rem; /* 16px */
+  --space-lg: 1.5rem; /* 24px */
+  --space-xl: 2rem; /* 32px */
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.main {
+  padding-top: 60px;
+}
+.page-layout {
+  display: flex;
+  gap: 1rem;
+  align-items: stretch;
+  flex-wrap: nowrap;
+  min-height: 80vh;
+  margin: 1.4rem;
+}
+
+.page-section {
+  flex: 1;
+  min-width: 25rem;
+  background-color: white;
+  padding: 1.2rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 0.25rem 0.75rem var(--color-shadow-mid);
+  display: flex;
+  flex-direction: column;
+  min-height: 31.25rem;
+}
+
+.blue {
+  background-color: var(--color-primary);
+}
+.blue:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.peach {
+  background-color: var(--color-warning);
+}
+.peach:hover {
+  background-color: var(--color-warning-hover);
+}
+@media (max-width: 48rem) {
+  .page-layout {
+    flex-direction: column;
+  }
+
+  .page-section {
+    min-height: 25rem;
+  }
+}
+
+.emoji {
+  font-family: "CookieRun", "TossFace";
+}
+
+button {
+  font-family: "CookieRun", sans-serif;
+  width: fit-content;
+  padding: 0.3rem 0.5rem;
+  background-color: #38bdf8;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+button:hover {
+  background-color: #0ea5e9;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+button:disabled {
+  background-color: #bae6fd;
+  color: #fff;
+  cursor: not-allowed;
+}
+.button-box {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+a {
+  text-decoration: none;
+}

@@ -9,6 +9,8 @@ import FeedbackButtons from "./FeedbackButtons";
 import FeedbackForm from "./FeedbackForm";
 
 import { toast } from "react-toastify";
+import "../../css/decor.scss";
+import "../../css/feedback.scss";
 
 export default function DecorDetailPopup({ data }) {
   const [feedback, setFeedback] = useState("");
@@ -76,7 +78,7 @@ export default function DecorDetailPopup({ data }) {
   }, [data.id]);
 
   return (
-    <div className="popup-container">
+    <>
       <DecorInfoSection
         type={data.type}
         lat={data.lat}
@@ -106,6 +108,6 @@ export default function DecorDetailPopup({ data }) {
           onSubmit={handleSubmit}
         />
       )}
-    </div>
+    </>
   );
 }

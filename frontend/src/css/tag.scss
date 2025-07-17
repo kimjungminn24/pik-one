@@ -1,0 +1,47 @@
+@import "mixins";
+
+.tag {
+  @include badge(var(--color-bg-gray), var(--color-text-default));
+  display: inline-flex;
+  align-items: center;
+  margin: 0.4rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.tag:hover {
+  background-color: var(--color-bg-gray-hover);
+  cursor: pointer;
+}
+
+.tag__emoji {
+  margin-left: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.tag__name {
+  color: var(--color-text-default);
+}
+
+.tag-selected {
+  background-color: var(--color-selected);
+  color: var(--color-text-default);
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media (max-width: 640px) {
+  .tag {
+    padding: 0.2rem 0.5rem;
+    font-size: 0.6rem;
+    margin: 0.2rem;
+  }
+
+  .tag__emoji {
+    font-size: 1rem;
+  }
+}

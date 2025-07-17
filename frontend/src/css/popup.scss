@@ -1,0 +1,45 @@
+@import "mixins";
+
+.popup {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-height: 65%;
+  background-color: var(--color-bg-white);
+  padding: 1.5rem;
+  overflow-y: auto;
+  box-shadow: 0 -4px 10px var(--color-shadow-top);
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  z-index: 1000;
+}
+.popup strong {
+  font-size: 16px;
+}
+
+.popup__close-button {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--color-icon-muted);
+  z-index: 10;
+  padding: 0;
+}
+
+.popup__close-button:hover {
+  color: var(--color-icon-hover);
+}
+
+@media (max-width: 48rem) {
+  .popup {
+    padding: 1rem;
+    max-width: 100%;
+    border-radius: 0.75rem;
+    margin: 0 1rem;
+  }
+}

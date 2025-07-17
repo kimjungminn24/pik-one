@@ -3,6 +3,8 @@ import { useMyDecorsQuery } from "../hooks/useDecor";
 import { decorList } from "../decorList";
 import DecorCard from "../components/DecorCard";
 import MyDecorPopup from "../components/MyDecorPopup";
+import "../css/mypage.scss";
+
 export default function MyPage() {
   const { data, isLoading } = useMyDecorsQuery();
   const [selectedDecor, setSelectedDecor] = useState(null);
@@ -11,7 +13,7 @@ export default function MyPage() {
 
   return (
     <div className="page-layout">
-      <div className="register-container">
+      <div className="page-section">
         <div>
           <h2>📍 내가 찾은 장소들</h2>
           {data && data.length > 0 ? (
@@ -39,9 +41,9 @@ export default function MyPage() {
       </div>
 
       {selectedDecor && (
-        <div className="mobile-popup-panel">
+        <div className="popup">
           <button
-            className="close-button"
+            className="popup__close-button"
             onClick={() => setSelectedDecor(null)}
           >
             ✕

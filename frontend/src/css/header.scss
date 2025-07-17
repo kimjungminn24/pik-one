@@ -1,0 +1,108 @@
+@import "mixins";
+
+.header {
+  width: 100%;
+  background-color: var(--color-bg-white);
+  border-bottom: 1px solid var(--color-border);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+}
+
+.header__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+  @include flex-between;
+}
+
+.header__logo {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.header__nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.header__menu-icon {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.header__mobile-menu {
+  display: none;
+  flex-direction: column;
+  background-color: var(--color-bg-white);
+  border-top: 1px solid var(--color-border-light);
+  padding: 16px;
+}
+
+.header__login-wrapper {
+  all: unset;
+  cursor: pointer;
+  display: block;
+  width: 120px;
+  height: auto;
+}
+
+.header__login-button {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.header__logout-button {
+  all: unset;
+  cursor: pointer;
+}
+
+.header__nav-item,
+.header__mobile-item {
+  text-decoration: none;
+  color: var(--color-text-default);
+  transition: color 0.3s;
+  background: none;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+
+.header__nav-item:hover,
+.header__mobile-item:hover {
+  color: var(--color-primary);
+  background-color: transparent !important;
+}
+
+.header__mobile-menu a,
+.header__mobile-menu .header__mobile-item {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--color-border-lighter);
+  text-align: left;
+  width: 100%;
+}
+
+.header__mobile-menu a:last-child,
+.header__mobile-menu .header__mobile-item:last-child {
+  border-bottom: none;
+}
+
+@media (max-width: 768px) {
+  .header__nav {
+    display: none;
+  }
+
+  .header__menu-icon {
+    display: block;
+  }
+
+  .header__mobile-menu.show {
+    display: flex;
+  }
+}

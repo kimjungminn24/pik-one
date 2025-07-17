@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import { decorList } from "../decorList";
 import TagListComponent from "../components/TagListComponent";
 import { useLocationStore } from "../store/useLocationStore";
 import { useCreateDecor } from "../hooks/useDecor";
-import MapComponent from "../components/map/MapComponent";
 import { toast } from "react-toastify";
+import "../css/register.scss";
+
+const LazyMap = React.lazy(() => import("../components/map/MapComponent"));
 
 export default function Register() {
   const [content, setContent] = useState("");
@@ -47,12 +49,14 @@ export default function Register() {
 
   return (
     <div className="page-layout">
-      <div className="map-wrapper">
-        <MapComponent />
+      <div className="page-section">
+        <Suspense fallback={<div>지도를 불러오는 중...</div>}>
+          <LazyMap />
+        </Suspense>
       </div>
       <div className="register-container">
         <div className="form-group">
-          <div className="location-display">
+          <div className="register-form__location-display">
             {lat && lng
               ? `📍 위도 ${parseFloat(lat).toFixed(5)} / 경도 ${parseFloat(
                   lng
@@ -63,6 +67,7 @@ export default function Register() {
 
         <div className="form-group">
           <input
+            className="register-form__input"
             type="text"
             placeholder="간단한 설명을 입력하세요"
             value={content}

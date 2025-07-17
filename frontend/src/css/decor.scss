@@ -1,0 +1,35 @@
+@import "mixins";
+
+.decor-info {
+  @include box-style(var(--color-bg-light));
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.decor-info__header {
+  @include flex-between;
+  margin-bottom: 0.6rem;
+}
+
+.decor-info__type {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-text-default);
+}
+
+.decor-info__probability {
+  font-size: 0.85rem;
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+.decor-info__content {
+  margin: 0.5rem 0 1rem;
+  color: var(--color-text-secondary);
+}
+
+.decor-info__coordinates {
+  margin: 0.2rem 0;
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}

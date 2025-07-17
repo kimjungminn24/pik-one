@@ -17,14 +17,17 @@ export function SearchBox() {
   };
 
   return (
-    <div className="search-box">
+    <div className="map__search-box">
       <input
+        className="map__search-box-input"
         type="text"
         placeholder="장소를 검색하세요"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
-      <button onClick={handleSearch}>검색</button>
+      <button className="map__search-box-button" onClick={handleSearch}>
+        검색
+      </button>
     </div>
   );
 }

@@ -8,6 +8,7 @@ import { useDecorDetail } from "../../hooks/useDecor";
 import DecorDetailPopup from "../decor/DecorDetailPopup";
 import { createCustomIcon } from "../../utils/markerIcon";
 import { SearchBox } from "./SearchBox";
+import "../../css/map.scss";
 
 export default function MapComponent({
   searchResults = [],
@@ -23,7 +24,7 @@ export default function MapComponent({
         zoom={15}
         minZoom={13}
         maxZoom={18}
-        className="leaflet-container"
+        className="map__container"
       >
         <SearchBox />
 
@@ -48,8 +49,11 @@ export default function MapComponent({
         <FetchOnMove />
       </MapContainer>
       {selectedId && data && !isLoading && !isError && (
-        <div className="mobile-popup-panel">
-          <button className="close-button" onClick={() => setSelectedId(null)}>
+        <div className="popup">
+          <button
+            className="popup__close-button"
+            onClick={() => setSelectedId(null)}
+          >
             ✕
           </button>
           <DecorDetailPopup data={data} />

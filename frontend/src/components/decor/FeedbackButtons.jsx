@@ -8,25 +8,31 @@ export default function FeedbackButtons({
   return (
     <div className="feedback-buttons">
       <button
-        className={`feedback-button helpful ${
-          selectedType === "HELPFUL" ? "selected" : ""
+        className={`feedback-buttons__button feedback-buttons__button--helpful ${
+          selectedType === "HELPFUL" ? "feedback-buttons__button--selected" : ""
         }`}
         onClick={() => onClick("HELPFUL")}
         disabled={isPending}
       >
         찾았어요 😊
-        <span className="count-badge">{displayedHelpful}</span>
+        <span className="feedback-buttons__count-badge">
+          {displayedHelpful}
+        </span>
       </button>
 
       <button
-        className={`feedback-button not-exist ${
-          selectedType === "NOT_FOUND" ? "selected" : ""
+        className={`feedback-buttons__button feedback-buttons__button--not-found ${
+          selectedType === "NOT_FOUND"
+            ? "feedback-buttons__button--selected"
+            : ""
         }`}
         onClick={() => onClick("NOT_FOUND")}
         disabled={isPending}
       >
         없어요 😢
-        <span className="count-badge">{displayedNotFound}</span>
+        <span className="feedback-buttons__count-badge">
+          {displayedNotFound}
+        </span>
       </button>
     </div>
   );

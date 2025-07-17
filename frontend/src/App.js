@@ -1,13 +1,20 @@
-import React, { useEffect } from "react";
+import React, { Suspense, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import Register from "./pages/Register";
 import Header from "./components/HeaderComponent";
-import Find from "./pages/Find";
-import MyPage from "./pages/MyPage";
-import { useUserQuery } from "./hooks/useUser";
-import { ToastContainer, toast } from "react-toastify";
 import PrivateRoute from "./components/PrivateRoute";
+import { useUserQuery } from "./hooks/useUser";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+const Register = React.lazy(() => import("./pages/Register"));
+const Find = React.lazy(() => import("./pages/Find"));
+const MyPage = React.lazy(() => import("./pages/MyPage"));
+const ToastContainer = React.lazy(() =>
+  import("react-toastify").then((mod) => ({
+    default: mod.ToastContainer,
+  }))
+);
 
 function App() {
   const { isLoading } = useUserQuery();
@@ -20,32 +27,38 @@ function App() {
   }, [isLoading]);
 
   if (isLoading) return null;
+
   return (
     <Router>
       <Header />
       <div className="main">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route
-            path="/register"
-            element={
-              <PrivateRoute>
-                <Register />
-              </PrivateRoute>
-            }
-          />
-          <Route path="/find" element={<Find />} />
-          <Route
-            path="/mypage"
-            element={
-              <PrivateRoute>
-                <MyPage />
-              </PrivateRoute>
-            }
-          />
-        </Routes>
+        <Suspense fallback={<div>로딩 중...</div>}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route
+              path="/register"
+              element={
+                <PrivateRoute>
+                  <Register />
+                </PrivateRoute>
+              }
+            />
+            <Route path="/find" element={<Find />} />
+            <Route
+              path="/mypage"
+              element={
+                <PrivateRoute>
+                  <MyPage />
+                </PrivateRoute>
+              }
+            />
+          </Routes>
+        </Suspense>
       </div>
-      <ToastContainer position="top-right" autoClose={3000} />
+
+      <Suspense fallback={null}>
+        <ToastContainer position="top-right" autoClose={3000} />
+      </Suspense>
     </Router>
   );
 }

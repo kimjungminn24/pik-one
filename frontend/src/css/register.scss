@@ -1,0 +1,31 @@
+@import "mixins";
+
+.register-form__input {
+  @include input-basic;
+
+  &::placeholder {
+    color: var(--color-text-placeholder);
+  }
+
+  &:focus {
+    border-color: #38bdf8;
+    background-color: #fff;
+    box-shadow: 0 0 0 0.1875rem var(--color-shadow-focus);
+  }
+}
+
+.register-form__location-display {
+  font-size: 0.9rem;
+  color: var(--color-text-dark);
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 48rem) {
+  .register-form__input {
+    @include input-basic(0.7rem, 0.45rem 0.7rem);
+  }
+
+  .register-form__location-display {
+    font-size: 0.7rem;
+  }
+}

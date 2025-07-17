@@ -1,13 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <style>
+      .home__content-row {
+        display: flex;
+        align-items: center;
+        gap: 60px;
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+        padding: 40px;
+        border-radius: 20px;
+        min-height: 300px;
+      }
+
+      .home__gif {
+        width: 320px;
+        height: auto;
+        border-radius: 16px;
+      }
+    </style>
     <meta charset="utf-8" />
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-EMBCBPNN1G"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-EMBCBPNN1G");
+    </script>
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta name="description" content="단독 스팟을 찾아보세요 !" />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-
+    <link rel="preload" as="image" href="/cute-320.webp" />
     <title>단독 스팟</title>
   </head>
   <body>

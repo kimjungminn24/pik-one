@@ -1,0 +1,30 @@
+@use "./css/global";
+
+body {
+  font-family: "CookieRun", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+@font-face {
+  font-family: "TossFace";
+  src: url("/fonts/tossface.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "CookieRun";
+  src: url("/fonts/cookie-regular.ttf") format("truetype");
+  font-weight: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "CookieRun";
+  src: url("/fonts/cookie-bold.ttf") format("truetype");
+  font-weight: bold;
+  font-display: swap;
+}
