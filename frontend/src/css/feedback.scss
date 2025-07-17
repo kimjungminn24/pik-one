@@ -1,3 +1,5 @@
+@import "mixins";
+
 .feedback-form__textarea {
   width: 100%;
   height: 60px;
@@ -11,12 +13,11 @@
 }
 
 .feedback-buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flex-center;
 }
 
 .feedback-buttons__button {
+  @include flex-center;
   flex: 1;
   border: 1px solid var(--color-border-muted);
   background-color: var(--color-bg-light);
@@ -25,8 +26,6 @@
   border-radius: 0.4rem;
   display: flex;
   margin: 0.3rem;
-  justify-content: center;
-  align-items: center;
   gap: 4px;
   transition: all 0.2s;
 }
@@ -52,9 +51,7 @@
 }
 
 .feedback-buttons__count-badge {
-  background-color: var(--color-count-bg);
-  color: var(--color-text-default);
-  font-size: 0.75rem;
+  @include badge(var(--color-count-bg), var(--color-text-default));
   font-weight: bold;
   border-radius: 8px;
   padding: 2px 6px;
@@ -72,14 +69,12 @@
 }
 
 .feedback-list {
+  @include box-style(var(--color-bg-lighter));
   margin-top: 0.5rem;
-  padding: 1rem;
-  background-color: var(--color-bg-lighter);
-  border-radius: 8px;
+  margin-bottom: 0.5rem;
   max-height: 120px;
   overflow-y: auto;
   font-size: 13px;
-  margin-bottom: 0.5rem;
 }
 
 .feedback-list__item {

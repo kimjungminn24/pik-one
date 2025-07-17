@@ -1,3 +1,5 @@
+@import "mixins";
+
 .header {
   width: 100%;
   background-color: var(--color-bg-white);
@@ -12,9 +14,7 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  @include flex-between;
 }
 
 .header__logo {

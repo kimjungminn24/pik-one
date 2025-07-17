@@ -61,7 +61,9 @@ body,
   padding: 0;
   box-sizing: border-box;
 }
-
+.main {
+  padding-top: 60px;
+}
 .page-layout {
   display: flex;
   gap: 1rem;

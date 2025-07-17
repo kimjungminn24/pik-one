@@ -1,11 +1,10 @@
+@import "mixins";
+
 .tag {
+  @include badge(var(--color-bg-gray), var(--color-text-default));
   display: inline-flex;
   align-items: center;
-  padding: 0.3rem 0.6rem;
   margin: 0.4rem;
-  background-color: var(--color-bg-gray);
-  border-radius: 9999px;
-  font-size: 0.75rem;
   font-weight: 500;
   transition: background-color 0.2s ease-in-out;
 }
