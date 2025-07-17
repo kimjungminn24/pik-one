@@ -51,8 +51,7 @@ public class Decor extends BaseTimeEntity {
         decor.lng = lng;
         decor.type = type;
         decor.content = content;
-        decor.user = user;
-        //user.addDecor(decor);
+        user.addDecor(decor);
         return decor;
     }
 
