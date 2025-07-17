@@ -13,7 +13,9 @@ import java.util.List;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @SQLDelete(sql = "UPDATE decor SET deleted_at = now() WHERE id = ?")
-
+@Table(name = "decor", indexes = {
+        @Index(name = "idx_lat_lng", columnList = "lat, lng")
+})
 public class Decor extends BaseTimeEntity {
 
     @Id
