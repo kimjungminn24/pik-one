@@ -144,11 +144,7 @@ public class DecorService {
     }
 
     public List<DecorDetailResponse> getMyDecors() {
-        if (!SecurityUtil.isLogin()) {
-            throw new RestApiException(ErrorCode.LOGIN_REQUIRED);
-        }
-        User user = getCurrentUser();
-        List<Decor> decors = decorRepository.findByUserAndDeletedAtIsNull(user);
+        List<Decor> decors = decorRepository.findWithFeedbacksByUserId(userId);
         return decors.stream()
                 .map(decor -> DecorDetailResponse.from(
                         decor,

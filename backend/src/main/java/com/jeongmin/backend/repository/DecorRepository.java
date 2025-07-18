@@ -33,7 +33,10 @@ public interface DecorRepository extends JpaRepository<Decor, Long> {
 
     Optional<Decor> findByIdAndDeletedAtIsNull(Long id);
 
-    List<Decor> findByUserAndDeletedAtIsNull(User user);
-
-
+    @Query("""
+                SELECT d FROM Decor d
+                LEFT JOIN FETCH d.feedbacks
+                WHERE d.user.id = :userId AND d.deletedAt IS NULL
+            """)
+    List<Decor> findWithFeedbacksByUserId(@Param("userId") Long userId);
 }
