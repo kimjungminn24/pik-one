@@ -199,4 +199,10 @@ export const decorList = [
     tags: ["cuisine=korean"],
     emoji: "🍲",
   },
+  {
+    name: "STREET",
+    ko: "길거리",
+    tags: ["highway=residential"],
+    emoji: "🛣",
+  },
 ];
