@@ -3,7 +3,6 @@ package com.jeongmin.backend.repository;
 
 import com.jeongmin.backend.entity.Decor;
 import com.jeongmin.backend.entity.DecorType;
-import com.jeongmin.backend.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

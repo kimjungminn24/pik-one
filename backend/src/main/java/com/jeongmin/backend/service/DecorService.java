@@ -58,9 +58,8 @@ public class DecorService {
     public void deleteDecor(Long decorId) {
         Decor decor = getActiveDecorById(decorId);
 
-        User user = getCurrentUser();
-
-        if (!decor.getUser().equals(user)) {
+        long userId = SecurityUtil.getCurrentUserId();
+        if (!decor.getUser().getId().equals(userId)) {
             throw new RestApiException(ErrorCode.NO_PERMISSION_DECOR_DELETE);
         }
 
@@ -83,11 +82,14 @@ public class DecorService {
     @Transactional
     public DecorResponse createNewDecor(DecorCreateRequest request) {
 
-        User user = getCurrentUser();
+        long userId = SecurityUtil.getCurrentUserId();
 
         if (checkDecorExistsNearby(request.lat(), request.lng(), request.type())) {
             throw new RestApiException(ErrorCode.DUPLICATE_DECOR);
         }
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RestApiException(ErrorCode.USER_NOT_FOUND));
 
         Decor decor = Decor.createNewDecor(
                 request.lat(),
@@ -115,6 +117,7 @@ public class DecorService {
                 type
         );
 
+
         return nearby.stream()
                 .anyMatch(d -> calculateDistance(
                         d.getLat(), d.getLng(),
@@ -125,12 +128,13 @@ public class DecorService {
     @Transactional
     public FeedbackDto createNewFeedback(FeedbackCreateRequest request) {
         Decor decor = getActiveDecorById(request.decorId());
-        User user = getCurrentUser();
+        long userId = SecurityUtil.getCurrentUserId();
 
-        if (feedbackRepository.existsByUserAndDecor(user, decor)) {
+        if (feedbackRepository.existsByUserIdAndDecorId(userId, decor.getId())) {
             throw new RestApiException(ErrorCode.DUPLICATE_FEEDBACK);
         }
 
+        User user = userRepository.getReferenceById(userId);
         Feedback feedback = Feedback.create(
                 request.feedbackType(),
                 request.content(),
@@ -138,12 +142,14 @@ public class DecorService {
                 decor
         );
 
-
         feedbackRepository.save(feedback);
         return FeedbackDto.from(feedback);
     }
 
+
     public List<DecorDetailResponse> getMyDecors() {
+
+        long userId = SecurityUtil.getCurrentUserId();
         List<Decor> decors = decorRepository.findWithFeedbacksByUserId(userId);
         return decors.stream()
                 .map(decor -> DecorDetailResponse.from(
@@ -156,11 +162,14 @@ public class DecorService {
     }
 
     public List<FeedbackResponse> getMyFeedback() {
-        if (!SecurityUtil.isLogin()) {
-            throw new RestApiException(ErrorCode.LOGIN_REQUIRED);
-        }
-        User user = getCurrentUser();
-        return user.getFeedbacks().stream().map(FeedbackResponse::from).toList();
+
+        Long userId = SecurityUtil.getCurrentUserId();
+
+        List<Feedback> feedbackList = feedbackRepository.findByUserId(userId);
+
+        return feedbackList.stream()
+                .map(FeedbackResponse::from)
+                .toList();
     }
 
 
@@ -169,13 +178,6 @@ public class DecorService {
                 .orElseThrow(() -> new RestApiException(ErrorCode.DECOR_NOT_FOUND));
     }
 
-    private User getCurrentUser() {
-        if (!SecurityUtil.isLogin()) {
-            throw new RestApiException(ErrorCode.LOGIN_REQUIRED);
-        }
-        String providerId = SecurityUtil.getCurrentProviderId();
-        return userRepository.findByProviderAndProviderId("naver", providerId)
-                .orElseThrow(() -> new RestApiException(ErrorCode.USER_NOT_FOUND));
-    }
+
 }
 

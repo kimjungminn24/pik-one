@@ -1,14 +1,17 @@
 package com.jeongmin.backend.repository;
 
 
-import com.jeongmin.backend.entity.Decor;
 import com.jeongmin.backend.entity.Feedback;
-import com.jeongmin.backend.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface FeedbackRepository extends JpaRepository<Feedback, Long> {
 
-    boolean existsByUserAndDecor(User user, Decor decor);
+    boolean existsByUserIdAndDecorId(Long userId, Long decorId);
+
+    List<Feedback> findByUserId(Long userId);
+
 }
