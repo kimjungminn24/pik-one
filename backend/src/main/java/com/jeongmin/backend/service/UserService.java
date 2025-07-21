@@ -21,17 +21,16 @@ public class UserService {
     private static final String ACCESS_TOKEN_COOKIE_NAME = "access_token";
     private final UserRepository userRepository;
 
-    public void registerIfNotExists(String provider, String providerId) {
-        if (!userRepository.existsByProviderAndProviderId(provider, providerId)) {
-            saveNewUser(provider, providerId);
-        }
+    public Long registerIfNotExists(String provider, String providerId) {
+        return userRepository.findByProviderAndProviderId(provider, providerId)
+                .map(User::getId)
+                .orElseGet(() -> saveNewUser(provider, providerId));
     }
 
-
-    private void saveNewUser(String provider, String providerId) {
+    private Long saveNewUser(String provider, String providerId) {
         String nickname = generateRandomNickname();
         User newUser = User.create(provider, providerId, nickname);
-        userRepository.save(newUser);
+        return userRepository.save(newUser).getId();
     }
 
     public LoginResponse checkLogin() {

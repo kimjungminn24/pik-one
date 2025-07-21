@@ -18,12 +18,12 @@ public enum DecorType {
     FOREST("숲", List.of("landuse=forest", "natural=wood")),
     WATERSIDE("물가", List.of("natural=water")),
     POST_OFFICE("우체국", List.of("amenity=post_office")),
-    ART_GALLERY("미술관", List.of("shop=art", "tourism=museum")),
+    ART_GALLERY("미술관", List.of("shop=art", "tourism=museum", "tourism=gallery")),
     AIRPORT("공항", List.of("aeroway=aerodrome", "aeroway=heliport")),
     STATION("기차역", List.of("building=train_station", "railway=station")),
     BEACH("해변", List.of("natural=beach")),
     BURGER_PLACE("버거 가게", List.of("amenity=fast_food", "cuisine=burger")),
-    CORNER_STORE("편의점", List.of("shop=onvenience")),
+    CORNER_STORE("편의점", List.of("shop=convenience")),
     SUPERMARKET("슈퍼마켓", List.of("shop=supermarket")),
     BAKERY("빵집", List.of("cuisine=pretzel", "shop=bakery")),
     HAIR_SALON("미용실", List.of("shop=hairdresser")),
@@ -47,13 +47,14 @@ public enum DecorType {
             "building=temple AND religion=shinto",
             "building=temple AND religion=buddhist"
     )),
-    APPLIANCES_STORE("전자제품 매장", List.of("shop=appliance", "shop=computer", "shop=electronics")),
+    APPLIANCES_STORE("전자제품 매장", List.of("shop=appliance", "shop=computer", "shop=electronics", "utility=power")),
     CURRY_RESTAURANT("카레집", List.of("cuisine=curry", "cuisine=indian", "cuisine=nepalese")),
     DIY_STORE("공구/철물점", List.of("shop=doityourself", "shop=hardware")),
     UNIVERSITY_COLLEGE("대학교", List.of("amenity=college", "amenity=university", "building=university")),
     MEXICAN_RESTAURANT("멕시칸 음식점", List.of("cuisine=mexican", "cuisine='tex-mex'")),
     LAUNDRY("세탁소", List.of("shop=dry_cleaning", "shop=laundry")),
-    KOREAN_RESTAURANT("한식당", List.of("cuisine=korean"));
+    KOREAN_RESTAURANT("한식당", List.of("cuisine=korean")),
+    STREET("길거리", List.of("highway=residential"));
 
     private final String koreanName;
     private final List<String> tags;

@@ -33,12 +33,14 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
             Authentication authentication
     ) throws IOException {
 
+
         OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
-        Map<String, Object> responseMap = oAuth2User.getAttributes();
+        Map<String, Object> attributes = oAuth2User.getAttributes();
 
-        String providerId = (String) responseMap.get("id");
+        String providerId = (String) attributes.get("providerId");
+        Long userId = ((Number) attributes.get("userId")).longValue();
 
-        String token = jwtProvider.createAccessToken(providerId);
+        String token = jwtProvider.createAccessToken(userId, providerId);
 
         ResponseCookie cookie = createAccessTokenCookie(token);
         response.addHeader("Set-Cookie", cookie.toString());

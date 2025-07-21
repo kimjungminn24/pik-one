@@ -1,9 +1,8 @@
 import L from "leaflet";
-import { decorList } from "../decorList";
+import { decorMap } from "../decorList";
 
 export function createCustomIcon(decorName, isSelected = false) {
-  const found = decorList.find((item) => item.name === decorName);
-  const emoji = found?.emoji ?? "🌱";
+  const emoji = decorMap[decorName]?.emoji ?? "🌱";
 
   return L.divIcon({
     className: isSelected

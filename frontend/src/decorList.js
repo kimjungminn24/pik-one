@@ -1,7 +1,7 @@
 export const decorList = [
   {
     name: "RESTAURANT",
-    ko: "음식점",
+    ko: "레스토랑",
     tags: ["amenity=restaurant"],
     emoji: "🍽️",
   },
@@ -13,7 +13,7 @@ export const decorList = [
   },
   {
     name: "SWEET_SHOP",
-    ko: "과자 가게",
+    ko: "디저트 가게",
     tags: ["shop=confectionery", "shop=pastry"],
     emoji: "🍬",
   },
@@ -52,14 +52,14 @@ export const decorList = [
   },
   {
     name: "STATION",
-    ko: "기차역",
+    ko: "역",
     tags: ["building=train_station", "railway=station"],
     emoji: "🚉",
   },
   { name: "BEACH", ko: "해변", tags: ["natural=beach"], emoji: "🏖️" },
   {
     name: "BURGER_PLACE",
-    ko: "버거 가게",
+    ko: "햄버거 가게",
     tags: ["amenity=fast_food", "cuisine=burger"],
     emoji: "🍔",
   },
@@ -77,21 +77,21 @@ export const decorList = [
   },
   {
     name: "BAKERY",
-    ko: "빵집",
+    ko: "베이커리",
     tags: ["cuisine=pretzel", "shop=bakery"],
     emoji: "🥐",
   },
   { name: "HAIR_SALON", ko: "미용실", tags: ["shop=hairdresser"], emoji: "💇" },
   {
     name: "CLOTHES_STORE",
-    ko: "의류 매장",
+    ko: "패션",
     tags: ["shop=clothes", "shop=shoes"],
     emoji: "👗",
   },
   { name: "PARK", ko: "공원", tags: ["leisure=park"], emoji: "🏞️" },
   {
     name: "LIBRARY_BOOKSTORE",
-    ko: "도서관 및 서점",
+    ko: "도서관/서점",
     tags: ["amenity=library"],
     emoji: "📚",
   },
@@ -102,7 +102,7 @@ export const decorList = [
     emoji: "🍣",
   },
   { name: "MOUNTAIN", ko: "산", tags: ["natural=peak"], emoji: "⛰️" },
-  { name: "STADIUM", ko: "경기장", tags: ["leisure=stadium"], emoji: "🏟️" },
+  { name: "STADIUM", ko: "스타디움", tags: ["leisure=stadium"], emoji: "🏟️" },
   {
     name: "THEME_PARK",
     ko: "테마파크",
@@ -123,7 +123,7 @@ export const decorList = [
   },
   {
     name: "RAMEN_RESTAURANT",
-    ko: "라멘집",
+    ko: "라멘 가게",
     tags: [
       "cuisine=chinese",
       "cuisine=noodle",
@@ -142,13 +142,13 @@ export const decorList = [
   { name: "HOTEL", ko: "호텔", tags: ["tourism=hotel"], emoji: "🏨" },
   {
     name: "MAKEUP_STORE",
-    ko: "화장품 매장",
+    ko: "화장품 가게",
     tags: ["amenity=pharmacy", "shop=cosmetics", "shop=department_store"],
     emoji: "💄",
   },
   {
     name: "SHRINE_TEMPLE",
-    ko: "사원 및 절",
+    ko: "제단과 사찰",
     tags: [
       "building=shrine AND religion=shinto",
       "building=shrine AND religion=buddhist",
@@ -165,38 +165,48 @@ export const decorList = [
   },
   {
     name: "CURRY_RESTAURANT",
-    ko: "카레집",
+    ko: "카레 레스토랑",
     tags: ["cuisine=curry", "cuisine=indian", "cuisine=nepalese"],
     emoji: "🍛",
   },
   {
     name: "DIY_STORE",
-    ko: "공구/철물점",
+    ko: "공구점",
     tags: ["shop=doityourself", "shop=hardware"],
     emoji: "🛠️",
   },
   {
     name: "UNIVERSITY_COLLEGE",
-    ko: "대학교",
+    ko: "대학 & 전문대학",
     tags: ["amenity=college", "amenity=university", "building=university"],
     emoji: "🎓",
   },
   {
     name: "MEXICAN_RESTAURANT",
-    ko: "멕시칸 음식점",
+    ko: "멕시코 레스토랑",
     tags: ["cuisine=mexican", "cuisine='tex-mex'"],
     emoji: "🌮",
   },
   {
     name: "LAUNDRY",
-    ko: "세탁소",
+    ko: "빨래방 & 세탁소",
     tags: ["shop=dry_cleaning", "shop=laundry"],
     emoji: "🧺",
   },
   {
     name: "KOREAN_RESTAURANT",
-    ko: "한식당",
+    ko: "한식 레스토랑",
     tags: ["cuisine=korean"],
     emoji: "🍲",
   },
+  {
+    name: "STREET",
+    ko: "길거리",
+    tags: ["highway=residential"],
+    emoji: "🛣",
+  },
 ];
+
+export const decorMap = Object.fromEntries(
+  decorList.map((item) => [item.name, item])
+);
