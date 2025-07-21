@@ -35,7 +35,6 @@ public class SecurityUtil {
         Object principal = authentication.getPrincipal();
 
         if (!(principal instanceof CustomUserPrincipal)) {
-            System.out.println(principal.toString());
             throw new RestApiException(ErrorCode.LOGIN_REQUIRED);
         }
 
