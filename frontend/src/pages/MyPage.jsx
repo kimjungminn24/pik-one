@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useMyDecorsQuery } from "../hooks/useDecor";
-import { decorList } from "../decorList";
+import { decorMap } from "../decorList";
 import DecorCard from "../components/DecorCard";
 import MyDecorPopup from "../components/MyDecorPopup";
 import "../css/mypage.scss";
@@ -19,9 +19,7 @@ export default function MyPage() {
           {data && data.length > 0 ? (
             <div className="decor-grid">
               {data.map((decor) => {
-                const matched = decorList.find(
-                  (item) => item.name === decor.type
-                );
+                const matched = decorMap[decor.type];
                 return (
                   <div key={decor.id} onClick={() => setSelectedDecor(decor)}>
                     <DecorCard

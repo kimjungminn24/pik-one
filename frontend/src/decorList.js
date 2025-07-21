@@ -206,3 +206,7 @@ export const decorList = [
     emoji: "🛣",
   },
 ];
+
+export const decorMap = Object.fromEntries(
+  decorList.map((item) => [item.name, item])
+);
