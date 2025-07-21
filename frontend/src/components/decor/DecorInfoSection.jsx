@@ -1,3 +1,5 @@
+import { decorMap } from "../../decorList";
+
 export default function DecorInfoSection({
   type,
   lat,
@@ -5,10 +7,12 @@ export default function DecorInfoSection({
   probability,
   content,
 }) {
+  const decor = decorMap[type];
+  const koName = decor?.ko ?? type;
   return (
     <div className="decor-info">
       <div className="decor-info__header">
-        <strong className="decor-info__type">{type}</strong>
+        <strong className="decor-info__type">{koName}</strong>
         <span className="decor-info__probability">
           🌱 존재 확률 {probability === null ? "-" : `${probability}%`}
         </span>

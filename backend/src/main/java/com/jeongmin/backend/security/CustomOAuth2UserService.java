@@ -26,9 +26,12 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
         String provider = userRequest.getClientRegistration().getRegistrationId();
         Map<String, Object> response = (Map<String, Object>) attributes.get("response");
-        String providerId = (String) response.get("id");
 
-        userService.registerIfNotExists(provider, providerId);
+        String providerId = (String) response.get("id");
+        Long userId = userService.registerIfNotExists(provider, providerId);
+
+        response.put("userId", userId);
+        response.put("providerId", providerId);
 
         return new DefaultOAuth2User(
                 Collections.singleton(new SimpleGrantedAuthority("ROLE_USER")),
