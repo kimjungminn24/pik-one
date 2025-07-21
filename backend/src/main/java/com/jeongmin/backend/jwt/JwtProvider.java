@@ -29,12 +29,13 @@ public class JwtProvider {
         this.secretKey = Keys.hmacShaKeyFor(rawSecretKey.getBytes(StandardCharsets.UTF_8));
     }
 
-    public String createAccessToken(String providerId) {
+    public String createAccessToken(Long userId, String providerId) {
         Date now = new Date();
         Date expiry = new Date(now.getTime() + expirationMillis);
 
         return Jwts.builder()
                 .setSubject(providerId)
+                .claim("userId", userId)
                 .setIssuedAt(now)
                 .setExpiration(expiry)
                 .signWith(secretKey, SignatureAlgorithm.HS256)
@@ -60,6 +61,15 @@ public class JwtProvider {
                 .parseClaimsJws(token)
                 .getBody()
                 .getSubject();
+    }
+
+    public Long getUserId(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(secretKey)
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .get("userId", Long.class);
     }
 
     public long getAccessTokenExpirySeconds() {
