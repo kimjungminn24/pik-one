@@ -67,14 +67,17 @@ public class DecorService {
     }
 
     public List<DecorResponse> searchDecorInBoundary(DecorSearchRequest request) {
-        return decorRepository.findByBoundaryAndType(
+        List<Decor> decors = (request.type() == null)
+                ? decorRepository.findByBoundary(request.northLat(), request.southLat(), request.eastLng(),
+                request.westLng()) : decorRepository.findByBoundaryAndType(
                         request.northLat(),
                         request.southLat(),
                         request.eastLng(),
                         request.westLng(),
                         request.type()
-                )
-                .stream()
+        );
+
+        return decors.stream()
                 .map(DecorResponse::from)
                 .toList();
     }

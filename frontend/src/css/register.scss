@@ -1,4 +1,4 @@
-@import "mixins";
+@use "mixins" as *;
 
 .register-form__input {
   @include input-basic;

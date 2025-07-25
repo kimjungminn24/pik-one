@@ -22,8 +22,8 @@ export default function MapComponent({
       <MapContainer
         center={[37.5665, 126.978]}
         zoom={15}
-        minZoom={13}
-        maxZoom={18}
+        minZoom={10}
+        maxZoom={20}
         className="map__container"
       >
         <SearchBox />
@@ -31,6 +31,7 @@ export default function MapComponent({
         <TileLayer
           attribution="&copy; OpenStreetMap contributors"
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          maxZoom={20}
         />
 
         {searchResults.map((item) => (

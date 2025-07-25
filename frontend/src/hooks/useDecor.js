@@ -15,9 +15,48 @@ import {
 } from "../api/decor";
 
 import { toast } from "react-toastify";
+import { decorList } from "../decorList";
 
 export const useDecor = (params = {}, isEnabled = true) => {
-  const { northLat, southLat, eastLng, westLng, types = [] } = params ?? {};
+  const {
+    northLat,
+    southLat,
+    eastLng,
+    westLng,
+    types = [],
+    isAllMode,
+  } = params ?? {};
+
+  const baseEnabled =
+    isEnabled && !!northLat && !!southLat && !!eastLng && !!westLng;
+
+  const queryClient = useQueryClient();
+
+  const allQuery = useQuery({
+    queryKey: ["decor", northLat, southLat, eastLng, westLng, null],
+    queryFn: async () => {
+      const allData = await getDecorByTypeAndPosition({
+        northLat,
+        southLat,
+        eastLng,
+        westLng,
+      });
+
+      for (const type of decorList.map((d) => d.name)) {
+        const filtered = allData.filter((item) => item.type === type);
+        queryClient.setQueryData(
+          ["decor", northLat, southLat, eastLng, westLng, type],
+          filtered
+        );
+      }
+      return allData;
+    },
+
+    enabled: baseEnabled && isAllMode,
+    staleTime: 1000 * 60 * 5,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+  });
 
   const results = useQueries({
     queries: types.map((type) => ({
@@ -30,24 +69,26 @@ export const useDecor = (params = {}, isEnabled = true) => {
           westLng,
           type,
         }),
-      enabled:
-        isEnabled &&
-        !!northLat &&
-        !!southLat &&
-        !!eastLng &&
-        !!westLng &&
-        !!type,
+      enabled: baseEnabled && !isAllMode && !!type,
       staleTime: 1000 * 60 * 5,
       refetchOnWindowFocus: false,
       refetchOnMount: false,
     })),
   });
 
-  const isLoading = results.some((r) => r.isLoading);
-  const isError = results.some((r) => r.isError);
-  const error = results.find((r) => r.isError)?.error;
-  const data = results.flatMap((r) => r.data ?? []);
+  const isLoading = isAllMode
+    ? allQuery.isLoading
+    : results.some((r) => r.isLoading);
 
+  const isError = isAllMode ? allQuery.isError : results.some((r) => r.isError);
+
+  const error = isAllMode
+    ? allQuery.error
+    : results.find((r) => r.isError)?.error;
+
+  const data = isAllMode
+    ? allQuery.data ?? []
+    : results.flatMap((r) => r.data ?? []);
   return { data, isLoading, isError, error };
 };
 

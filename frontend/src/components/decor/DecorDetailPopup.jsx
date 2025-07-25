@@ -11,6 +11,7 @@ import FeedbackForm from "./FeedbackForm";
 import { toast } from "react-toastify";
 import "../../css/decor.scss";
 import "../../css/feedback.scss";
+import "../../css/popup.scss";
 
 export default function DecorDetailPopup({ data }) {
   const [feedback, setFeedback] = useState("");

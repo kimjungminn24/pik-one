@@ -10,6 +10,15 @@ export default function Find() {
   const [selectedTags, setSelectedTags] = useState([]);
 
   const handleTagClick = (item) => {
+    if (item.name === "ALL") {
+      const allTagNames = decorList.map((d) => d.name);
+      const isAllSelected = allTagNames.every((name) =>
+        selectedTags.includes(name)
+      );
+
+      setSelectedTags(isAllSelected ? [] : allTagNames);
+      return;
+    }
     setSelectedTags((prev) =>
       prev.includes(item.name)
         ? prev.filter((tag) => tag !== item.name)
@@ -20,13 +29,33 @@ export default function Find() {
   const { bounds } = useLocationStore();
   const debouncedBounds = useDebouncedValue(bounds, 500);
 
+  const isAllMode =
+    selectedTags.length === decorList.length &&
+    decorList.every((d) => selectedTags.includes(d.name));
+
   const { data: searchResults = [] } = useDecor({
     northLat: debouncedBounds?.northLat,
     southLat: debouncedBounds?.southLat,
     eastLng: debouncedBounds?.eastLng,
     westLng: debouncedBounds?.westLng,
     types: selectedTags,
+    isAllMode,
   });
+
+  const allTag = {
+    name: "ALL",
+    ko: "전체",
+    tags: [],
+    emoji: "🌐",
+  };
+
+  const isTagSelected = (item, selectedTags, decorList) => {
+    if (item.name === "ALL") {
+      const allTagNames = decorList.map((d) => d.name);
+      return allTagNames.every((name) => selectedTags.includes(name));
+    }
+    return selectedTags.includes(item.name);
+  };
 
   return (
     <div className="page-layout">
@@ -38,8 +67,8 @@ export default function Find() {
 
       <div className="page-section">
         <TagListComponent
-          items={decorList}
-          isSelected={(item) => selectedTags.includes(item.name)}
+          items={[allTag, ...decorList]}
+          isSelected={(item) => isTagSelected(item, selectedTags, decorList)}
           onTagClick={handleTagClick}
         />
       </div>
