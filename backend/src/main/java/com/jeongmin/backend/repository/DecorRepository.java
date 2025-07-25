@@ -30,10 +30,23 @@ public interface DecorRepository extends JpaRepository<Decor, Long> {
             @Param("type") DecorType type
     );
 
+    @Query("""
+            SELECT d FROM Decor d
+            WHERE d.lat BETWEEN :southLat AND :northLat
+            AND d.lng BETWEEN :westLng AND :eastLng
+            AND d.deletedAt IS NULL
+            """)
+    List<Decor> findByBoundary(
+            @Param("northLat") double northLat,
+            @Param("southLat") double southLat,
+            @Param("eastLng") double eastLng,
+            @Param("westLng") double westLng
+    );
+
     Optional<Decor> findByIdAndDeletedAtIsNull(Long id);
 
     @Query("""
-                SELECT d FROM Decor d
+                SELECT DISTINCT d FROM Decor d
                 LEFT JOIN FETCH d.feedbacks
                 WHERE d.user.id = :userId AND d.deletedAt IS NULL
             """)
