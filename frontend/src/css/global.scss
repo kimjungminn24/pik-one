@@ -7,7 +7,7 @@
   --color-success: #4caf50;
   --color-danger: #dc2626;
   --color-warning: #ffb74d;
-  --color-info: #2563eb;
+  --color-info: #00b7d4;
   --color-selected: #a5f3fc;
   --color-danger-lighter: #e53935;
   --color-warning-hover: #ff8828;
@@ -125,19 +125,6 @@ button {
   transition: background-color 0.2s, transform 0.1s;
 }
 
-button:hover {
-  background-color: #0ea5e9;
-}
-
-button:active {
-  transform: scale(0.98);
-}
-
-button:disabled {
-  background-color: #bae6fd;
-  color: #fff;
-  cursor: not-allowed;
-}
 .button-box {
   display: flex;
   justify-content: center;

@@ -1,4 +1,4 @@
-@import "mixins";
+@use "mixins" as *;
 
 .tag {
   @include badge(var(--color-bg-gray), var(--color-text-default));
@@ -6,11 +6,6 @@
   align-items: center;
   margin: 0.4rem;
   font-weight: 500;
-  transition: background-color 0.2s ease-in-out;
-}
-
-.tag:hover {
-  background-color: var(--color-bg-gray-hover);
   cursor: pointer;
 }
 

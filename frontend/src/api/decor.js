@@ -9,12 +9,20 @@ export const getDecorByTypeAndPosition = async ({
   westLng,
   type,
 }) => {
-  const res = await fetch(
-    `${BASE_URL}/search?type=${type}&westLng=${westLng}&northLat=${northLat}&southLat=${southLat}&eastLng=${eastLng}`,
-    {
-      credentials: "include",
-    }
-  );
+  const url = new URL(`${BASE_URL}/search`);
+
+  url.searchParams.set("northLat", northLat);
+  url.searchParams.set("southLat", southLat);
+  url.searchParams.set("eastLng", eastLng);
+  url.searchParams.set("westLng", westLng);
+
+  if (type != null) {
+    url.searchParams.set("type", type);
+  }
+
+  const res = await fetch(url.toString(), {
+    credentials: "include",
+  });
 
   if (!res.ok) {
     await handleFetchError(res);
