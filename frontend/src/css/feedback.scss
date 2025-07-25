@@ -1,4 +1,4 @@
-@import "mixins";
+@use "mixins" as *;
 
 .feedback-form__textarea {
   width: 100%;

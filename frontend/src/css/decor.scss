@@ -1,4 +1,4 @@
-@import "mixins";
+@use "mixins" as *;
 
 .decor-info {
   @include box-style(var(--color-bg-light));
