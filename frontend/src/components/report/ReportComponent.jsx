@@ -64,7 +64,7 @@ export default function ReportComponent() {
   return (
     <div className="report">
       <CategorySelector
-        categoryList={["버그", "제안", "칭찬"]}
+        categoryList={["버그", "제안", "응원"]}
         selected={selectedCategory}
         onSelect={setSelectedCategory}
       />
