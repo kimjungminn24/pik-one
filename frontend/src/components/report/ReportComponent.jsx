@@ -109,7 +109,7 @@ ISSUE_END -->
         onSubmit={handleSubmitComment}
       />
 
-      <CommentList list={commentList} />
+      <CommentList list={list} />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function CommentList({ list }) {
+export default function CommentList({ list = [] }) {
   return (
     <div className="comment-list">
       {list.map((item, idx) => (
