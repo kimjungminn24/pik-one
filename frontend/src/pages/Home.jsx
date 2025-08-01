@@ -1,9 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import "../css/home.scss";
+import ReportComponent from "../components/report/ReportComponent";
+import { useState } from "react";
 
 export default function Home() {
   const navigate = useNavigate();
-
+  const [isReportOpen, setIsReportOpen] = useState(false);
+  const handleShow = () => {
+    setIsReportOpen((prev) => !prev);
+  };
   const messages = [
     "오늘도 새로운 스팟을 발견해보세요!",
     "작은 발자국이 큰 지도를 만듭니다 🗺️",
@@ -46,7 +51,17 @@ export default function Home() {
           >
             단독 스팟을 검색해보세요 🔍
           </button>
+
+          <button
+            onClick={() => handleShow()}
+            className="home__button green emoji"
+          >
+            여러분의 의견을 들려주세요 💬
+          </button>
         </div>
+      </div>
+      <div className={`report-wrapper ${isReportOpen ? "show" : ""}`}>
+        <ReportComponent enabled={isReportOpen} />
       </div>
     </div>
   );
