@@ -10,9 +10,12 @@ import {
   nicknameCoreList,
   randomColorList,
 } from "../../utils/reportOptions";
+import { useCreateIssue, useGetIssues } from "../../hooks/useIssue";
 
-export default function ReportComponent() {
+export default function ReportComponent({ enabled }) {
   const getRandomElement = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
+  const { data: list, isLoading } = useGetIssues(enabled);
 
   const [bgColor, setBgColor] = useState(getRandomElement(randomColorList));
   const [emoji, setEmoji] = useState(getRandomElement(emojiList));
@@ -23,7 +26,6 @@ export default function ReportComponent() {
   );
   const [selectedCategory, setSelectedCategory] = useState("버그");
   const [commentText, setCommentText] = useState("");
-  const [commentList, setCommentList] = useState([]);
 
   const handleEmojiClick = () => {
     setEmoji(getRandomElement(emojiList));
@@ -38,6 +40,33 @@ export default function ReportComponent() {
     );
   };
 
+  const buildGithubComment = ({
+    emoji,
+    category,
+    bgColor,
+    nickname,
+    comment,
+    createdAt,
+    answer,
+  }) => {
+    return `
+-  **닉네임**: ${emoji} ${nickname}  
+-  **카테고리**: ${category}  
+-  **작성 시간**: ${new Date(createdAt).toLocaleString()}  
+-  **내용**: ${comment}  
+-  **답변**: ${answer ? answer : "아직 없음"}
+
+<!-- ISSUE_START
+${JSON.stringify(
+  { emoji, category, bgColor, nickname, comment, createdAt, answer },
+  null,
+  2
+)}
+ISSUE_END -->
+  `.trim();
+  };
+
+  const mutation = useCreateIssue();
   const handleSubmitComment = () => {
     if (!commentText.trim()) return;
 
@@ -47,18 +76,14 @@ export default function ReportComponent() {
       bgColor,
       nickname,
       comment: commentText,
-      createdAt: new Date().toLocaleString("ko-KR", {
-        hour12: false,
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit",
-      }),
+      createdAt: new Date().toISOString(),
+      answer: null,
     };
 
-    setCommentList((prev) => [newComment, ...prev]);
+    const commentBody = buildGithubComment(newComment);
+
     setCommentText("");
+    mutation.mutate({ body: commentBody });
   };
 
   return (
