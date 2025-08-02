@@ -1,12 +1,11 @@
 @use "mixins" as *;
 
 .home {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flex-column;
   padding: 60px 20px;
   min-height: 80vh;
   box-sizing: border-box;
+  justify-content: center;
   background: linear-gradient(
     to bottom,
     var(--color-bg-gradient-start) 0%,

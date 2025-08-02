@@ -15,6 +15,11 @@ export default function CommentList({ list = [] }) {
             <div className="comment-item-nickname">{item.nickname}</div>
           </div>
           <div className="comment-item-text">{item.comment}</div>
+
+          {item.answer && (
+            <div className="comment-item-answer">{item.answer}</div>
+          )}
+
           <div className="comment-item-meta">
             {item.category} / {item.createdAt}
           </div>
