@@ -66,12 +66,7 @@ export default function Find() {
         </Suspense>
         {isLoading && (
           <div className="map-loading-overlay">
-            <div className="loading-spinner-container">
-              <div className="loading-spinner" />
-              <div className="loading-text">
-                🌱 단독 스팟을 불러오는 중이에요...
-              </div>
-            </div>
+            <LoadingSpinner message="🌱 단독 스팟을 불러오는 중이에요..." />
           </div>
         )}
       </div>
