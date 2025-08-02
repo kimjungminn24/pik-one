@@ -109,7 +109,6 @@ ISSUE_END -->
         onChange={setCommentText}
         onSubmit={handleSubmitComment}
       />
-      <LoadingSpinner message="댓글을 불러오는 중이에요..." />
 
       {isLoading ? (
         <LoadingSpinner message="댓글을 불러오는 중이에요..." />
