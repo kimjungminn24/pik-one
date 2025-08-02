@@ -45,8 +45,10 @@ public class SecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/user/login/check", "/oauth2/**", "/decors/**").permitAll()
-                        .anyRequest().authenticated()
+                        .requestMatchers("/", "/user/login/check", "/oauth2/**", "/decors/**", "/issue")
+                        .permitAll()
+                        .anyRequest()
+                        .authenticated()
                 )
                 .oauth2Login(oauth2 -> oauth2
                         .userInfoEndpoint(userInfo -> userInfo.userService(customOAuth2UserService))
