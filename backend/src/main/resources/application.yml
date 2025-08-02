@@ -36,3 +36,11 @@ jwt:
 app:
   front-url: ${FRONTEND_URL}
 
+
+
+github:
+  token: ${ISSUE_API_KEY}
+  owner: ${ISSUE_API_OWNER}
+  repo: ${ISSUE_API_REPO}
+  issue:
+    number: ${ISSUE_API_NUMBER}
