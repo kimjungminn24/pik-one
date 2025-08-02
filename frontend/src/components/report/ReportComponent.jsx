@@ -11,6 +11,7 @@ import {
   randomColorList,
 } from "../../utils/reportOptions";
 import { useCreateIssue, useGetIssues } from "../../hooks/useIssue";
+import LoadingSpinner from "../LoadingSpinner";
 
 export default function ReportComponent({ enabled }) {
   const getRandomElement = (arr) => arr[Math.floor(Math.random() * arr.length)];
@@ -76,7 +77,7 @@ ISSUE_END -->
       bgColor,
       nickname,
       comment: commentText,
-      createdAt: new Date().toISOString(),
+      createdAt: new Date().toISOString().slice(0, 10),
       answer: null,
     };
 
@@ -89,7 +90,7 @@ ISSUE_END -->
   return (
     <div className="report">
       <CategorySelector
-        categoryList={["버그", "제안", "응원"]}
+        categoryList={["응원", "버그", "제안"]}
         selected={selectedCategory}
         onSelect={setSelectedCategory}
       />
@@ -108,8 +109,13 @@ ISSUE_END -->
         onChange={setCommentText}
         onSubmit={handleSubmitComment}
       />
+      <LoadingSpinner message="댓글을 불러오는 중이에요..." />
 
-      <CommentList list={list} />
+      {isLoading ? (
+        <LoadingSpinner message="댓글을 불러오는 중이에요..." />
+      ) : (
+        <CommentList list={list} />
+      )}
     </div>
   );
 }

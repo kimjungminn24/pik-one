@@ -4,6 +4,7 @@ import TagListComponent from "../components/TagListComponent";
 import { useLocationStore } from "../store/useLocationStore";
 import { useDebouncedValue } from "../hooks/useDebouncedValue";
 import { useDecor } from "../hooks/useDecor";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const LazyMap = React.lazy(() => import("../components/map/MapComponent"));
 export default function Find() {
@@ -33,7 +34,7 @@ export default function Find() {
     selectedTags.length === decorList.length &&
     decorList.every((d) => selectedTags.includes(d.name));
 
-  const { data: searchResults = [] } = useDecor({
+  const { data: searchResults = [], isLoading } = useDecor({
     northLat: debouncedBounds?.northLat,
     southLat: debouncedBounds?.southLat,
     eastLng: debouncedBounds?.eastLng,
@@ -60,9 +61,13 @@ export default function Find() {
   return (
     <div className="page-layout">
       <div className="page-section">
-        <Suspense fallback={<div>지도를 불러오는 중...</div>}>
-          <LazyMap searchResults={searchResults} showLocationMarker={false} />
-        </Suspense>
+        {isLoading ? (
+          <LoadingSpinner message="🌱 단독 스팟을 불러오는 중이에요..." />
+        ) : (
+          <Suspense fallback={<div>지도를 불러오는 중...</div>}>
+            <LazyMap searchResults={searchResults} showLocationMarker={false} />
+          </Suspense>
+        )}
       </div>
 
       <div className="page-section">
