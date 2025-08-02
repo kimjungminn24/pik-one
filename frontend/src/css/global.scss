@@ -144,6 +144,16 @@ a {
   text-decoration: none;
 }
 
+.map-loading-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(255, 255, 255, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
 .loading-spinner-container {
   display: flex;
   flex-direction: column;
