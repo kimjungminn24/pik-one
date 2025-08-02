@@ -61,12 +61,18 @@ export default function Find() {
   return (
     <div className="page-layout">
       <div className="page-section">
-        {isLoading ? (
-          <LoadingSpinner message="🌱 단독 스팟을 불러오는 중이에요..." />
-        ) : (
-          <Suspense fallback={<div>지도를 불러오는 중...</div>}>
-            <LazyMap searchResults={searchResults} showLocationMarker={false} />
-          </Suspense>
+        <Suspense fallback={<div>지도를 불러오는 중...</div>}>
+          <LazyMap searchResults={searchResults} showLocationMarker={false} />
+        </Suspense>
+        {isLoading && (
+          <div className="map-loading-overlay">
+            <div className="loading-spinner-container">
+              <div className="loading-spinner" />
+              <div className="loading-text">
+                🌱 단독 스팟을 불러오는 중이에요...
+              </div>
+            </div>
+          </div>
         )}
       </div>
 
