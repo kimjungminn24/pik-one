@@ -1,0 +1,29 @@
+.search-result-banner {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-primary);
+  box-shadow: 0 2px 6px var(--color-shadow-light);
+  z-index: 1000;
+  white-space: nowrap;
+}
+
+.search-result-count {
+  color: var(--color-primary);
+}
+
+.highlight-number {
+  font-weight: 700;
+  color: var(--color-primary-hover);
+}
+
+.search-result-count.no-result {
+  color: var(--color-text-muted);
+}
