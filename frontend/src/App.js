@@ -6,6 +6,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import { useUserQuery } from "./hooks/useUser";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Footer from "./components/Footer";
 
 const Register = React.lazy(() => import("./pages/Register"));
 const Find = React.lazy(() => import("./pages/Find"));
@@ -59,6 +60,7 @@ function App() {
       <Suspense fallback={null}>
         <ToastContainer position="top-right" autoClose={3000} />
       </Suspense>
+      <Footer />
     </Router>
   );
 }

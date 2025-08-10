@@ -6,6 +6,7 @@
   width: 100%;
 }
 .report-wrapper {
+  max-height: 0;
   transform: scaleY(0);
   transform-origin: top;
   opacity: 0;
@@ -15,6 +16,7 @@
 
 .report-wrapper.show {
   transform: scaleY(1);
+  max-height: 1000px;
   opacity: 1;
 }
 

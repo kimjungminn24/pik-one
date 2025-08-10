@@ -5,6 +5,7 @@ import { useLocationStore } from "../store/useLocationStore";
 import { useDebouncedValue } from "../hooks/useDebouncedValue";
 import { useDecor } from "../hooks/useDecor";
 import LoadingSpinner from "../components/LoadingSpinner";
+import "../css/find.scss";
 
 const LazyMap = React.lazy(() => import("../components/map/MapComponent"));
 export default function Find() {
@@ -67,6 +68,20 @@ export default function Find() {
         {isLoading && (
           <div className="map-loading-overlay">
             <LoadingSpinner message="🌱 단독 스팟을 불러오는 중이에요..." />
+          </div>
+        )}
+        {selectedTags.length > 0 && (
+          <div className="search-result-banner">
+            {searchResults.length > 0 ? (
+              <span className="search-result-count">
+                <span className="highlight-number">{searchResults.length}</span>
+                개가 검색되었어요!
+              </span>
+            ) : (
+              <span className="search-result-count no-result">
+                검색된 단독 스팟이 없어요
+              </span>
+            )}
           </div>
         )}
       </div>
