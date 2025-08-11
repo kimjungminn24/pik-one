@@ -54,7 +54,7 @@ export default function Register() {
           <LazyMap />
         </Suspense>
       </div>
-      <div className="register-container">
+      <div className="page-section">
         <div className="form-group">
           <div className="register-form__location-display">
             {lat && lng
@@ -64,7 +64,6 @@ export default function Register() {
               : "위치를 선택해주세요"}
           </div>
         </div>
-
         <div className="form-group">
           <input
             className="register-form__input"
@@ -80,7 +79,6 @@ export default function Register() {
           isSelected={(item) => selectedTag === item.name}
           onTagClick={handleTagClick}
         />
-
         <div className="button-box">
           <button onClick={handleSubmit} disabled={isPending}>
             {isPending ? "등록 중..." : "등록하기"}
