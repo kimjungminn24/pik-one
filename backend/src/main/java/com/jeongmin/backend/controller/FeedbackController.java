@@ -24,7 +24,7 @@ public class FeedbackController {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/")
+    @PostMapping
     public ResponseEntity<FeedbackDto> postFeedback(@RequestBody FeedbackCreateRequest request) {
         FeedbackDto response = feedbackFacade.createFeedback(request);
         return ResponseEntity.ok(response);
