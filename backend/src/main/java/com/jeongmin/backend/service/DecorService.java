@@ -3,12 +3,10 @@ package com.jeongmin.backend.service;
 import com.jeongmin.backend.dto.*;
 import com.jeongmin.backend.entity.Decor;
 import com.jeongmin.backend.entity.DecorType;
-import com.jeongmin.backend.entity.Feedback;
 import com.jeongmin.backend.entity.User;
 import com.jeongmin.backend.exception.ErrorCode;
 import com.jeongmin.backend.exception.RestApiException;
 import com.jeongmin.backend.repository.DecorRepository;
-import com.jeongmin.backend.repository.FeedbackRepository;
 import com.jeongmin.backend.repository.UserRepository;
 import com.jeongmin.backend.utils.GeoUtils;
 import com.jeongmin.backend.utils.SecurityUtil;
@@ -24,7 +22,6 @@ public class DecorService {
 
 
     private final DecorRepository decorRepository;
-    private final FeedbackRepository feedbackRepository;
     private final UserRepository userRepository;
 
 
@@ -112,27 +109,6 @@ public class DecorService {
                 ) <= 50);
     }
 
-    @Transactional
-    public FeedbackDto createNewFeedback(FeedbackCreateRequest request) {
-        Decor decor = getActiveDecorById(request.decorId());
-        long userId = SecurityUtil.getCurrentUserId();
-
-        if (feedbackRepository.existsByUserIdAndDecorId(userId, decor.getId())) {
-            throw new RestApiException(ErrorCode.DUPLICATE_FEEDBACK);
-        }
-
-        User user = userRepository.getReferenceById(userId);
-        Feedback feedback = Feedback.create(
-                request.feedbackType(),
-                request.content(),
-                user,
-                decor
-        );
-
-        feedbackRepository.save(feedback);
-        return FeedbackDto.from(feedback);
-    }
-
 
     public List<DecorDetailResponse> getMyDecors() {
 
@@ -148,19 +124,7 @@ public class DecorService {
                 .toList();
     }
 
-    public List<FeedbackResponse> getMyFeedback() {
-
-        Long userId = SecurityUtil.getCurrentUserId();
-
-        List<Feedback> feedbackList = feedbackRepository.findByUserId(userId);
-
-        return feedbackList.stream()
-                .map(FeedbackResponse::from)
-                .toList();
-    }
-
-
-    private Decor getActiveDecorById(Long decorId) {
+    public Decor getActiveDecorById(Long decorId) {
         return decorRepository.findByIdAndDeletedAtIsNull(decorId)
                 .orElseThrow(() -> new RestApiException(ErrorCode.DECOR_NOT_FOUND));
     }
