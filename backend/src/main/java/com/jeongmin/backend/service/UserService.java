@@ -7,6 +7,7 @@ import com.jeongmin.backend.exception.RestApiException;
 import com.jeongmin.backend.repository.UserRepository;
 import com.jeongmin.backend.utils.SecurityUtil;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Service;
@@ -21,10 +22,22 @@ public class UserService {
     private static final String ACCESS_TOKEN_COOKIE_NAME = "access_token";
     private final UserRepository userRepository;
 
+    @Transactional
     public Long registerIfNotExists(String provider, String providerId) {
         return userRepository.findByProviderAndProviderId(provider, providerId)
                 .map(User::getId)
                 .orElseGet(() -> saveNewUser(provider, providerId));
+    }
+
+    @Transactional
+    public User findById(Long userId) {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new RestApiException(ErrorCode.USER_NOT_FOUND));
+    }
+
+    @Transactional
+    public User getRef(Long userId) {
+        return userRepository.getReferenceById(userId);
     }
 
     private Long saveNewUser(String provider, String providerId) {
