@@ -8,12 +8,11 @@ import {
   getDecorByTypeAndPosition,
   createNewDecor,
   fetchDecorDetail,
-  createNewFeedback,
   deleteDecor,
   fetchMyDecors,
-  fetchMyFeedbacks,
 } from "../api/decor";
 
+import { createNewFeedback, fetchMyFeedbacks } from "../api/feedback";
 import { toast } from "react-toastify";
 import { decorList } from "../decorList";
 

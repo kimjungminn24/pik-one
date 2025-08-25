@@ -32,6 +32,8 @@ export default function MapComponent({
           attribution="&copy; OpenStreetMap contributors"
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           maxZoom={20}
+          maxNativeZoom={19}
+          keepBuffer={4}
         />
 
         {searchResults.map((item) => (
