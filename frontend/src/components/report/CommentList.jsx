@@ -1,9 +1,12 @@
 import React from "react";
 
 export default function CommentList({ list = [] }) {
+  const sortedList = [...list].sort(
+    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+  );
   return (
     <div className="comment-list">
-      {list.map((item, idx) => (
+      {sortedList.map((item, idx) => (
         <div key={idx} className="comment-item">
           <div className="comment-item-header">
             <div
