@@ -9,6 +9,7 @@ import DecorDetailPopup from "../decor/DecorDetailPopup";
 import { createCustomIcon } from "../../utils/markerIcon";
 import { SearchBox } from "./SearchBox";
 import "../../css/map.scss";
+import { useLocationStore } from "../../store/useLocationStore";
 
 export default function MapComponent({
   searchResults = [],
@@ -16,11 +17,16 @@ export default function MapComponent({
 }) {
   const [selectedId, setSelectedId] = useState(null);
   const { data, isLoading, isError } = useDecorDetail(selectedId, !!selectedId);
+  const { bounds } = useLocationStore();
+  const initialCenter = [
+    (Number(bounds.northLat) + Number(bounds.southLat)) / 2,
+    (Number(bounds.eastLng) + Number(bounds.westLng)) / 2,
+  ];
 
   return (
     <>
       <MapContainer
-        center={[37.5665, 126.978]}
+        center={initialCenter}
         zoom={15}
         minZoom={10}
         maxZoom={20}
