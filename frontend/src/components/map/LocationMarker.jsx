@@ -1,11 +1,17 @@
 import { useMapEvents, Marker } from "react-leaflet";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocationStore } from "../../store/useLocationStore";
 import { createCustomIcon } from "../../utils/markerIcon";
 
 export function LocationMarker() {
-  const setLocation = useLocationStore((state) => state.setLocation);
+  const { lat, lng, setLocation } = useLocationStore();
   const [position, setPosition] = useState(null);
+
+  useEffect(() => {
+    if (lat && lng) {
+      setPosition([parseFloat(lat), parseFloat(lng)]);
+    }
+  }, [lat, lng]);
 
   useMapEvents({
     click(e) {
