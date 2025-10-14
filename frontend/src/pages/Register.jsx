@@ -5,6 +5,7 @@ import { useLocationStore } from "../store/useLocationStore";
 import { useCreateDecor } from "../hooks/useDecor";
 import { toast } from "react-toastify";
 import "../css/register.scss";
+import CoordinateRegister from "../components/CoordinateRegister";
 
 const LazyMap = React.lazy(() => import("../components/map/MapComponent"));
 
@@ -56,13 +57,7 @@ export default function Register() {
       </div>
       <div className="page-section">
         <div className="form-group">
-          <div className="register-form__location-display">
-            {lat && lng
-              ? `📍 위도 ${parseFloat(lat).toFixed(5)} / 경도 ${parseFloat(
-                  lng
-                ).toFixed(5)}`
-              : "위치를 선택해주세요"}
-          </div>
+          <CoordinateRegister lat={lat} lng={lng} />
         </div>
         <div className="form-group">
           <input
@@ -73,7 +68,6 @@ export default function Register() {
             onChange={(e) => setContent(e.target.value)}
           />
         </div>
-
         <TagListComponent
           items={decorList}
           isSelected={(item) => selectedTag === item.name}

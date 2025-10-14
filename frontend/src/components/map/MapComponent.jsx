@@ -10,6 +10,7 @@ import { createCustomIcon } from "../../utils/markerIcon";
 import { SearchBox } from "./SearchBox";
 import "../../css/map.scss";
 import { useLocationStore } from "../../store/useLocationStore";
+import { MapCenterUpdater } from "./MapCenterUpdater";
 
 export default function MapComponent({
   searchResults = [],
@@ -32,6 +33,7 @@ export default function MapComponent({
         maxZoom={20}
         className="map__container"
       >
+        <MapCenterUpdater />
         <SearchBox />
 
         <TileLayer
