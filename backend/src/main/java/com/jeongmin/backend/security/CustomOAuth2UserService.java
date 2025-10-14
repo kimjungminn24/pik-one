@@ -23,19 +23,33 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2User oAuth2User = super.loadUser(userRequest);
         Map<String, Object> attributes = oAuth2User.getAttributes();
+        String provider = userRequest.getClientRegistration().getRegistrationId(); // naver, kakao 등
 
-        String provider = userRequest.getClientRegistration().getRegistrationId();
-        Map<String, Object> response = (Map<String, Object>) attributes.get("response");
+        Map<String, Object> userAttributes = Map.of();
 
-        String providerId = (String) response.get("id");
-        Long userId = userService.registerIfNotExists(provider, providerId);
+        if ("kakao".equals(provider)) {
+            String providerId = String.valueOf(attributes.get("id"));
+            Long userId = userService.registerIfNotExists(provider, providerId);
+            userAttributes = Map.of(
+                    "provider", "kakao",
+                    "id", providerId,
+                    "userId", userId
+            );
+        } else if ("naver".equals(provider)) {
+            Map<String, Object> response = (Map<String, Object>) attributes.get("response");
+            String providerId = (String) response.get("id");
+            Long userId = userService.registerIfNotExists(provider, providerId);
+            userAttributes = Map.of(
+                    "provider", "naver",
+                    "id", providerId,
+                    "userId", userId
+            );
+        }
 
-        response.put("userId", userId);
-        response.put("providerId", providerId);
 
         return new DefaultOAuth2User(
                 Collections.singleton(new SimpleGrantedAuthority("ROLE_USER")),
-                response,
+                userAttributes,
                 "id"
         );
     }
