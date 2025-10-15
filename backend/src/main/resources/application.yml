@@ -23,6 +23,13 @@ spring:
             redirect-uri: ${KAKAO_REDIRECT_URI}
             client-authentication-method: client_secret_post
             authorization-grant-type: ${KAKAO_AUTHORIZATION_GRANT_TYPE}
+          google:
+            client-name: google
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
+            redirect-uri: ${GOOGLE_REDIRECT_URI}
+            authorization-grant-type: authorization_code
+            scope: openid
         provider:
           naver:
             authorization-uri: ${NAVER_AUTHORIZATION_URL}
@@ -34,6 +41,11 @@ spring:
             token-uri: ${KAKAO_TOKEN_URL}
             user-info-uri: ${KAKAO_USER_INFO_URL}
             user-name-attribute: ${KAKAO_USER_NAME_ATTRIBUTE}
+          google:
+            authorization-uri: ${GOOGLE_AUTHORIZATION_URL}
+            token-uri: ${GOOGLE_TOKEN_URL}
+            user-info-uri: ${GOOGLE_USER_INFO_URL}
+            user-name-attribute: ${GOOGLE_USER_NAME_ATTRIBUTE}
   jpa:
     hibernate:
       ddl-auto: update
