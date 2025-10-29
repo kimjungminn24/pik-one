@@ -69,7 +69,7 @@
   transition: all 0.2s;
 }
 
-@mixin input-basic($font-size: 0.95rem, $padding: 0.7rem 1rem) {
+@mixin input-basic($font-size: 0.95rem, $padding: 0.7rem 0.2rem) {
   width: 100%;
   margin-bottom: 0.4rem;
   padding: $padding;

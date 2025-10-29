@@ -22,10 +22,31 @@
 
 @media (max-width: 48rem) {
   .register-form__input {
-    @include input-basic(0.7rem, 0.45rem 0.7rem);
+    @include input-basic(0.7rem);
   }
 
   .register-form__location-display {
     font-size: 0.7rem;
   }
+}
+.coordinate-register-form {
+  @include flex-start;
+  margin-bottom: 0.5rem;
+}
+.coordinate-register-form-outer {
+  @include flex-start;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+.coordinate-register-form-input {
+  border: 0.09375rem solid var(--color-bg-gray-hover);
+  border-radius: 0.5rem;
+  padding: 0.5em;
+  margin-left: 1rem;
+  background-color: var(--color-bg-lighter);
+  font-family: "CookieRun", sans-serif;
+  color: #111827;
+  outline: none;
+  box-shadow: inset 0 0.0625rem 0.125rem var(--color-shadow-light);
+  transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
 }

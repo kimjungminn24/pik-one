@@ -37,7 +37,7 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
         OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
         Map<String, Object> attributes = oAuth2User.getAttributes();
 
-        String providerId = (String) attributes.get("providerId");
+        String providerId = (String) attributes.get("id");
         Long userId = ((Number) attributes.get("userId")).longValue();
 
         String token = jwtProvider.createAccessToken(userId, providerId);
