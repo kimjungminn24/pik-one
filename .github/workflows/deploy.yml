@@ -66,6 +66,7 @@ jobs:
           echo "export GOOGLE_CLIENT_SECRET='${{ secrets.GOOGLE_CLIENT_SECRET }}'" >> backend/env.sh
           echo "export GOOGLE_REDIRECT_URI='${{ secrets.GOOGLE_REDIRECT_URI }}'" >> backend/env.sh
           echo "export GOOGLE_AUTHORIZATION_URL='${{ secrets.GOOGLE_AUTHORIZATION_URL }}'" >> backend/env.sh
+          echo "export GOOGLE_AUTHORIZATION_GRANT_TYPE='${{ secrets.GOOGLE_AUTHORIZATION_GRANT_TYPE }}'" >> backend/env.sh
           echo "export GOOGLE_TOKEN_URL='${{ secrets.GOOGLE_TOKEN_URL }}'" >> backend/env.sh
           echo "export GOOGLE_USER_INFO_URL='${{ secrets.GOOGLE_USER_INFO_URL }}'" >> backend/env.sh
           echo "export GOOGLE_USER_NAME_ATTRIBUTE='${{ secrets.GOOGLE_USER_NAME_ATTRIBUTE }}'" >> backend/env.sh
