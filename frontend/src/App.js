@@ -7,6 +7,8 @@ import { useUserQuery } from "./hooks/useUser";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Footer from "./components/Footer";
+import Login from "./pages/Login";
+import NotFound from "./pages/NotFound";
 
 const Register = React.lazy(() => import("./pages/Register"));
 const Find = React.lazy(() => import("./pages/Find"));
@@ -45,6 +47,7 @@ function App() {
               }
             />
             <Route path="/find" element={<Find />} />
+            <Route path="/login" element={<Login />} />
             <Route
               path="/mypage"
               element={
@@ -53,6 +56,7 @@ function App() {
                 </PrivateRoute>
               }
             />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
       </div>
