@@ -54,6 +54,21 @@ jobs:
           echo "export ISSUE_API_OWNER='${{ secrets.ISSUE_API_OWNER }}'" >> backend/env.sh
           echo "export ISSUE_API_REPO='${{ secrets.ISSUE_API_REPO }}'" >> backend/env.sh
           echo "export ISSUE_API_NUMBER='${{ secrets.ISSUE_API_NUMBER }}'" >> backend/env.sh
+          echo "export KAKAO_CLIENT_ID='${{ secrets.KAKAO_CLIENT_ID }}'" >> backend/env.sh
+          echo "export KAKAO_CLIENT_SECRET='${{ secrets.KAKAO_CLIENT_SECRET }}'" >> backend/env.sh
+          echo "export KAKAO_REDIRECT_URI='${{ secrets.KAKAO_REDIRECT_URI }}'" >> backend/env.sh
+          echo "export KAKAO_AUTHORIZATION_GRANT_TYPE='${{ secrets.KAKAO_AUTHORIZATION_GRANT_TYPE }}'" >> backend/env.sh
+          echo "export KAKAO_AUTHORIZATION_URL='${{ secrets.KAKAO_AUTHORIZATION_URL }}'" >> backend/env.sh
+          echo "export KAKAO_TOKEN_URL='${{ secrets.KAKAO_TOKEN_URL }}'" >> backend/env.sh
+          echo "export KAKAO_USER_INFO_URL='${{ secrets.KAKAO_USER_INFO_URL }}'" >> backend/env.sh
+          echo "export KAKAO_USER_NAME_ATTRIBUTE='${{ secrets.KAKAO_USER_NAME_ATTRIBUTE }}'" >> backend/env.sh
+          echo "export GOOGLE_CLIENT_ID='${{ secrets.GOOGLE_CLIENT_ID }}'" >> backend/env.sh
+          echo "export GOOGLE_CLIENT_SECRET='${{ secrets.GOOGLE_CLIENT_SECRET }}'" >> backend/env.sh
+          echo "export GOOGLE_REDIRECT_URI='${{ secrets.GOOGLE_REDIRECT_URI }}'" >> backend/env.sh
+          echo "export GOOGLE_AUTHORIZATION_URL='${{ secrets.GOOGLE_AUTHORIZATION_URL }}'" >> backend/env.sh
+          echo "export GOOGLE_TOKEN_URL='${{ secrets.GOOGLE_TOKEN_URL }}'" >> backend/env.sh
+          echo "export GOOGLE_USER_INFO_URL='${{ secrets.GOOGLE_USER_INFO_URL }}'" >> backend/env.sh
+          echo "export GOOGLE_USER_NAME_ATTRIBUTE='${{ secrets.GOOGLE_USER_NAME_ATTRIBUTE }}'" >> backend/env.sh
 
       - name: Copy frontend build to EC2
         uses: appleboy/scp-action@v0.1.4
