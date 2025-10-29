@@ -51,13 +51,9 @@ export default function Header() {
               </button>
             </>
           ) : (
-            <button onClick={handleLogin} className="header__login-wrapper">
-              <img
-                src="/btn.png"
-                alt="로그인버튼"
-                className="header__login-button"
-              />
-            </button>
+            <Link to="/login" className="header__nav-item">
+              로그인
+            </Link>
           )}
         </nav>
 
@@ -92,13 +88,9 @@ export default function Header() {
             </button>
           </>
         ) : (
-          <button onClick={handleLogin} className="header__login-wrapper">
-            <img
-              src="/btn.png"
-              alt="로그인버튼"
-              className="header__login-button"
-            />
-          </button>
+          <Link to="/login" className="header__mobile-item">
+            로그인
+          </Link>
         )}
       </div>
     </header>
