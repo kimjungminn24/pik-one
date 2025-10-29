@@ -19,10 +19,6 @@ export default function Header() {
     setIsOpen(!isOpen);
   };
 
-  const handleLogin = () => {
-    window.location.href = `${process.env.REACT_APP_BACKEND_URL}/oauth2/authorization/naver`;
-  };
-
   return (
     <header className="header">
       <div className="header__container">
