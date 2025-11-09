@@ -16,6 +16,8 @@ export const useLocationStore = create(
       },
       setBounds: (newBounds) =>
         set((state) => ({ bounds: { ...state.bounds, ...newBounds } })),
+      isExternalUpdate: false,
+      setIsExternalUpdate: (value) => set({ isExternalUpdate: value }),
     }),
     {
       name: "location-storage",

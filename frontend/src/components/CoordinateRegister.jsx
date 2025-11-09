@@ -7,6 +7,7 @@ export default function CoordinateRegister() {
     lng: storeLng,
     setLocation,
     setBounds,
+    setIsExternalUpdate,
   } = useLocationStore();
 
   const [lat, setLat] = useState(storeLat || "");
@@ -22,11 +23,12 @@ export default function CoordinateRegister() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (!lat || !lng) {
       alert("위도와 경도를 모두 입력해주세요.");
       return;
     }
-
+    setIsExternalUpdate(true);
     const parsedLat = parseFloat(lat);
     const parsedLng = parseFloat(lng);
     setLocation(parsedLat, parsedLng);
@@ -37,6 +39,7 @@ export default function CoordinateRegister() {
       eastLng: parsedLng + offset,
       westLng: parsedLng - offset,
     });
+    setTimeout(() => setIsExternalUpdate(false), 500);
   };
 
   return (
