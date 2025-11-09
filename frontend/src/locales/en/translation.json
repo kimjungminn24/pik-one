@@ -21,5 +21,9 @@
       "Great places shine brighter when shared 🌟",
       "Complete all the decorations 💫"
     ]
+  },
+  "notfound": {
+    "title": "404 Page Not Found 😢",
+    "home": "Go back to Home"
   }
 }
