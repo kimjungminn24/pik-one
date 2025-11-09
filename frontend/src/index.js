@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.scss";
 import App from "./App";
 import { showErrorToast } from "./utils/toast";
+import "./i18n";
 
 const queryClient = new QueryClient({
   defaultOptions: {
