@@ -1,0 +1,25 @@
+{
+  "title": "PikOne",
+  "menu": {
+    "register": "Register",
+    "find": "Find Plants",
+    "mypage": "My Page",
+    "login": "Login",
+    "logout": "Logout"
+  },
+  "footer": {
+    "copyright": "© 2025 PikOne"
+  },
+  "home": {
+    "desc": "Register your own private spot and discover others' places!",
+    "register": "Register your private spot 🌿",
+    "find": "Search for a private spot 🔍",
+    "feedback": "Share your thoughts 💬",
+    "messages": [
+      "Discover a new spot today!",
+      "Every small step builds a bigger map 🗺️",
+      "Great places shine brighter when shared 🌟",
+      "Complete all the decorations 💫"
+    ]
+  }
+}

@@ -3,11 +3,14 @@ import { Link, useLocation } from "react-router-dom";
 import { useUserStore } from "../store/useUserStore";
 import { useLogoutMutation } from "../hooks/useUser";
 import "../css/header.scss";
+import LanguageSwitcher from "./LanguageSwitcher";
+import { useTranslation } from "react-i18next";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const { mutate: logout } = useLogoutMutation();
+  const { t } = useTranslation();
 
   const isLogin = useUserStore((state) => state.isLogin);
 
@@ -21,34 +24,35 @@ export default function Header() {
 
   return (
     <header className="header">
+      <LanguageSwitcher />
       <div className="header__container">
         <div className="header__logo">
-          <Link to="/">단독스팟</Link>
+          <Link to="/">{t("title")}</Link>
         </div>
 
         <nav className="header__nav">
           <Link to="/register" className="header__nav-item">
-            모종 등록
+            {t("menu.register")}
           </Link>
           <Link to="/find" className="header__nav-item">
-            모종 찾기
+            {t("menu.find")}
           </Link>
           {isLogin ? (
             <>
               <Link to="/mypage" className="header__nav-item">
-                내 정보
+                {t("menu.mypage")}
               </Link>
 
               <button
                 onClick={() => logout()}
                 className="header__nav-item header__logout-button"
               >
-                로그아웃
+                {t("menu.logout")}
               </button>
             </>
           ) : (
             <Link to="/login" className="header__nav-item">
-              로그인
+              {t("menu.login")}
             </Link>
           )}
         </nav>
@@ -64,28 +68,28 @@ export default function Header() {
           className="header__mobile-item"
           onClick={toggleMenu}
         >
-          모종 등록
+          {t("menu.register")}
         </Link>
         <Link to="/find" className="header__mobile-item" onClick={toggleMenu}>
-          모종 찾기
+          {t("menu.find")}
         </Link>
 
         {isLogin ? (
           <>
             <Link to="/mypage" className="header__mobile-item">
-              내 정보
+              {t("menu.mypage")}
             </Link>
 
             <button
               onClick={() => logout()}
               className="header__logout-button header__mobile-item"
             >
-              로그아웃
+              {t("menu.logout")}
             </button>
           </>
         ) : (
           <Link to="/login" className="header__mobile-item">
-            로그인
+            {t("menu.login")}
           </Link>
         )}
       </div>
