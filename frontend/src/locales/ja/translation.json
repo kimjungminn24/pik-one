@@ -74,5 +74,16 @@
     "LAUNDRY": "コインランドリー・クリーニング",
     "KOREAN_RESTAURANT": "韓国料理店",
     "STREET": "通り"
+  },
+  "toast": {
+    "login_required": "ログインしてからご利用ください。",
+    "decor_success": "苗が登録されました！",
+    "decor_delete": "苗が削除されました。",
+    "register_pos_error": "位置を選択してください。",
+    "register_input_error": "すべての項目を入力してください。",
+    "error": "不明なエラーが発生しました。",
+    "search_info": "検索結果がありません。",
+    "feedback_success": "フィードバックが正常に送信されました！",
+    "feedback_input_error": "ボタンとフィードバックの両方を入力してください。"
   }
 }

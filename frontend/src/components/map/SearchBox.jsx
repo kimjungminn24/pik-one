@@ -2,9 +2,11 @@ import { useMap } from "react-leaflet";
 import { useState } from "react";
 import { searchLocation } from "../../api/geocode";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 export function SearchBox() {
   const map = useMap();
   const [query, setQuery] = useState("");
+  const { t } = useTranslation();
 
   const handleSearch = async () => {
     const results = await searchLocation(query);
@@ -12,7 +14,7 @@ export function SearchBox() {
       const { lat, lon } = results[0];
       map.setView([parseFloat(lat), parseFloat(lon)], 16);
     } else {
-      toast.info("검색 결과가 없습니다.");
+      toast.info(t("toast.search_info"));
     }
   };
 

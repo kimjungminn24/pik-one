@@ -6,6 +6,8 @@ import { useCreateDecor } from "../hooks/useDecor";
 import { toast } from "react-toastify";
 import "../css/register.scss";
 import CoordinateRegister from "../components/CoordinateRegister";
+import SharedMapLinkSearch from "../components/report/SharedMapLinkSearch";
+import { useTranslation } from "react-i18next";
 
 const LazyMap = React.lazy(() => import("../components/map/MapComponent"));
 
@@ -15,16 +17,18 @@ export default function Register() {
   const [selectedTag, setSelectedTag] = useState("");
   const { mutate, isPending } = useCreateDecor();
 
+  const { t } = useTranslation();
+
   const handleTagClick = (item) => {
     setSelectedTag(item.name);
   };
   const handleSubmit = () => {
     if (!lat || !lng) {
-      toast.error("위치를 찍어주세요.");
+      toast.error(t("toast.register_pos_error"));
       return;
     }
     if (!content || !selectedTag) {
-      toast.error("모든 필드를 입력해주세요.");
+      toast.error(t("toast.register_input_error"));
       return;
     }
 
@@ -37,7 +41,7 @@ export default function Register() {
       },
       {
         onSuccess: () => {
-          toast.success("모종이 등록되었어요!");
+          toast.success(t("toast.decor_success"));
           setContent("");
           setSelectedTag("");
         },
@@ -58,6 +62,9 @@ export default function Register() {
       <div className="page-section">
         <div className="form-group">
           <CoordinateRegister lat={lat} lng={lng} />
+        </div>
+        <div className="form-group">
+          <SharedMapLinkSearch />
         </div>
         <div className="form-group">
           <input

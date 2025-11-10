@@ -74,5 +74,16 @@
     "LAUNDRY": "Laundry / Dry Cleaning",
     "KOREAN_RESTAURANT": "Korean Restaurant",
     "STREET": "Street"
+  },
+  "toast": {
+    "login_required": "Please log in to continue.",
+    "decor_success": "Your seedling has been registered!",
+    "decor_delete": "Your seedling has been deleted.",
+    "register_pos_error": "Please select a location.",
+    "register_input_error": "Please fill in all required fields.",
+    "error": "An unknown error has occurred.",
+    "search_info": "No search results found.",
+    "feedback_success": "Your feedback has been submitted successfully!",
+    "feedback_input_error": "Please enter both a button and feedback."
   }
 }

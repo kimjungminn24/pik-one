@@ -15,6 +15,7 @@ import {
 import { createNewFeedback, fetchMyFeedbacks } from "../api/feedback";
 import { toast } from "react-toastify";
 import { decorList } from "../decorList";
+import { useTranslation } from "react-i18next";
 
 export const useDecor = (params = {}, isEnabled = true) => {
   const {
@@ -124,11 +125,11 @@ export const useDecorDetail = (id, enabled) => {
 
 export const useDeleteDecor = () => {
   const queryClient = useQueryClient();
-
+  const { t } = useTranslation();
   return useMutation({
     mutationFn: deleteDecor,
     onSuccess: () => {
-      toast.success("모종이 삭제되었습니다.");
+      toast.success(t("toast.decor_delete"));
       queryClient.invalidateQueries({ queryKey: ["my-decors"] });
     },
   });
