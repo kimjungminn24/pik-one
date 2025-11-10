@@ -104,5 +104,13 @@
   "mypage": {
     "title": "My Found Locations",
     "no_results": "No registered places found."
+  },
+  "feedback": {
+    "placeholder": "Please enter your feedback",
+    "submit_loading": "Submitting...",
+    "submit": "Submit",
+    "found": "Found it 😊",
+    "not_found": "Not found 😢",
+    "no_feedback": "No feedback has been submitted yet."
   }
 }

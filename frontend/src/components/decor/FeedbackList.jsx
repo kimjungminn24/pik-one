@@ -1,10 +1,11 @@
+import { useTranslation } from "react-i18next";
 import "../../css/feedback.scss";
 
 export default function FeedbackList({ feedbacks }) {
+  const { t } = useTranslation();
+
   if (feedbacks.length === 0) {
-    return (
-      <p className="feedback-list__empty">아직 등록된 피드백이 없습니다.</p>
-    );
+    return <p className="feedback-list__empty"> {t("feedback.no_feedback")}</p>;
   }
 
   return (
@@ -18,7 +19,9 @@ export default function FeedbackList({ feedbacks }) {
                 : "feedback-list__label--not-found"
             }`}
           >
-            {item.type === "HELPFUL" ? " 찾았어요" : "없어요"}
+            {item.type === "HELPFUL"
+              ? t("feedback.found")
+              : t("feedback.not_found")}{" "}
           </strong>
           <span className="feedback-list__content">{item.content}</span>
         </div>
