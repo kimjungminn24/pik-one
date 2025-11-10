@@ -112,5 +112,21 @@
     "found": "Found it 😊",
     "not_found": "Not found 😢",
     "no_feedback": "No feedback has been submitted yet."
+  },
+  "error": {
+    "INVALID_REQUEST": "Invalid request.",
+    "DUPLICATE_DECOR": "A seedling of the same type already exists at this location.",
+    "DUPLICATE_FEEDBACK": "You have already submitted feedback for this seedling.",
+    "UNAUTHORIZED": "Authentication required.",
+    "LOGIN_REQUIRED": "Please log in to continue.",
+    "NO_PERMISSION_DECOR_DELETE": "You do not have permission to delete this seedling.",
+    "NO_PERMISSION_FEEDBACK_DELETE": "You do not have permission to delete this feedback.",
+    "NOT_FOUND": "Resource not found.",
+    "DECOR_NOT_FOUND": "The seedling could not be found or has already been deleted.",
+    "FEEDBACK_NOT_FOUND": "Feedback could not be found.",
+    "USER_NOT_FOUND": "User not found.",
+    "INTERNAL_ERROR": "Internal server error.",
+    "INVALID_OVERPASS_RESPONSE": "Failed to process Overpass response.",
+    "EXTERNAL_API_ERROR": "Failed to connect to the external API."
   }
 }

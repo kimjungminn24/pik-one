@@ -112,5 +112,21 @@
     "found": "見つけた 😊",
     "not_found": "見つからない 😢",
     "no_feedback": "まだ登録されたフィードバックはありません。"
+  },
+  "error": {
+    "INVALID_REQUEST": "無効なリクエストです。",
+    "DUPLICATE_DECOR": "同じタイプの苗がこの位置にすでに存在します。",
+    "DUPLICATE_FEEDBACK": "この苗にはすでにフィードバックを送信しています。",
+    "UNAUTHORIZED": "認証が必要です。",
+    "LOGIN_REQUIRED": "ログインしてからご利用ください。",
+    "NO_PERMISSION_DECOR_DELETE": "苗を削除する権限がありません。",
+    "NO_PERMISSION_FEEDBACK_DELETE": "フィードバックを削除する権限がありません。",
+    "NOT_FOUND": "リソースが見つかりません。",
+    "DECOR_NOT_FOUND": "苗が見つからないか、すでに削除されています。",
+    "FEEDBACK_NOT_FOUND": "フィードバックが見つかりません。",
+    "USER_NOT_FOUND": "ユーザーが見つかりません。",
+    "INTERNAL_ERROR": "サーバー内部エラーが発生しました。",
+    "INVALID_OVERPASS_RESPONSE": "Overpass の応答を処理できません。",
+    "EXTERNAL_API_ERROR": "外部 API の呼び出しに失敗しました。"
   }
 }
