@@ -15,8 +15,8 @@ export default function FeedbackList({ feedbacks }) {
           <strong
             className={`feedback-list__label ${
               item.type === "HELPFUL"
-                ? "feedback-list__label--helpful"
-                : "feedback-list__label--not-found"
+                ? "feedback-list__label--helpful emoji"
+                : "feedback-list__label--not-found emoji"
             }`}
           >
             {item.type === "HELPFUL"
