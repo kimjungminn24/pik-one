@@ -128,5 +128,32 @@
     "INTERNAL_ERROR": "サーバー内部エラーが発生しました。",
     "INVALID_OVERPASS_RESPONSE": "Overpass の応答を処理できません。",
     "EXTERNAL_API_ERROR": "外部 API の呼び出しに失敗しました。"
+  },
+  "login": {
+    "quick": "簡単ログインですぐに始める"
+  },
+  "report": {
+    "nickname": "ニックネーム",
+    "change": "変更",
+    "category": {
+      "title": "カテゴリー",
+      "cheer": "応援",
+      "bug": "バグ",
+      "suggestion": "提案"
+    },
+    "categoryMap": {
+      "応援": "cheer",
+      "バグ": "bug",
+      "提案": "suggestion"
+    },
+    "form": {
+      "placeholder": "コメントを入力してください",
+      "button": "コメントを送信"
+    },
+    "createdAt": "作成時間",
+    "content": "内容",
+    "answer": "回答",
+    "noAnswer": "まだありません",
+    "loading": "コメントを読み込んでいます..."
   }
 }

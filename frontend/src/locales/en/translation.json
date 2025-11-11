@@ -128,5 +128,32 @@
     "INTERNAL_ERROR": "Internal server error.",
     "INVALID_OVERPASS_RESPONSE": "Failed to process Overpass response.",
     "EXTERNAL_API_ERROR": "Failed to connect to the external API."
+  },
+  "login": {
+    "quick": "Get started quickly with simple login"
+  },
+  "report": {
+    "nickname": "Nickname",
+    "change": "change",
+    "category": {
+      "title": "Category",
+      "cheer": "Cheer",
+      "bug": "Bug",
+      "suggestion": "Suggestion"
+    },
+    "categoryMap": {
+      "cheer": "cheer",
+      "bug": "bug",
+      "suggestion": "suggestion"
+    },
+    "form": {
+      "placeholder": "Write a comment...",
+      "button": "Post Comment"
+    },
+    "createdAt": "Created At",
+    "content": "Content",
+    "answer": "Answer",
+    "noAnswer": "No answer yet",
+    "loading": "Loading comments..."
   }
 }

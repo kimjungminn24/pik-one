@@ -128,5 +128,32 @@
     "INTERNAL_ERROR": "서버 내부 오류입니다",
     "INVALID_OVERPASS_RESPONSE": "Overpass 응답을 처리할 수 없습니다",
     "EXTERNAL_API_ERROR": "외부 API 요청에 실패했습니다"
+  },
+  "login": {
+    "quick": "간편 로그인으로 빠르게 시작하기"
+  },
+  "report": {
+    "nickname": "닉네임",
+    "change": "변경",
+    "category": {
+      "title": "카테고리",
+      "cheer": "응원",
+      "bug": "버그",
+      "suggestion": "제안"
+    },
+    "categoryMap": {
+      "응원": "cheer",
+      "버그": "bug",
+      "제안": "suggestion"
+    },
+    "form": {
+      "placeholder": "댓글을 입력하세요",
+      "button": "댓글 남기기"
+    },
+    "createdAt": "작성 시간",
+    "content": "내용",
+    "answer": "답변",
+    "noAnswer": "아직 없음",
+    "loading": "댓글을 불러오는 중이에요..."
   }
 }
