@@ -24,7 +24,6 @@ export default function Header() {
 
   return (
     <header className="header">
-      <LanguageSwitcher />
       <div className="header__container">
         <div className="header__logo">
           <Link to="/">{t("title")}</Link>
@@ -55,6 +54,9 @@ export default function Header() {
               {t("menu.login")}
             </Link>
           )}
+          <div className="header__lang-switcher">
+            <LanguageSwitcher />
+          </div>
         </nav>
 
         <div className="header__menu-icon" onClick={toggleMenu}>
@@ -92,6 +94,9 @@ export default function Header() {
             {t("menu.login")}
           </Link>
         )}
+        <div className="header__lang-switcher">
+          <LanguageSwitcher />
+        </div>
       </div>
     </header>
   );
