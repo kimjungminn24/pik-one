@@ -1,6 +1,8 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 export default function CommentList({ list = [] }) {
+  const { t } = useTranslation();
   const sortedList = [...list].sort(
     (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
   );
@@ -24,7 +26,7 @@ export default function CommentList({ list = [] }) {
           )}
 
           <div className="comment-item-meta">
-            {item.category} / {item.createdAt}
+            {t(`report.category.${item.category}`)} / {item.createdAt}
           </div>
         </div>
       ))}

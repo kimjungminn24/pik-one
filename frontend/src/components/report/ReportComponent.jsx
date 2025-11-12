@@ -6,26 +6,31 @@ import CommentList from "./CommentList";
 import "../../css/report.scss";
 import {
   emojiList,
-  nicknamePrefixList,
-  nicknameCoreList,
   randomColorList,
+  nicknameOptions,
 } from "../../utils/reportOptions";
 import { useCreateIssue, useGetIssues } from "../../hooks/useIssue";
 import LoadingSpinner from "../LoadingSpinner";
+import { useTranslation } from "react-i18next";
 
 export default function ReportComponent({ enabled }) {
   const getRandomElement = (arr) => arr[Math.floor(Math.random() * arr.length)];
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language.startsWith("ja")
+    ? "ja"
+    : i18n.language.startsWith("en")
+    ? "en"
+    : "ko";
+  const { prefix, core } = nicknameOptions[lang];
 
   const { data: list, isLoading } = useGetIssues(enabled);
 
   const [bgColor, setBgColor] = useState(getRandomElement(randomColorList));
   const [emoji, setEmoji] = useState(getRandomElement(emojiList));
   const [nickname, setNickname] = useState(
-    `${getRandomElement(nicknamePrefixList)} ${getRandomElement(
-      nicknameCoreList
-    )}`
+    `${getRandomElement(prefix)} ${getRandomElement(core)}`
   );
-  const [selectedCategory, setSelectedCategory] = useState("버그");
+  const [selectedCategory, setSelectedCategory] = useState("bug");
   const [commentText, setCommentText] = useState("");
 
   const handleEmojiClick = () => {
@@ -34,11 +39,7 @@ export default function ReportComponent({ enabled }) {
   };
 
   const handleNicknameRandomize = () => {
-    setNickname(
-      `${getRandomElement(nicknamePrefixList)} ${getRandomElement(
-        nicknameCoreList
-      )}`
-    );
+    setNickname(`${getRandomElement(prefix)} ${getRandomElement(core)}`);
   };
 
   const buildGithubComment = ({
@@ -52,7 +53,7 @@ export default function ReportComponent({ enabled }) {
   }) => {
     return `
 -  **닉네임**: ${emoji} ${nickname}  
--  **카테고리**: ${category}  
+-  **카테고리**: ${t(`report.categoryName.${category}`)} 
 -  **작성 시간**: ${new Date(createdAt).toLocaleString()}  
 -  **내용**: ${comment}  
 -  **답변**: ${answer ? answer : "아직 없음"}
@@ -90,9 +91,13 @@ ISSUE_END -->
   return (
     <div className="report">
       <CategorySelector
-        categoryList={["응원", "버그", "제안"]}
+        categoryList={[
+          { code: "cheer", label: t("report.category.cheer") },
+          { code: "bug", label: t("report.category.bug") },
+          { code: "suggestion", label: t("report.category.suggestion") },
+        ]}
         selected={selectedCategory}
-        onSelect={setSelectedCategory}
+        onSelect={(c) => setSelectedCategory(c.code)}
       />
 
       <NicknameBox

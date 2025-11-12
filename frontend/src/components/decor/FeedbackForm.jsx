@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 export default function FeedbackForm({
   feedback,
   onChange,
@@ -5,11 +7,13 @@ export default function FeedbackForm({
   isPending,
   selectedType,
 }) {
+  const { t } = useTranslation();
+
   return (
     <>
       <textarea
         className="feedback-form__textarea"
-        placeholder="피드백을 입력해주세요"
+        placeholder={t("feedback.placeholder")}
         value={feedback}
         onChange={onChange}
         disabled={isPending}
@@ -20,7 +24,7 @@ export default function FeedbackForm({
         onClick={onSubmit}
         disabled={isPending || !selectedType || feedback.trim() === ""}
       >
-        {isPending ? "등록 중..." : "등록"}
+        {isPending ? t("feedback.submit_loading") : t("feedback.submit")}
       </button>
     </>
   );

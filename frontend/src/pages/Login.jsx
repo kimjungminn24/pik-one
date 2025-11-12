@@ -1,4 +1,8 @@
+import { useTranslation } from "react-i18next";
+
 export default function Login() {
+  const { t } = useTranslation();
+
   const handleLogin = (provider) => {
     window.location.href = `${process.env.REACT_APP_BACKEND_URL}/oauth2/authorization/${provider}`;
   };
@@ -7,7 +11,7 @@ export default function Login() {
     <div className="page-layout">
       <div className="page-section">
         <div className="login">
-          <p className="login__title">간편 로그인으로 빠르게 시작하기</p>
+          <p className="login__title">{t("login.quick")}</p>
           <button
             className="login__btn login__btn--kakao"
             onClick={() => handleLogin("kakao")}

@@ -6,11 +6,12 @@ import { useDebouncedValue } from "../hooks/useDebouncedValue";
 import { useDecor } from "../hooks/useDecor";
 import LoadingSpinner from "../components/LoadingSpinner";
 import "../css/find.scss";
+import { useTranslation } from "react-i18next";
 
 const LazyMap = React.lazy(() => import("../components/map/MapComponent"));
 export default function Find() {
   const [selectedTags, setSelectedTags] = useState([]);
-
+  const { t } = useTranslation();
   const handleTagClick = (item) => {
     if (item.name === "ALL") {
       const allTagNames = decorList.map((d) => d.name);
@@ -46,7 +47,7 @@ export default function Find() {
 
   const allTag = {
     name: "ALL",
-    ko: "전체",
+    ko: t("find.all"),
     tags: [],
     emoji: "🌐",
   };
@@ -62,24 +63,23 @@ export default function Find() {
   return (
     <div className="page-layout">
       <div className="page-section">
-        <Suspense fallback={<div>지도를 불러오는 중...</div>}>
+        <Suspense fallback={<div>{t("find.mapLoading")}</div>}>
           <LazyMap searchResults={searchResults} showLocationMarker={false} />
         </Suspense>
         {isLoading && (
           <div className="map-loading-overlay">
-            <LoadingSpinner message="🌱 단독 스팟을 불러오는 중이에요..." />
+            <LoadingSpinner message={t("find.loadingMessage")} />
           </div>
         )}
         {selectedTags.length > 0 && (
           <div className="search-result-banner">
             {searchResults.length > 0 ? (
               <span className="search-result-count">
-                <span className="highlight-number">{searchResults.length}</span>
-                개가 검색되었어요!
+                {t("find.resultCount", { count: searchResults.length })}
               </span>
             ) : (
               <span className="search-result-count no-result">
-                검색된 단독 스팟이 없어요
+                {t("find.noResult")}
               </span>
             )}
           </div>

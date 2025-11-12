@@ -143,3 +143,11 @@
   color: var(--color-text-secondary);
   margin-bottom: var(--space-xs);
 }
+
+.lang-switcher {
+  margin-left: -0.5rem;
+}
+.lang-switcher button {
+  background-color: var(--color-bg-white);
+  color: var(--color-text-dark);
+}

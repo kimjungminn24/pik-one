@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 export default function NicknameBox({
   emoji,
@@ -8,6 +9,7 @@ export default function NicknameBox({
   onNicknameChange,
   onRandomize,
 }) {
+  const { t } = useTranslation();
   return (
     <div className="report-nickname">
       <div
@@ -23,7 +25,7 @@ export default function NicknameBox({
         onChange={(e) => onNicknameChange(e.target.value)}
       />
       <div className="report-nickname-btn" onClick={onRandomize}>
-        변경
+        {t("report.change")}
       </div>
     </div>
   );

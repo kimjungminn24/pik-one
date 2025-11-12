@@ -3,6 +3,7 @@ import FeedbackList from "./decor//FeedbackList";
 import { useDeleteDecor } from "../hooks/useDecor";
 import React, { Suspense } from "react";
 import "../css/popup.scss";
+import { useTranslation } from "react-i18next";
 const LazyMap = React.lazy(() => import("./map/SingleMapComponent"));
 export default function MyDecorPopup({ data, onClose }) {
   const total = data.helpfulCount + data.notFoundCount;
@@ -10,9 +11,9 @@ export default function MyDecorPopup({ data, onClose }) {
     total === 0 ? null : ((data.helpfulCount / total) * 100).toFixed(1);
 
   const { mutate: deleteMutate, isPending } = useDeleteDecor();
-
+  const { t } = useTranslation();
   const handleDelete = () => {
-    if (window.confirm("정말 삭제하시겠습니까?")) {
+    if (window.confirm(t("popup.delete_confirm"))) {
       deleteMutate(
         { id: data.id },
         {
@@ -32,11 +33,11 @@ export default function MyDecorPopup({ data, onClose }) {
             disabled={isPending}
             className="delete-button my-decor-popup__delete-button"
           >
-            {isPending ? "삭제 중..." : "삭제"}
+            {isPending ? t("popup.delete_loading") : t("popup.delete")}
           </button>
           {data.helpfulCount > 0 && (
             <div className="my-decor-popup__helpful-message">
-              {data.helpfulCount}명에게 도움이 되었어요! 😊
+              {t("popup.helpful_message", { count: data.helpfulCount })}
             </div>
           )}
         </div>
@@ -53,7 +54,7 @@ export default function MyDecorPopup({ data, onClose }) {
         </div>
       </div>
       <div className="my-decor-popup__map">
-        <Suspense fallback={<div>지도를 불러오는 중...</div>}>
+        <Suspense fallback={<div>{t("popup.loading_map")}</div>}>
           <LazyMap lng={data.lng} lat={data.lat} type={data.type} />
         </Suspense>
       </div>

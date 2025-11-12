@@ -11,26 +11,73 @@ export const emojiList = [
   "💖",
 ];
 
-export const nicknamePrefixList = [
-  "뚱뚱한",
-  "보라색",
-  "핑크색",
-  "전기",
-  "노란색",
-  "빨간색",
-  "배고픈",
-  "배부른",
-  "화난",
-  "독",
-  "중형",
-  "대형",
-  "소형",
-  "이벤트",
-  "거대",
-  "귀여운",
-];
+export const nicknameOptions = {
+  ko: {
+    prefix: [
+      "뚱뚱한",
+      "보라색",
+      "핑크색",
+      "전기",
+      "노란색",
+      "빨간색",
+      "배고픈",
+      "배부른",
+      "화난",
+      "독",
+      "중형",
+      "대형",
+      "소형",
+      "이벤트",
+      "거대",
+      "귀여운",
+    ],
+    core: ["모종", "피꾸민", "버섯", "플라워"],
+  },
 
-export const nicknameCoreList = ["모종", "피꾸민", "버섯", "플라워"];
+  en: {
+    prefix: [
+      "Fat",
+      "Purple",
+      "Pink",
+      "Electric",
+      "Yellow",
+      "Red",
+      "Hungry",
+      "Full",
+      "Angry",
+      "Poison",
+      "Medium",
+      "Large",
+      "Small",
+      "Event",
+      "Giant",
+      "Cute",
+    ],
+    core: ["Seedling", "Pikumin", "Mushroom", "Flower"],
+  },
+
+  ja: {
+    prefix: [
+      "太った",
+      "むらさきの",
+      "ピンクの",
+      "でんきの",
+      "きいろい",
+      "あかい",
+      "おなかすいた",
+      "おなかいっぱい",
+      "おこった",
+      "どくの",
+      "ちゅうがた",
+      "おおがた",
+      "こがた",
+      "イベント",
+      "きょだい",
+      "かわいい",
+    ],
+    core: ["モジョン", "ピクミン", "キノコ", "フラワー"],
+  },
+};
 
 export const randomColorList = [
   "#FFEBEE",

@@ -5,7 +5,7 @@ export async function handleFetchError(res) {
 
   const error = Object.assign(baseError, {
     status: res.status,
-    errorCode: errorBody.error,
+    errorCode: errorBody.errorCode,
   });
 
   throw error;

@@ -1,9 +1,11 @@
 import React from "react";
 import "../css/footer.scss";
+import { useTranslation } from "react-i18next";
 export default function Footer() {
+  const { t } = useTranslation();
   return (
     <footer className="footer">
-      <p>© 2025 단독스팟</p>
+      <p>{t("footer.copyright")}</p>
       <p>
         Map data ©{" "}
         <a
