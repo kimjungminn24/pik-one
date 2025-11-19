@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { decorMap } from "../../decorList";
 
 export default function DecorInfoSection({
@@ -7,22 +8,38 @@ export default function DecorInfoSection({
   probability,
   content,
 }) {
+  const { t } = useTranslation();
   const decor = decorMap[type];
-  const koName = decor?.ko ?? type;
+  const displayName = t(`decor.${type}`, { defaultValue: decor?.ko ?? type });
+  const handleCopyAll = () => {
+    const text = `${lat}, ${lng}`;
+    navigator.clipboard.writeText(text);
+  };
   return (
     <div className="decor-info">
       <div className="decor-info__header">
-        <strong className="decor-info__type">{koName}</strong>
+        <div>
+          <strong className="decor-info__type">{displayName}</strong>
+          <button className="decor-info__copy " onClick={handleCopyAll}>
+            좌표 복사
+          </button>
+        </div>
+
         <span className="decor-info__probability">
-          🌱 존재 확률 {probability === null ? "-" : `${probability}%`}
+          <span className="emoji">🌱</span> {t("decor_info.probability")}:{" "}
+          {probability === null ? "-" : `${probability}%`}{" "}
         </span>
       </div>
 
       <p className="decor-info__content">{content} </p>
 
       <div className="decor-info__coordinates">
-        <p>📍 위도: {lat}</p>
-        <p>📍 경도: {lng}</p>
+        <p>
+          <span className="emoji">📍</span> {t("decor_info.latitude")}: {lat}
+        </p>
+        <p>
+          <span className="emoji">📍</span> {t("decor_info.longitude")}: {lng}
+        </p>
       </div>
     </div>
   );

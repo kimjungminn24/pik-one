@@ -5,13 +5,13 @@ export default function CategorySelector({ categoryList, selected, onSelect }) {
     <div className="report-category">
       {categoryList.map((category) => (
         <div
-          key={category}
+          key={category.code}
           className={`report-category-item ${
-            selected === category ? "active" : ""
+            selected === category.code ? "active" : ""
           }`}
           onClick={() => onSelect(category)}
         >
-          {category}
+          {category.label}
         </div>
       ))}
     </div>

@@ -1,0 +1,179 @@
+{
+  "title": "単独スポット",
+  "menu": {
+    "register": "苗を登録",
+    "find": "苗を探す",
+    "mypage": "マイページ",
+    "login": "ログイン",
+    "logout": "ログアウト"
+  },
+  "footer": {
+    "copyright": "© 2025 단独スポット"
+  },
+  "home": {
+    "desc": "自分だけのスポットを登録して、他の人のスポットも見つけよう！",
+    "register": "単独スポットを登録しよう 🌿",
+    "find": "単独スポットを探そう 🔍",
+    "feedback": "あなたの意見を聞かせてください 💬",
+    "messages": [
+      "今日も新しいスポットを見つけよう！",
+      "小さな一歩が大きな地図を作ります 🗺️",
+      "良い場所は共有するほど輝きます 🌟",
+      "すべてのデコを完成させましょう 💫"
+    ]
+  },
+  "notfound": {
+    "title": "404 ページが見つかりません 😢",
+    "home": "ホームに戻る"
+  },
+  "find": {
+    "mapLoading": "地図を読み込み中...",
+    "loadingMessage": "🌱 単独スポットを読み込み中です...",
+    "resultCount": "{{count}}件が見つかりました！",
+    "noResult": "検索された単独スポットがありません",
+    "all": "すべて",
+    "search_placeholder": "場所を検索してください",
+    "search_button": "検索"
+  },
+  "decor": {
+    "RESTAURANT": "レストラン",
+    "CAFE": "カフェ",
+    "SWEET_SHOP": "スイーツショップ",
+    "MOVIE_THEATER": "映画館",
+    "PHARMACY": "薬局",
+    "ZOO": "動物園",
+    "FOREST": "森",
+    "WATERSIDE": "水辺",
+    "POST_OFFICE": "郵便局",
+    "ART_GALLERY": "美術館",
+    "AIRPORT": "空港",
+    "STATION": "駅",
+    "BEACH": "ビーチ",
+    "BURGER_PLACE": "ハンバーガーショップ",
+    "CORNER_STORE": "コンビニ",
+    "SUPERMARKET": "スーパーマーケット",
+    "BAKERY": "ベーカリー",
+    "HAIR_SALON": "美容室",
+    "CLOTHES_STORE": "洋服店",
+    "PARK": "公園",
+    "LIBRARY_BOOKSTORE": "図書館・書店",
+    "SUSHI_RESTAURANT": "寿司屋",
+    "MOUNTAIN": "山",
+    "STADIUM": "スタジアム",
+    "THEME_PARK": "テーマパーク",
+    "BUS_STOP": "バス停",
+    "ITALIAN_RESTAURANT": "イタリアンレストラン",
+    "RAMEN_RESTAURANT": "ラーメン屋",
+    "BRIDGE": "橋",
+    "HOTEL": "ホテル",
+    "MAKEUP_STORE": "コスメショップ",
+    "SHRINE_TEMPLE": "神社・寺院",
+    "APPLIANCES_STORE": "電器店",
+    "CURRY_RESTAURANT": "カレー屋",
+    "DIY_STORE": "工具店",
+    "UNIVERSITY_COLLEGE": "大学・短期大学",
+    "MEXICAN_RESTAURANT": "メキシカンレストラン",
+    "LAUNDRY": "コインランドリー・クリーニング",
+    "KOREAN_RESTAURANT": "韓国料理店",
+    "STREET": "通り"
+  },
+  "toast": {
+    "login_required": "ログインしてからご利用ください。",
+    "decor_success": "苗が登録されました！",
+    "decor_delete": "苗が削除されました。",
+    "register_pos_error": "位置を選択してください。",
+    "register_input_error": "すべての項目を入力してください。",
+    "error": "不明なエラーが発生しました。",
+    "search_info": "検索結果がありません。",
+    "feedback_success": "フィードバックが正常に送信されました！",
+    "feedback_input_error": "ボタンとフィードバックの両方を入力してください。"
+  },
+  "popup": {
+    "delete_confirm": "本当に削除しますか？",
+    "delete_loading": "削除中...",
+    "delete": "削除",
+    "helpful_message": "{{count}}人が参考になったと言っています！ 😊",
+    "loading_map": "地図を読み込み中..."
+  },
+  "decor_info": {
+    "probability": "存在確率",
+    "latitude": "緯度",
+    "longitude": "経度"
+  },
+  "common": {
+    "loading": "読み込み中..."
+  },
+  "mypage": {
+    "title": "見つけた場所",
+    "no_results": "登録された場所はありません。"
+  },
+  "feedback": {
+    "placeholder": "フィードバックを入力してください",
+    "submit_loading": "登録中...",
+    "submit": "登録",
+    "found": "見つけた 😊",
+    "not_found": "見つからない 😢",
+    "no_feedback": "まだ登録されたフィードバックはありません。"
+  },
+  "error": {
+    "INVALID_REQUEST": "無効なリクエストです。",
+    "DUPLICATE_DECOR": "同じタイプの苗がこの位置にすでに存在します。",
+    "DUPLICATE_FEEDBACK": "この苗にはすでにフィードバックを送信しています。",
+    "UNAUTHORIZED": "認証が必要です。",
+    "LOGIN_REQUIRED": "ログインしてからご利用ください。",
+    "NO_PERMISSION_DECOR_DELETE": "苗を削除する権限がありません。",
+    "NO_PERMISSION_FEEDBACK_DELETE": "フィードバックを削除する権限がありません。",
+    "NOT_FOUND": "リソースが見つかりません。",
+    "DECOR_NOT_FOUND": "苗が見つからないか、すでに削除されています。",
+    "FEEDBACK_NOT_FOUND": "フィードバックが見つかりません。",
+    "USER_NOT_FOUND": "ユーザーが見つかりません。",
+    "INTERNAL_ERROR": "サーバー内部エラーが発生しました。",
+    "INVALID_OVERPASS_RESPONSE": "Overpass の応答を処理できません。",
+    "EXTERNAL_API_ERROR": "外部 API の呼び出しに失敗しました。"
+  },
+  "login": {
+    "quick": "簡単ログインですぐに始める"
+  },
+  "report": {
+    "nickname": "ニックネーム",
+    "change": "変更",
+    "category": {
+      "title": "カテゴリー",
+      "cheer": "応援",
+      "bug": "バグ",
+      "suggestion": "提案"
+    },
+    "categoryMap": {
+      "応援": "cheer",
+      "バグ": "bug",
+      "提案": "suggestion"
+    },
+    "form": {
+      "placeholder": "コメントを入力してください",
+      "button": "コメントを送信"
+    },
+    "createdAt": "作成時間",
+    "content": "内容",
+    "answer": "回答",
+    "noAnswer": "まだありません",
+    "loading": "コメントを読み込んでいます..."
+  },
+  "register": {
+    "placeholder": "簡単な説明を入力してください",
+    "submit": "登録",
+    "submitting": "登録中..."
+  },
+  "coordinate": {
+    "latitude": "緯度",
+    "longitude": "経度",
+    "lat_placeholder": "例: 37.5665",
+    "lng_placeholder": "例: 126.9780",
+    "submit": "検索",
+    "error_empty": "緯度と経度を入力してください。"
+  },
+  "locate": {
+    "title": "現在地に移動",
+    "error_no_geolocation": "このブラウザでは位置情報機能が使用できません。",
+    "error_no_position": "位置情報を取得できません。"
+  }
+}

@@ -6,6 +6,7 @@ import { useCreateDecor } from "../hooks/useDecor";
 import { toast } from "react-toastify";
 import "../css/register.scss";
 import CoordinateRegister from "../components/CoordinateRegister";
+import { useTranslation } from "react-i18next";
 
 const LazyMap = React.lazy(() => import("../components/map/MapComponent"));
 
@@ -15,16 +16,18 @@ export default function Register() {
   const [selectedTag, setSelectedTag] = useState("");
   const { mutate, isPending } = useCreateDecor();
 
+  const { t } = useTranslation();
+
   const handleTagClick = (item) => {
     setSelectedTag(item.name);
   };
   const handleSubmit = () => {
     if (!lat || !lng) {
-      toast.error("위치를 찍어주세요.");
+      toast.error(t("toast.register_pos_error"));
       return;
     }
     if (!content || !selectedTag) {
-      toast.error("모든 필드를 입력해주세요.");
+      toast.error(t("toast.register_input_error"));
       return;
     }
 
@@ -37,7 +40,7 @@ export default function Register() {
       },
       {
         onSuccess: () => {
-          toast.success("모종이 등록되었어요!");
+          toast.success(t("toast.decor_success"));
           setContent("");
           setSelectedTag("");
         },
@@ -51,7 +54,7 @@ export default function Register() {
   return (
     <div className="page-layout">
       <div className="page-section">
-        <Suspense fallback={<div>지도를 불러오는 중...</div>}>
+        <Suspense fallback={<div>{t("find.mapLoading")}</div>}>
           <LazyMap />
         </Suspense>
       </div>
@@ -59,11 +62,12 @@ export default function Register() {
         <div className="form-group">
           <CoordinateRegister lat={lat} lng={lng} />
         </div>
+        <div className="form-group"></div>
         <div className="form-group">
           <input
             className="register-form__input"
             type="text"
-            placeholder="간단한 설명을 입력하세요"
+            placeholder={t("register.placeholder")}
             value={content}
             onChange={(e) => setContent(e.target.value)}
           />
@@ -75,7 +79,7 @@ export default function Register() {
         />
         <div className="button-box">
           <button onClick={handleSubmit} disabled={isPending}>
-            {isPending ? "등록 중..." : "등록하기"}
+            {isPending ? t("register.submitting") : t("register.submit")}
           </button>
         </div>
       </div>

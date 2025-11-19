@@ -10,10 +10,12 @@ public class ErrorResponse {
     private final int statusCode;
     private final String error;
     private final String message;
+    private final String errorCode;
 
     public ErrorResponse(ErrorCode errorCode) {
         this.statusCode = errorCode.getHttpStatus().value();
         this.error = errorCode.getHttpStatus().name();
         this.message = errorCode.getMessage();
+        this.errorCode = errorCode.name();
     }
 }

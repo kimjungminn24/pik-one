@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { useLocationStore } from "../store/useLocationStore";
+import { useTranslation } from "react-i18next";
 
 export default function CoordinateRegister() {
+  const { t } = useTranslation();
+
   const {
     lat: storeLat,
     lng: storeLng,
@@ -25,7 +28,7 @@ export default function CoordinateRegister() {
     e.preventDefault();
 
     if (!lat || !lng) {
-      alert("위도와 경도를 모두 입력해주세요.");
+      alert(t("coordinate.error_empty"));
       return;
     }
     setIsExternalUpdate(true);
@@ -45,28 +48,32 @@ export default function CoordinateRegister() {
   return (
     <form onSubmit={handleSubmit} className="coordinate-register-form">
       <div className="coordinate-register-form-outer">
-        <div className="coordinate-register-form-label emoji">위도</div>
+        <div className="coordinate-register-form-label">
+          {t("coordinate.latitude")}
+        </div>
         <input
           type="number"
           step="0.000001"
           value={lat}
           className="coordinate-register-form-input"
           onChange={(e) => setLat(e.target.value)}
-          placeholder="ex: 37.5665"
+          placeholder={t("coordinate.lat_placeholder")}
         />
       </div>
       <div className="coordinate-register-form-outer">
-        <div className="coordinate-register-form-label emoji">경도</div>
+        <div className="coordinate-register-form-label">
+          {t("coordinate.longitude")}
+        </div>
         <input
           type="number"
           step="0.000001"
           value={lng}
           className="coordinate-register-form-input"
           onChange={(e) => setLng(e.target.value)}
-          placeholder="ex: 126.9780"
+          placeholder={t("coordinate.lng_placeholder")}
         />
       </div>
-      <button type="submit">조회</button>
+      <button type="submit">{t("coordinate.submit")}</button>
     </form>
   );
 }

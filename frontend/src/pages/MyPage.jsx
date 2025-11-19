@@ -4,18 +4,24 @@ import { decorMap } from "../decorList";
 import DecorCard from "../components/DecorCard";
 import MyDecorPopup from "../components/MyDecorPopup";
 import "../css/mypage.scss";
+import { useTranslation } from "react-i18next";
 
 export default function MyPage() {
+  const { t } = useTranslation();
+
   const { data, isLoading } = useMyDecorsQuery();
   const [selectedDecor, setSelectedDecor] = useState(null);
 
-  if (isLoading) return <div> 로딩 중...</div>;
+  if (isLoading) return <div>{t("common.loading")}</div>;
 
   return (
     <div className="page-layout">
       <div className="page-section">
         <div>
-          <h2>📍 내가 찾은 장소들</h2>
+          <h2>
+            <span className="emoji">📍 </span>
+            {t("mypage.title")}
+          </h2>
           {data && data.length > 0 ? (
             <div className="decor-grid">
               {data.map((decor) => {
@@ -24,7 +30,9 @@ export default function MyPage() {
                   <div key={decor.id} onClick={() => setSelectedDecor(decor)}>
                     <DecorCard
                       key={decor.id}
-                      type={matched?.ko ?? decor.type}
+                      type={t(`decor.${decor.type}`, {
+                        defaultValue: matched?.ko ?? decor.type,
+                      })}
                       content={decor.content}
                       emoji={matched?.emoji}
                     />
@@ -33,7 +41,7 @@ export default function MyPage() {
               })}
             </div>
           ) : (
-            <div>등록한 장소가 없습니다.</div>
+            <div>{t("mypage.no_results")}</div>
           )}
         </div>
       </div>

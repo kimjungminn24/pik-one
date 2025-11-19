@@ -1,0 +1,179 @@
+{
+  "title": "PikOne",
+  "menu": {
+    "register": "Register",
+    "find": "Find Plants",
+    "mypage": "My Page",
+    "login": "Login",
+    "logout": "Logout"
+  },
+  "footer": {
+    "copyright": "© 2025 PikOne"
+  },
+  "home": {
+    "desc": "Register your own private spot and discover others' places!",
+    "register": "Register your private spot 🌿",
+    "find": "Search for a private spot 🔍",
+    "feedback": "Share your thoughts 💬",
+    "messages": [
+      "Discover a new spot today!",
+      "Every small step builds a bigger map 🗺️",
+      "Great places shine brighter when shared 🌟",
+      "Complete all the decorations 💫"
+    ]
+  },
+  "notfound": {
+    "title": "404 Page Not Found 😢",
+    "home": "Go back to Home"
+  },
+  "find": {
+    "mapLoading": "Loading map...",
+    "loadingMessage": "🌱 Loading private spots...",
+    "resultCount": "{{count}} results found!",
+    "noResult": "No private spots found",
+    "all": "All",
+    "search_placeholder": "Search for a place",
+    "search_button": "Search"
+  },
+  "decor": {
+    "RESTAURANT": "Restaurant",
+    "CAFE": "Cafe",
+    "SWEET_SHOP": "Dessert Shop",
+    "MOVIE_THEATER": "Movie Theater",
+    "PHARMACY": "Pharmacy",
+    "ZOO": "Zoo",
+    "FOREST": "Forest",
+    "WATERSIDE": "Waterside",
+    "POST_OFFICE": "Post Office",
+    "ART_GALLERY": "Art Gallery",
+    "AIRPORT": "Airport",
+    "STATION": "Station",
+    "BEACH": "Beach",
+    "BURGER_PLACE": "Burger Place",
+    "CORNER_STORE": "Convenience Store",
+    "SUPERMARKET": "Supermarket",
+    "BAKERY": "Bakery",
+    "HAIR_SALON": "Hair Salon",
+    "CLOTHES_STORE": "Clothing Store",
+    "PARK": "Park",
+    "LIBRARY_BOOKSTORE": "Library / Bookstore",
+    "SUSHI_RESTAURANT": "Sushi Restaurant",
+    "MOUNTAIN": "Mountain",
+    "STADIUM": "Stadium",
+    "THEME_PARK": "Theme Park",
+    "BUS_STOP": "Bus Stop",
+    "ITALIAN_RESTAURANT": "Italian Restaurant",
+    "RAMEN_RESTAURANT": "Ramen Shop",
+    "BRIDGE": "Bridge",
+    "HOTEL": "Hotel",
+    "MAKEUP_STORE": "Cosmetics Store",
+    "SHRINE_TEMPLE": "Shrine / Temple",
+    "APPLIANCES_STORE": "Electronics Store",
+    "CURRY_RESTAURANT": "Curry Restaurant",
+    "DIY_STORE": "Hardware Store",
+    "UNIVERSITY_COLLEGE": "University / College",
+    "MEXICAN_RESTAURANT": "Mexican Restaurant",
+    "LAUNDRY": "Laundry / Dry Cleaning",
+    "KOREAN_RESTAURANT": "Korean Restaurant",
+    "STREET": "Street"
+  },
+  "toast": {
+    "login_required": "Please log in to continue.",
+    "decor_success": "Your seedling has been registered!",
+    "decor_delete": "Your seedling has been deleted.",
+    "register_pos_error": "Please select a location.",
+    "register_input_error": "Please fill in all required fields.",
+    "error": "An unknown error has occurred.",
+    "search_info": "No search results found.",
+    "feedback_success": "Your feedback has been submitted successfully!",
+    "feedback_input_error": "Please enter both a button and feedback."
+  },
+  "popup": {
+    "delete_confirm": "Are you sure you want to delete this?",
+    "delete_loading": "Deleting...",
+    "delete": "Delete",
+    "helpful_message": "{{count}} people found this helpful! 😊",
+    "loading_map": "Loading map..."
+  },
+  "decor_info": {
+    "probability": "Existence Probability",
+    "latitude": "Latitude",
+    "longitude": "Longitude"
+  },
+  "common": {
+    "loading": "Loading..."
+  },
+  "mypage": {
+    "title": "My Found Locations",
+    "no_results": "No registered places found."
+  },
+  "feedback": {
+    "placeholder": "Please enter your feedback",
+    "submit_loading": "Submitting...",
+    "submit": "Submit",
+    "found": "Found it 😊",
+    "not_found": "Not found 😢",
+    "no_feedback": "No feedback has been submitted yet."
+  },
+  "error": {
+    "INVALID_REQUEST": "Invalid request.",
+    "DUPLICATE_DECOR": "A seedling of the same type already exists at this location.",
+    "DUPLICATE_FEEDBACK": "You have already submitted feedback for this seedling.",
+    "UNAUTHORIZED": "Authentication required.",
+    "LOGIN_REQUIRED": "Please log in to continue.",
+    "NO_PERMISSION_DECOR_DELETE": "You do not have permission to delete this seedling.",
+    "NO_PERMISSION_FEEDBACK_DELETE": "You do not have permission to delete this feedback.",
+    "NOT_FOUND": "Resource not found.",
+    "DECOR_NOT_FOUND": "The seedling could not be found or has already been deleted.",
+    "FEEDBACK_NOT_FOUND": "Feedback could not be found.",
+    "USER_NOT_FOUND": "User not found.",
+    "INTERNAL_ERROR": "Internal server error.",
+    "INVALID_OVERPASS_RESPONSE": "Failed to process Overpass response.",
+    "EXTERNAL_API_ERROR": "Failed to connect to the external API."
+  },
+  "login": {
+    "quick": "Get started quickly with simple login"
+  },
+  "report": {
+    "nickname": "Nickname",
+    "change": "change",
+    "category": {
+      "title": "Category",
+      "cheer": "Cheer",
+      "bug": "Bug",
+      "suggestion": "Suggestion"
+    },
+    "categoryMap": {
+      "cheer": "cheer",
+      "bug": "bug",
+      "suggestion": "suggestion"
+    },
+    "form": {
+      "placeholder": "Write a comment...",
+      "button": "Post Comment"
+    },
+    "createdAt": "Created At",
+    "content": "Content",
+    "answer": "Answer",
+    "noAnswer": "No answer yet",
+    "loading": "Loading comments..."
+  },
+  "register": {
+    "placeholder": "Enter a short description",
+    "submit": "Register",
+    "submitting": "Registering..."
+  },
+  "coordinate": {
+    "latitude": "Latitude",
+    "longitude": "Longitude",
+    "lat_placeholder": "ex: 37.5665",
+    "lng_placeholder": "ex: 126.9780",
+    "submit": "Search",
+    "error_empty": "Please enter both latitude and longitude."
+  },
+  "locate": {
+    "title": "Go to my location",
+    "error_no_geolocation": "Geolocation is not supported by this browser.",
+    "error_no_position": "Unable to retrieve your location."
+  }
+}

@@ -78,7 +78,6 @@ body,
 
 .page-section {
   flex: 1;
-  min-width: 25rem;
   background-color: white;
   padding: 1.2rem;
   border-radius: 0.75rem;
@@ -120,11 +119,10 @@ body,
 }
 
 .emoji {
-  font-family: "CookieRun", "TossFace";
+  font-family: "TossFace";
 }
 
 button {
-  font-family: "CookieRun", sans-serif;
   width: fit-content;
   padding: 0.3rem 0.5rem;
   background-color: #38bdf8;
