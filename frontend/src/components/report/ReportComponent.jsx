@@ -51,9 +51,10 @@ export default function ReportComponent({ enabled }) {
     createdAt,
     answer,
   }) => {
+    console.log(category);
     return `
 -  **닉네임**: ${emoji} ${nickname}  
--  **카테고리**: ${t(`report.categoryName.${category}`)} 
+-  **카테고리**: ${t(`report.categoryMap.${category}`)} 
 -  **작성 시간**: ${new Date(createdAt).toLocaleString()}  
 -  **내용**: ${comment}  
 -  **답변**: ${answer ? answer : "아직 없음"}
