@@ -15,20 +15,20 @@ export default function DecorInfoSection({
     <div className="decor-info">
       <div className="decor-info__header">
         <strong className="decor-info__type">{displayName}</strong>
-        <span className="decor-info__probability emoji">
-          🌱 {t("decor_info.probability")}:{" "}
+        <span className="decor-info__probability">
+          <span className="emoji">🌱</span> {t("decor_info.probability")}:{" "}
           {probability === null ? "-" : `${probability}%`}{" "}
         </span>
       </div>
 
       <p className="decor-info__content">{content} </p>
 
-      <div className="decor-info__coordinates emoji">
+      <div className="decor-info__coordinates">
         <p>
-          📍 {t("decor_info.latitude")}: {lat}
+          <span className="emoji">📍</span> {t("decor_info.latitude")}: {lat}
         </p>
         <p>
-          📍 {t("decor_info.longitude")}: {lng}
+          <span className="emoji">📍</span> {t("decor_info.longitude")}: {lng}
         </p>
       </div>
     </div>

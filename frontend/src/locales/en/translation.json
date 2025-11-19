@@ -31,7 +31,9 @@
     "loadingMessage": "🌱 Loading private spots...",
     "resultCount": "{{count}} results found!",
     "noResult": "No private spots found",
-    "all": "All"
+    "all": "All",
+    "search_placeholder": "Search for a place",
+    "search_button": "Search"
   },
   "decor": {
     "RESTAURANT": "Restaurant",
@@ -155,5 +157,23 @@
     "answer": "Answer",
     "noAnswer": "No answer yet",
     "loading": "Loading comments..."
+  },
+  "register": {
+    "placeholder": "Enter a short description",
+    "submit": "Register",
+    "submitting": "Registering..."
+  },
+  "coordinate": {
+    "latitude": "Latitude",
+    "longitude": "Longitude",
+    "lat_placeholder": "ex: 37.5665",
+    "lng_placeholder": "ex: 126.9780",
+    "submit": "Search",
+    "error_empty": "Please enter both latitude and longitude."
+  },
+  "locate": {
+    "title": "Go to my location",
+    "error_no_geolocation": "Geolocation is not supported by this browser.",
+    "error_no_position": "Unable to retrieve your location."
   }
 }

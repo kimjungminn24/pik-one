@@ -6,7 +6,6 @@ import { useCreateDecor } from "../hooks/useDecor";
 import { toast } from "react-toastify";
 import "../css/register.scss";
 import CoordinateRegister from "../components/CoordinateRegister";
-import SharedMapLinkSearch from "../components/report/SharedMapLinkSearch";
 import { useTranslation } from "react-i18next";
 
 const LazyMap = React.lazy(() => import("../components/map/MapComponent"));
@@ -55,7 +54,7 @@ export default function Register() {
   return (
     <div className="page-layout">
       <div className="page-section">
-        <Suspense fallback={<div>지도를 불러오는 중...</div>}>
+        <Suspense fallback={<div>{t("find.mapLoading")}</div>}>
           <LazyMap />
         </Suspense>
       </div>
@@ -63,14 +62,12 @@ export default function Register() {
         <div className="form-group">
           <CoordinateRegister lat={lat} lng={lng} />
         </div>
-        <div className="form-group">
-          <SharedMapLinkSearch />
-        </div>
+        <div className="form-group"></div>
         <div className="form-group">
           <input
             className="register-form__input"
             type="text"
-            placeholder="간단한 설명을 입력하세요"
+            placeholder={t("register.placeholder")}
             value={content}
             onChange={(e) => setContent(e.target.value)}
           />
@@ -82,7 +79,7 @@ export default function Register() {
         />
         <div className="button-box">
           <button onClick={handleSubmit} disabled={isPending}>
-            {isPending ? "등록 중..." : "등록하기"}
+            {isPending ? t("register.submitting") : t("register.submit")}
           </button>
         </div>
       </div>

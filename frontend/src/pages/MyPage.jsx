@@ -16,9 +16,12 @@ export default function MyPage() {
 
   return (
     <div className="page-layout">
-      <div className="page-section emoji">
+      <div className="page-section">
         <div>
-          <h2>📍 {t("mypage.title")}</h2>
+          <h2>
+            <span className="emoji">📍 </span>
+            {t("mypage.title")}
+          </h2>
           {data && data.length > 0 ? (
             <div className="decor-grid">
               {data.map((decor) => {

@@ -23,12 +23,12 @@ export function SearchBox() {
       <input
         className="map__search-box-input"
         type="text"
-        placeholder="장소를 검색하세요"
+        placeholder={t("find.search_placeholder")}
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
       <button className="map__search-box-button" onClick={handleSearch}>
-        검색
+        {t("find.search_button")}
       </button>
     </div>
   );
