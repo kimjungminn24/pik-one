@@ -1,11 +1,13 @@
+import { useTranslation } from "react-i18next";
 import { useMap } from "react-leaflet";
 
 export function LocateButton() {
   const map = useMap();
+  const { t } = useTranslation();
 
   const handleLocate = () => {
     if (!navigator.geolocation) {
-      alert("이 브라우저에서는 위치 기능을 사용할 수 없습니다.");
+      alert(t("locate.error_no_geolocation"));
       return;
     }
 
@@ -17,7 +19,7 @@ export function LocateButton() {
         });
       },
       () => {
-        alert("위치 정보를 가져올 수 없습니다.");
+        alert(t("locate.error_no_position"));
       }
     );
   };
@@ -25,9 +27,9 @@ export function LocateButton() {
   return (
     <div className="leaflet-top leaflet-right">
       <div
-        className="leaflet-control locate-button"
+        className="leaflet-control locate-button emoji"
         onClick={handleLocate}
-        title="내 위치로 이동"
+        title={t("locate.title")}
       >
         📍
       </div>

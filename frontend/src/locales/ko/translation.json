@@ -1,0 +1,179 @@
+{
+  "title": "단독스팟",
+  "menu": {
+    "register": "모종 등록",
+    "find": "모종 찾기",
+    "mypage": "내 정보",
+    "login": "로그인",
+    "logout": "로그아웃"
+  },
+  "footer": {
+    "copyright": "© 2025 단독스팟"
+  },
+  "home": {
+    "desc": "나만의 단독 스팟을 등록하고, 다른 사람의 스팟도 발견해보세요!",
+    "register": "단독 스팟을 등록해보세요 🌿",
+    "find": "단독 스팟을 검색해보세요 🔍",
+    "feedback": "여러분의 의견을 들려주세요 💬",
+    "messages": [
+      "오늘도 새로운 스팟을 발견해보세요!",
+      "작은 발자국이 큰 지도를 만듭니다 🗺️",
+      "좋은 장소는 나눌수록 빛나요 🌟",
+      "모든 데코를 완성해보세요 💫"
+    ]
+  },
+  "notfound": {
+    "title": "404 페이지를 찾을 수 없습니다 😢",
+    "home": "홈으로 돌아가기"
+  },
+  "find": {
+    "mapLoading": "지도를 불러오는 중...",
+    "loadingMessage": "🌱 단독 스팟을 불러오는 중이에요...",
+    "resultCount": "{{count}}개가 검색되었어요!",
+    "noResult": "검색된 단독 스팟이 없어요",
+    "all": "전체",
+    "search_placeholder": "장소를 검색하세요",
+    "search_button": "검색"
+  },
+  "decor": {
+    "RESTAURANT": "레스토랑",
+    "CAFE": "카페",
+    "SWEET_SHOP": "디저트 가게",
+    "MOVIE_THEATER": "영화관",
+    "PHARMACY": "약국",
+    "ZOO": "동물원",
+    "FOREST": "숲",
+    "WATERSIDE": "물가",
+    "POST_OFFICE": "우체국",
+    "ART_GALLERY": "미술관",
+    "AIRPORT": "공항",
+    "STATION": "역",
+    "BEACH": "해변",
+    "BURGER_PLACE": "햄버거 가게",
+    "CORNER_STORE": "편의점",
+    "SUPERMARKET": "슈퍼마켓",
+    "BAKERY": "베이커리",
+    "HAIR_SALON": "미용실",
+    "CLOTHES_STORE": "패션",
+    "PARK": "공원",
+    "LIBRARY_BOOKSTORE": "도서관/서점",
+    "SUSHI_RESTAURANT": "초밥집",
+    "MOUNTAIN": "산",
+    "STADIUM": "스타디움",
+    "THEME_PARK": "테마파크",
+    "BUS_STOP": "버스 정류장",
+    "ITALIAN_RESTAURANT": "이탈리안 레스토랑",
+    "RAMEN_RESTAURANT": "라멘 가게",
+    "BRIDGE": "다리",
+    "HOTEL": "호텔",
+    "MAKEUP_STORE": "화장품 가게",
+    "SHRINE_TEMPLE": "제단과 사찰",
+    "APPLIANCES_STORE": "전자제품 매장",
+    "CURRY_RESTAURANT": "카레 레스토랑",
+    "DIY_STORE": "공구점",
+    "UNIVERSITY_COLLEGE": "대학 & 전문대학",
+    "MEXICAN_RESTAURANT": "멕시코 레스토랑",
+    "LAUNDRY": "빨래방 & 세탁소",
+    "KOREAN_RESTAURANT": "한식 레스토랑",
+    "STREET": "길거리"
+  },
+  "toast": {
+    "login_required": "로그인 후 이용해 주세요",
+    "decor_success": "모종이 등록되었어요!",
+    "decor_delete": "모종이 삭제되었습니다.",
+    "register_pos_error": "위치를 찍어주세요.",
+    "register_input_error": "모든 필드를 입력해주세요.",
+    "error": "알 수 없는 오류가 발생했습니다.",
+    "search_info": "검색 결과가 없습니다.",
+    "feedback_success": "피드백이 성공적으로 등록되었어요!",
+    "feedback_input_error": "버튼과 피드백을 모두 입력해주세요."
+  },
+  "popup": {
+    "delete_confirm": "정말 삭제하시겠습니까?",
+    "delete_loading": "삭제 중...",
+    "delete": "삭제",
+    "helpful_message": "{{count}}명에게 도움이 되었어요! 😊",
+    "loading_map": "지도를 불러오는 중..."
+  },
+  "decor_info": {
+    "probability": "존재 확률",
+    "latitude": "위도",
+    "longitude": "경도"
+  },
+  "common": {
+    "loading": "로딩 중..."
+  },
+  "mypage": {
+    "title": "내가 찾은 장소들",
+    "no_results": "등록한 장소가 없습니다."
+  },
+  "feedback": {
+    "placeholder": "피드백을 입력해주세요",
+    "submit_loading": "등록 중...",
+    "submit": "등록",
+    "found": "찾았어요 😊",
+    "not_found": "없어요 😢",
+    "no_feedback": "아직 등록된 피드백이 없습니다."
+  },
+  "error": {
+    "INVALID_REQUEST": "잘못된 요청입니다",
+    "DUPLICATE_DECOR": "해당 위치에 같은 타입의 모종이 이미 존재합니다",
+    "DUPLICATE_FEEDBACK": "해당 모종에 이미 피드백을 남겼습니다",
+    "UNAUTHORIZED": "인증이 필요합니다",
+    "LOGIN_REQUIRED": "로그인이 필요합니다",
+    "NO_PERMISSION_DECOR_DELETE": "모종을 삭제할 권한이 없습니다",
+    "NO_PERMISSION_FEEDBACK_DELETE": "피드백을 삭제할 권한이 없습니다",
+    "NOT_FOUND": "리소스를 찾을 수 없습니다",
+    "DECOR_NOT_FOUND": "해당 모종을 찾을 수 없거나 삭제된 상태입니다",
+    "FEEDBACK_NOT_FOUND": "해당 피드백을 찾을 수 없습니다",
+    "USER_NOT_FOUND": "유저를 찾을 수 없습니다",
+    "INTERNAL_ERROR": "서버 내부 오류입니다",
+    "INVALID_OVERPASS_RESPONSE": "Overpass 응답을 처리할 수 없습니다",
+    "EXTERNAL_API_ERROR": "외부 API 요청에 실패했습니다"
+  },
+  "login": {
+    "quick": "간편 로그인으로 빠르게 시작하기"
+  },
+  "report": {
+    "nickname": "닉네임",
+    "change": "변경",
+    "category": {
+      "title": "카테고리",
+      "cheer": "응원",
+      "bug": "버그",
+      "suggestion": "제안"
+    },
+    "categoryMap": {
+      "응원": "cheer",
+      "버그": "bug",
+      "제안": "suggestion"
+    },
+    "form": {
+      "placeholder": "댓글을 입력하세요",
+      "button": "댓글 남기기"
+    },
+    "createdAt": "작성 시간",
+    "content": "내용",
+    "answer": "답변",
+    "noAnswer": "아직 없음",
+    "loading": "댓글을 불러오는 중이에요..."
+  },
+  "register": {
+    "placeholder": "간단한 설명을 입력하세요",
+    "submit": "등록하기",
+    "submitting": "등록 중..."
+  },
+  "coordinate": {
+    "latitude": "위도",
+    "longitude": "경도",
+    "lat_placeholder": "ex: 37.5665",
+    "lng_placeholder": "ex: 126.9780",
+    "submit": "조회",
+    "error_empty": "위도와 경도를 모두 입력해주세요."
+  },
+  "locate": {
+    "title": "내 위치로 이동",
+    "error_no_geolocation": "이 브라우저에서는 위치 기능을 사용할 수 없습니다.",
+    "error_no_position": "위치 정보를 가져올 수 없습니다."
+  }
+}

@@ -2,19 +2,18 @@ import { useNavigate } from "react-router-dom";
 import "../css/home.scss";
 import ReportComponent from "../components/report/ReportComponent";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function Home() {
+  const { t } = useTranslation();
+
   const navigate = useNavigate();
   const [isReportOpen, setIsReportOpen] = useState(false);
   const handleShow = () => {
     setIsReportOpen((prev) => !prev);
   };
-  const messages = [
-    "오늘도 새로운 스팟을 발견해보세요!",
-    "작은 발자국이 큰 지도를 만듭니다 🗺️",
-    "좋은 장소는 나눌수록 빛나요 🌟",
-    "모든 데코를 완성해보세요 💫",
-  ];
+  const messages = t("home.messages", { returnObjects: true });
+
   const randomMessage = messages[Math.floor(Math.random() * messages.length)];
 
   return (
@@ -41,9 +40,7 @@ export default function Home() {
             </small>
           </div>
 
-          <p className="home__description">
-            나만의 단독 스팟을 등록하고, 다른 사람의 스팟도 발견해보세요!
-          </p>
+          <p className="home__description">{t("home.desc")}</p>
           <p className="home__inspiration-text emoji">{randomMessage}</p>
         </div>
 
@@ -52,21 +49,21 @@ export default function Home() {
             onClick={() => navigate("/register")}
             className="home__button peach emoji"
           >
-            단독 스팟을 등록해보세요 🌿
+            {t("home.register")}
           </button>
 
           <button
             onClick={() => navigate("/find")}
             className="home__button blue emoji"
           >
-            단독 스팟을 검색해보세요 🔍
+            {t("home.find")}
           </button>
 
           <button
             onClick={() => handleShow()}
             className="home__button green emoji"
           >
-            여러분의 의견을 들려주세요 💬
+            {t("home.feedback")}
           </button>
         </div>
       </div>
