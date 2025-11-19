@@ -11,10 +11,20 @@ export default function DecorInfoSection({
   const { t } = useTranslation();
   const decor = decorMap[type];
   const displayName = t(`decor.${type}`, { defaultValue: decor?.ko ?? type });
+  const handleCopyAll = () => {
+    const text = `${lat}, ${lng}`;
+    navigator.clipboard.writeText(text);
+  };
   return (
     <div className="decor-info">
       <div className="decor-info__header">
-        <strong className="decor-info__type">{displayName}</strong>
+        <div>
+          <strong className="decor-info__type">{displayName}</strong>
+          <button className="decor-info__copy " onClick={handleCopyAll}>
+            좌표 복사
+          </button>
+        </div>
+
         <span className="decor-info__probability">
           <span className="emoji">🌱</span> {t("decor_info.probability")}:{" "}
           {probability === null ? "-" : `${probability}%`}{" "}

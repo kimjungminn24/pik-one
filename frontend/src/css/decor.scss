@@ -29,7 +29,16 @@
 }
 
 .decor-info__coordinates {
-  margin: 0.2rem 0;
   color: var(--color-text-muted);
   font-size: 0.85rem;
+}
+
+.decor-info__copy {
+  margin-left: 0.4rem;
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  background-color: inherit;
+  border-radius: 0;
+  padding: 0 0.1rem;
+  border-bottom: 2px solid var(--color-text-muted);
 }
