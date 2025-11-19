@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Footer from "./components/Footer";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
+import { useTranslation } from "react-i18next";
 
 const Register = React.lazy(() => import("./pages/Register"));
 const Find = React.lazy(() => import("./pages/Find"));
@@ -21,6 +22,12 @@ const ToastContainer = React.lazy(() =>
 
 function App() {
   const { isLoading } = useUserQuery();
+
+  const { i18n } = useTranslation();
+
+  useEffect(() => {
+    document.body.className = `lang-${i18n.language}`;
+  }, [i18n.language]);
 
   useEffect(() => {
     if (isLoading) {
