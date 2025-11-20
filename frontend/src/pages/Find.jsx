@@ -36,7 +36,8 @@ export default function Find() {
     selectedTags.length === decorList.length &&
     decorList.every((d) => selectedTags.includes(d.name));
 
-  const { data: searchResults = [], isLoading } = useDecor({
+  const { data: searchResults = [], isLoading } = useDecor(
+    {
     northLat: debouncedBounds?.northLat,
     southLat: debouncedBounds?.southLat,
     eastLng: debouncedBounds?.eastLng,
