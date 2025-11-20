@@ -29,7 +29,7 @@ export default function MapComponent({
       <MapContainer
         center={initialCenter}
         zoom={15}
-        minZoom={10}
+        minZoom={2}
         maxZoom={20}
         className="map__container"
       >
