@@ -7,6 +7,7 @@ import { useDecor } from "../hooks/useDecor";
 import LoadingSpinner from "../components/LoadingSpinner";
 import "../css/find.scss";
 import { useTranslation } from "react-i18next";
+import SearchResultBanner from "../components/map/SearchResultBanner";
 
 const LazyMap = React.lazy(() => import("../components/map/MapComponent"));
 export default function Find() {
@@ -29,8 +30,11 @@ export default function Find() {
     );
   };
 
-  const { bounds } = useLocationStore();
+  const { bounds, zoom } = useLocationStore();
   const debouncedBounds = useDebouncedValue(bounds, 500);
+
+  const MIN_ZOOM = 10;
+  const shouldSearch = zoom >= MIN_ZOOM && selectedTags.length > 0;
 
   const isAllMode =
     selectedTags.length === decorList.length &&
@@ -38,13 +42,15 @@ export default function Find() {
 
   const { data: searchResults = [], isLoading } = useDecor(
     {
-    northLat: debouncedBounds?.northLat,
-    southLat: debouncedBounds?.southLat,
-    eastLng: debouncedBounds?.eastLng,
-    westLng: debouncedBounds?.westLng,
-    types: selectedTags,
-    isAllMode,
-  });
+      northLat: debouncedBounds?.northLat,
+      southLat: debouncedBounds?.southLat,
+      eastLng: debouncedBounds?.eastLng,
+      westLng: debouncedBounds?.westLng,
+      types: selectedTags,
+      isAllMode,
+    },
+    shouldSearch
+  );
 
   const allTag = {
     name: "ALL",
@@ -67,24 +73,20 @@ export default function Find() {
         <Suspense fallback={<div>{t("find.mapLoading")}</div>}>
           <LazyMap searchResults={searchResults} showLocationMarker={false} />
         </Suspense>
+
         {isLoading && (
           <div className="map-loading-overlay">
             <LoadingSpinner message={t("find.loadingMessage")} />
           </div>
         )}
-        {selectedTags.length > 0 && (
-          <div className="search-result-banner">
-            {searchResults.length > 0 ? (
-              <span className="search-result-count">
-                {t("find.resultCount", { count: searchResults.length })}
-              </span>
-            ) : (
-              <span className="search-result-count no-result">
-                {t("find.noResult")}
-              </span>
-            )}
-          </div>
-        )}
+
+        <SearchResultBanner
+          selectedTags={selectedTags}
+          searchResults={searchResults}
+          zoom={zoom}
+          minZoom={MIN_ZOOM}
+          t={t}
+        />
       </div>
 
       <div className="page-section">

@@ -11,6 +11,7 @@ import { SearchBox } from "./SearchBox";
 import "../../css/map.scss";
 import { useLocationStore } from "../../store/useLocationStore";
 import { MapCenterUpdater } from "./MapCenterUpdater";
+import ZoomTracker from "./ZoomTracker";
 
 export default function MapComponent({
   searchResults = [],
@@ -33,6 +34,7 @@ export default function MapComponent({
         maxZoom={20}
         className="map__container"
       >
+        <ZoomTracker />
         <MapCenterUpdater />
         <SearchBox />
 
