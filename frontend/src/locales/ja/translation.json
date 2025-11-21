@@ -33,7 +33,8 @@
     "noResult": "検索された単独スポットがありません",
     "all": "すべて",
     "search_placeholder": "場所を検索してください",
-    "search_button": "検索"
+    "search_button": "検索",
+    "zoomInMore": "検索するには地図をもっと拡大する必要があります。"
   },
   "decor": {
     "RESTAURANT": "レストラン",

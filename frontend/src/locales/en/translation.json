@@ -33,7 +33,8 @@
     "noResult": "No private spots found",
     "all": "All",
     "search_placeholder": "Search for a place",
-    "search_button": "Search"
+    "search_button": "Search",
+    "zoomInMore": "You need to zoom in further to search."
   },
   "decor": {
     "RESTAURANT": "Restaurant",

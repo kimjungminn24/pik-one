@@ -11,7 +11,7 @@ export default function SearchResultBanner({
   const isEmpty = searchResults.length === 0;
 
   const getMessage = () => {
-    if (isZoomTooLow) return "지도를 더 확대해야 검색할 수 있어요.";
+    if (isZoomTooLow) return t("find.zoomInMore");
     if (isEmpty) return t("find.noResult");
     return t("find.resultCount", { count: searchResults.length });
   };

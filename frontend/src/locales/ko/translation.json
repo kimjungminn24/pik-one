@@ -33,7 +33,8 @@
     "noResult": "검색된 단독 스팟이 없어요",
     "all": "전체",
     "search_placeholder": "장소를 검색하세요",
-    "search_button": "검색"
+    "search_button": "검색",
+    "zoomInMore": "지도를 더 확대해야 검색할 수 있어요."
   },
   "decor": {
     "RESTAURANT": "레스토랑",
