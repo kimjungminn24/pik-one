@@ -33,7 +33,8 @@
     "noResult": "No private spots found",
     "all": "All",
     "search_placeholder": "Search for a place",
-    "search_button": "Search"
+    "search_button": "Search",
+    "zoomInMore": "You need to zoom in further to search."
   },
   "decor": {
     "RESTAURANT": "Restaurant",
@@ -98,7 +99,9 @@
   "decor_info": {
     "probability": "Existence Probability",
     "latitude": "Latitude",
-    "longitude": "Longitude"
+    "longitude": "Longitude",
+
+    "copyCoordinates": "Copy coordinates"
   },
   "common": {
     "loading": "Loading..."
@@ -175,5 +178,12 @@
     "title": "Go to my location",
     "error_no_geolocation": "Geolocation is not supported by this browser.",
     "error_no_position": "Unable to retrieve your location."
+  },
+  "info": {
+    "greeting": "Hello! I'm a developer preparing for a job in Korea.",
+    "bug": "If you find bugs or have features to request, please let me know through the suggestion box on the main page.",
+    "ask": "If you have any questions, feel free to contact me by email!",
+    "email": "Email",
+    "friendCode": "Pikmin Friend Code"
   }
 }

@@ -1,0 +1,68 @@
+.info-page {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-xl) var(--space-md);
+  background: var(--color-bg-lighter);
+}
+
+.info-card {
+  width: 100%;
+  max-width: 580px;
+  background: var(--color-bg-white);
+  padding: var(--space-lg);
+  border-radius: 18px;
+  box-shadow: 0 10px 25px var(--color-shadow-mid);
+  animation: fadeIn 0.4s ease;
+}
+
+.info-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.info-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.info-intro {
+  line-height: 1.6;
+  font-size: 15px;
+  color: var(--color-text-default);
+}
+
+.info-details {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-border);
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: 14px;
+  font-size: 15px;
+}
+
+.detail-value {
+  color: var(--color-text-secondary);
+}
+
+.emoji {
+  font-size: 20px;
+  font-family: "TossFace";
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

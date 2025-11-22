@@ -33,7 +33,8 @@
     "noResult": "검색된 단독 스팟이 없어요",
     "all": "전체",
     "search_placeholder": "장소를 검색하세요",
-    "search_button": "검색"
+    "search_button": "검색",
+    "zoomInMore": "지도를 더 확대해야 검색할 수 있어요."
   },
   "decor": {
     "RESTAURANT": "레스토랑",
@@ -98,7 +99,8 @@
   "decor_info": {
     "probability": "존재 확률",
     "latitude": "위도",
-    "longitude": "경도"
+    "longitude": "경도",
+    "copyCoordinates": "좌표 복사"
   },
   "common": {
     "loading": "로딩 중..."
@@ -175,5 +177,12 @@
     "title": "내 위치로 이동",
     "error_no_geolocation": "이 브라우저에서는 위치 기능을 사용할 수 없습니다.",
     "error_no_position": "위치 정보를 가져올 수 없습니다."
+  },
+  "info": {
+    "greeting": "안녕하세요! 한국에 사는 취업준비생입니다.",
+    "bug": "버그나 추가했으면 하는 기능은 메인화면의 의견 제안창으로 알려주세요.",
+    "ask": "궁금한 점은 편하게 이메일로 연락 주세요!",
+    "email": "이메일",
+    "friendCode": "피크민 친구 코드"
   }
 }
