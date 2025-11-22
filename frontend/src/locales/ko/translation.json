@@ -99,7 +99,8 @@
   "decor_info": {
     "probability": "존재 확률",
     "latitude": "위도",
-    "longitude": "경도"
+    "longitude": "경도",
+    "copyCoordinates": "좌표 복사"
   },
   "common": {
     "loading": "로딩 중..."

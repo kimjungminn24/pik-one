@@ -99,7 +99,8 @@
   "decor_info": {
     "probability": "存在確率",
     "latitude": "緯度",
-    "longitude": "経度"
+    "longitude": "経度",
+    "copyCoordinates": "座標をコピー"
   },
   "common": {
     "loading": "読み込み中..."

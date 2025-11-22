@@ -99,7 +99,9 @@
   "decor_info": {
     "probability": "Existence Probability",
     "latitude": "Latitude",
-    "longitude": "Longitude"
+    "longitude": "Longitude",
+
+    "copyCoordinates": "Copy coordinates"
   },
   "common": {
     "loading": "Loading..."
