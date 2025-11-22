@@ -1,6 +1,7 @@
 import React from "react";
 import "../css/footer.scss";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 export default function Footer() {
   const { t } = useTranslation();
   return (
@@ -23,6 +24,10 @@ export default function Footer() {
         >
           TossFace
         </a>
+        | Made by{" "}
+        <Link to="/info" className="header__nav-item">
+          Jung Min
+        </Link>
       </p>
     </footer>
   );

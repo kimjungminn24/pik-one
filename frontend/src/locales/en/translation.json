@@ -178,5 +178,12 @@
     "title": "Go to my location",
     "error_no_geolocation": "Geolocation is not supported by this browser.",
     "error_no_position": "Unable to retrieve your location."
+  },
+  "info": {
+    "greeting": "Hello! I'm a developer preparing for a job in Korea.",
+    "bug": "If you find bugs or have features to request, please let me know through the suggestion box on the main page.",
+    "ask": "If you have any questions, feel free to contact me by email!",
+    "email": "Email",
+    "friendCode": "Pikmin Friend Code"
   }
 }
