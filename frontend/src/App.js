@@ -10,6 +10,7 @@ import Footer from "./components/Footer";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 import { useTranslation } from "react-i18next";
+import Info from "./pages/Info";
 
 const Register = React.lazy(() => import("./pages/Register"));
 const Find = React.lazy(() => import("./pages/Find"));
@@ -63,6 +64,7 @@ function App() {
                 </PrivateRoute>
               }
             />
+            <Route path="/info" element={<Info />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

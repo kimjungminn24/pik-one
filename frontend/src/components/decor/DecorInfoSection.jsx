@@ -21,7 +21,7 @@ export default function DecorInfoSection({
         <div>
           <strong className="decor-info__type">{displayName}</strong>
           <button className="decor-info__copy " onClick={handleCopyAll}>
-            좌표 복사
+            {t("decor_info.copyCoordinates")}
           </button>
         </div>
 

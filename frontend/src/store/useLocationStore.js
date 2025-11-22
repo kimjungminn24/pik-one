@@ -16,6 +16,8 @@ export const useLocationStore = create(
       },
       setBounds: (newBounds) =>
         set((state) => ({ bounds: { ...state.bounds, ...newBounds } })),
+      zoom: 15,
+      setZoom: (zoom) => set({ zoom }),
       isExternalUpdate: false,
       setIsExternalUpdate: (value) => set({ isExternalUpdate: value }),
     }),
