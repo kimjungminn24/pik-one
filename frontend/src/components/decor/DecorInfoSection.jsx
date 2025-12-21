@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { decorMap } from "../../decorList";
+import "../../css/decor.scss";
 
 export default function DecorInfoSection({
   type,

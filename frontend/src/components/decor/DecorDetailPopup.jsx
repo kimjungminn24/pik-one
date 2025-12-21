@@ -9,7 +9,6 @@ import FeedbackButtons from "./FeedbackButtons";
 import FeedbackForm from "./FeedbackForm";
 
 import { toast } from "react-toastify";
-import "../../css/decor.scss";
 import "../../css/feedback.scss";
 import "../../css/popup.scss";
 import { useTranslation } from "react-i18next";
