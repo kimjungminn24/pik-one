@@ -37,7 +37,7 @@ export default function FeedbackList({ feedbacks }) {
               className="feedback-list__delete"
               onClick={() => handleDelete(item)}
             >
-              삭제
+              {t("popup.delete")}
             </button>
           )}
         </div>

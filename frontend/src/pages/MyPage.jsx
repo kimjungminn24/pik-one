@@ -54,10 +54,10 @@ export default function MyPage() {
         <div>
           <h3>
             <span className="emoji">📍 </span>
-            내가 작성한 피드백들
+            {t("mypage.feedback")}
           </h3>
           <MyFeedbackList
-            onSelectDecor={setSelectedDecor}
+            onSelectDecor={setSelectedFeedbackDecor}
             feedbacks={feedbacksData}
           />
         </div>
@@ -86,7 +86,8 @@ export default function MyPage() {
             ✕
           </button>
           <DecorDetailPopup
-            data={selectedDecor}
+            feedbacks={selectedFeedbackDecor.feedbacks}
+            data={selectedFeedbackDecor}
             onClose={() => setSelectedFeedbackDecor(null)}
           />
         </div>
