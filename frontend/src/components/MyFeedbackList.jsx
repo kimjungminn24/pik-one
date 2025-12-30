@@ -19,11 +19,11 @@ export default function MyFeedbackList({ feedbacks, onSelectDecor }) {
   };
 
   return (
-    <>
+    <div className="myfeedback-list">
       {feedbacks.map((item) => (
         <div
           key={item.id}
-          className="feedback-list__item"
+          className="myfeedback-list__item"
           onClick={() => clickFeedback(item.decorId)}
         >
           <strong
@@ -35,11 +35,11 @@ export default function MyFeedbackList({ feedbacks, onSelectDecor }) {
           >
             {item.type === "HELPFUL"
               ? t("feedback.found")
-              : t("feedback.not_found")}{" "}
+              : t("feedback.not_found")}
           </strong>
           <span className="feedback-list__content">{item.content}</span>
         </div>
       ))}
-    </>
+    </div>
   );
 }

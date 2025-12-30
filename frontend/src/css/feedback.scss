@@ -77,6 +77,7 @@
 }
 
 .feedback-list__item {
+  @include flex-between;
   margin-bottom: 6px;
 }
 
@@ -104,4 +105,26 @@
 
 .feedback-list__label--not-found {
   color: var(--color-danger);
+}
+.feedback-list__delete {
+  font-size: var(--font-sm);
+  background-color: var(--color-danger);
+}
+
+.myfeedback-list {
+  font-size: var(--font-md);
+  .feedback-list__label {
+    font-size: var(--font-md);
+  }
+}
+.myfeedback-list__item {
+  background-color: var(--color-bg-lighter);
+  padding: var(--space-xs);
+  border-radius: var(--space-xs);
+  margin: var(--space-xs);
+  cursor: pointer;
+  &:hover {
+    background-color: var(--color-bg-gray-hover);
+    transform: translateY(-2px);
+  }
 }
