@@ -87,7 +87,8 @@
     "error": "不明なエラーが発生しました。",
     "search_info": "検索結果がありません。",
     "feedback_success": "フィードバックが正常に送信されました！",
-    "feedback_input_error": "ボタンとフィードバックの両方を入力してください。"
+    "feedback_input_error": "ボタンとフィードバックの両方を入力してください。",
+    "feedback_delete": "フィードバックが削除されました。"
   },
   "popup": {
     "delete_confirm": "本当に削除しますか？",
@@ -107,7 +108,8 @@
   },
   "mypage": {
     "title": "見つけた場所",
-    "no_results": "登録された場所はありません。"
+    "no_results": "登録された場所はありません。",
+    "feedback": "自分が投稿したフィードバック"
   },
   "feedback": {
     "placeholder": "フィードバックを入力してください",

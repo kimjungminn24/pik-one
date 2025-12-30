@@ -87,7 +87,8 @@
     "error": "An unknown error has occurred.",
     "search_info": "No search results found.",
     "feedback_success": "Your feedback has been submitted successfully!",
-    "feedback_input_error": "Please enter both a button and feedback."
+    "feedback_input_error": "Please enter both a button and feedback.",
+    "feedback_delete": "Feedback has been deleted."
   },
   "popup": {
     "delete_confirm": "Are you sure you want to delete this?",
@@ -108,7 +109,8 @@
   },
   "mypage": {
     "title": "My Found Locations",
-    "no_results": "No registered places found."
+    "no_results": "No registered places found.",
+    "feedback": "My Feedback"
   },
   "feedback": {
     "placeholder": "Please enter your feedback",
