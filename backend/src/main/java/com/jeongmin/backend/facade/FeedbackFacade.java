@@ -31,7 +31,7 @@ public class FeedbackFacade {
         Decor decor = decorService.getActiveDecorById(request.decorId());
 
         return FeedbackDto.from(
-                feedbackService.create(request, user, decor)
+                feedbackService.create(request, user, decor), userId
         );
     }
 
