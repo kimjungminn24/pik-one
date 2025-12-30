@@ -13,13 +13,16 @@ import "../../css/feedback.scss";
 import "../../css/popup.scss";
 import { useTranslation } from "react-i18next";
 
-export default function DecorDetailPopup({ data }) {
+export default function DecorDetailPopup({ data, feedbacks }) {
   const [feedback, setFeedback] = useState("");
   const [selectedType, setSelectedType] = useState("");
 
-  const [feedbacks, setFeedbacks] = useState(data.feedbacks ?? []);
-  const [helpfulCount, setHelpfulCount] = useState(data.helpfulCount ?? 0);
-  const [notFoundCount, setNotFoundCount] = useState(data.notFoundCount ?? 0);
+  const helpfulCount = data.feedbacks.filter(
+    (f) => f.type === "HELPFUL"
+  ).length;
+  const notFoundCount = data.feedbacks.filter(
+    (f) => f.type === "NOT_FOUND"
+  ).length;
   const [tempHelpfulAdd, setTempHelpfulAdd] = useState(0);
   const [tempNotFoundAdd, setTempNotFoundAdd] = useState(0);
 
@@ -49,9 +52,6 @@ export default function DecorDetailPopup({ data }) {
 
   const onSuccess = (newFeedback) => {
     toast.success(t("toast.feedback_success"));
-    setFeedbacks((prev) => [...prev, newFeedback]);
-    if (newFeedback.type === "HELPFUL") setHelpfulCount((prev) => prev + 1);
-    else setNotFoundCount((prev) => prev + 1);
     resetFeedbackState();
     queryClient.invalidateQueries({ queryKey: ["decor", data.id] });
   };
@@ -72,9 +72,6 @@ export default function DecorDetailPopup({ data }) {
   };
 
   useEffect(() => {
-    setFeedbacks(data.feedbacks ?? []);
-    setHelpfulCount(data.helpfulCount ?? 0);
-    setNotFoundCount(data.notFoundCount ?? 0);
     resetFeedbackState();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data.id]);
