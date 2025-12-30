@@ -36,3 +36,19 @@ export const fetchMyFeedbacks = async () => {
 
   return data;
 };
+
+export const deleteMyFeedback = async ({ id }) => {
+  const res = await fetch(`${BASE_URL}/${id}`, {
+    method: "delete",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+  });
+
+  if (!res.ok) {
+    await handleFetchError(res);
+  }
+
+  return true;
+};
