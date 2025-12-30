@@ -44,4 +44,10 @@ public class FeedbackFacade {
                 .map(FeedbackResponse::from)
                 .toList();
     }
+
+    @Transactional
+    public void deleteMyFeedback(Long feedbackId) {
+        long userId = SecurityUtil.getCurrentUserId();
+        feedbackService.deleteByIdAndUser(feedbackId, userId);
+    }
 }

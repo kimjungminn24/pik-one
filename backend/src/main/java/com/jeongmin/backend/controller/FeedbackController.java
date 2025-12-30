@@ -30,4 +30,10 @@ public class FeedbackController {
         return ResponseEntity.ok(response);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteFeedback(@PathVariable("id") Long feedbackId) {
+        feedbackFacade.deleteMyFeedback(feedbackId);
+        return ResponseEntity.noContent().build();
+    }
+
 }
