@@ -27,12 +27,15 @@ public class DecorService {
 
     public DecorDetailResponse getDecorById(Long decorId) {
         Decor decor = getActiveDecorById(decorId);
+        Long userId = SecurityUtil.isLogin()
+                ? SecurityUtil.getCurrentUserId()
+                : null;
         List<FeedbackDto> feedbacks = decor.getFeedbacks().stream()
-                .map(FeedbackDto::from)
+                .map(feedback -> FeedbackDto.from(feedback, userId))
                 .toList();
 
 
-        return DecorDetailResponse.from(decor, feedbacks);
+        return DecorDetailResponse.from(decor, feedbacks, userId);
     }
 
     @Transactional
@@ -118,8 +121,8 @@ public class DecorService {
                 .map(decor -> DecorDetailResponse.from(
                         decor,
                         decor.getFeedbacks().stream()
-                                .map(FeedbackDto::from)
-                                .toList()
+                                .map(feedback -> FeedbackDto.from(feedback, userId))
+                                .toList(), userId
                 ))
                 .toList();
     }

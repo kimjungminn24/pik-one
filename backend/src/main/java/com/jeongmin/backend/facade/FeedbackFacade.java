@@ -31,7 +31,7 @@ public class FeedbackFacade {
         Decor decor = decorService.getActiveDecorById(request.decorId());
 
         return FeedbackDto.from(
-                feedbackService.create(request, user, decor)
+                feedbackService.create(request, user, decor), userId
         );
     }
 
@@ -43,5 +43,11 @@ public class FeedbackFacade {
                 .stream()
                 .map(FeedbackResponse::from)
                 .toList();
+    }
+
+    @Transactional
+    public void deleteMyFeedback(Long feedbackId) {
+        long userId = SecurityUtil.getCurrentUserId();
+        feedbackService.deleteByIdAndUser(feedbackId, userId);
     }
 }

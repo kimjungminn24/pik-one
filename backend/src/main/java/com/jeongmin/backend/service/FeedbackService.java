@@ -41,4 +41,18 @@ public class FeedbackService {
     public List<Feedback> findByUser(Long userId) {
         return feedbackRepository.findByUserId(userId);
     }
+
+
+    public void deleteByIdAndUser(Long feedbackId, Long userId) {
+        Feedback feedback = feedbackRepository.findById(feedbackId)
+                .orElseThrow(() ->
+                        new RestApiException(ErrorCode.FEEDBACK_NOT_FOUND)
+                );
+
+        if (!feedback.getUser().getId().equals(userId)) {
+            throw new RestApiException(ErrorCode.NO_PERMISSION_FEEDBACK_DELETE);
+        }
+
+        feedbackRepository.delete(feedback);
+    }
 }
