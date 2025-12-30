@@ -51,7 +51,6 @@ export default function ReportComponent({ enabled }) {
     createdAt,
     answer,
   }) => {
-    console.log(category);
     return `
 -  **닉네임**: ${emoji} ${nickname}  
 -  **카테고리**: ${t(`report.categoryMap.${category}`)} 
