@@ -1,5 +1,5 @@
 import { handleFetchError } from "../utils/handleFetchError";
-const BASE_URL = `${process.env.REACT_APP_BACKEND_URL}/issue`;
+const BASE_URL = `${import.meta.env.VITE_BACKEND_URL}/issue`;
 
 export const postIssue = async ({ body }) => {
   const res = await fetch(`${BASE_URL}`, {

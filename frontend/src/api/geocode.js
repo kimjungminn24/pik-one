@@ -1,6 +1,6 @@
 import { handleFetchError } from "../utils/handleFetchError";
 
-const OSM_BASE_URL = process.env.REACT_APP_OSM_API;
+const OSM_BASE_URL = import.meta.env.VITE_OSM_API;
 
 export const searchLocation = async (query) => {
   const res = await fetch(
