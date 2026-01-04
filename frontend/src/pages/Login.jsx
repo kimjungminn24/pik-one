@@ -4,7 +4,9 @@ export default function Login() {
   const { t } = useTranslation();
 
   const handleLogin = (provider) => {
-    window.location.href = `${process.env.REACT_APP_BACKEND_URL}/oauth2/authorization/${provider}`;
+    window.location.href = `${
+      import.meta.env.VITE_BACKEND_URL
+    }/oauth2/authorization/${provider}`;
   };
 
   return (

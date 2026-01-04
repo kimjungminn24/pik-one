@@ -1,6 +1,6 @@
 import { handleFetchError } from "../utils/handleFetchError";
 
-const BASE_URL = `${process.env.REACT_APP_BACKEND_URL}/decors`;
+const BASE_URL = `${import.meta.env.VITE_BACKEND_URL}/decors`;
 
 export const getDecorByTypeAndPosition = async ({
   northLat,

@@ -1,6 +1,6 @@
 import { handleFetchError } from "../utils/handleFetchError";
 
-const BASE_URL = `${process.env.REACT_APP_BACKEND_URL}/feedback`;
+const BASE_URL = `${import.meta.env.VITE_BACKEND_URL}/feedback`;
 
 export const createNewFeedback = async ({ decorId, feedbackType, content }) => {
   const res = await fetch(`${BASE_URL}`, {
