@@ -41,13 +41,7 @@ export default function MyDecorPopup({ data, onClose }) {
             </div>
           )}
         </div>
-        <DecorInfoSection
-          type={data.type}
-          lat={data.lat}
-          lng={data.lng}
-          probability={probability}
-          content={data.content}
-        />
+        <DecorInfoSection data={data} probability={probability} />
 
         <div className="feedback-list">
           <FeedbackList feedbacks={data.feedbacks} />
