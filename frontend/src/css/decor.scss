@@ -17,12 +17,6 @@
   color: var(--color-text-default);
 }
 
-.decor-info__probability {
-  font-size: 0.85rem;
-  color: var(--color-primary);
-  font-weight: 500;
-}
-
 .decor-info__content {
   margin: 0.5rem 0 1rem;
   color: var(--color-text-secondary);
@@ -41,4 +35,60 @@
   border-radius: 0;
   padding: 0 0.1rem;
   border-bottom: 2px solid var(--color-text-muted);
+}
+
+.decor-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+
+  &__like-wrapper {
+    @include flex-center;
+  }
+
+  &__probability {
+    font-size: var(--font-sm);
+    color: var(--color-primary);
+    font-weight: 500;
+    .emoji {
+      font-size: var(--font-md);
+    }
+  }
+
+  &__not-like {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-size: var(--font-lg);
+
+    &:hover {
+      transform: scale(1.05);
+    }
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  }
+
+  &__like {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-size: var(--font-md);
+
+    &:hover {
+      transform: scale(1.05);
+    }
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  }
+
+  &__like-count {
+    font-size: var(--font-sm);
+    color: var(--color-text-muted);
+  }
 }
