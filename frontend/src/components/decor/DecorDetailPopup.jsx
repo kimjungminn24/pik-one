@@ -78,14 +78,7 @@ export default function DecorDetailPopup({ data, feedbacks }) {
 
   return (
     <>
-      <DecorInfoSection
-        type={data.type}
-        lat={data.lat}
-        lng={data.lng}
-        probability={probability}
-        content={data.content}
-      />
-
+      <DecorInfoSection data={data} probability={probability} />
       <div className="feedback-list">
         <FeedbackList feedbacks={feedbacks} />
       </div>
