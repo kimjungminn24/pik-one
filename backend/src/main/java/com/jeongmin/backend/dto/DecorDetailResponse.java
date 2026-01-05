@@ -11,8 +11,10 @@ public record DecorDetailResponse(
         double lat,
         double lng,
         Boolean isAuthor,
+        Boolean isLikedByMe,
         DecorType type,
         String content,
+        int likeCount,
         int helpfulCount,
         int notFoundCount,
         List<FeedbackDto> feedbacks
@@ -20,7 +22,9 @@ public record DecorDetailResponse(
     public static DecorDetailResponse from(
             Decor decor,
             List<FeedbackDto> feedbacks,
-            Long currentUserId
+            Long currentUserId,
+            int likeCount,
+            boolean likeByMe
     ) {
 
         boolean isAuthor = decor.getUser().getId().equals(currentUserId);
@@ -37,8 +41,10 @@ public record DecorDetailResponse(
                 decor.getLat(),
                 decor.getLng(),
                 isAuthor,
+                likeByMe,
                 decor.getType(),
                 decor.getContent(),
+                likeCount,
                 helpfulCount,
                 notFoundCount,
                 feedbacks
