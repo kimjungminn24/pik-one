@@ -1,18 +1,18 @@
 package com.jeongmin.backend.service;
 
-import com.jeongmin.backend.dto.*;
+import com.jeongmin.backend.dto.DecorCreateRequest;
+import com.jeongmin.backend.dto.DecorSearchRequest;
 import com.jeongmin.backend.entity.Decor;
 import com.jeongmin.backend.entity.DecorType;
 import com.jeongmin.backend.entity.User;
 import com.jeongmin.backend.exception.ErrorCode;
 import com.jeongmin.backend.exception.RestApiException;
 import com.jeongmin.backend.repository.DecorRepository;
+import com.jeongmin.backend.repository.LikeRepository;
 import com.jeongmin.backend.repository.UserRepository;
 import com.jeongmin.backend.utils.GeoUtils;
-import com.jeongmin.backend.utils.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,35 +23,14 @@ public class DecorService {
 
     private final DecorRepository decorRepository;
     private final UserRepository userRepository;
+    private final LikeRepository likeRepository;
 
-
-    public DecorDetailResponse getDecorById(Long decorId) {
-        Decor decor = getActiveDecorById(decorId);
-        Long userId = SecurityUtil.isLogin()
-                ? SecurityUtil.getCurrentUserId()
-                : null;
-        List<FeedbackDto> feedbacks = decor.getFeedbacks().stream()
-                .map(feedback -> FeedbackDto.from(feedback, userId))
-                .toList();
-
-
-        return DecorDetailResponse.from(decor, feedbacks, userId);
-    }
-
-    @Transactional
-    public void deleteDecor(Long decorId) {
-        Decor decor = getActiveDecorById(decorId);
-
-        long userId = SecurityUtil.getCurrentUserId();
-        if (!decor.getUser().getId().equals(userId)) {
-            throw new RestApiException(ErrorCode.NO_PERMISSION_DECOR_DELETE);
-        }
-
+    public void delete(Decor decor) {
         decorRepository.delete(decor);
     }
 
-    public List<DecorResponse> searchDecorInBoundary(DecorSearchRequest request) {
-        List<Decor> decors = (request.type() == null)
+    public List<Decor> searchDecorInBoundary(DecorSearchRequest request) {
+        return (request.type() == null)
                 ? decorRepository.findByBoundary(request.northLat(), request.southLat(), request.eastLng(),
                 request.westLng()) : decorRepository.findByBoundaryAndType(
                 request.northLat(),
@@ -61,23 +40,9 @@ public class DecorService {
                 request.type()
         );
 
-        return decors.stream()
-                .map(DecorResponse::from)
-                .toList();
     }
 
-    @Transactional
-    public DecorResponse createNewDecor(DecorCreateRequest request) {
-
-        long userId = SecurityUtil.getCurrentUserId();
-
-        if (checkDecorExistsNearby(request.lat(), request.lng(), request.type())) {
-            throw new RestApiException(ErrorCode.DUPLICATE_DECOR);
-        }
-
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RestApiException(ErrorCode.USER_NOT_FOUND));
-
+    public Decor createDecor(DecorCreateRequest request, User user) {
         Decor decor = Decor.createNewDecor(
                 request.lat(),
                 request.lng(),
@@ -85,11 +50,7 @@ public class DecorService {
                 request.content(),
                 user
         );
-
-        Decor saved = decorRepository.save(decor);
-
-        return DecorResponse.from(saved);
-
+        return decorRepository.save(decor);
     }
 
     public boolean checkDecorExistsNearby(Double lat, Double lng, DecorType type) {
@@ -112,19 +73,8 @@ public class DecorService {
                 ) <= 50);
     }
 
-
-    public List<DecorDetailResponse> getMyDecors() {
-
-        long userId = SecurityUtil.getCurrentUserId();
-        List<Decor> decors = decorRepository.findWithFeedbacksByUserId(userId);
-        return decors.stream()
-                .map(decor -> DecorDetailResponse.from(
-                        decor,
-                        decor.getFeedbacks().stream()
-                                .map(feedback -> FeedbackDto.from(feedback, userId))
-                                .toList(), userId
-                ))
-                .toList();
+    public List<Decor> findMyDecorsWithFeedbacks(Long userId) {
+        return decorRepository.findWithFeedbacksByUserId(userId);
     }
 
     public Decor getActiveDecorById(Long decorId) {

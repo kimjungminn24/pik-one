@@ -26,12 +26,11 @@ public class FeedbackFacade {
 
     @Transactional
     public FeedbackDto createFeedback(FeedbackCreateRequest request) {
-        long userId = SecurityUtil.getCurrentUserId();
-        User user = userService.getRef(userId);
+        User user = userService.getCurrentUser();
         Decor decor = decorService.getActiveDecorById(request.decorId());
 
         return FeedbackDto.from(
-                feedbackService.create(request, user, decor), userId
+                feedbackService.create(request, user, decor), user.getId()
         );
     }
 
