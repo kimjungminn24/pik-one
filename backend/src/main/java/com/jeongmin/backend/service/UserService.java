@@ -29,15 +29,10 @@ public class UserService {
                 .orElseGet(() -> saveNewUser(provider, providerId));
     }
 
-    @Transactional
-    public User findById(Long userId) {
+    public User getCurrentUser() {
+        long userId = SecurityUtil.getCurrentUserId();
         return userRepository.findById(userId)
                 .orElseThrow(() -> new RestApiException(ErrorCode.USER_NOT_FOUND));
-    }
-
-    @Transactional
-    public User getRef(Long userId) {
-        return userRepository.getReferenceById(userId);
     }
 
     private Long saveNewUser(String provider, String providerId) {
