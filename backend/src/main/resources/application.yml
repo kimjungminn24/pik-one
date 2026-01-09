@@ -1,6 +1,7 @@
 server:
   port: 8080
 spring:
+  jpa.open-in-view: false
   config:
     import: optional:env[.env]
   datasource:
@@ -47,11 +48,9 @@ spring:
             user-info-uri: ${GOOGLE_USER_INFO_URL}
             user-name-attribute: ${GOOGLE_USER_NAME_ATTRIBUTE}
   jpa:
+    show-sql: false
     hibernate:
-      ddl-auto: update
-    show-sql: true
-    generate-ddl: true
-
+      ddl-auto: validate
 
 jwt:
   secret: ${JWT_SECRET_KEY}

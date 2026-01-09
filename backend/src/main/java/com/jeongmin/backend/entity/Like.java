@@ -26,4 +26,12 @@ public class Like extends BaseTimeEntity {
     @JoinColumn(name = "decor_id", nullable = false)
     private Decor decor;
 
+    public static Like createLike(User user, Decor decor) {
+        Like like = new Like();
+        like.user = user;
+        like.decor = decor;
+        return like;
+    }
+
+
 }

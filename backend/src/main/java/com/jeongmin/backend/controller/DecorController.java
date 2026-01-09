@@ -5,7 +5,7 @@ import com.jeongmin.backend.dto.DecorCreateRequest;
 import com.jeongmin.backend.dto.DecorDetailResponse;
 import com.jeongmin.backend.dto.DecorResponse;
 import com.jeongmin.backend.dto.DecorSearchRequest;
-import com.jeongmin.backend.service.DecorService;
+import com.jeongmin.backend.facade.DecorFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,36 +16,36 @@ import java.util.List;
 @RequestMapping("/decors")
 @RequiredArgsConstructor
 public class DecorController {
-    private final DecorService decorService;
+    private final DecorFacade decorFacade;
 
     @GetMapping("/search")
     public ResponseEntity<List<DecorResponse>> getDecorList(@ModelAttribute DecorSearchRequest request) {
-        List<DecorResponse> response = decorService.searchDecorInBoundary(request);
+        List<DecorResponse> response = decorFacade.searchDecorInBoundary(request);
         return ResponseEntity.ok(response);
     }
 
     @PostMapping
     public ResponseEntity<DecorResponse> postDecor(@RequestBody DecorCreateRequest request) {
-        DecorResponse response = decorService.createNewDecor(request);
+        DecorResponse response = decorFacade.createNewDecor(request);
         return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteDecor(@PathVariable("id") Long decorId) {
-        decorService.deleteDecor(decorId);
+        decorFacade.deleteDecor(decorId);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<DecorDetailResponse> getDecor(@PathVariable("id") Long decorId) {
-        DecorDetailResponse response = decorService.getDecorById(decorId);
+        DecorDetailResponse response = decorFacade.getDecorById(decorId);
         return ResponseEntity.ok(response);
     }
 
 
     @GetMapping("/me")
     public ResponseEntity<List<DecorDetailResponse>> getMyDecors() {
-        List<DecorDetailResponse> response = decorService.getMyDecors();
+        List<DecorDetailResponse> response = decorFacade.getMyDecors();
         return ResponseEntity.ok(response);
     }
 

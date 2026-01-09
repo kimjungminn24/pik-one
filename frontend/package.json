@@ -12,7 +12,6 @@
     "react-i18next": "^16.2.4",
     "react-leaflet": "^5.0.0",
     "react-router-dom": "^7.6.2",
-    "react-scripts": "5.0.1",
     "react-toastify": "^11.0.5",
     "sass": "^1.89.2",
     "sass-loader": "^16.0.5",
@@ -20,16 +19,9 @@
     "zustand": "^5.0.5"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "browserslist": {
     "production": [
@@ -44,6 +36,8 @@
     ]
   },
   "devDependencies": {
-    "source-map-explorer": "^2.5.3"
+    "@vitejs/plugin-react": "^5.1.2",
+    "source-map-explorer": "^2.5.3",
+    "vite": "^7.3.0"
   }
 }

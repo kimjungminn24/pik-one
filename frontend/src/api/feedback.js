@@ -1,6 +1,6 @@
 import { handleFetchError } from "../utils/handleFetchError";
 
-const BASE_URL = `${process.env.REACT_APP_BACKEND_URL}/feedback`;
+const BASE_URL = `${import.meta.env.VITE_BACKEND_URL}/feedback`;
 
 export const createNewFeedback = async ({ decorId, feedbackType, content }) => {
   const res = await fetch(`${BASE_URL}`, {
@@ -35,4 +35,20 @@ export const fetchMyFeedbacks = async () => {
   const data = await res.json();
 
   return data;
+};
+
+export const deleteMyFeedback = async ({ id }) => {
+  const res = await fetch(`${BASE_URL}/${id}`, {
+    method: "delete",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+  });
+
+  if (!res.ok) {
+    await handleFetchError(res);
+  }
+
+  return true;
 };

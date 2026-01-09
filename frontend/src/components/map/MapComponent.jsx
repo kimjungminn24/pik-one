@@ -69,7 +69,7 @@ export default function MapComponent({
           >
             ✕
           </button>
-          <DecorDetailPopup data={data} />
+          <DecorDetailPopup feedbacks={data.feedbacks} data={data} />
         </div>
       )}
     </>

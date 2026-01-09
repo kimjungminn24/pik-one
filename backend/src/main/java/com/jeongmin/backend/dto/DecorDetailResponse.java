@@ -10,17 +10,24 @@ public record DecorDetailResponse(
         Long id,
         double lat,
         double lng,
+        Boolean isAuthor,
+        Boolean isLikedByMe,
         DecorType type,
         String content,
+        int likeCount,
         int helpfulCount,
         int notFoundCount,
         List<FeedbackDto> feedbacks
 ) {
     public static DecorDetailResponse from(
             Decor decor,
-            List<FeedbackDto> feedbacks
+            List<FeedbackDto> feedbacks,
+            Long currentUserId,
+            int likeCount,
+            boolean likeByMe
     ) {
 
+        boolean isAuthor = decor.getUser().getId().equals(currentUserId);
         int notFoundCount = (int) feedbacks.stream()
                 .filter(f -> f.type() == FeedbackType.NOT_FOUND)
                 .count();
@@ -33,8 +40,11 @@ public record DecorDetailResponse(
                 decor.getId(),
                 decor.getLat(),
                 decor.getLng(),
+                isAuthor,
+                likeByMe,
                 decor.getType(),
                 decor.getContent(),
+                likeCount,
                 helpfulCount,
                 notFoundCount,
                 feedbacks

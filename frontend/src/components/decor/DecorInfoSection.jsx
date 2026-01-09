@@ -1,18 +1,16 @@
 import { useTranslation } from "react-i18next";
 import { decorMap } from "../../decorList";
+import "../../css/decor.scss";
+import DecorMetaInfo from "./DecorMetaInfo";
 
-export default function DecorInfoSection({
-  type,
-  lat,
-  lng,
-  probability,
-  content,
-}) {
+export default function DecorInfoSection({ data, probability }) {
   const { t } = useTranslation();
-  const decor = decorMap[type];
-  const displayName = t(`decor.${type}`, { defaultValue: decor?.ko ?? type });
+  const decor = decorMap[data.type];
+  const displayName = t(`decor.${data.type}`, {
+    defaultValue: decor?.ko ?? data.type,
+  });
   const handleCopyAll = () => {
-    const text = `${lat}, ${lng}`;
+    const text = `${data.lat}, ${data.lng}`;
     navigator.clipboard.writeText(text);
   };
   return (
@@ -25,20 +23,25 @@ export default function DecorInfoSection({
           </button>
         </div>
 
-        <span className="decor-info__probability">
-          <span className="emoji">🌱</span> {t("decor_info.probability")}:{" "}
-          {probability === null ? "-" : `${probability}%`}{" "}
-        </span>
+        <DecorMetaInfo
+          id={data.id}
+          probability={probability}
+          likeCount={data.likeCount}
+          likedByMe={data.isLikedByMe}
+          isAuthor={data.isAuthor}
+        />
       </div>
 
-      <p className="decor-info__content">{content} </p>
+      <p className="decor-info__content">{data.content} </p>
 
       <div className="decor-info__coordinates">
         <p>
-          <span className="emoji">📍</span> {t("decor_info.latitude")}: {lat}
+          <span className="emoji">📍</span> {t("decor_info.latitude")}:{" "}
+          {data.lat}
         </p>
         <p>
-          <span className="emoji">📍</span> {t("decor_info.longitude")}: {lng}
+          <span className="emoji">📍</span> {t("decor_info.longitude")}:{" "}
+          {data.lng}
         </p>
       </div>
     </div>

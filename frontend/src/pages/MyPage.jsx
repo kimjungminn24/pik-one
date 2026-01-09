@@ -1,30 +1,37 @@
 import React, { useState } from "react";
-import { useMyDecorsQuery } from "../hooks/useDecor";
+import { useMyDecorsQuery, useMyFeedbacksQuery } from "../hooks/useDecor";
 import { decorMap } from "../decorList";
 import DecorCard from "../components/DecorCard";
 import MyDecorPopup from "../components/MyDecorPopup";
 import "../css/mypage.scss";
 import { useTranslation } from "react-i18next";
+import MyFeedbackList from "../components/MyFeedbackList";
+import DecorDetailPopup from "../components/decor/DecorDetailPopup";
 
 export default function MyPage() {
   const { t } = useTranslation();
 
-  const { data, isLoading } = useMyDecorsQuery();
-  const [selectedDecor, setSelectedDecor] = useState(null);
+  const { data: decorsData, isLoading: decorsLoading } = useMyDecorsQuery();
+  const { data: feedbacksData, isLoading: feedbacksLoading } =
+    useMyFeedbacksQuery();
 
-  if (isLoading) return <div>{t("common.loading")}</div>;
+  const [selectedDecor, setSelectedDecor] = useState(null);
+  const [selectedFeedbackDecor, setSelectedFeedbackDecor] = useState(null);
+
+  if (decorsLoading) return <div>{t("common.loading")}</div>;
+  if (feedbacksLoading) return <div>{t("common.loading")}</div>;
 
   return (
     <div className="page-layout">
       <div className="page-section">
         <div>
-          <h2>
+          <h3>
             <span className="emoji">📍 </span>
             {t("mypage.title")}
-          </h2>
-          {data && data.length > 0 ? (
+          </h3>
+          {decorsData && decorsData.length > 0 ? (
             <div className="decor-grid">
-              {data.map((decor) => {
+              {decorsData.map((decor) => {
                 const matched = decorMap[decor.type];
                 return (
                   <div key={decor.id} onClick={() => setSelectedDecor(decor)}>
@@ -44,6 +51,16 @@ export default function MyPage() {
             <div>{t("mypage.no_results")}</div>
           )}
         </div>
+        <div>
+          <h3>
+            <span className="emoji">📍 </span>
+            {t("mypage.feedback")}
+          </h3>
+          <MyFeedbackList
+            onSelectDecor={setSelectedFeedbackDecor}
+            feedbacks={feedbacksData}
+          />
+        </div>
       </div>
 
       {selectedDecor && (
@@ -57,6 +74,21 @@ export default function MyPage() {
           <MyDecorPopup
             data={selectedDecor}
             onClose={() => setSelectedDecor(null)}
+          />
+        </div>
+      )}
+      {selectedFeedbackDecor && (
+        <div className="popup">
+          <button
+            className="popup__close-button"
+            onClick={() => setSelectedFeedbackDecor(null)}
+          >
+            ✕
+          </button>
+          <DecorDetailPopup
+            feedbacks={selectedFeedbackDecor.feedbacks}
+            data={selectedFeedbackDecor}
+            onClose={() => setSelectedFeedbackDecor(null)}
           />
         </div>
       )}

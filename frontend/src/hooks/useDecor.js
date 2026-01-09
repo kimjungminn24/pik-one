@@ -12,7 +12,11 @@ import {
   fetchMyDecors,
 } from "../api/decor";
 
-import { createNewFeedback, fetchMyFeedbacks } from "../api/feedback";
+import {
+  createNewFeedback,
+  fetchMyFeedbacks,
+  deleteMyFeedback,
+} from "../api/feedback";
 import { toast } from "react-toastify";
 import { decorList } from "../decorList";
 import { useTranslation } from "react-i18next";
@@ -131,6 +135,24 @@ export const useDeleteDecor = () => {
     onSuccess: () => {
       toast.success(t("toast.decor_delete"));
       queryClient.invalidateQueries({ queryKey: ["my-decors"] });
+    },
+  });
+};
+export const useDeleteFeedback = () => {
+  const queryClient = useQueryClient();
+  const { t } = useTranslation();
+  return useMutation({
+    mutationFn: deleteMyFeedback,
+    onSuccess: (_, { id, decorId }) => {
+      toast.success(t("toast.feedback_delete"));
+      queryClient.invalidateQueries({ queryKey: ["my-feedbacks"] });
+      queryClient.setQueryData(["decor", decorId], (oldData) => {
+        if (!oldData) return oldData;
+        return {
+          ...oldData,
+          feedbacks: oldData.feedbacks.filter((f) => f.id !== id),
+        };
+      });
     },
   });
 };
