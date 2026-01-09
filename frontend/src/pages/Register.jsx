@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import "../css/register.scss";
 import CoordinateRegister from "../components/CoordinateRegister";
 import { useTranslation } from "react-i18next";
+import SharedMapLinkSearch from "../components/report/SharedMapLinkSearch";
 
 const LazyMap = React.lazy(() => import("../components/map/MapComponent"));
 
@@ -72,6 +73,7 @@ export default function Register() {
             onChange={(e) => setContent(e.target.value)}
           />
         </div>
+        <SharedMapLinkSearch />
         <TagListComponent
           items={decorList}
           isSelected={(item) => selectedTag === item.name}
