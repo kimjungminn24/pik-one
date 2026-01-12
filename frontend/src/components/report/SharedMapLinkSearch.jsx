@@ -1,29 +1,42 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useLocationStore } from "../../store/useLocationStore";
+import { useResolveSharedLink } from "../../hooks/useLocation";
 
 export default function SharedMapLinkSearch() {
   const { setLocation, setBounds, setIsExternalUpdate } = useLocationStore();
 
   const [url, setUrl] = useState("");
+  const { mutate, isPending } = useResolveSharedLink();
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    mutate(url, {
+      onSuccess: ({ lat, lng }) => {
+        const parsedLat = Number(lat);
+        const parsedLng = Number(lng);
 
-    const lat = 37.5665;
-    const lng = 126.978;
-    setIsExternalUpdate(true);
+        if (Number.isNaN(parsedLat) || Number.isNaN(parsedLng)) {
+          console.error("좌표 파싱 실패");
+          return;
+        }
 
-    const parsedLat = parseFloat(lat);
-    const parsedLng = parseFloat(lng);
-    console.log(parsedLat, parsedLat);
-    setLocation(parsedLat, parsedLng);
-    const offset = 0.01;
-    setBounds({
-      northLat: parsedLat + offset,
-      southLat: parsedLat - offset,
-      eastLng: parsedLng + offset,
-      westLng: parsedLng - offset,
+        setIsExternalUpdate(true);
+        setLocation(parsedLat, parsedLng);
+
+        const offset = 0.03;
+        setBounds({
+          northLat: parsedLat + offset,
+          southLat: parsedLat - offset,
+          eastLng: parsedLng + offset,
+          westLng: parsedLng - offset,
+        });
+
+        setTimeout(() => setIsExternalUpdate(false), 500);
+      },
+      onError: (err) => {
+        console.error("공유 링크 처리 실패", err);
+      },
     });
-    setTimeout(() => setIsExternalUpdate(false), 500);
   };
 
   return (
