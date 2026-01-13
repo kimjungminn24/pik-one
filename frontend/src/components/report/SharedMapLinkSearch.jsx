@@ -1,22 +1,25 @@
 import React, { useState } from "react";
 import { useLocationStore } from "../../store/useLocationStore";
 import { useResolveSharedLink } from "../../hooks/useLocation";
+import { useTranslation } from "react-i18next";
 
 export default function SharedMapLinkSearch() {
   const { setLocation, setBounds, setIsExternalUpdate } = useLocationStore();
 
   const [url, setUrl] = useState("");
   const { mutate, isPending } = useResolveSharedLink();
+  const { t } = useTranslation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!url.trim()) return;
+
     mutate(url, {
       onSuccess: ({ lat, lng }) => {
         const parsedLat = Number(lat);
         const parsedLng = Number(lng);
 
         if (Number.isNaN(parsedLat) || Number.isNaN(parsedLng)) {
-          console.error("좌표 파싱 실패");
           return;
         }
 
@@ -33,26 +36,38 @@ export default function SharedMapLinkSearch() {
 
         setTimeout(() => setIsExternalUpdate(false), 500);
       },
-      onError: (err) => {
-        console.error("공유 링크 처리 실패", err);
-      },
     });
   };
 
   return (
     <form onSubmit={handleSubmit} className="coordinate-register-form">
       <div className="coordinate-register-form-outer">
-        <div className="coordinate-register-form-label emoji">
-          공유 링크로 좌표 조회하기
-        </div>
+        <label className="coordinate-register-form-label ">
+          {t("sharedMap.label")}
+        </label>
 
         <input
           value={url}
+          placeholder={t("sharedMap.placeholder")}
           className="coordinate-register-form-input"
           onChange={(e) => setUrl(e.target.value)}
+          disabled={isPending}
         />
       </div>
-      <button type="submit">조회</button>
+
+      <button type="submit" disabled={isPending || !url.trim()}>
+        {isPending ? t("sharedMap.loading") : t("sharedMap.submit")}
+      </button>
+      <span
+        className="help-tooltip emoji"
+        tabIndex={0}
+        aria-label={t("sharedMap.label")}
+      >
+        ❓
+        <span className="help-tooltip-text" role="tooltip">
+          {t("sharedMap.help")}
+        </span>
+      </span>
     </form>
   );
 }

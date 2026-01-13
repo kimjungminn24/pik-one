@@ -63,7 +63,8 @@ export default function Register() {
         <div className="form-group">
           <CoordinateRegister lat={lat} lng={lng} />
         </div>
-        <div className="form-group"></div>
+        <SharedMapLinkSearch />
+
         <div className="form-group">
           <input
             className="register-form__input"
@@ -73,7 +74,6 @@ export default function Register() {
             onChange={(e) => setContent(e.target.value)}
           />
         </div>
-        <SharedMapLinkSearch />
         <TagListComponent
           items={decorList}
           isSelected={(item) => selectedTag === item.name}

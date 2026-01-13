@@ -186,5 +186,12 @@
     "ask": "ご不明な点があれば、気軽にメールでご連絡ください！",
     "email": "メール",
     "friendCode": "ピクミンフレンドコード"
+  },
+  "sharedMap": {
+    "label": "地図リンクで位置検索",
+    "placeholder": "例）https://maps.google.com/...",
+    "submit": "検索",
+    "loading": "検索中...",
+    "help": "Googleマップ、NAVERマップ、カカオマップで共有されたリンクを貼り付けると、その位置に移動します。"
   }
 }

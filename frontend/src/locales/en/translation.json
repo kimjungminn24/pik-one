@@ -187,5 +187,12 @@
     "ask": "If you have any questions, feel free to contact me by email!",
     "email": "Email",
     "friendCode": "Pikmin Friend Code"
+  },
+  "sharedMap": {
+    "label": "Find location by map link",
+    "placeholder": "e.g. https://maps.google.com/...",
+    "submit": "Search",
+    "loading": "Searching...",
+    "help": "Paste a shared link from Google Maps, Naver Map, or Kakao Map to move to that location."
   }
 }
