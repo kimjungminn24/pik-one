@@ -88,7 +88,11 @@
     "search_info": "No search results found.",
     "feedback_success": "Your feedback has been submitted successfully!",
     "feedback_input_error": "Please enter both a button and feedback.",
-    "feedback_delete": "Feedback has been deleted."
+    "feedback_delete": "Feedback has been deleted.",
+    "map_link_empty": "Please enter a map link.",
+    "map_link_parse_error": "Unable to read coordinates from this link.",
+    "map_link_api_error": "Failed to load the map link.",
+    "map_link_success": "Moved to the selected location."
   },
   "popup": {
     "delete_confirm": "Are you sure you want to delete this?",

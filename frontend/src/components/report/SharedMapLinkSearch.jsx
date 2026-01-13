@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useLocationStore } from "../../store/useLocationStore";
 import { useResolveSharedLink } from "../../hooks/useLocation";
 import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 
 export default function SharedMapLinkSearch() {
   const { setLocation, setBounds, setIsExternalUpdate } = useLocationStore();
@@ -12,17 +13,19 @@ export default function SharedMapLinkSearch() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!url.trim()) return;
-
+    if (!url.trim()) {
+      toast.warn(t("toast.map_link_empty"));
+      return;
+    }
     mutate(url, {
       onSuccess: ({ lat, lng }) => {
         const parsedLat = Number(lat);
         const parsedLng = Number(lng);
 
         if (Number.isNaN(parsedLat) || Number.isNaN(parsedLng)) {
+          toast.warn(t("toast.map_link_parse_error"));
           return;
         }
-
         setIsExternalUpdate(true);
         setLocation(parsedLat, parsedLng);
 
@@ -33,6 +36,7 @@ export default function SharedMapLinkSearch() {
           eastLng: parsedLng + offset,
           westLng: parsedLng - offset,
         });
+        toast.success(t("toast.map_link_success"));
 
         setTimeout(() => setIsExternalUpdate(false), 500);
       },

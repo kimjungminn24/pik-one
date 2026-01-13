@@ -88,7 +88,11 @@
     "search_info": "검색 결과가 없습니다.",
     "feedback_success": "피드백이 성공적으로 등록되었어요!",
     "feedback_input_error": "버튼과 피드백을 모두 입력해주세요.",
-    "feedback_delete": "피드백이 삭제되었습니다."
+    "feedback_delete": "피드백이 삭제되었습니다.",
+    "map_link_empty": "지도 링크를 입력해 주세요.",
+    "map_link_parse_error": "좌표를 인식할 수 없는 링크입니다.",
+    "map_link_api_error": "지도 링크를 불러오지 못했습니다.",
+    "map_link_success": "해당 위치로 이동했습니다."
   },
   "popup": {
     "delete_confirm": "정말 삭제하시겠습니까?",

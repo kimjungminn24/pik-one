@@ -88,7 +88,11 @@
     "search_info": "検索結果がありません。",
     "feedback_success": "フィードバックが正常に送信されました！",
     "feedback_input_error": "ボタンとフィードバックの両方を入力してください。",
-    "feedback_delete": "フィードバックが削除されました。"
+    "feedback_delete": "フィードバックが削除されました。",
+    "map_link_empty": "地図リンクを入力してください。",
+    "map_link_parse_error": "座標を認識できないリンクです。",
+    "map_link_api_error": "地図リンクを取得できませんでした。",
+    "map_link_success": "指定された位置に移動しました。"
   },
   "popup": {
     "delete_confirm": "本当に削除しますか？",
