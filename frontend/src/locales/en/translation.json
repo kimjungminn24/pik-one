@@ -138,7 +138,11 @@
     "USER_NOT_FOUND": "User not found.",
     "INTERNAL_ERROR": "Internal server error.",
     "INVALID_OVERPASS_RESPONSE": "Failed to process Overpass response.",
-    "EXTERNAL_API_ERROR": "Failed to connect to the external API."
+    "EXTERNAL_API_ERROR": "Failed to connect to the external API.",
+    "INVALID_MAP_LINK": "This is not a valid map link.",
+    "MAP_LINK_NOT_FOUND": "The specified map information could not be found.",
+    "MAP_COORDINATE_PARSE_ERROR": "Failed to extract coordinates from the map link.",
+    "MAP_EXTERNAL_API_ERROR": "Failed to communicate with the map service."
   },
   "login": {
     "quick": "Get started quickly with simple login"
