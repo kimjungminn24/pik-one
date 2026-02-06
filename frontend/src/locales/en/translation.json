@@ -88,7 +88,11 @@
     "search_info": "No search results found.",
     "feedback_success": "Your feedback has been submitted successfully!",
     "feedback_input_error": "Please enter both a button and feedback.",
-    "feedback_delete": "Feedback has been deleted."
+    "feedback_delete": "Feedback has been deleted.",
+    "map_link_empty": "Please enter a map link.",
+    "map_link_parse_error": "Unable to read coordinates from this link.",
+    "map_link_api_error": "Failed to load the map link.",
+    "map_link_success": "Moved to the selected location."
   },
   "popup": {
     "delete_confirm": "Are you sure you want to delete this?",
@@ -134,7 +138,11 @@
     "USER_NOT_FOUND": "User not found.",
     "INTERNAL_ERROR": "Internal server error.",
     "INVALID_OVERPASS_RESPONSE": "Failed to process Overpass response.",
-    "EXTERNAL_API_ERROR": "Failed to connect to the external API."
+    "EXTERNAL_API_ERROR": "Failed to connect to the external API.",
+    "INVALID_MAP_LINK": "This is not a valid map link.",
+    "MAP_LINK_NOT_FOUND": "The specified map information could not be found.",
+    "MAP_COORDINATE_PARSE_ERROR": "Failed to extract coordinates from the map link.",
+    "MAP_EXTERNAL_API_ERROR": "Failed to communicate with the map service."
   },
   "login": {
     "quick": "Get started quickly with simple login"
@@ -187,5 +195,12 @@
     "ask": "If you have any questions, feel free to contact me by email!",
     "email": "Email",
     "friendCode": "Pikmin Friend Code"
+  },
+  "sharedMap": {
+    "label": "Find location by map link",
+    "placeholder": "e.g. https://maps.google.com/...",
+    "submit": "Search",
+    "loading": "Searching...",
+    "help": "Paste a shared link from Google Maps, Naver Map, or Kakao Map to move to that location."
   }
 }

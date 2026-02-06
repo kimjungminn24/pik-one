@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import "../css/register.scss";
 import CoordinateRegister from "../components/CoordinateRegister";
 import { useTranslation } from "react-i18next";
+import SharedMapLinkSearch from "../components/report/SharedMapLinkSearch";
 
 const LazyMap = React.lazy(() => import("../components/map/MapComponent"));
 
@@ -62,7 +63,8 @@ export default function Register() {
         <div className="form-group">
           <CoordinateRegister lat={lat} lng={lng} />
         </div>
-        <div className="form-group"></div>
+        <SharedMapLinkSearch />
+
         <div className="form-group">
           <input
             className="register-form__input"

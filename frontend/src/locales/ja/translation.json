@@ -88,7 +88,11 @@
     "search_info": "検索結果がありません。",
     "feedback_success": "フィードバックが正常に送信されました！",
     "feedback_input_error": "ボタンとフィードバックの両方を入力してください。",
-    "feedback_delete": "フィードバックが削除されました。"
+    "feedback_delete": "フィードバックが削除されました。",
+    "map_link_empty": "地図リンクを入力してください。",
+    "map_link_parse_error": "座標を認識できないリンクです。",
+    "map_link_api_error": "地図リンクを取得できませんでした。",
+    "map_link_success": "指定された位置に移動しました。"
   },
   "popup": {
     "delete_confirm": "本当に削除しますか？",
@@ -133,7 +137,11 @@
     "USER_NOT_FOUND": "ユーザーが見つかりません。",
     "INTERNAL_ERROR": "サーバー内部エラーが発生しました。",
     "INVALID_OVERPASS_RESPONSE": "Overpass の応答を処理できません。",
-    "EXTERNAL_API_ERROR": "外部 API の呼び出しに失敗しました。"
+    "EXTERNAL_API_ERROR": "外部 API の呼び出しに失敗しました。",
+    "INVALID_MAP_LINK": "正しい地図リンクではありません。",
+    "MAP_LINK_NOT_FOUND": "指定された地図情報が見つかりません。",
+    "MAP_COORDINATE_PARSE_ERROR": "地図リンクから座標を取得できません。",
+    "MAP_EXTERNAL_API_ERROR": "地図サービスとの通信に失敗しました。"
   },
   "login": {
     "quick": "簡単ログインですぐに始める"
@@ -186,5 +194,12 @@
     "ask": "ご不明な点があれば、気軽にメールでご連絡ください！",
     "email": "メール",
     "friendCode": "ピクミンフレンドコード"
+  },
+  "sharedMap": {
+    "label": "地図リンクで位置検索",
+    "placeholder": "例）https://maps.google.com/...",
+    "submit": "検索",
+    "loading": "検索中...",
+    "help": "Googleマップ、NAVERマップ、カカオマップで共有されたリンクを貼り付けると、その位置に移動します。"
   }
 }
