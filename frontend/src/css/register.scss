@@ -24,17 +24,18 @@
   .register-form__input {
     @include input-basic(0.7rem);
   }
-
-  .coordinate-register-form-input {
-    @include input-basic(0.7rem);
-    font-size: 0.7rem;
-  }
-  .register-form__location-display {
+  .coordinate-register-form-input,
+  .register-form__location-display,
+  .coordinate-register-form button,
+  .coordinate-register-form-label,
+  .register-form__input label,
+  .button-box button {
     font-size: 0.7rem;
   }
 }
 .coordinate-register-form {
   @include flex-start;
+
   margin-bottom: 0.5rem;
   white-space: nowrap;
 }
@@ -43,23 +44,27 @@
   margin-left: 0.5rem;
   margin-right: 0.5rem;
 }
+
 .coordinate-register-form-input {
   border: 0.09375rem solid var(--color-bg-gray-hover);
   border-radius: 0.5rem;
   padding: 0.5em;
   margin-left: 1rem;
   background-color: var(--color-bg-lighter);
-  color: #111827;
   outline: none;
   width: 80%;
   box-shadow: inset 0 0.0625rem 0.125rem var(--color-shadow-light);
   transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+  &::placeholder {
+    color: var(--color-text-placeholder);
+  }
   &:focus {
     border-color: #38bdf8;
     background-color: #fff;
     box-shadow: 0 0 0 0.1875rem var(--color-shadow-focus);
   }
 }
+
 .help-tooltip {
   position: relative;
   margin-left: 6px;
