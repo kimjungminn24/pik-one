@@ -21,7 +21,8 @@ public class DecorFacade {
     private final DecorService decorService;
     private final UserService userService;
     private final LikeService likeService;
-
+    private final DecorCreateLockManager lockManager;
+    private final DecorLockKeyGenerator lockKeyGenerator;
 
     @Transactional(readOnly = true)
     public List<DecorResponse> searchDecorInBoundary(DecorSearchRequest request) {
@@ -53,7 +54,6 @@ public class DecorFacade {
         );
     }
 
-
     @Transactional
     public void deleteDecor(Long decorId) {
         Decor decor = decorService.getActiveDecorById(decorId);
@@ -64,22 +64,13 @@ public class DecorFacade {
         decorService.delete(decor);
     }
 
-    @Transactional
+
     public DecorResponse createNewDecor(DecorCreateRequest request) {
-
-        if (decorService.checkDecorExistsNearby(
-                request.lat(),
-                request.lng(),
-                request.type()
-        )) {
-            throw new RestApiException(ErrorCode.DUPLICATE_DECOR);
-        }
-
         User user = userService.getCurrentUser();
-        Decor decor = decorService.createDecor(request, user);
-        return DecorResponse.from(decor);
-
+        List<String> lockKeys = lockKeyGenerator.generate(request);
+        return lockManager.executeWithLock(lockKeys, () -> decorService.createNewDecorTransactional(request, user));
     }
+
 
     @Transactional(readOnly = true)
     public List<DecorDetailResponse> getMyDecors() {
