@@ -65,10 +65,15 @@ public class DecorFacade {
     }
 
 
+    public DecorResponse createNewDecorWithoutLock(DecorCreateRequest request) {
+        Long userId = SecurityUtil.getCurrentUserId();
+        return decorService.createNewDecorTransactional(request, userId);
+    }
+
     public DecorResponse createNewDecor(DecorCreateRequest request) {
-        User user = userService.getCurrentUser();
+        Long userId = SecurityUtil.getCurrentUserId();
         List<String> lockKeys = lockKeyGenerator.generate(request);
-        return lockManager.executeWithLock(lockKeys, () -> decorService.createNewDecorTransactional(request, user));
+        return lockManager.executeWithLock(lockKeys, () -> decorService.createNewDecorTransactional(request, userId));
     }
 
 
