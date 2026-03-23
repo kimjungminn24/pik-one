@@ -1,6 +1,7 @@
 package com.jeongmin.backend.service;
 
 import com.jeongmin.backend.dto.DecorCreateRequest;
+import com.jeongmin.backend.dto.DecorResponse;
 import com.jeongmin.backend.dto.DecorSearchRequest;
 import com.jeongmin.backend.entity.Decor;
 import com.jeongmin.backend.entity.DecorType;
@@ -8,11 +9,10 @@ import com.jeongmin.backend.entity.User;
 import com.jeongmin.backend.exception.ErrorCode;
 import com.jeongmin.backend.exception.RestApiException;
 import com.jeongmin.backend.repository.DecorRepository;
-import com.jeongmin.backend.repository.LikeRepository;
-import com.jeongmin.backend.repository.UserRepository;
 import com.jeongmin.backend.utils.GeoUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,10 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DecorService {
 
-
     private final DecorRepository decorRepository;
-    private final UserRepository userRepository;
-    private final LikeRepository likeRepository;
 
     public void delete(Decor decor) {
         decorRepository.delete(decor);
@@ -32,14 +29,23 @@ public class DecorService {
     public List<Decor> searchDecorInBoundary(DecorSearchRequest request) {
         return (request.type() == null)
                 ? decorRepository.findByBoundary(request.northLat(), request.southLat(), request.eastLng(),
-                request.westLng()) : decorRepository.findByBoundaryAndType(
+                request.westLng())
+                : decorRepository.findByBoundaryAndType(
                 request.northLat(),
                 request.southLat(),
                 request.eastLng(),
                 request.westLng(),
                 request.type()
         );
+    }
 
+    @Transactional
+    public DecorResponse createNewDecorTransactional(DecorCreateRequest request, User user) {
+        if (checkDecorExistsNearby(request.lat(), request.lng(), request.type())) {
+            throw new RestApiException(ErrorCode.DUPLICATE_DECOR);
+        }
+        Decor decor = createDecor(request, user);
+        return DecorResponse.from(decor);
     }
 
     public Decor createDecor(DecorCreateRequest request, User user) {
@@ -65,7 +71,6 @@ public class DecorService {
                 type
         );
 
-
         return nearby.stream()
                 .anyMatch(d -> GeoUtils.calculateDistance(
                         d.getLat(), d.getLng(),
@@ -81,7 +86,5 @@ public class DecorService {
         return decorRepository.findByIdAndDeletedAtIsNull(decorId)
                 .orElseThrow(() -> new RestApiException(ErrorCode.DECOR_NOT_FOUND));
     }
-
-
 }
 
