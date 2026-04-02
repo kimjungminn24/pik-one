@@ -9,6 +9,7 @@ import com.jeongmin.backend.entity.User;
 import com.jeongmin.backend.exception.ErrorCode;
 import com.jeongmin.backend.exception.RestApiException;
 import com.jeongmin.backend.repository.DecorRepository;
+import com.jeongmin.backend.repository.UserRepository;
 import com.jeongmin.backend.utils.GeoUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,7 @@ import java.util.List;
 public class DecorService {
 
     private final DecorRepository decorRepository;
+    private final UserRepository userRepository;
 
     public void delete(Decor decor) {
         decorRepository.delete(decor);
@@ -40,10 +42,12 @@ public class DecorService {
     }
 
     @Transactional
-    public DecorResponse createNewDecorTransactional(DecorCreateRequest request, User user) {
+    public DecorResponse createNewDecorTransactional(DecorCreateRequest request, Long userId) {
         if (checkDecorExistsNearby(request.lat(), request.lng(), request.type())) {
             throw new RestApiException(ErrorCode.DUPLICATE_DECOR);
         }
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RestApiException(ErrorCode.USER_NOT_FOUND));
         Decor decor = createDecor(request, user);
         return DecorResponse.from(decor);
     }
