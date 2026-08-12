@@ -205,6 +205,12 @@ export const decorList = [
     tags: ["highway=residential"],
     emoji: "🛣",
   },
+  {
+    name: "STATIONERY",
+    ko: "문구점",
+    tags: ["shop=stationery"],
+    emoji: "✏️",
+  },
 ];
 
 export const decorMap = Object.fromEntries(
