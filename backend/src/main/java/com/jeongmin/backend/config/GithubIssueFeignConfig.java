@@ -12,7 +12,7 @@ public class GithubIssueFeignConfig {
     private String githubToken;
 
     @Bean
-    public RequestInterceptor requestInterceptor() {
+    public RequestInterceptor githubRequestInterceptor() {
         return template -> {
             template.header("Authorization", "Bearer " + githubToken);
             template.header("Accept", "application/vnd.github+json");

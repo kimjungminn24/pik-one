@@ -24,6 +24,12 @@ public enum ErrorCode {
     INTERNAL_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "서버 내부 오류입니다"),
     INVALID_OVERPASS_RESPONSE(HttpStatus.INTERNAL_SERVER_ERROR, "Overpass 응답을 처리할 수 없습니다"),
 
+
+    INVALID_MAP_LINK(HttpStatus.BAD_REQUEST, "올바르지 않은 지도 링크입니다"),
+    MAP_LINK_NOT_FOUND(HttpStatus.NOT_FOUND, "해당 지도 정보를 찾을 수 없습니다"),
+    MAP_COORDINATE_PARSE_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "지도 링크에서 좌표를 추출할 수 없습니다"),
+    MAP_EXTERNAL_API_ERROR(HttpStatus.BAD_GATEWAY, "지도 서비스와의 통신에 실패했습니다"),
+    
     EXTERNAL_API_ERROR(HttpStatus.BAD_GATEWAY, "외부 API 요청에 실패했습니다");
 
     private final HttpStatus httpStatus;

@@ -54,7 +54,8 @@ public enum DecorType {
     MEXICAN_RESTAURANT("멕시칸 음식점", List.of("cuisine=mexican", "cuisine='tex-mex'")),
     LAUNDRY("세탁소", List.of("shop=dry_cleaning", "shop=laundry")),
     KOREAN_RESTAURANT("한식당", List.of("cuisine=korean")),
-    STREET("길거리", List.of("highway=residential"));
+    STREET("길거리", List.of("highway=residential")),
+    STATIONERY("문구점", List.of("shop=stationery"));
 
     private final String koreanName;
     private final List<String> tags;

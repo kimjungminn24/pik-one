@@ -1,7 +1,5 @@
 import i18next from "i18next";
 
-import { errorMessageMap } from "./errorMessageMap";
-
 export async function showToast(messageKey) {
   const { toast } = await import("react-toastify");
 
@@ -19,7 +17,6 @@ export async function showErrorToast(error) {
 
   const message =
     (code && i18next.exists(`error.${code}`) && i18next.t(`error.${code}`)) ||
-    errorMessageMap[code] ||
     error?.message ||
     fallback;
   toast.error(message);
