@@ -76,7 +76,8 @@
     "MEXICAN_RESTAURANT": "Mexican Restaurant",
     "LAUNDRY": "Laundry / Dry Cleaning",
     "KOREAN_RESTAURANT": "Korean Restaurant",
-    "STREET": "Street"
+    "STREET": "Street",
+    "STATIONERY": "Stationery"
   },
   "toast": {
     "login_required": "Please log in to continue.",

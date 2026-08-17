@@ -76,7 +76,8 @@
     "MEXICAN_RESTAURANT": "メキシカンレストラン",
     "LAUNDRY": "コインランドリー・クリーニング",
     "KOREAN_RESTAURANT": "韓国料理店",
-    "STREET": "通り"
+    "STREET": "通り",
+    "STATIONERY": "文房具店"
   },
   "toast": {
     "login_required": "ログインしてからご利用ください。",
