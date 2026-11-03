@@ -222,8 +222,7 @@
     "people": "{{count}}人",
     "mine": "自分",
     "delete_spot": "このスポットを削除",
-    "anonymous": "匿名",
-    "anonymous_by": "匿名で登録されたスポット"
+    "anonymous": "匿名"
   },
   "community": {
     "title": "ほかのコミュニティもどうぞ",

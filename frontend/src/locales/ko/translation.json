@@ -222,8 +222,7 @@
     "people": "{{count}}명",
     "mine": "내 기록",
     "delete_spot": "이 스팟 삭제하기",
-    "anonymous": "익명",
-    "anonymous_by": "익명으로 등록된 스팟"
+    "anonymous": "익명"
   },
   "community": {
     "title": "더 많은 커뮤니티를 이용하세요",

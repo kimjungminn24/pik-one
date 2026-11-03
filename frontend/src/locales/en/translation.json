@@ -222,8 +222,7 @@
     "people": "{{count}}",
     "mine": "Mine",
     "delete_spot": "Delete this spot",
-    "anonymous": "Anonymous",
-    "anonymous_by": "Posted anonymously"
+    "anonymous": "Anonymous"
   },
   "community": {
     "title": "Find more communities",
