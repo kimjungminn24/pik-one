@@ -114,9 +114,6 @@
     "MAP_COORDINATE_PARSE_ERROR": "地図リンクから座標を取得できません。",
     "MAP_EXTERNAL_API_ERROR": "地図サービスとの通信に失敗しました。"
   },
-  "login": {
-    "quick": "簡単ログインですぐに始める"
-  },
   "report": {
     "nickname": "ニックネーム",
     "change": "変更",
@@ -144,7 +141,6 @@
     "submit": "登録",
     "submitting": "登録中...",
     "section_location": "位置",
-    "location_hint": "地図をタップするとその場所が入力されます。座標や地図の共有リンクでも探せます。",
     "section_type": "種類",
     "section_desc": "説明",
     "anonymous_notice": "ログインしていないと匿名で登録されます。匿名のスポットはマイページに残らず、削除もできません。",

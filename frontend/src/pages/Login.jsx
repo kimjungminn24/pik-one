@@ -21,7 +21,6 @@ export default function Login() {
     <div className="shell">
       <aside className="shell__panel">
         <h1 className="shell__title">{t("menu.login")}</h1>
-        <p className="shell__text">{t("login.quick")}</p>
 
         <section className="panel-section login">
           {PROVIDERS.map(({ id, image, label }) => (

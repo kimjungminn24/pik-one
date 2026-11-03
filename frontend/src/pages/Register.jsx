@@ -104,7 +104,6 @@ export default function Register() {
 
           <section className="panel-section">
             <h2 className="panel-section__title">{t("register.section_location")}</h2>
-            <p className="panel-section__hint">{t("register.location_hint")}</p>
             <CoordinateRegister />
             <SharedMapLinkSearch />
           </section>
