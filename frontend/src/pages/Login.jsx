@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import "../css/page.scss";
 import "../css/login.scss";
 
 const PROVIDERS = [
@@ -17,26 +16,23 @@ export default function Login() {
   };
 
   return (
-    <div className="shell shell--single">
-      <aside className="shell__panel">
-        <h1 className="shell__title">{t("menu.login")}</h1>
-
-        <section className="panel-section login">
-          {PROVIDERS.map(({ id, image, label }) => (
-            <button
-              key={id}
-              type="button"
-              className="login__btn"
-              onClick={() => handleLogin(id)}
-            >
-              <img src={image} alt={`${label} login`} width="300" height="60" />
-            </button>
-          ))}
-          <Link to="/privacy" className="login__privacy">
-            {t("footer.privacy")}
-          </Link>
-        </section>
-      </aside>
+    <div className="login-page">
+      <section className="login">
+        <h1 className="login__title">{t("menu.login")}</h1>
+        {PROVIDERS.map(({ id, image, label }) => (
+          <button
+            key={id}
+            type="button"
+            className="login__btn"
+            onClick={() => handleLogin(id)}
+          >
+            <img src={image} alt={`${label} login`} width="300" height="60" />
+          </button>
+        ))}
+        <Link to="/privacy" className="login__privacy">
+          {t("footer.privacy")}
+        </Link>
+      </section>
     </div>
   );
 }
