@@ -6,6 +6,11 @@
   border-radius: 0.75rem;
   overflow: hidden;
   font-family: inherit;
+
+  // 타일이 아직 안 온 자리. Leaflet 기본 회색 대신 OSM 땅 색
+  &.leaflet-container {
+    background: #f2efe9;
+  }
 }
 .leaflet-tile-pane {
   filter: saturate(0.85) brightness(1.02);
