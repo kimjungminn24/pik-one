@@ -1,85 +1,40 @@
+# 단독스팟 프론트엔드
+
+React 19 + Vite. 지도는 react-leaflet, 서버 상태는 React Query, 번역은 i18next(ko, en, ja).
+
+## 실행
+
+`.env`에 두 값을 넣습니다.
+
+- `VITE_BACKEND_URL`: 백엔드 주소
+- `VITE_OSM_API`: 장소 검색에 쓰는 OpenStreetMap 검색 주소
+
+```bash
+npm install
+npm run dev
+```
+
+http://localhost:3000 에서 열립니다.
+
+```bash
+npm run build
+```
+
+```bash
+npm run lint
+```
+
 ## 웹폰트 서브셋
 
-이모지(TossFace)와 일본어(Noto Sans JP) 폰트는 원본이 커서 실제로 쓰는 글자만 남긴 woff2를 씁니다.
+이모지(TossFace)는 원본이 커서 실제로 쓰는 이모지만 남긴 woff2를 씁니다. 일본어 한자는 기기에 있는 일본어 폰트로 보여 줍니다.
 
 - 원본: `fonts-src/` (배포되지 않음)
-- 결과: `public/fonts/tossface-*.woff2`, `public/fonts/NotoSansJP-Bold.woff2`, `src/css/_tossface.scss`(자동 생성)
-- TossFace는 화면 이모지(ui)와 의견에 자주 쓰는 이모지(faces, hearts, misc) 조각으로 나뉘고, 조각마다 `unicode-range`가 있어 그 이모지가 화면에 있을 때만 받습니다.
-- 데코 종류, 이모지, 일본어 문구를 바꾸면 다시 만들어 커밋합니다.
+- 결과: `public/fonts/tossface-*.woff2`, `src/css/_tossface.scss`(자동 생성)
+- 화면 이모지(ui)와 의견에 자주 쓰는 이모지(faces, hearts, misc) 조각으로 나뉘고, 조각마다 `unicode-range`가 있어 그 이모지가 화면에 있을 때만 받습니다.
+- 데코 종류나 이모지를 바꾸면 다시 만들어 커밋합니다.
 
 ```bash
 npm run fonts:subset
 ```
 
 TossFace는 비트맵(sbix) 폰트라 일반 서브셋 도구로는 그림이 빠집니다. 그래서 스크립트가 쓰는 이모지의 PNG만 남기고 나머지를 비우는 방식으로 줄입니다.
-
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
