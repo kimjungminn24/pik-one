@@ -13,6 +13,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+// 번체 중국어 화면은 한자를 대만 글꼴로 (일본·한국 글꼴은 같은 한자도 모양이 다름)
+html:lang(zh-TW) body {
+  font-family: "Pretendard Variable", Pretendard, "TossFace", -apple-system,
+    BlinkMacSystemFont, "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+}
 input,
 textarea,
 select,

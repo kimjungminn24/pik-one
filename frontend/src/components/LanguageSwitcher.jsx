@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 const LANGUAGES = [
   { code: "ko", label: "한국어" },
   { code: "ja", label: "日本語" },
+  { code: "zh-TW", label: "繁體中文" },
   { code: "en", label: "English" },
 ];
 
@@ -23,7 +24,7 @@ export default function LanguageSwitcher({ inline = false }) {
   const { i18n, t } = useTranslation();
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
-  const current = (i18n.resolvedLanguage || i18n.language || "ko").slice(0, 2);
+  const current = i18n.resolvedLanguage || "ko";
 
   const change = (code) => {
     i18n.changeLanguage(code);
@@ -73,7 +74,7 @@ export default function LanguageSwitcher({ inline = false }) {
         aria-label={t("menu.language")}
       >
         <GlobeIcon />
-        <span>{current.toUpperCase()}</span>
+        <span>{current.slice(0, 2).toUpperCase()}</span>
       </button>
 
       {open && (
