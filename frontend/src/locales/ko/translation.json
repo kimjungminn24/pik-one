@@ -112,7 +112,8 @@
     "INVALID_MAP_LINK": "올바르지 않은 지도 링크입니다.",
     "MAP_LINK_NOT_FOUND": "해당 지도 정보를 찾을 수 없습니다.",
     "MAP_COORDINATE_PARSE_ERROR": "지도 링크에서 좌표를 추출할 수 없습니다.",
-    "MAP_EXTERNAL_API_ERROR": "지도 서비스와의 통신에 실패했습니다."
+    "MAP_EXTERNAL_API_ERROR": "지도 서비스와의 통신에 실패했습니다.",
+    "TOO_MANY_REQUESTS": "요청이 너무 많아요. 잠시 후 다시 시도해 주세요."
   },
   "report": {
     "nickname": "닉네임",

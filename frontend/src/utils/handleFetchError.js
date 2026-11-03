@@ -1,5 +1,7 @@
 export async function handleFetchError(res) {
-  const errorBody = await res.json();
+  // nginx가 직접 돌려주는 응답(429 등)은 JSON이 아닐 수 있음
+  const errorBody = await res.json().catch(() => ({}));
+  if (res.status === 429) errorBody.errorCode ??= "TOO_MANY_REQUESTS";
 
   const baseError = new Error(errorBody.message || "알 수 없는 에러");
 
