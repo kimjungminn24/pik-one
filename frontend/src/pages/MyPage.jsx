@@ -140,9 +140,6 @@ export default function MyPage() {
           <LazyMap
             searchResults={decors}
             showLocationMarker={false}
-            showSearchBox={false}
-            zoomControlPosition={null}
-            locatePosition={null}
             selectedId={selectedId}
             highlightId={selectedId ? null : hoveredId}
             onSelect={select}

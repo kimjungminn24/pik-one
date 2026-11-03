@@ -22,9 +22,7 @@
   },
   "find": {
     "mapLoading": "地図を読み込み中...",
-    "all": "すべて",
-    "search_placeholder": "場所を検索してください",
-    "search_button": "検索"
+    "all": "すべて"
   },
   "decor": {
     "RESTAURANT": "レストラン",
@@ -77,30 +75,17 @@
     "register_input_error": "すべての項目を入力してください。",
     "error": "不明なエラーが発生しました。",
     "search_info": "検索結果がありません。",
-    "feedback_success": "フィードバックが正常に送信されました！",
-    "feedback_input_error": "ボタンとフィードバックの両方を入力してください。",
     "feedback_delete": "フィードバックが削除されました。",
     "map_link_empty": "地図リンクを入力してください。",
     "map_link_parse_error": "座標を認識できないリンクです。",
-    "map_link_api_error": "地図リンクを取得できませんでした。",
     "map_link_success": "指定された位置に移動しました。"
   },
   "popup": {
     "delete_confirm": "本当に削除しますか？",
-    "delete_loading": "削除中...",
-    "delete": "削除",
-    "helpful_message": "{{count}}人が参考になったと言っています！ 😊",
-    "loading_map": "地図を読み込み中..."
-  },
-  "decor_info": {
-    "probability": "存在確率",
-    "latitude": "緯度",
-    "longitude": "経度",
-    "copyCoordinates": "座標をコピー"
+    "delete_loading": "削除中..."
   },
   "common": {
-    "loading": "読み込み中...",
-    "close": "閉じる"
+    "loading": "読み込み中..."
   },
   "mypage": {
     "title": "登録したスポット",
@@ -108,14 +93,6 @@
     "feedback": "残したフィードバック",
     "go_register": "最初のスポットを登録",
     "no_feedback": "まだフィードバックがありません。"
-  },
-  "feedback": {
-    "placeholder": "フィードバックを入力してください",
-    "submit_loading": "登録中...",
-    "submit": "登録",
-    "found": "見つけた 😊",
-    "not_found": "見つからない 😢",
-    "no_feedback": "まだ登録されたフィードバックはありません。"
   },
   "error": {
     "INVALID_REQUEST": "無効なリクエストです。",
@@ -149,11 +126,6 @@
       "bug": "バグ",
       "suggestion": "提案"
     },
-    "categoryMap": {
-      "応援": "cheer",
-      "バグ": "bug",
-      "提案": "suggestion"
-    },
     "form": {
       "placeholder": "良かった点や不便な点を教えてください",
       "button": "送信"
@@ -171,11 +143,12 @@
     "placeholder": "簡単な説明を入力してください",
     "submit": "登録",
     "submitting": "登録中...",
-    "desc": "地図をタップして位置を決め、種類と説明を入力してください。",
     "section_location": "位置",
     "location_hint": "地図をタップするとその場所が入力されます。座標や地図の共有リンクでも探せます。",
     "section_type": "種類",
-    "section_desc": "説明"
+    "section_desc": "説明",
+    "anonymous_notice": "ログインしていないと匿名で登録されます。匿名のスポットはマイページに残らず、削除もできません。",
+    "anonymous_login": "ログインする"
   },
   "coordinate": {
     "latitude": "緯度",
@@ -248,7 +221,8 @@
     "unlike": "いいねを取り消す",
     "people": "{{count}}人",
     "mine": "自分",
-    "delete_spot": "このスポットを削除"
+    "delete_spot": "このスポットを削除",
+    "anonymous": "匿名"
   },
   "community": {
     "title": "ほかのコミュニティもどうぞ",

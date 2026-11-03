@@ -3,8 +3,10 @@
 
 body {
   // 글 속 이모지도 TossFace로. 조각마다 unicode-range가 있어 이모지가 있을 때만 받는다
+  // 한자는 기기 일본어 폰트로 (보통·굵게가 다 있어 굵기가 섞이지 않음)
   font-family: "Pretendard Variable", Pretendard, "TossFace", -apple-system,
-    BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans JP", sans-serif;
+    BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic UI", Meiryo, "Apple SD Gothic Neo",
+    sans-serif;
   color: var(--g900);
   background: var(--page-bg);
   letter-spacing: -0.01em;
@@ -23,12 +25,4 @@ p {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
-}
-// 일본어 글자가 있을 때만 받도록 범위를 가나·한자로 제한
-@font-face {
-  font-family: "Noto Sans JP";
-  src: url("/fonts/NotoSansJP-Bold.woff2") format("woff2");
-  font-weight: 700;
-  font-display: swap;
-  unicode-range: U+3000-30FF, U+4E00-9FFF, U+FF00-FFEF;
 }

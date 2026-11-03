@@ -8,6 +8,7 @@ public record DecorSearchResponse(
         double lng,
         String type,
         String content,
+        boolean anonymous,
         int helpfulCount,
         int notFoundCount
 ) {
@@ -19,6 +20,7 @@ public record DecorSearchResponse(
                 decor.getLng(),
                 decor.getType().name(),
                 decor.getContent(),
+                decor.isAnonymous(),
                 counts.helpful(),
                 counts.notFound()
         );

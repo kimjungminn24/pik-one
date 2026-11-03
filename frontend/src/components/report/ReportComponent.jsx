@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import CategorySelector from "./CategorySelector";
 import NicknameBox from "./NicknameBox";
 import CommentForm from "./CommentForm";
@@ -53,7 +53,7 @@ export default function ReportComponent({ enabled, outro }) {
   }) => {
     return `
 -  **닉네임**: ${emoji} ${nickname}  
--  **카테고리**: ${t(`report.categoryMap.${category}`)} 
+-  **카테고리**: ${category} 
 -  **작성 시간**: ${new Date(createdAt).toLocaleString()}  
 -  **내용**: ${comment}  
 -  **답변**: ${answer ? answer : "아직 없음"}

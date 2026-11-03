@@ -1,4 +1,5 @@
 import React, { Suspense, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 import { decorList } from "../decorList";
@@ -9,6 +10,7 @@ import PlaceSearch from "../components/explore/PlaceSearch";
 import FlyTo from "../components/map/FlyTo";
 import MapControls from "../components/map/MapControls";
 import { useLocationStore } from "../store/useLocationStore";
+import { useUserStore } from "../store/useUserStore";
 import { useCreateDecor } from "../hooks/useDecor";
 import { useBottomSheet } from "../hooks/useBottomSheet";
 import "../css/explore.scss";
@@ -24,6 +26,7 @@ export default function Register() {
   const [flyTarget, setFlyTarget] = useState(null);
   const [sheetSnap, setSheetSnap] = useState("half");
   const { lat, lng } = useLocationStore();
+  const isLogin = useUserStore((state) => state.isLogin);
   const { mutate, isPending } = useCreateDecor();
 
   const panelRef = useRef(null);
@@ -90,6 +93,15 @@ export default function Register() {
         />
 
         <div className="explore__body">
+          {!isLogin && (
+            <p className="register-notice">
+              {t("register.anonymous_notice")}{" "}
+              <Link to="/login" className="register-notice__link">
+                {t("register.anonymous_login")}
+              </Link>
+            </p>
+          )}
+
           <section className="panel-section">
             <h2 className="panel-section__title">{t("register.section_location")}</h2>
             <p className="panel-section__hint">{t("register.location_hint")}</p>
@@ -135,7 +147,7 @@ export default function Register() {
 
       <div className="explore__map">
         <Suspense fallback={<div className="explore__map-loading">{t("find.mapLoading")}</div>}>
-          <LazyMap showSearchBox={false} zoomControlPosition={null} locatePosition={null}>
+          <LazyMap>
             <FlyTo target={flyTarget} />
             <MapControls />
           </LazyMap>

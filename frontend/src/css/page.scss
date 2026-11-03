@@ -102,7 +102,7 @@ $panel-w: 22.5rem;
     color: var(--g500);
   }
   &:focus {
-    background: var(--color-bg-white);
+    background: #fff;
     box-shadow: inset 0 0 0 2px var(--ink);
   }
   &:disabled {
@@ -209,7 +209,7 @@ textarea.field {
   grid-area: footer;
   padding: 0.75rem 1rem 1rem;
   border-top: 1px solid var(--g100);
-  background: var(--color-bg-white);
+  background: #fff;
 }
 
 .my-feedback-list {
@@ -303,7 +303,7 @@ textarea.field {
 /* 지도 없는 화면(만든 사람, 로그인, 404)의 오른쪽 칸 */
 .mascot-panel {
   @include flex-center;
-  background: var(--color-bg-white);
+  background: #fff;
 }
 
 .mascot {

@@ -126,6 +126,7 @@ export default function SpotDetail({ id, onBack, onDeleted, hideBack = false }) 
         </span>
         <div className="spot-detail__heading">
           <h3 className="spot-detail__name">{t(`decor.${data.type}`)}</h3>
+          {data.anonymous && <span className="anon-badge">{t("spot.anonymous")}</span>}
         </div>
         <button
           type="button"

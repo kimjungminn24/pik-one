@@ -22,9 +22,7 @@
   },
   "find": {
     "mapLoading": "Loading map...",
-    "all": "All",
-    "search_placeholder": "Search for a place",
-    "search_button": "Search"
+    "all": "All"
   },
   "decor": {
     "RESTAURANT": "Restaurant",
@@ -77,30 +75,17 @@
     "register_input_error": "Please fill in all required fields.",
     "error": "An unknown error has occurred.",
     "search_info": "No search results found.",
-    "feedback_success": "Your feedback has been submitted successfully!",
-    "feedback_input_error": "Please enter both a button and feedback.",
     "feedback_delete": "Feedback has been deleted.",
     "map_link_empty": "Please enter a map link.",
     "map_link_parse_error": "Unable to read coordinates from this link.",
-    "map_link_api_error": "Failed to load the map link.",
     "map_link_success": "Moved to the selected location."
   },
   "popup": {
     "delete_confirm": "Are you sure you want to delete this?",
-    "delete_loading": "Deleting...",
-    "delete": "Delete",
-    "helpful_message": "{{count}} people found this helpful! 😊",
-    "loading_map": "Loading map..."
-  },
-  "decor_info": {
-    "probability": "Existence Probability",
-    "latitude": "Latitude",
-    "longitude": "Longitude",
-    "copyCoordinates": "Copy coordinates"
+    "delete_loading": "Deleting..."
   },
   "common": {
-    "loading": "Loading...",
-    "close": "Close"
+    "loading": "Loading..."
   },
   "mypage": {
     "title": "My spots",
@@ -108,14 +93,6 @@
     "feedback": "My feedback",
     "go_register": "Add your first spot",
     "no_feedback": "You haven't left any feedback yet."
-  },
-  "feedback": {
-    "placeholder": "Please enter your feedback",
-    "submit_loading": "Submitting...",
-    "submit": "Submit",
-    "found": "Found it 😊",
-    "not_found": "Not found 😢",
-    "no_feedback": "No feedback has been submitted yet."
   },
   "error": {
     "INVALID_REQUEST": "Invalid request.",
@@ -149,11 +126,6 @@
       "bug": "Bug",
       "suggestion": "Suggestion"
     },
-    "categoryMap": {
-      "cheer": "cheer",
-      "bug": "bug",
-      "suggestion": "suggestion"
-    },
     "form": {
       "placeholder": "Tell me what you liked or what bothered you",
       "button": "Post"
@@ -171,11 +143,12 @@
     "placeholder": "Enter a short description",
     "submit": "Register",
     "submitting": "Registering...",
-    "desc": "Tap the map to drop a pin, then pick a type and add a note.",
     "section_location": "Location",
     "location_hint": "Tap the map to set the spot. You can also search by coordinates or a shared map link.",
     "section_type": "Type",
-    "section_desc": "Note"
+    "section_desc": "Note",
+    "anonymous_notice": "You are not logged in, so this spot will be posted anonymously. Anonymous spots do not appear in My Page and cannot be deleted.",
+    "anonymous_login": "Log in"
   },
   "coordinate": {
     "latitude": "Latitude",
@@ -248,7 +221,8 @@
     "unlike": "Unlike",
     "people": "{{count}}",
     "mine": "Mine",
-    "delete_spot": "Delete this spot"
+    "delete_spot": "Delete this spot",
+    "anonymous": "Anonymous"
   },
   "community": {
     "title": "Find more communities",
