@@ -10,10 +10,10 @@ import { MapCenterUpdater } from "./MapCenterUpdater";
 import ZoomTracker from "./ZoomTracker";
 
 const NO_SPOTS = [];
-// 위아래로는 지도 끝 밖으로 못 나가게. 옆으로는 지구가 이어지니 막지 않음
+// 지도 끝 밖으로 못 나가게. 옆으로도 막아서 같은 세계가 반복되지 않게 (반복된 쪽에는 핀이 안 보임)
 const WORLD_BOUNDS = [
-  [-85, -540],
-  [85, 540],
+  [-85, -180],
+  [85, 180],
 ];
 
 export default function MapComponent({
@@ -51,6 +51,7 @@ export default function MapComponent({
         maxZoom={20}
         keepBuffer={4}
         updateWhenIdle={false}
+        noWrap
       />
 
       <SpotMarkers
