@@ -25,7 +25,7 @@ export default function Register() {
   const [selectedTag, setSelectedTag] = useState("");
   const [flyTarget, setFlyTarget] = useState(null);
   const [sheetSnap, setSheetSnap] = useState("half");
-  const { lat, lng } = useLocationStore();
+  const { lat, lng, setLocation } = useLocationStore();
   const isLogin = useUserStore((state) => state.isLogin);
   const { mutate, isPending } = useCreateDecor();
 
@@ -148,7 +148,7 @@ export default function Register() {
         <Suspense fallback={<div className="explore__map-loading">{t("find.mapLoading")}</div>}>
           <LazyMap>
             <FlyTo target={flyTarget} />
-            <MapControls />
+            <MapControls onLocate={(fLat, fLng) => setLocation(fLat.toFixed(6), fLng.toFixed(6))} />
           </LazyMap>
         </Suspense>
       </div>
