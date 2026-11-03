@@ -39,7 +39,7 @@ public class Decor extends BaseTimeEntity {
     private boolean deleted = false;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id")
     private User user;
 
     @OneToMany(mappedBy = "decor", cascade = CascadeType.ALL)
@@ -51,8 +51,18 @@ public class Decor extends BaseTimeEntity {
         decor.lng = lng;
         decor.type = type;
         decor.content = content;
-        user.addDecor(decor);
+        if (user != null) {
+            user.addDecor(decor);
+        }
         return decor;
+    }
+
+    public boolean isAnonymous() {
+        return user == null;
+    }
+
+    public boolean isWrittenBy(Long userId) {
+        return user != null && user.getId().equals(userId);
     }
 
     public void addFeedback(Feedback feedback) {

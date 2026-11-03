@@ -1,41 +1,38 @@
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import "../css/login.scss";
+
+const PROVIDERS = [
+  { id: "kakao", image: "/kakao-btn.png", label: "Kakao" },
+  { id: "naver", image: "/naver-btn.png", label: "Naver" },
+  { id: "google", image: "/google-btn.png", label: "Google" },
+];
 
 export default function Login() {
   const { t } = useTranslation();
 
   const handleLogin = (provider) => {
-    window.location.href = `${
-      import.meta.env.VITE_BACKEND_URL
-    }/oauth2/authorization/${provider}`;
+    window.location.href = `${import.meta.env.VITE_BACKEND_URL}/oauth2/authorization/${provider}`;
   };
 
   return (
-    <div className="page-layout">
-      <div className="page-section">
-        <div className="login">
-          <p className="login__title">{t("login.quick")}</p>
+    <div className="login-page">
+      <section className="login">
+        <h1 className="login__title">{t("menu.login")}</h1>
+        {PROVIDERS.map(({ id, image, label }) => (
           <button
-            className="login__btn login__btn--kakao"
-            onClick={() => handleLogin("kakao")}
+            key={id}
+            type="button"
+            className="login__btn"
+            onClick={() => handleLogin(id)}
           >
-            <img src="/kakao-btn.png" alt="kakao login" />
+            <img src={image} alt={`${label} login`} width="300" height="60" />
           </button>
-
-          <button
-            className="login__btn login__btn--naver"
-            onClick={() => handleLogin("naver")}
-          >
-            <img src="/naver-btn.png" alt="naver login" />
-          </button>
-
-          <button
-            className="login__btn login__btn--google"
-            onClick={() => handleLogin("google")}
-          >
-            <img src="/google-btn.png" alt="google login" />
-          </button>
-        </div>
-      </div>
+        ))}
+        <Link to="/privacy" className="login__privacy">
+          {t("footer.privacy")}
+        </Link>
+      </section>
     </div>
   );
 }

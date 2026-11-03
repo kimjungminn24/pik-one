@@ -2,34 +2,12 @@ import { handleFetchError } from "../utils/handleFetchError";
 
 const BASE_URL = `${import.meta.env.VITE_BACKEND_URL}/decors`;
 
-export const getDecorByTypeAndPosition = async ({
-  northLat,
-  southLat,
-  eastLng,
-  westLng,
-  type,
-}) => {
-  const url = new URL(`${BASE_URL}/search`);
-
-  url.searchParams.set("northLat", northLat);
-  url.searchParams.set("southLat", southLat);
-  url.searchParams.set("eastLng", eastLng);
-  url.searchParams.set("westLng", westLng);
-
-  if (type != null) {
-    url.searchParams.set("type", type);
-  }
-
-  const res = await fetch(url.toString(), {
-    credentials: "include",
-  });
-
+export const fetchAllDecors = async () => {
+  const res = await fetch(BASE_URL, { credentials: "include" });
   if (!res.ok) {
     await handleFetchError(res);
   }
-  const data = await res.json();
-
-  return data;
+  return res.json();
 };
 
 export const createNewDecor = async ({ lat, lng, type, content }) => {

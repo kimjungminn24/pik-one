@@ -45,6 +45,8 @@ public interface DecorRepository extends JpaRepository<Decor, Long> {
 
     Optional<Decor> findByIdAndDeletedAtIsNull(Long id);
 
+    List<Decor> findAllByDeletedAtIsNull();
+
     @Query("""
                 SELECT DISTINCT d FROM Decor d
                 LEFT JOIN FETCH d.feedbacks

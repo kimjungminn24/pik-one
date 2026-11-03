@@ -22,7 +22,7 @@ public class Feedback extends BaseTimeEntity {
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -35,8 +35,18 @@ public class Feedback extends BaseTimeEntity {
         feedback.content = content;
         feedback.decor = decor;
         decor.addFeedback(feedback);
-        user.addFeedback(feedback);
+        if (user != null) {
+            user.addFeedback(feedback);
+        }
         return feedback;
+    }
+
+    public boolean isAnonymous() {
+        return user == null;
+    }
+
+    public boolean isWrittenBy(Long userId) {
+        return user != null && user.getId().equals(userId);
     }
 
     public void setUser(User user) {

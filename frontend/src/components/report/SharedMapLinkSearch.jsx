@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useLocationStore } from "../../store/useLocationStore";
 import { useResolveSharedLink } from "../../hooks/useLocation";
 import { useTranslation } from "react-i18next";
@@ -44,34 +44,35 @@ export default function SharedMapLinkSearch() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="coordinate-register-form">
-      <div className="coordinate-register-form-outer">
-        <label className="coordinate-register-form-label ">
+    <form onSubmit={handleSubmit} className="link-form">
+      <div className="link-form__label">
+        <label className="field-label" htmlFor="shared-map-link">
           {t("sharedMap.label")}
         </label>
-
+        <button type="button" className="link-form__help" aria-describedby="shared-map-help">
+          ?
+          <span id="shared-map-help" className="link-form__tooltip" role="tooltip">
+            {t("sharedMap.help")}
+          </span>
+        </button>
+      </div>
+      <div className="link-form__row">
         <input
+          id="shared-map-link"
           value={url}
           placeholder={t("sharedMap.placeholder")}
-          className="coordinate-register-form-input"
+          className="field"
           onChange={(e) => setUrl(e.target.value)}
           disabled={isPending}
         />
+        <button
+          type="submit"
+          className="btn btn--secondary"
+          disabled={isPending || !url.trim()}
+        >
+          {isPending ? t("sharedMap.loading") : t("sharedMap.submit")}
+        </button>
       </div>
-
-      <button type="submit" disabled={isPending || !url.trim()}>
-        {isPending ? t("sharedMap.loading") : t("sharedMap.submit")}
-      </button>
-      <span
-        className="help-tooltip emoji"
-        tabIndex={0}
-        aria-label={t("sharedMap.label")}
-      >
-        ❓
-        <span className="help-tooltip-text" role="tooltip">
-          {t("sharedMap.help")}
-        </span>
-      </span>
     </form>
   );
 }

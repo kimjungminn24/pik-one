@@ -26,11 +26,13 @@ public class FeedbackFacade {
 
     @Transactional
     public FeedbackDto createFeedback(FeedbackCreateRequest request) {
-        User user = userService.getCurrentUser();
+        // 로그인하지 않았으면 익명 피드백
+        User user = SecurityUtil.isLogin() ? userService.getCurrentUser() : null;
         Decor decor = decorService.getActiveDecorById(request.decorId());
 
         return FeedbackDto.from(
-                feedbackService.create(request, user, decor), user.getId()
+                feedbackService.create(request, user, decor),
+                user == null ? null : user.getId()
         );
     }
 

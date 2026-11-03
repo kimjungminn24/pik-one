@@ -1,37 +1,55 @@
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
+import MascotPanel from "../components/MascotPanel";
+import "../css/page.scss";
 import "../css/info.scss";
+
+const CONTACTS = [
+  { key: "email", value: "jmeve24@naver.com", href: "mailto:jmeve24@naver.com" },
+  { key: "friendCode", value: "6335-5601-8671" },
+];
 
 export default function Info() {
   const { t } = useTranslation();
 
+  const copy = async (value) => {
+    try {
+      await navigator.clipboard.writeText(value);
+      toast.success(t("spot.copied"));
+    } catch {
+      toast.error(t("toast.error"));
+    }
+  };
+
   return (
-    <div className="info-page">
-      <div className="info-card">
-        <div className="info-header">
-          <img src="/pikmin.png" alt="pikmin" className="info-icon" />
-          <p className="info-intro">
-            {t("info.greeting")}
-            <br />
-            {t("info.bug")}
-            <br />
-            {t("info.ask")}
-          </p>
-        </div>
+    <div className="shell info">
+      <aside className="shell__panel">
 
-        <div className="info-details">
-          <div className="detail-item">
-            <span className="emoji">📨</span>
-            <strong>{t("info.email")} :</strong>
-            <span className="detail-value">jmeve24@naver.com</span>
-          </div>
+        <section className="panel-section info-maker">
+          <dl className="info-contacts">
+            {CONTACTS.map(({ key, value, href }) => (
+              <div key={key} className="info-contact">
+                <dt className="info-contact__label">{t(`info.${key}`)}</dt>
+                <dd className="info-contact__value">
+                  <span className="info-contact__text">
+                    {href ? <a href={href}>{value}</a> : value}
+                  </span>
+                  <button type="button" className="text-btn" onClick={() => copy(value)}>
+                    {t("spot.copy")}
+                  </button>
+                </dd>
+              </div>
+            ))}
+          </dl>
 
-          <div className="detail-item">
-            <span className="emoji">🌱</span>
-            <strong>{t("info.friendCode")} :</strong>
-            <span className="detail-value">6335-5601-8671</span>
-          </div>
-        </div>
-      </div>
+          <Link to="/feedback" className="btn btn--secondary btn--block">
+            {t("info.go_feedback")}
+          </Link>
+        </section>
+      </aside>
+
+      <MascotPanel />
     </div>
   );
 }

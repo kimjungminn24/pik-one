@@ -14,14 +14,15 @@
     "react-router-dom": "^7.6.2",
     "react-toastify": "^11.0.5",
     "sass": "^1.89.2",
-    "sass-loader": "^16.0.5",
-    "web-vitals": "^2.1.4",
+    "supercluster": "^8.0.1",
     "zustand": "^5.0.5"
   },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "fonts:subset": "node scripts/subset-fonts.mjs",
+    "lint": "eslint ."
   },
   "browserslist": {
     "production": [
@@ -36,8 +37,15 @@
     ]
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.5",
     "@vitejs/plugin-react": "^5.1.2",
-    "source-map-explorer": "^2.5.3",
+    "eslint": "^9.39.5",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "fontverter": "2.0.0",
+    "globals": "^16.5.0",
+    "harfbuzzjs": "1.6.3",
     "vite": "^7.3.0"
   }
 }

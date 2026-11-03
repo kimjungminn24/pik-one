@@ -1,6 +1,11 @@
 import React, { Suspense, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import Find from "./pages/Find";
 import Header from "./components/HeaderComponent";
 import PrivateRoute from "./components/PrivateRoute";
 import { useUserQuery } from "./hooks/useUser";
@@ -13,8 +18,9 @@ import { useTranslation } from "react-i18next";
 import Info from "./pages/Info";
 
 const Register = React.lazy(() => import("./pages/Register"));
-const Find = React.lazy(() => import("./pages/Find"));
 const MyPage = React.lazy(() => import("./pages/MyPage"));
+const Feedback = React.lazy(() => import("./pages/Feedback"));
+const Privacy = React.lazy(() => import("./pages/Privacy"));
 const ToastContainer = React.lazy(() =>
   import("react-toastify").then((mod) => ({
     default: mod.ToastContainer,
@@ -43,18 +49,15 @@ function App() {
     <Router>
       <Header />
       <div className="main">
-        <Suspense fallback={<div>로딩 중...</div>}>
+        <Suspense fallback={null}>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Find />} />
+            <Route path="/find" element={<Navigate to="/" replace />} />
             <Route
               path="/register"
-              element={
-                <PrivateRoute>
-                  <Register />
-                </PrivateRoute>
-              }
+              element={<Register />}
             />
-            <Route path="/find" element={<Find />} />
+            <Route path="/feedback" element={<Feedback />} />
             <Route path="/login" element={<Login />} />
             <Route
               path="/mypage"
@@ -65,6 +68,7 @@ function App() {
               }
             />
             <Route path="/info" element={<Info />} />
+            <Route path="/privacy" element={<Privacy />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

@@ -46,7 +46,9 @@ public class DecorService {
         if (checkDecorExistsNearby(request.lat(), request.lng(), request.type())) {
             throw new RestApiException(ErrorCode.DUPLICATE_DECOR);
         }
-        User user = userRepository.findById(userId)
+        User user = (userId == null)
+                ? null
+                : userRepository.findById(userId)
                 .orElseThrow(() -> new RestApiException(ErrorCode.USER_NOT_FOUND));
         Decor decor = createDecor(request, user);
         return DecorResponse.from(decor);
@@ -80,6 +82,10 @@ public class DecorService {
                         d.getLat(), d.getLng(),
                         lat, lng
                 ) <= 50);
+    }
+
+    public List<Decor> findAllActive() {
+        return decorRepository.findAllByDeletedAtIsNull();
     }
 
     public List<Decor> findMyDecorsWithFeedbacks(Long userId) {

@@ -1,0 +1,98 @@
+// npm run fonts:subset 으로 만든 파일. 직접 고치지 않는다
+@font-face {
+  font-family: "TossFace";
+  src: url("/fonts/tossface-ui.woff2?v=0a0af049") format("woff2");
+  font-display: swap;
+  unicode-range: U+A9, U+2614-2615, U+26E9, U+26F0, U+2708, U+270F, U+FE0F, U+1F1E6-1F1F0, U+1F1F5, U+1F1F7-1F1FA, U+1F1FC, U+1F309-1F30A, U+1F310, U+1F32E, U+1F331-1F332, U+1F338, U+1F33B-1F33C, U+1F342, U+1F344, U+1F349, U+1F34E, U+1F354, U+1F35B-1F35D, U+1F363, U+1F36C, U+1F372, U+1F37D, U+1F393, U+1F3A2, U+1F3AC, U+1F3D6, U+1F3DE-1F3DF, U+1F3E8, U+1F3EA, U+1F457, U+1F484, U+1F487, U+1F48A, U+1F496, U+1F49C, U+1F4DA, U+1F4EE, U+1F4FA, U+1F525, U+1F5BC, U+1F60A, U+1F622, U+1F689, U+1F68C, U+1F6D2, U+1F6E0, U+1F6E3, U+1F950, U+1F981, U+1F9FA;
+}
+
+@font-face {
+  font-family: "TossFace";
+  src: url("/fonts/tossface-faces-1.woff2?v=895ea6ef") format("woff2");
+  font-display: swap;
+  unicode-range: U+1F600-1F609, U+1F60B-1F610;
+}
+
+@font-face {
+  font-family: "TossFace";
+  src: url("/fonts/tossface-faces-2.woff2?v=87e7127d") format("woff2");
+  font-display: swap;
+  unicode-range: U+1F611-1F620;
+}
+
+@font-face {
+  font-family: "TossFace";
+  src: url("/fonts/tossface-faces-3.woff2?v=4cc201b2") format("woff2");
+  font-display: swap;
+  unicode-range: U+1F621, U+1F623-1F631;
+}
+
+@font-face {
+  font-family: "TossFace";
+  src: url("/fonts/tossface-faces-4.woff2?v=6d4b08f4") format("woff2");
+  font-display: swap;
+  unicode-range: U+1F632-1F641;
+}
+
+@font-face {
+  font-family: "TossFace";
+  src: url("/fonts/tossface-faces-5.woff2?v=76ca8e0a") format("woff2");
+  font-display: swap;
+  unicode-range: U+1F642-1F64F, U+1F910-1F911;
+}
+
+@font-face {
+  font-family: "TossFace";
+  src: url("/fonts/tossface-faces-6.woff2?v=317a95d2") format("woff2");
+  font-display: swap;
+  unicode-range: U+1F912-1F921;
+}
+
+@font-face {
+  font-family: "TossFace";
+  src: url("/fonts/tossface-faces-7.woff2?v=65fd7355") format("woff2");
+  font-display: swap;
+  unicode-range: U+1F922-1F92F, U+1F970-1F971;
+}
+
+@font-face {
+  font-family: "TossFace";
+  src: url("/fonts/tossface-faces-8.woff2?v=dea2705d") format("woff2");
+  font-display: swap;
+  unicode-range: U+2639-263A, U+1F972-1F97F;
+}
+
+@font-face {
+  font-family: "TossFace";
+  src: url("/fonts/tossface-hearts-1.woff2?v=f4ce7138") format("woff2");
+  font-display: swap;
+  unicode-range: U+2763-2764, U+1F493-1F495, U+1F497-1F49B, U+1F49D-1F49F, U+1F5A4, U+1F90D-1F90E;
+}
+
+@font-face {
+  font-family: "TossFace";
+  src: url("/fonts/tossface-hearts-2.woff2?v=ca581d3d") format("woff2");
+  font-display: swap;
+  unicode-range: U+1F446-1F450, U+1F4AA, U+1F590, U+1F595-1F596, U+1F9E1;
+}
+
+@font-face {
+  font-family: "TossFace";
+  src: url("/fonts/tossface-hearts-3.woff2?v=e79fe382") format("woff2");
+  font-display: swap;
+  unicode-range: U+261D, U+270A-270D, U+1F90C, U+1F90F, U+1F918-1F91F, U+1F932;
+}
+
+@font-face {
+  font-family: "TossFace";
+  src: url("/fonts/tossface-misc-1.woff2?v=5a04329b") format("woff2");
+  font-display: swap;
+  unicode-range: U+2705, U+2728, U+274C, U+2753, U+2757, U+2B50, U+1F31F, U+1F340, U+1F381, U+1F389-1F38A, U+1F4A1, U+1F4AF, U+1F4CC-1F4CD, U+1F680;
+}
+
+@font-face {
+  font-family: "TossFace";
+  src: url("/fonts/tossface-misc-2.woff2?v=a54ac8e7") format("woff2");
+  font-display: swap;
+  unicode-range: U+2600-2601, U+26A1, U+2744, U+1F308, U+1F319, U+1F31E, U+1F3B5, U+1F4A4, U+1F4A6, U+1F4A8, U+1F4E2, U+1F4F7, U+1F60E, U+1F6A8;
+}

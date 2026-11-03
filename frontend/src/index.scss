@@ -1,7 +1,17 @@
 @use "./css/global";
+@use "./css/tossface";
 
 body {
-  font-family: "Noto Sans KR", "Noto Sans JP", "Noto Sans", sans-serif;
+  // 글 속 이모지도 TossFace로. 조각마다 unicode-range가 있어 이모지가 있을 때만 받는다
+  // 한자는 기기 일본어 폰트로 (보통·굵게가 다 있어 굵기가 섞이지 않음)
+  font-family: "Pretendard Variable", Pretendard, "TossFace", -apple-system,
+    BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic UI", Meiryo, "Apple SD Gothic Neo",
+    sans-serif;
+  color: var(--g900);
+  background: var(--page-bg);
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 input,
 textarea,
@@ -10,33 +20,9 @@ button,
 span,
 p {
   font-family: inherit;
+  letter-spacing: inherit;
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
-}
-@font-face {
-  font-family: "TossFace";
-  src: url("/fonts/tossface.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "Noto Sans";
-  src: url("/fonts/NotoSans-Bold.ttf") format("truetype");
-  font-weight: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Noto Sans KR";
-  src: url("/fonts/NotoSansKR-Bold.ttf") format("truetype");
-  font-weight: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Noto Sans JP";
-  src: url("/fonts/NotoSansJP-Bold.ttf") format("truetype");
-  font-weight: normal;
-  font-display: swap;
 }

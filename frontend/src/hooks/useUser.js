@@ -11,6 +11,8 @@ export const useUserQuery = () => {
   const query = useQuery({
     queryKey: ["auth", "me"],
     queryFn: fetchUser,
+    // 비로그인이면 401이 정상. 전역 onError의 토스트/로그인 리다이렉트에서 제외
+    meta: { silent: true },
   });
 
   useEffect(() => {

@@ -1,77 +1,68 @@
-import React, { useState } from "react";
-import { MapContainer, TileLayer, Marker } from "react-leaflet";
+import { MapContainer, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import { LocateButton } from "./LocateButton";
 import { LocationMarker } from "./LocationMarker";
 import { FetchOnMove } from "./FetchOnMove";
-import { useDecorDetail } from "../../hooks/useDecor";
-import DecorDetailPopup from "../decor/DecorDetailPopup";
-import { createCustomIcon } from "../../utils/markerIcon";
-import { SearchBox } from "./SearchBox";
+import SpotMarkers from "./SpotMarkers";
+import { TILE_ATTRIBUTION, TILE_OPTIONS, TILE_URL } from "../../utils/mapTiles";
 import "../../css/map.scss";
 import { useLocationStore } from "../../store/useLocationStore";
 import { MapCenterUpdater } from "./MapCenterUpdater";
 import ZoomTracker from "./ZoomTracker";
 
+const NO_SPOTS = [];
+// 위아래로는 지도 끝 밖으로 못 나가게. 옆으로는 지구가 이어지니 막지 않음
+const WORLD_BOUNDS = [
+  [-85, -540],
+  [85, 540],
+];
+
 export default function MapComponent({
-  searchResults = [],
+  searchResults = NO_SPOTS,
   showLocationMarker = true,
+  selectedId,
+  highlightId,
+  onSelect,
+  children,
 }) {
-  const [selectedId, setSelectedId] = useState(null);
-  const { data, isLoading, isError } = useDecorDetail(selectedId, !!selectedId);
-  const { bounds } = useLocationStore();
+  const { bounds, zoom } = useLocationStore();
   const initialCenter = [
     (Number(bounds.northLat) + Number(bounds.southLat)) / 2,
     (Number(bounds.eastLng) + Number(bounds.westLng)) / 2,
   ];
 
   return (
-    <>
-      <MapContainer
-        center={initialCenter}
-        zoom={15}
-        minZoom={2}
+    <MapContainer
+      center={initialCenter}
+      zoom={zoom || 15}
+      minZoom={2}
+      maxZoom={20}
+      maxBounds={WORLD_BOUNDS}
+      maxBoundsViscosity={1}
+      zoomControl={false}
+      className="map__container"
+    >
+      <ZoomTracker />
+      <MapCenterUpdater />
+
+      <TileLayer
+        attribution={TILE_ATTRIBUTION}
+        url={TILE_URL}
+        {...TILE_OPTIONS}
         maxZoom={20}
-        className="map__container"
-      >
-        <ZoomTracker />
-        <MapCenterUpdater />
-        <SearchBox />
+        keepBuffer={4}
+        updateWhenIdle={false}
+      />
 
-        <TileLayer
-          attribution="&copy; OpenStreetMap contributors"
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          maxZoom={20}
-          maxNativeZoom={19}
-          keepBuffer={4}
-        />
+      <SpotMarkers
+        spots={searchResults}
+        selectedId={selectedId}
+        highlightId={highlightId}
+        onSelect={onSelect}
+      />
 
-        {searchResults.map((item) => (
-          <Marker
-            key={`${item.id}-${item.type}`}
-            position={[item.lat, item.lng]}
-            icon={createCustomIcon(item.type, item.id === selectedId)}
-            eventHandlers={{
-              click: () => setSelectedId(item.id),
-            }}
-          />
-        ))}
-
-        {showLocationMarker && <LocationMarker />}
-        <LocateButton />
-        <FetchOnMove />
-      </MapContainer>
-      {selectedId && data && !isLoading && !isError && (
-        <div className="popup">
-          <button
-            className="popup__close-button"
-            onClick={() => setSelectedId(null)}
-          >
-            ✕
-          </button>
-          <DecorDetailPopup feedbacks={data.feedbacks} data={data} />
-        </div>
-      )}
-    </>
+      {showLocationMarker && <LocationMarker />}
+      <FetchOnMove />
+      {children}
+    </MapContainer>
   );
 }
