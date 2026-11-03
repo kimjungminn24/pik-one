@@ -168,6 +168,8 @@ const TYPED_EMOJI = {
   ],
 };
 
+const CHUNK_SIZE = 16;
+
 async function buildTossFace(code) {
   const source = await readFile(path.join(FONT_SRC, "tossface.ttf"));
   const face = new hb.Face(new hb.Blob(source));
@@ -181,9 +183,17 @@ async function buildTossFace(code) {
   const uiEmoji = [...new Set(code.match(/\p{RGI_Emoji}|\p{Extended_Pictographic}/gv) ?? [])];
   const uiCodepoints = new Set(uiEmoji.flatMap((e) => [...e].map((c) => c.codePointAt(0))));
   const chunks = [{ name: "ui", strings: uiEmoji, codepoints: [...uiCodepoints] }];
+  // 16개씩 나눠, 글에 이모지 몇 개만 있어도 그 이모지가 든 작은 조각만 받게 한다
   for (const [name, list] of Object.entries(TYPED_EMOJI)) {
     const cps = list.filter((cp) => supported.has(cp) && !uiCodepoints.has(cp));
-    chunks.push({ name, strings: cps.map((cp) => String.fromCodePoint(cp)), codepoints: cps });
+    for (let i = 0; i < cps.length; i += CHUNK_SIZE) {
+      const part = cps.slice(i, i + CHUNK_SIZE);
+      chunks.push({
+        name: `${name}-${i / CHUNK_SIZE + 1}`,
+        strings: part.map((cp) => String.fromCodePoint(cp)),
+        codepoints: part,
+      });
+    }
   }
 
   const rules = [];
