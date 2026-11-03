@@ -1,0 +1,19 @@
+# 서버에 /etc/systemd/system/pik-one-backend.service 로 설치
+# 비밀값은 /etc/pik-one/backend.env (권한 600)에서 읽는다
+[Unit]
+Description=pik-one backend
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=ubuntu
+WorkingDirectory=/home/ubuntu/app/pik-one/backend
+EnvironmentFile=/etc/pik-one/backend.env
+ExecStart=/usr/bin/java -jar /home/ubuntu/app/pik-one/backend/backend-0.0.1-SNAPSHOT.jar
+# java는 SIGTERM으로 끝나면 143을 돌려줌. 정상 종료로 본다
+SuccessExitStatus=143
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
