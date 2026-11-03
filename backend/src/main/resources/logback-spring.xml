@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <property name="LOG_PATH" value="/home/ec2-user/logs"/>
+    <!-- 서버 사용자는 ubuntu라 예전 /home/ec2-user/logs에는 쓰지 못했음. 실행 폴더 아래 logs, LOG_PATH로 바꿀 수 있음 -->
+    <property name="LOG_PATH" value="${LOG_PATH:-logs}"/>
 
     <appender name="JSON_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_PATH}/error.json</file>
