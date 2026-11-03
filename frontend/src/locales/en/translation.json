@@ -223,7 +223,8 @@
   "map": {
     "zoom": "Map zoom",
     "zoom_in": "Zoom in",
-    "zoom_out": "Zoom out"
+    "zoom_out": "Zoom out",
+    "cluster_title": "{{count}} spots"
   },
   "spot": {
     "probability": "Likelihood",

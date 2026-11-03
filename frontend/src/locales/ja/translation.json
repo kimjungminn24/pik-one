@@ -223,7 +223,8 @@
   "map": {
     "zoom": "地図の拡大・縮小",
     "zoom_in": "拡大",
-    "zoom_out": "縮小"
+    "zoom_out": "縮小",
+    "cluster_title": "スポット{{count}}か所"
   },
   "spot": {
     "probability": "存在確率",
