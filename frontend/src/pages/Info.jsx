@@ -54,7 +54,7 @@ export default function Info() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            illust. @sarii_illustration
+            @sarii_illustration
           </a>
           <img
             src="/cute-200.webp"
