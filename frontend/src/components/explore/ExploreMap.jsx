@@ -8,9 +8,6 @@ export default function ExploreMap({ spots, selectedId, highlightId, onSelect, f
     <MapComponent
       searchResults={spots}
       showLocationMarker={false}
-      showSearchBox={false}
-      zoomControlPosition={null}
-      locatePosition={null}
       selectedId={selectedId}
       highlightId={highlightId}
       onSelect={onSelect}
