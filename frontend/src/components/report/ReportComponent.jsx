@@ -16,12 +16,7 @@ import { useTranslation } from "react-i18next";
 export default function ReportComponent({ enabled, outro }) {
   const getRandomElement = (arr) => arr[Math.floor(Math.random() * arr.length)];
   const { t, i18n } = useTranslation();
-  const lang = i18n.language.startsWith("ja")
-    ? "ja"
-    : i18n.language.startsWith("en")
-      ? "en"
-      : "ko";
-  const { prefix, core } = nicknameOptions[lang];
+  const { prefix, core } = nicknameOptions[i18n.resolvedLanguage] ?? nicknameOptions.ko;
 
   const { data: list, isLoading } = useGetIssues(enabled);
 
