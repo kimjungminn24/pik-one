@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useLocationStore } from "../../store/useLocationStore";
 import { useResolveSharedLink } from "../../hooks/useLocation";
 import { useTranslation } from "react-i18next";
@@ -49,12 +49,12 @@ export default function SharedMapLinkSearch() {
         <label className="field-label" htmlFor="shared-map-link">
           {t("sharedMap.label")}
         </label>
-        <span className="link-form__help" tabIndex={0} aria-describedby="shared-map-help">
+        <button type="button" className="link-form__help" aria-describedby="shared-map-help">
           ?
           <span id="shared-map-help" className="link-form__tooltip" role="tooltip">
             {t("sharedMap.help")}
           </span>
-        </span>
+        </button>
       </div>
       <div className="link-form__row">
         <input

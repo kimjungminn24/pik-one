@@ -1,4 +1,3 @@
-import React from "react";
 import "../../css/tag.scss";
 
 export default function CategorySelector({ categoryList, selected, onSelect }) {

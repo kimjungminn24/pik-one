@@ -135,7 +135,7 @@ export default function Register() {
 
       <div className="explore__map">
         <Suspense fallback={<div className="explore__map-loading">{t("find.mapLoading")}</div>}>
-          <LazyMap showSearchBox={false} zoomControlPosition={null} locatePosition={null}>
+          <LazyMap>
             <FlyTo target={flyTarget} />
             <MapControls />
           </LazyMap>
