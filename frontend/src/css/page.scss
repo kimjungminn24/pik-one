@@ -265,7 +265,7 @@ textarea.field {
   }
 
   .explore:has(.explore__footer) .explore__body {
-    padding-bottom: 5.5rem;
+    padding-bottom: calc(5.5rem + var(--sheet-hidden, 0px));
   }
 }
 

@@ -97,6 +97,6 @@
 
 @media (max-width: 48rem) {
   .explore:has(.register-anon) .explore__body {
-    padding-bottom: 7rem;
+    padding-bottom: calc(7rem + var(--sheet-hidden, 0px));
   }
 }
