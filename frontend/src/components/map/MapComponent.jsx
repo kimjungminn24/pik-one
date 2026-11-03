@@ -14,8 +14,10 @@ import { useLocationStore } from "../../store/useLocationStore";
 import { MapCenterUpdater } from "./MapCenterUpdater";
 import ZoomTracker from "./ZoomTracker";
 
+const NO_SPOTS = [];
+
 export default function MapComponent({
-  searchResults = [],
+  searchResults = NO_SPOTS,
   showLocationMarker = true,
   showSearchBox = true,
   zoomControlPosition = "topleft",

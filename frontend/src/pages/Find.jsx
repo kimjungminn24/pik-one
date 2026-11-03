@@ -6,15 +6,16 @@ import Tag from "../components/TagComponent";
 import PlaceSearch from "../components/explore/PlaceSearch";
 import SpotCard from "../components/explore/SpotCard";
 import SpotDetail from "../components/explore/SpotDetail";
-import FlyTo from "../components/map/FlyTo";
-import MapControls from "../components/map/MapControls";
 import { useLocationStore } from "../store/useLocationStore";
 import { useDebouncedValue } from "../hooks/useDebouncedValue";
 import { useDecor } from "../hooks/useDecor";
 import { sheetCenterOffsetPx, useBottomSheet } from "../hooks/useBottomSheet";
 import "../css/explore.scss";
 
-const LazyMap = React.lazy(() => import("../components/map/MapComponent"));
+const loadExploreMap = () => import("../components/explore/ExploreMap");
+// 지도 화면으로 들어온 경우에만 앱 시작과 동시에 지도 조각을 받기 시작 (다른 페이지는 그대로 지연 로딩)
+const earlyMap = window.location.pathname === "/" ? loadExploreMap() : null;
+const ExploreMap = React.lazy(() => earlyMap ?? loadExploreMap());
 
 const MIN_ZOOM = 10;
 const PRIMARY_LIMIT = 5;
@@ -116,6 +117,8 @@ export default function Find() {
       .map((spot) => ({ spot, distance: distanceMeters(center, spot) }))
       .sort((a, b) => a.distance - b.distance);
   }, [isAllMode, spotsInView, selectedTags, center]);
+
+  const mapSpots = useMemo(() => visibleSpots.map((v) => v.spot), [visibleSpots]);
 
   const handleTagClick = (item) => {
     if (item.name === "ALL") {
@@ -268,19 +271,13 @@ export default function Find() {
 
       <div className="explore__map">
         <Suspense fallback={<div className="explore__map-loading">{t("find.mapLoading")}</div>}>
-          <LazyMap
-            searchResults={visibleSpots.map((v) => v.spot)}
-            showLocationMarker={false}
-            showSearchBox={false}
-            zoomControlPosition={null}
-            locatePosition={null}
+          <ExploreMap
+            spots={mapSpots}
             selectedId={selectedId}
             highlightId={selectedId ? null : hoveredId}
             onSelect={selectSpot}
-          >
-            <FlyTo target={flyTarget} />
-            <MapControls />
-          </LazyMap>
+            flyTarget={flyTarget}
+          />
         </Suspense>
       </div>
     </div>
