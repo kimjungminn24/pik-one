@@ -559,20 +559,6 @@ $danger: var(--danger);
   font-size: 0.875rem;
 }
 
-.spot-detail__login {
-  @include flex-center;
-  height: 3rem;
-  border-radius: 0.875rem;
-  background: $brand;
-  color: var(--ink);
-  font-size: 0.9375rem;
-  font-weight: 700;
-
-  &:hover {
-    background: $brand-hover;
-  }
-}
-
 .spot-detail__vote-buttons {
   display: grid;
   grid-template-columns: 1fr 1fr;
