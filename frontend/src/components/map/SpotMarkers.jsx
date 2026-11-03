@@ -10,6 +10,8 @@ import {
 
 const CLUSTER_MAX_ZOOM = 15;
 const CLUSTER_RADIUS = 90;
+// 이보다 멀리서 보면 종류 알약 대신 노란 숫자 원으로만 (도시 하나가 다 보이는 정도)
+const FAR_ZOOM = 10;
 
 // 키보드로 핀·묶음에 초점을 두고 Enter나 Space를 누르면 클릭과 같게
 const withKeyboard = (onActivate) => ({
@@ -109,6 +111,7 @@ export default function SpotMarkers({ spots, selectedId, highlightId, onSelect }
 
   // 묶음이 보이는 줌에서는 혼자 있는 스팟도 "1" 묶음으로 보여 줘서 모양을 맞춤
   const singleAsCluster = view.zoom <= CLUSTER_MAX_ZOOM;
+  const far = view.zoom <= FAR_ZOOM;
 
   return items.map((item) => {
     if (item.spot && singleAsCluster) {
@@ -118,7 +121,7 @@ export default function SpotMarkers({ spots, selectedId, highlightId, onSelect }
         <Marker
           key={`${item.key}-single-${lang}`}
           position={item.position}
-          icon={createClusterIcon(1, [spot.type], isActive)}
+          icon={createClusterIcon(1, far ? [] : [spot.type], isActive)}
           title={spotTitle(spot)}
           zIndexOffset={isActive ? 900 : 500}
           eventHandlers={item.handlers}
@@ -147,7 +150,7 @@ export default function SpotMarkers({ spots, selectedId, highlightId, onSelect }
       <Marker
         key={`${item.key}-${lang}`}
         position={item.position}
-        icon={createClusterIcon(item.count, item.topTypes, isActive)}
+        icon={createClusterIcon(item.count, far ? [] : item.topTypes, isActive)}
         title={t("map.cluster_title", { count: item.count })}
         zIndexOffset={isActive ? 900 : 500}
         eventHandlers={item.handlers}
