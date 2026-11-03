@@ -1,5 +1,5 @@
-import React, { Suspense, useMemo, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { Suspense, useEffect, useMemo, useRef, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { decorList } from "../decorList";
 import Tag from "../components/TagComponent";
@@ -35,11 +35,30 @@ const distanceMeters = (a, b) => {
 export default function Find() {
   const { t } = useTranslation();
 
+  const location = useLocation();
+  const navigate = useNavigate();
+  const registered = location.state?.registered;
+
   const [selectedTags, setSelectedTags] = useState([]);
-  const [selectedId, setSelectedId] = useState(null);
+  const [selectedId, setSelectedId] = useState(registered?.id ?? null);
   const [hoveredId, setHoveredId] = useState(null);
   const [sheetSnap, setSheetSnap] = useState("half");
-  const [flyTarget, setFlyTarget] = useState(null);
+  const [flyTarget, setFlyTarget] = useState(() =>
+    registered
+      ? {
+          lat: registered.lat,
+          lng: registered.lng,
+          zoom: 17,
+          offsetY: sheetCenterOffsetPx("half"),
+          key: Date.now(),
+        }
+      : null
+  );
+
+  // 등록 화면에서 넘어온 스팟은 한 번만 연다. 새로고침이나 뒤로 가기로 다시 열리지 않게 비움
+  useEffect(() => {
+    if (registered) navigate(location.pathname, { replace: true, state: null });
+  }, [registered, navigate, location.pathname]);
 
   const panelRef = useRef(null);
   const toggleSheet = () =>

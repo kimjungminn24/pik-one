@@ -1,5 +1,5 @@
 import React, { Suspense, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 import { decorList } from "../decorList";
@@ -21,6 +21,7 @@ const LazyMap = React.lazy(() => import("../components/map/MapComponent"));
 
 export default function Register() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const [content, setContent] = useState("");
   const [selectedTag, setSelectedTag] = useState("");
   const [flyTarget, setFlyTarget] = useState(null);
@@ -57,10 +58,10 @@ export default function Register() {
         content,
       },
       {
-        onSuccess: () => {
+        onSuccess: (spot) => {
           toast.success(t("toast.decor_success"));
-          setContent("");
-          setSelectedTag("");
+          // 찾기 화면에서 방금 등록한 스팟을 바로 열어 준다
+          navigate("/", { state: { registered: spot } });
         },
       }
     );
