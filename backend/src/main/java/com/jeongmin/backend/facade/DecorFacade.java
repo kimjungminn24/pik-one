@@ -45,9 +45,7 @@ public class DecorFacade {
     @Transactional(readOnly = true)
     public DecorDetailResponse getDecorById(Long decorId) {
         Decor decor = decorService.getActiveDecorById(decorId);
-        Long userId = SecurityUtil.isLogin()
-                ? SecurityUtil.getCurrentUserId()
-                : null;
+        Long userId = currentUserIdOrNull();
         int likeCount = likeService.countByDecorId(decorId);
         boolean likedByMe = (userId != null)
                 && likeService.isLikedByUser(decorId, userId);
@@ -69,7 +67,7 @@ public class DecorFacade {
     public void deleteDecor(Long decorId) {
         Decor decor = decorService.getActiveDecorById(decorId);
         User user = userService.getCurrentUser();
-        if (!decor.getUser().getId().equals(user.getId())) {
+        if (!decor.isWrittenBy(user.getId())) {
             throw new RestApiException(ErrorCode.NO_PERMISSION_DECOR_DELETE);
         }
         decorService.delete(decor);
@@ -77,12 +75,12 @@ public class DecorFacade {
 
 
     public DecorResponse createNewDecorWithoutLock(DecorCreateRequest request) {
-        Long userId = SecurityUtil.getCurrentUserId();
+        Long userId = currentUserIdOrNull();
         return decorService.createNewDecorTransactional(request, userId);
     }
 
     public DecorResponse createNewDecor(DecorCreateRequest request) {
-        Long userId = SecurityUtil.getCurrentUserId();
+        Long userId = currentUserIdOrNull();
         List<String> lockKeys = lockKeyGenerator.generate(request);
         return lockManager.executeWithLock(lockKeys, () -> decorService.createNewDecorTransactional(request, userId));
     }
@@ -99,6 +97,11 @@ public class DecorFacade {
         return decors.stream()
                 .map(decor -> toDecorDetailResponse(decor, userId))
                 .toList();
+    }
+
+    // 로그인하지 않았으면 null. 등록에서는 익명 스팟이 된다
+    private Long currentUserIdOrNull() {
+        return SecurityUtil.isLogin() ? SecurityUtil.getCurrentUserId() : null;
     }
 
     private DecorDetailResponse toDecorDetailResponse(Decor decor, Long userId) {
