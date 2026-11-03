@@ -12,7 +12,10 @@ import { useDecor } from "../hooks/useDecor";
 import { sheetCenterOffsetPx, useBottomSheet } from "../hooks/useBottomSheet";
 import "../css/explore.scss";
 
-const ExploreMap = React.lazy(() => import("../components/explore/ExploreMap"));
+const loadExploreMap = () => import("../components/explore/ExploreMap");
+// 지도 화면으로 들어온 경우에만 앱 시작과 동시에 지도 조각을 받기 시작 (다른 페이지는 그대로 지연 로딩)
+const earlyMap = window.location.pathname === "/" ? loadExploreMap() : null;
+const ExploreMap = React.lazy(() => earlyMap ?? loadExploreMap());
 
 const MIN_ZOOM = 10;
 const PRIMARY_LIMIT = 5;
