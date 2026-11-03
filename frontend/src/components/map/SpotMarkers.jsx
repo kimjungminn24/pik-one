@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Marker, useMap, useMapEvents } from "react-leaflet";
+import { useTranslation } from "react-i18next";
 import Supercluster from "supercluster";
 import {
   createClusterIcon,
@@ -9,6 +10,18 @@ import {
 
 const CLUSTER_MAX_ZOOM = 15;
 const CLUSTER_RADIUS = 90;
+
+// 키보드로 핀·묶음에 초점을 두고 Enter나 Space를 누르면 클릭과 같게
+const withKeyboard = (onActivate) => ({
+  click: onActivate,
+  keydown: (e) => {
+    const key = e.originalEvent.key;
+    if (key === "Enter" || key === " ") {
+      e.originalEvent.preventDefault();
+      onActivate();
+    }
+  },
+});
 
 const readView = (map) => {
   const b = map.getBounds();
@@ -20,7 +33,20 @@ const readView = (map) => {
 
 export default function SpotMarkers({ spots, selectedId, highlightId, onSelect }) {
   const map = useMap();
+  const { t, i18n } = useTranslation();
+  // react-leaflet은 title을 마커를 만들 때만 넣으므로, 언어가 바뀌면 마커를 새로 만든다
+  const lang = i18n.resolvedLanguage;
   const [view, setView] = useState(() => readView(map));
+
+  // 키보드·스크린리더용 핀 이름 ("카페, 존재 확률 67% · 3명 확인")
+  const spotTitle = (spot) => {
+    const total = (spot.helpfulCount ?? 0) + (spot.notFoundCount ?? 0);
+    const status =
+      total === 0
+        ? t("explore.no_feedback")
+        : t("explore.probability", { value: Math.round((spot.helpfulCount / total) * 100), count: total });
+    return `${t(`decor.${spot.type}`)}, ${status}`;
+  };
 
   // 부모가 다시 그려져 함수가 바뀌어도 마커 이벤트를 다시 걸지 않도록 최신 함수만 참조
   const onSelectRef = useRef(onSelect);
@@ -59,7 +85,7 @@ export default function SpotMarkers({ spots, selectedId, highlightId, onSelect }
             key: `spot-${spot.id}`,
             position: [lat, lng],
             spot,
-            handlers: { click: () => onSelectRef.current(spot.id) },
+            handlers: withKeyboard(() => onSelectRef.current(spot.id)),
           };
         }
 
@@ -72,12 +98,10 @@ export default function SpotMarkers({ spots, selectedId, highlightId, onSelect }
           count,
           leafIds: new Set(leaves.map((leaf) => leaf.id)),
           topTypes: Object.keys(tally).sort((a, b) => tally[b] - tally[a]),
-          handlers: {
-            click: () => {
-              const zoom = Math.min(index.getClusterExpansionZoom(clusterId), map.getMaxZoom());
-              map.flyTo([lat, lng], zoom, { duration: 0.6 });
-            },
-          },
+          handlers: withKeyboard(() => {
+            const zoom = Math.min(index.getClusterExpansionZoom(clusterId), map.getMaxZoom());
+            map.flyTo([lat, lng], zoom, { duration: 0.6 });
+          }),
         };
       }),
     [index, view, map]
@@ -90,9 +114,10 @@ export default function SpotMarkers({ spots, selectedId, highlightId, onSelect }
         spot.id === selectedId ? "selected" : spot.id === highlightId ? "hover" : "none";
       return (
         <Marker
-          key={item.key}
+          key={`${item.key}-${lang}`}
           position={item.position}
           icon={createCustomIcon(spot.type, state, probabilityTone(spot))}
+          title={spotTitle(spot)}
           zIndexOffset={state === "selected" ? 1000 : state === "hover" ? 900 : 0}
           eventHandlers={item.handlers}
         />
@@ -102,9 +127,10 @@ export default function SpotMarkers({ spots, selectedId, highlightId, onSelect }
     const isActive = item.leafIds.has(selectedId) || item.leafIds.has(highlightId);
     return (
       <Marker
-        key={item.key}
+        key={`${item.key}-${lang}`}
         position={item.position}
         icon={createClusterIcon(item.count, item.topTypes, isActive)}
+        title={t("map.cluster_title", { count: item.count })}
         zIndexOffset={isActive ? 900 : 500}
         eventHandlers={item.handlers}
       />

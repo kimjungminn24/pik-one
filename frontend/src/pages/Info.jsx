@@ -31,11 +31,13 @@ export default function Info() {
               <div key={key} className="info-contact">
                 <dt className="info-contact__label">{t(`info.${key}`)}</dt>
                 <dd className="info-contact__value">
-                  {href ? <a href={href}>{value}</a> : value}
+                  <span className="info-contact__text">
+                    {href ? <a href={href}>{value}</a> : value}
+                  </span>
+                  <button type="button" className="text-btn" onClick={() => copy(value)}>
+                    {t("spot.copy")}
+                  </button>
                 </dd>
-                <button type="button" className="text-btn" onClick={() => copy(value)}>
-                  {t("spot.copy")}
-                </button>
               </div>
             ))}
           </dl>

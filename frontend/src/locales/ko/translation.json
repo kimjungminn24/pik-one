@@ -223,7 +223,8 @@
   "map": {
     "zoom": "지도 확대/축소",
     "zoom_in": "확대",
-    "zoom_out": "축소"
+    "zoom_out": "축소",
+    "cluster_title": "스팟 {{count}}곳"
   },
   "spot": {
     "probability": "존재 확률",
