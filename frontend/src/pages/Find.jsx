@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { decorList } from "../decorList";
 import Tag from "../components/TagComponent";
 import PlaceSearch from "../components/explore/PlaceSearch";
+import CountryJump from "../components/explore/CountryJump";
 import SpotCard from "../components/explore/SpotCard";
 import SpotDetail from "../components/explore/SpotDetail";
 import { useLocationStore } from "../store/useLocationStore";
@@ -166,6 +167,11 @@ export default function Find() {
     }
   };
 
+  const moveToCountry = ({ lat, lng, zoom: countryZoom }) => {
+    setSelectedId(null);
+    setFlyTarget({ lat, lng, zoom: countryZoom, key: Date.now() });
+  };
+
   const moveTo = ({ lat, lng }) => {
     setSelectedId(null);
     setFlyTarget({ lat, lng, zoom: 16, key: Date.now() });
@@ -289,6 +295,7 @@ export default function Find() {
       </aside>
 
       <div className="explore__map">
+        <CountryJump onPick={moveToCountry} />
         <Suspense fallback={<div className="explore__map-loading">{t("find.mapLoading")}</div>}>
           <ExploreMap
             spots={mapSpots}

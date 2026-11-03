@@ -228,5 +228,22 @@
     "japan": "Japan",
     "usa": "USA",
     "need_info": "Know one? Let us know!"
+  },
+  "country": {
+    "label": "Go to country",
+    "KR": "South Korea",
+    "JP": "Japan",
+    "TW": "Taiwan",
+    "HK": "Hong Kong",
+    "SG": "Singapore",
+    "TH": "Thailand",
+    "US": "United States",
+    "CA": "Canada",
+    "GB": "United Kingdom",
+    "FR": "France",
+    "DE": "Germany",
+    "ES": "Spain",
+    "IT": "Italy",
+    "AU": "Australia"
   }
 }
