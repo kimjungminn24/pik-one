@@ -22,4 +22,11 @@ i18n
     },
   });
 
+// 스크린리더 발음과 검색엔진 언어 판단을 위해 <html lang>을 지금 언어로
+const syncHtmlLang = (lng) => {
+  document.documentElement.lang = (lng || "ko").slice(0, 2);
+};
+syncHtmlLang(i18n.resolvedLanguage || i18n.language);
+i18n.on("languageChanged", syncHtmlLang);
+
 export default i18n;
