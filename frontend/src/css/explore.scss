@@ -985,15 +985,11 @@ $control: 2.75rem;
     display: none;
   }
 
-  .explore--sheet-peek .explore__panel,
-  .explore--sheet-half .explore__panel {
-    touch-action: none;
-
-    .explore__list,
-    .explore__body,
-    .spot-detail {
-      overflow-y: hidden;
-    }
+  // 시트에 가려진 만큼(--sheet-hidden, useBottomSheet가 넣음) 아래 여백을 줘서 끝까지 스크롤되게
+  .explore__list,
+  .explore__body,
+  .spot-detail {
+    padding-bottom: calc(1rem + var(--sheet-hidden, 0px));
   }
   .explore__chips {
     touch-action: pan-x;

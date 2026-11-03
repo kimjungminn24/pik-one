@@ -1,0 +1,247 @@
+{
+  "title": "單獨點位",
+  "menu": {
+    "register": "登錄幼苗",
+    "find": "找幼苗",
+    "mypage": "我的資料",
+    "login": "登入",
+    "logout": "登出",
+    "feedback": "意見",
+    "label": "選單",
+    "open": "打開選單",
+    "close": "關閉選單",
+    "language": "語言"
+  },
+  "footer": {
+    "copyright": "© 2025 單獨點位",
+    "privacy": "隱私權政策"
+  },
+  "notfound": {
+    "title": "404 找不到頁面 😢",
+    "home": "回到首頁"
+  },
+  "find": {
+    "mapLoading": "地圖載入中...",
+    "all": "全部"
+  },
+  "decor": {
+    "RESTAURANT": "餐廳",
+    "CAFE": "咖啡廳",
+    "SWEET_SHOP": "甜點店",
+    "MOVIE_THEATER": "電影院",
+    "PHARMACY": "藥局",
+    "ZOO": "動物園",
+    "FOREST": "森林",
+    "WATERSIDE": "水邊",
+    "POST_OFFICE": "郵局",
+    "ART_GALLERY": "美術館",
+    "AIRPORT": "機場",
+    "STATION": "車站",
+    "BEACH": "海灘",
+    "BURGER_PLACE": "漢堡店",
+    "CORNER_STORE": "便利商店",
+    "SUPERMARKET": "超市",
+    "BAKERY": "麵包店",
+    "HAIR_SALON": "美髮沙龍",
+    "CLOTHES_STORE": "服飾店",
+    "PARK": "公園",
+    "LIBRARY_BOOKSTORE": "圖書館・書店",
+    "SUSHI_RESTAURANT": "壽司店",
+    "MOUNTAIN": "山",
+    "STADIUM": "體育場",
+    "THEME_PARK": "主題樂園",
+    "BUS_STOP": "公車站",
+    "ITALIAN_RESTAURANT": "義大利餐廳",
+    "RAMEN_RESTAURANT": "拉麵店",
+    "BRIDGE": "橋",
+    "HOTEL": "飯店",
+    "MAKEUP_STORE": "美妝店",
+    "SHRINE_TEMPLE": "神社・寺廟",
+    "APPLIANCES_STORE": "家電量販店",
+    "CURRY_RESTAURANT": "咖哩店",
+    "DIY_STORE": "五金・居家用品店",
+    "UNIVERSITY_COLLEGE": "大學",
+    "MEXICAN_RESTAURANT": "墨西哥餐廳",
+    "LAUNDRY": "洗衣店",
+    "KOREAN_RESTAURANT": "韓式料理店",
+    "STREET": "街道",
+    "STATIONERY": "文具店"
+  },
+  "toast": {
+    "login_required": "請先登入。",
+    "decor_success": "幼苗登錄完成！",
+    "decor_delete": "已刪除幼苗。",
+    "register_pos_error": "請選擇位置。",
+    "register_input_error": "請填寫所有必填項目。",
+    "error": "發生未知的錯誤。",
+    "search_info": "找不到搜尋結果。",
+    "feedback_delete": "已刪除回饋。",
+    "map_link_empty": "請輸入地圖連結。",
+    "map_link_parse_error": "無法從這個連結讀取座標。",
+    "map_link_success": "已移動到該位置。"
+  },
+  "popup": {
+    "delete_confirm": "確定要刪除嗎？",
+    "delete_loading": "刪除中..."
+  },
+  "common": {
+    "loading": "載入中..."
+  },
+  "mypage": {
+    "title": "我登錄的點位",
+    "no_results": "還沒有登錄的點位。",
+    "feedback": "我的回饋",
+    "go_register": "登錄第一個點位",
+    "no_feedback": "還沒有留下回饋。"
+  },
+  "error": {
+    "INVALID_REQUEST": "請求無效。",
+    "DUPLICATE_DECOR": "這個位置已經有同種類的幼苗了。",
+    "DUPLICATE_FEEDBACK": "你已經對這個幼苗留過回饋了。",
+    "UNAUTHORIZED": "需要驗證身分。",
+    "LOGIN_REQUIRED": "請先登入。",
+    "NO_PERMISSION_DECOR_DELETE": "沒有刪除這個幼苗的權限。",
+    "NO_PERMISSION_FEEDBACK_DELETE": "沒有刪除這則回饋的權限。",
+    "NOT_FOUND": "找不到資料。",
+    "DECOR_NOT_FOUND": "找不到這個幼苗，或已被刪除。",
+    "FEEDBACK_NOT_FOUND": "找不到這則回饋。",
+    "USER_NOT_FOUND": "找不到使用者。",
+    "INTERNAL_ERROR": "伺服器發生錯誤。",
+    "INVALID_OVERPASS_RESPONSE": "無法處理 Overpass 的回應。",
+    "EXTERNAL_API_ERROR": "無法連線到外部服務。",
+    "INVALID_MAP_LINK": "不是有效的地圖連結。",
+    "MAP_LINK_NOT_FOUND": "找不到這個地圖資訊。",
+    "MAP_COORDINATE_PARSE_ERROR": "無法從地圖連結取出座標。",
+    "MAP_EXTERNAL_API_ERROR": "無法和地圖服務連線。"
+  },
+  "report": {
+    "nickname": "暱稱",
+    "change": "換一個",
+    "category": {
+      "title": "分類",
+      "cheer": "加油",
+      "bug": "錯誤",
+      "suggestion": "建議"
+    },
+    "form": {
+      "placeholder": "說說你喜歡的地方或不方便的地方",
+      "button": "送出"
+    },
+    "createdAt": "建立時間",
+    "content": "內容",
+    "answer": "開發者回覆",
+    "noAnswer": "還沒有回覆",
+    "loading": "留言載入中...",
+    "change_emoji": "換表情",
+    "list_title": "大家的意見",
+    "empty": "還沒有意見。"
+  },
+  "register": {
+    "placeholder": "輸入簡短說明",
+    "submit": "登錄",
+    "submitting": "登錄中...",
+    "section_location": "位置",
+    "section_type": "種類",
+    "section_desc": "說明",
+    "anonymous_notice": "未登入時會以匿名登錄。",
+    "anonymous_login": "登入"
+  },
+  "coordinate": {
+    "latitude": "緯度",
+    "longitude": "經度",
+    "lat_placeholder": "25.0330",
+    "lng_placeholder": "121.5654",
+    "submit": "查詢",
+    "error_empty": "請輸入緯度和經度。"
+  },
+  "locate": {
+    "title": "移動到我的位置",
+    "error_no_geolocation": "這個瀏覽器無法使用定位功能。",
+    "error_no_position": "無法取得位置資訊。"
+  },
+  "info": {
+    "email": "電子郵件",
+    "friendCode": "皮克敏好友代碼",
+    "go_feedback": "去留下意見"
+  },
+  "sharedMap": {
+    "label": "用地圖連結找位置",
+    "placeholder": "貼上地圖分享連結",
+    "submit": "查詢",
+    "loading": "查詢中...",
+    "help": "貼上從 Google 地圖、Naver 地圖或 Kakao 地圖分享的連結，就會移動到那個位置。"
+  },
+  "explore": {
+    "panel_label": "單獨點位列表",
+    "search_placeholder": "搜尋地區或地點",
+    "search_clear": "清除搜尋",
+    "empty": "這個區域還沒有登錄的點位。",
+    "empty_register": "知道的話就來登錄吧",
+    "no_feedback": "還沒有人確認過",
+    "probability": "存在機率 {{value}}% · {{count}} 人確認",
+    "distance_m": "{{value}}m",
+    "distance_km": "{{value}}km",
+    "back": "列表",
+    "expand": "展開列表",
+    "collapse": "收起列表",
+    "more_tags": "＋ 其他 {{count}} 種",
+    "less_tags": "收起",
+    "empty_filtered": "這裡沒有選擇的種類。移動地圖看看吧。"
+  },
+  "map": {
+    "zoom": "地圖縮放",
+    "zoom_in": "放大",
+    "zoom_out": "縮小",
+    "cluster_title": "{{count}} 個點位"
+  },
+  "spot": {
+    "probability": "存在機率",
+    "votes": "找到了 {{found}} · 沒有 {{notFound}}",
+    "no_votes": "還沒有人確認過",
+    "coords": "座標",
+    "copy": "複製",
+    "copied": "已複製座標",
+    "ask": "在這裡單獨出現了嗎？",
+    "found": "找到了",
+    "not_found": "沒有",
+    "comment_placeholder": "留句話（選填）",
+    "submit": "送出",
+    "submitting": "送出中...",
+    "sent": "謝謝你的回報",
+    "already": "你已經在這個點位留過回饋了",
+    "reviews_title": "確認過的人 {{count}}",
+    "delete": "刪除",
+    "like": "喜歡",
+    "unlike": "取消喜歡",
+    "people": "{{count}} 人",
+    "mine": "我的紀錄",
+    "delete_spot": "刪除這個點位",
+    "anonymous": "匿名"
+  },
+  "community": {
+    "title": "也來看看其他社群",
+    "korea": "韓國",
+    "pikmin_cafe": "皮克敏粉絲咖啡",
+    "taiwan": "台灣",
+    "japan": "日本",
+    "usa": "美國",
+    "need_info": "徵求資訊！"
+  },
+  "country": {
+    "label": "移動到國家",
+    "KR": "韓國",
+    "JP": "日本",
+    "TW": "台灣",
+    "HK": "香港",
+    "SG": "新加坡",
+    "TH": "泰國",
+    "US": "美國",
+    "CA": "加拿大",
+    "GB": "英國",
+    "FR": "法國",
+    "DE": "德國",
+    "ES": "西班牙",
+    "IT": "義大利",
+    "AU": "澳洲"
+  }
+}
