@@ -112,7 +112,8 @@
     "INVALID_MAP_LINK": "正しい地図リンクではありません。",
     "MAP_LINK_NOT_FOUND": "指定された地図情報が見つかりません。",
     "MAP_COORDINATE_PARSE_ERROR": "地図リンクから座標を取得できません。",
-    "MAP_EXTERNAL_API_ERROR": "地図サービスとの通信に失敗しました。"
+    "MAP_EXTERNAL_API_ERROR": "地図サービスとの通信に失敗しました。",
+    "TOO_MANY_REQUESTS": "リクエストが多すぎます。しばらくしてからもう一度お試しください。"
   },
   "report": {
     "nickname": "ニックネーム",

@@ -112,7 +112,8 @@
     "INVALID_MAP_LINK": "不是有效的地圖連結。",
     "MAP_LINK_NOT_FOUND": "找不到這個地圖資訊。",
     "MAP_COORDINATE_PARSE_ERROR": "無法從地圖連結取出座標。",
-    "MAP_EXTERNAL_API_ERROR": "無法和地圖服務連線。"
+    "MAP_EXTERNAL_API_ERROR": "無法和地圖服務連線。",
+    "TOO_MANY_REQUESTS": "請求太多了，請稍後再試。"
   },
   "report": {
     "nickname": "暱稱",
