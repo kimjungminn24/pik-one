@@ -68,6 +68,7 @@ export function useBottomSheet(panelRef, snap, setSnap, onTap, handleSelector) {
       try {
         panelRef.current.setPointerCapture(e.pointerId);
       } catch {
+        // 포인터가 이미 떨어졌으면 잡지 못해도 드래그는 계속된다
       }
     }
 

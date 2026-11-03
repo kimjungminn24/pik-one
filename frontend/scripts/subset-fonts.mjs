@@ -176,7 +176,8 @@ async function buildTossFace(code) {
   const supported = new Set(face.collectUnicodes());
   const tables = readTables(source);
   const numGlyphs = tables.maxp.readUInt16BE(4);
-  const { DSIG: _dsig, ...base } = tables;
+  // eslint-disable-next-line no-unused-vars -- 서명 테이블은 버린다
+  const { DSIG, ...base } = tables;
   const post = postWithoutNames(tables.post);
 
   const uiEmoji = [...new Set(code.match(/\p{RGI_Emoji}|\p{Extended_Pictographic}/gv) ?? [])];
