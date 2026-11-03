@@ -6,15 +6,13 @@ import Tag from "../components/TagComponent";
 import PlaceSearch from "../components/explore/PlaceSearch";
 import SpotCard from "../components/explore/SpotCard";
 import SpotDetail from "../components/explore/SpotDetail";
-import FlyTo from "../components/map/FlyTo";
-import MapControls from "../components/map/MapControls";
 import { useLocationStore } from "../store/useLocationStore";
 import { useDebouncedValue } from "../hooks/useDebouncedValue";
 import { useDecor } from "../hooks/useDecor";
 import { sheetCenterOffsetPx, useBottomSheet } from "../hooks/useBottomSheet";
 import "../css/explore.scss";
 
-const LazyMap = React.lazy(() => import("../components/map/MapComponent"));
+const ExploreMap = React.lazy(() => import("../components/explore/ExploreMap"));
 
 const MIN_ZOOM = 10;
 const PRIMARY_LIMIT = 5;
@@ -270,19 +268,13 @@ export default function Find() {
 
       <div className="explore__map">
         <Suspense fallback={<div className="explore__map-loading">{t("find.mapLoading")}</div>}>
-          <LazyMap
-            searchResults={mapSpots}
-            showLocationMarker={false}
-            showSearchBox={false}
-            zoomControlPosition={null}
-            locatePosition={null}
+          <ExploreMap
+            spots={mapSpots}
             selectedId={selectedId}
             highlightId={selectedId ? null : hoveredId}
             onSelect={selectSpot}
-          >
-            <FlyTo target={flyTarget} />
-            <MapControls />
-          </LazyMap>
+            flyTarget={flyTarget}
+          />
         </Suspense>
       </div>
     </div>
