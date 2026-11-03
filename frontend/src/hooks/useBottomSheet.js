@@ -6,6 +6,11 @@ const MOBILE_QUERY = "(max-width: 48rem)";
 export const SHEET_VISIBLE_REM = { peek: 4.75, half: 18 };
 
 const DRAG_THRESHOLD = 6;
+const SNAPS = ["peek", "half", "full"];
+// 이보다 빠르게 튕기면 거리와 상관없이 그 방향으로 한 칸 (px/ms)
+const FLICK_SPEED = 0.35;
+// 천천히 끌 때는 다음 칸까지 거리의 이만큼만 가도 넘어감
+const STEP_RATIO = 0.15;
 
 const remToPx = (rem) =>
   rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
@@ -48,6 +53,7 @@ export function useBottomSheet(panelRef, snap, setSnap, onTap, handleSelector) {
       h,
       onHandle,
       moved: false,
+      samples: [{ y: e.clientY, t: e.timeStamp }],
     };
   };
 
@@ -77,6 +83,8 @@ export function useBottomSheet(panelRef, snap, setSnap, onTap, handleSelector) {
       Math.max(remToPx(SHEET_VISIBLE_REM.peek), d.startVisible - dy)
     );
     d.visible = visible;
+    d.samples.push({ y: e.clientY, t: e.timeStamp });
+    if (d.samples.length > 5) d.samples.shift();
     const panel = panelRef.current;
     panel.style.transition = "none";
     panel.style.transform = `translateY(${d.h - visible}px)`;
@@ -92,13 +100,25 @@ export function useBottomSheet(panelRef, snap, setSnap, onTap, handleSelector) {
       return;
     }
 
-    const nearest = ["peek", "half", "full"].reduce((best, name) =>
-      Math.abs(visibleOf(name, d.h) - d.visible) <
-      Math.abs(visibleOf(best, d.h) - d.visible)
-        ? name
-        : best
-    );
-    setSnap(nearest);
+    setSnap(nextSnap(d, e));
+  };
+
+  // 위로 끌면 visible이 커짐. 속도는 마지막 몇 번의 움직임으로 잼
+  const nextSnap = (d, e) => {
+    const first = d.samples[0];
+    const dt = Math.max(1, e.timeStamp - first.t);
+    const speedUp = (first.y - e.clientY) / dt;
+    const index = SNAPS.indexOf(snap);
+    const up = SNAPS[Math.min(index + 1, SNAPS.length - 1)];
+    const down = SNAPS[Math.max(index - 1, 0)];
+
+    if (speedUp > FLICK_SPEED) return up;
+    if (speedUp < -FLICK_SPEED) return down;
+
+    const moved = d.visible - d.startVisible;
+    if (moved > 0 && moved > (visibleOf(up, d.h) - d.startVisible) * STEP_RATIO) return up;
+    if (moved < 0 && -moved > (d.startVisible - visibleOf(down, d.h)) * STEP_RATIO) return down;
+    return snap;
   };
 
   const onClickCapture = (e) => {

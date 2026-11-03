@@ -875,9 +875,9 @@ $control: 2.75rem;
     border-left: none;
   }
 
-  // 모바일은 위에 떠 있는 검색창 아래
+  // 모바일은 화면이 좁아서 나라 바로가기를 뺌
   .country-jump {
-    top: 4rem;
+    display: none;
   }
 
   .explore__search {
@@ -922,8 +922,8 @@ $control: 2.75rem;
     justify-content: center;
     flex: 0 0 auto;
     width: calc(100% + 2rem);
-    height: 1.75rem;
-    margin: 0 -1rem 0.25rem;
+    height: 2.25rem;
+    margin: 0 -1rem 0;
     padding: 0;
     border-radius: 0;
     background: #fff;
