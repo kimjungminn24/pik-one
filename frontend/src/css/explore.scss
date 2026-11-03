@@ -167,9 +167,9 @@ $danger: var(--danger);
   height: 1.25rem;
   padding: 0;
   border-radius: 50%;
-  background: var(--g400);
+  background: var(--g500);
   color: var(--color-bg-white);
-  font-size: 0.625rem;
+  font-size: 0.75rem;
 }
 
 .explore__sheet-handle {
@@ -739,7 +739,7 @@ $danger: var(--danger);
   border-radius: 0.375rem;
   background: $grey-100;
   color: $grey-700;
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   font-weight: 600;
 }
 
@@ -933,7 +933,7 @@ $control: 2.75rem;
     visibility: hidden;
   }
   .explore .leaflet-control-attribution {
-    font-size: 0.625rem;
+    font-size: 0.75rem;
     line-height: 1.4;
     border-top-left-radius: 0.375rem;
   }
