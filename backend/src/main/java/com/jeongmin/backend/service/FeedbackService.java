@@ -45,7 +45,7 @@ public class FeedbackService {
 
     @Transactional
     public Feedback create(FeedbackCreateRequest request, User user, Decor decor) {
-        if (existsByUserAndDecor(user.getId(), decor.getId())) {
+        if (user != null && existsByUserAndDecor(user.getId(), decor.getId())) {
             throw new RestApiException(ErrorCode.DUPLICATE_FEEDBACK);
         }
         Feedback feedback = Feedback.create(
@@ -73,7 +73,7 @@ public class FeedbackService {
                         new RestApiException(ErrorCode.FEEDBACK_NOT_FOUND)
                 );
 
-        if (!feedback.getUser().getId().equals(userId)) {
+        if (!feedback.isWrittenBy(userId)) {
             throw new RestApiException(ErrorCode.NO_PERMISSION_FEEDBACK_DELETE);
         }
 
