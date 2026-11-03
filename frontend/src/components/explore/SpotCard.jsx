@@ -31,6 +31,7 @@ export default function SpotCard({ spot, distance, onSelect, onHover }) {
         <span className="spot-card__body">
           <span className="spot-card__title">
             <strong>{t(`decor.${spot.type}`)}</strong>
+            {spot.anonymous && <span className="anon-badge">{t("spot.anonymous")}</span>}
             {distance != null && (
               <span className="spot-card__distance">{formatDistance(distance, t)}</span>
             )}

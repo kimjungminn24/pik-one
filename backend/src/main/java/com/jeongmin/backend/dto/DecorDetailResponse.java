@@ -11,6 +11,7 @@ public record DecorDetailResponse(
         double lat,
         double lng,
         Boolean isAuthor,
+        boolean anonymous,
         Boolean isLikedByMe,
         DecorType type,
         String content,
@@ -27,7 +28,7 @@ public record DecorDetailResponse(
             boolean likeByMe
     ) {
 
-        boolean isAuthor = decor.getUser().getId().equals(currentUserId);
+        boolean isAuthor = decor.isWrittenBy(currentUserId);
         int notFoundCount = (int) feedbacks.stream()
                 .filter(f -> f.type() == FeedbackType.NOT_FOUND)
                 .count();
@@ -41,6 +42,7 @@ public record DecorDetailResponse(
                 decor.getLat(),
                 decor.getLng(),
                 isAuthor,
+                decor.isAnonymous(),
                 likeByMe,
                 decor.getType(),
                 decor.getContent(),

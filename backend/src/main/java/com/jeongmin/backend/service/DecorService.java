@@ -46,7 +46,9 @@ public class DecorService {
         if (checkDecorExistsNearby(request.lat(), request.lng(), request.type())) {
             throw new RestApiException(ErrorCode.DUPLICATE_DECOR);
         }
-        User user = userRepository.findById(userId)
+        User user = (userId == null)
+                ? null
+                : userRepository.findById(userId)
                 .orElseThrow(() -> new RestApiException(ErrorCode.USER_NOT_FOUND));
         Decor decor = createDecor(request, user);
         return DecorResponse.from(decor);

@@ -146,7 +146,9 @@
     "section_location": "位置",
     "location_hint": "地図をタップするとその場所が入力されます。座標や地図の共有リンクでも探せます。",
     "section_type": "種類",
-    "section_desc": "説明"
+    "section_desc": "説明",
+    "anonymous_notice": "ログインしていないと匿名で登録されます。匿名のスポットはマイページに残らず、削除もできません。",
+    "anonymous_login": "ログインする"
   },
   "coordinate": {
     "latitude": "緯度",
@@ -219,7 +221,8 @@
     "unlike": "いいねを取り消す",
     "people": "{{count}}人",
     "mine": "自分",
-    "delete_spot": "このスポットを削除"
+    "delete_spot": "このスポットを削除",
+    "anonymous": "匿名"
   },
   "community": {
     "title": "ほかのコミュニティもどうぞ",
