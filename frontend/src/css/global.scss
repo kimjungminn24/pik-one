@@ -105,6 +105,8 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100%;
+  // 모바일 주소창이 접히고 펼쳐져도 실제 보이는 높이에 맞춤 (지원 안 하면 위 100%)
+  min-height: 100dvh;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
