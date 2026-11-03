@@ -3,11 +3,9 @@
   <head>
     <meta charset="utf-8" />
 
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-EMBCBPNN1G"
-    ></script>
+    <!-- Google tag (gtag.js)
+         dataLayer와 config는 바로 정의하고, 스크립트는 페이지 로드 뒤에 받아 첫 화면과 회선을 다투지 않게 함.
+         그 사이 이벤트는 dataLayer에 쌓였다가 스크립트가 오면 전송됨 -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
@@ -15,6 +13,12 @@
       }
       gtag("js", new Date());
       gtag("config", "G-EMBCBPNN1G");
+      window.addEventListener("load", function () {
+        var script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-EMBCBPNN1G";
+        document.head.appendChild(script);
+      });
     </script>
 
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
