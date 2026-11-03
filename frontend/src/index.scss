@@ -1,7 +1,9 @@
 @use "./css/global";
+@use "./css/tossface";
 
 body {
-  font-family: "Pretendard Variable", Pretendard, -apple-system,
+  // 글 속 이모지도 TossFace로. 조각마다 unicode-range가 있어 이모지가 있을 때만 받는다
+  font-family: "Pretendard Variable", Pretendard, "TossFace", -apple-system,
     BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans JP", sans-serif;
   color: var(--g900);
   background: var(--page-bg);
@@ -22,13 +24,6 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-// 쓰는 이모지만 남긴 서브셋 (npm run fonts:subset)
-@font-face {
-  font-family: "TossFace";
-  src: url("/fonts/tossface.woff2") format("woff2");
-  font-display: swap;
-}
-
 // 일본어 글자가 있을 때만 받도록 범위를 가나·한자로 제한
 @font-face {
   font-family: "Noto Sans JP";
