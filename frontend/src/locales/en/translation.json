@@ -114,9 +114,6 @@
     "MAP_COORDINATE_PARSE_ERROR": "Failed to extract coordinates from the map link.",
     "MAP_EXTERNAL_API_ERROR": "Failed to communicate with the map service."
   },
-  "login": {
-    "quick": "Get started quickly with simple login"
-  },
   "report": {
     "nickname": "Nickname",
     "change": "Shuffle",
@@ -144,10 +141,9 @@
     "submit": "Register",
     "submitting": "Registering...",
     "section_location": "Location",
-    "location_hint": "Tap the map to set the spot. You can also search by coordinates or a shared map link.",
     "section_type": "Type",
     "section_desc": "Note",
-    "anonymous_notice": "You are not logged in, so this spot will be posted anonymously. Anonymous spots do not appear in My Page and cannot be deleted.",
+    "anonymous_notice": "You are not logged in, so this spot will be posted anonymously.",
     "anonymous_login": "Log in"
   },
   "coordinate": {
@@ -179,7 +175,6 @@
     "panel_label": "Private spot list",
     "search_placeholder": "Search area or place",
     "search_clear": "Clear search",
-    "zoom_in": "Zoom in to see spots in this area.",
     "empty": "No spots registered in this area yet.",
     "empty_register": "Know one? Register it",
     "no_feedback": "Not checked by anyone yet",
@@ -214,7 +209,6 @@
     "submitting": "Sending...",
     "sent": "Thanks for letting us know",
     "already": "You already left feedback here",
-    "login_cta": "Log in to tell us",
     "reviews_title": "Checked by {{count}}",
     "delete": "Delete",
     "like": "Like",
@@ -232,5 +226,22 @@
     "japan": "Japan",
     "usa": "USA",
     "need_info": "Know one? Let us know!"
+  },
+  "country": {
+    "label": "Go to country",
+    "KR": "South Korea",
+    "JP": "Japan",
+    "TW": "Taiwan",
+    "HK": "Hong Kong",
+    "SG": "Singapore",
+    "TH": "Thailand",
+    "US": "United States",
+    "CA": "Canada",
+    "GB": "United Kingdom",
+    "FR": "France",
+    "DE": "Germany",
+    "ES": "Spain",
+    "IT": "Italy",
+    "AU": "Australia"
   }
 }

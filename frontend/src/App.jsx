@@ -49,7 +49,7 @@ function App() {
     <Router>
       <Header />
       <div className="main">
-        <Suspense fallback={<div>로딩 중...</div>}>
+        <Suspense fallback={null}>
           <Routes>
             <Route path="/" element={<Find />} />
             <Route path="/find" element={<Navigate to="/" replace />} />

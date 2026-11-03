@@ -1,5 +1,5 @@
 import React, { Suspense, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 import { decorList } from "../decorList";
@@ -21,11 +21,12 @@ const LazyMap = React.lazy(() => import("../components/map/MapComponent"));
 
 export default function Register() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const [content, setContent] = useState("");
   const [selectedTag, setSelectedTag] = useState("");
   const [flyTarget, setFlyTarget] = useState(null);
   const [sheetSnap, setSheetSnap] = useState("half");
-  const { lat, lng } = useLocationStore();
+  const { lat, lng, setLocation } = useLocationStore();
   const isLogin = useUserStore((state) => state.isLogin);
   const { mutate, isPending } = useCreateDecor();
 
@@ -57,10 +58,10 @@ export default function Register() {
         content,
       },
       {
-        onSuccess: () => {
+        onSuccess: (spot) => {
           toast.success(t("toast.decor_success"));
-          setContent("");
-          setSelectedTag("");
+          // 찾기 화면에서 방금 등록한 스팟을 바로 열어 준다
+          navigate("/", { state: { registered: spot } });
         },
       }
     );
@@ -93,18 +94,8 @@ export default function Register() {
         />
 
         <div className="explore__body">
-          {!isLogin && (
-            <p className="register-notice">
-              {t("register.anonymous_notice")}{" "}
-              <Link to="/login" className="register-notice__link">
-                {t("register.anonymous_login")}
-              </Link>
-            </p>
-          )}
-
           <section className="panel-section">
             <h2 className="panel-section__title">{t("register.section_location")}</h2>
-            <p className="panel-section__hint">{t("register.location_hint")}</p>
             <CoordinateRegister />
             <SharedMapLinkSearch />
           </section>
@@ -143,13 +134,19 @@ export default function Register() {
         >
           {isPending ? t("register.submitting") : t("register.submit")}
         </button>
+        {!isLogin && (
+          <p className="register-anon">
+            {t("register.anonymous_notice")}{" "}
+            <Link to="/login">{t("register.anonymous_login")}</Link>
+          </p>
+        )}
       </div>
 
       <div className="explore__map">
         <Suspense fallback={<div className="explore__map-loading">{t("find.mapLoading")}</div>}>
           <LazyMap>
             <FlyTo target={flyTarget} />
-            <MapControls />
+            <MapControls onLocate={(fLat, fLng) => setLocation(fLat.toFixed(6), fLng.toFixed(6))} />
           </LazyMap>
         </Suspense>
       </div>

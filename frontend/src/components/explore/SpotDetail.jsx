@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
@@ -12,6 +11,7 @@ import {
 } from "../../hooks/useDecor";
 import { useDeleteLike, usePostLike } from "../../hooks/useLike";
 import { useUserStore } from "../../store/useUserStore";
+import { hasAnonVote, rememberAnonVote } from "../../utils/anonVotes";
 
 const BackIcon = () => (
   <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
@@ -47,7 +47,8 @@ export default function SpotDetail({ id, onBack, onDeleted, hideBack = false }) 
 
   const refreshSpot = () => queryClient.invalidateQueries({ queryKey: ["decor"] });
 
-  const { mutate: createFeedback, isPending: isSending } = useCreateFeedback(() => {
+  const { mutate: createFeedback, isPending: isSending } = useCreateFeedback((sent) => {
+    if (!isLogin) rememberAnonVote(sent.decorId);
     toast.success(t("spot.sent"));
     setVote(null);
     setComment("");
@@ -91,7 +92,7 @@ export default function SpotDetail({ id, onBack, onDeleted, hideBack = false }) 
   const notFound = feedbacks.length - found;
   const probability = feedbacks.length ? Math.round((found / feedbacks.length) * 100) : null;
   const tone = probability == null ? "none" : probability >= 70 ? "good" : "low";
-  const alreadyVoted = feedbacks.some((f) => f.isAuthor);
+  const alreadyVoted = feedbacks.some((f) => f.isAuthor) || (!isLogin && hasAnonVote(data.id));
   const coords = `${Number(data.lat).toFixed(6)}, ${Number(data.lng).toFixed(6)}`;
 
   const copyCoords = async () => {
@@ -179,11 +180,7 @@ export default function SpotDetail({ id, onBack, onDeleted, hideBack = false }) 
         )}
         <h4 className="spot-detail__section-title">{t("spot.ask")}</h4>
 
-        {!isLogin ? (
-          <Link to="/login" className="spot-detail__login">
-            {t("spot.login_cta")}
-          </Link>
-        ) : alreadyVoted ? (
+        {alreadyVoted ? (
           <p className="spot-detail__muted">{t("spot.already")}</p>
         ) : (
           <>
@@ -258,6 +255,7 @@ export default function SpotDetail({ id, onBack, onDeleted, hideBack = false }) 
                       {f.isAuthor && (
                         <span className="spot-detail__review-mine">{t("spot.mine")}</span>
                       )}
+                      {f.anonymous && <span className="anon-badge">{t("spot.anonymous")}</span>}
                     </div>
                     {f.content && <p className="spot-detail__review-text">{f.content}</p>}
                   </div>

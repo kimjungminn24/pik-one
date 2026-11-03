@@ -1,14 +1,14 @@
-import React, { Suspense, useMemo, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { Suspense, useEffect, useMemo, useRef, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { decorList } from "../decorList";
 import Tag from "../components/TagComponent";
 import PlaceSearch from "../components/explore/PlaceSearch";
+import CountryJump from "../components/explore/CountryJump";
 import SpotCard from "../components/explore/SpotCard";
 import SpotDetail from "../components/explore/SpotDetail";
 import { useLocationStore } from "../store/useLocationStore";
-import { useDebouncedValue } from "../hooks/useDebouncedValue";
-import { useDecor } from "../hooks/useDecor";
+import { useAllDecors } from "../hooks/useDecor";
 import { sheetCenterOffsetPx, useBottomSheet } from "../hooks/useBottomSheet";
 import "../css/explore.scss";
 
@@ -17,7 +17,6 @@ const loadExploreMap = () => import("../components/explore/ExploreMap");
 const earlyMap = window.location.pathname === "/" ? loadExploreMap() : null;
 const ExploreMap = React.lazy(() => earlyMap ?? loadExploreMap());
 
-const MIN_ZOOM = 10;
 const PRIMARY_LIMIT = 5;
 const DECOR_ORDER = Object.fromEntries(decorList.map((d, i) => [d.name, i]));
 
@@ -32,14 +31,43 @@ const distanceMeters = (a, b) => {
   return 2 * R * Math.asin(Math.sqrt(h));
 };
 
+// 지도가 옆으로 이어져서 경도가 -180~180 밖일 수 있음. 한 바퀴 이상 보이면 경도는 다 통과
+const inBounds = (spot, b) => {
+  const west = Number(b.westLng);
+  const east = Number(b.eastLng);
+  if (spot.lat < Number(b.southLat) || spot.lat > Number(b.northLat)) return false;
+  if (east - west >= 360) return true;
+  const lng = ((((spot.lng - west) % 360) + 360) % 360) + west;
+  return lng <= east;
+};
+
 export default function Find() {
   const { t } = useTranslation();
 
+  const location = useLocation();
+  const navigate = useNavigate();
+  const registered = location.state?.registered;
+
   const [selectedTags, setSelectedTags] = useState([]);
-  const [selectedId, setSelectedId] = useState(null);
+  const [selectedId, setSelectedId] = useState(registered?.id ?? null);
   const [hoveredId, setHoveredId] = useState(null);
   const [sheetSnap, setSheetSnap] = useState("half");
-  const [flyTarget, setFlyTarget] = useState(null);
+  const [flyTarget, setFlyTarget] = useState(() =>
+    registered
+      ? {
+          lat: registered.lat,
+          lng: registered.lng,
+          zoom: 17,
+          offsetY: sheetCenterOffsetPx("half"),
+          key: Date.now(),
+        }
+      : null
+  );
+
+  // 등록 화면에서 넘어온 스팟은 한 번만 연다. 새로고침이나 뒤로 가기로 다시 열리지 않게 비움
+  useEffect(() => {
+    if (registered) navigate(location.pathname, { replace: true, state: null });
+  }, [registered, navigate, location.pathname]);
 
   const panelRef = useRef(null);
   const toggleSheet = () =>
@@ -52,21 +80,13 @@ export default function Find() {
     ".explore__sheet-handle"
   );
 
-  const { bounds, zoom } = useLocationStore();
-  const debouncedBounds = useDebouncedValue(bounds, 500);
-
+  const bounds = useLocationStore((state) => state.bounds);
   const isAllMode = selectedTags.length === 0;
-  const canSearch = zoom >= MIN_ZOOM;
 
-  const { data: spotsInView = [], isLoading } = useDecor(
-    {
-      northLat: debouncedBounds?.northLat,
-      southLat: debouncedBounds?.southLat,
-      eastLng: debouncedBounds?.eastLng,
-      westLng: debouncedBounds?.westLng,
-      isAllMode: true,
-    },
-    canSearch
+  const { data: allSpots, isLoading } = useAllDecors();
+  const spotsInView = useMemo(
+    () => (allSpots ?? []).filter((spot) => inBounds(spot, bounds)),
+    [allSpots, bounds]
   );
 
   const center = useMemo(
@@ -118,7 +138,14 @@ export default function Find() {
       .sort((a, b) => a.distance - b.distance);
   }, [isAllMode, spotsInView, selectedTags, center]);
 
-  const mapSpots = useMemo(() => visibleSpots.map((v) => v.spot), [visibleSpots]);
+  // 지도에는 화면 밖 스팟도 올려 둠. 그려지는 건 화면 안 묶음뿐이라 옮길 때 다시 계산하지 않음
+  const mapSpots = useMemo(
+    () =>
+      isAllMode
+        ? allSpots ?? []
+        : (allSpots ?? []).filter((spot) => selectedTags.includes(spot.type)),
+    [isAllMode, allSpots, selectedTags]
+  );
 
   const handleTagClick = (item) => {
     if (item.name === "ALL") {
@@ -147,6 +174,11 @@ export default function Find() {
     }
   };
 
+  const moveToCountry = ({ lat, lng, zoom: countryZoom }) => {
+    setSelectedId(null);
+    setFlyTarget({ lat, lng, zoom: countryZoom, key: Date.now() });
+  };
+
   const moveTo = ({ lat, lng }) => {
     setSelectedId(null);
     setFlyTarget({ lat, lng, zoom: 16, key: Date.now() });
@@ -155,10 +187,7 @@ export default function Find() {
   const allTag = { name: "ALL", ko: t("find.all"), emoji: "🌐" };
 
   const renderList = () => {
-    if (!canSearch) {
-      return <p className="explore__hint">{t("explore.zoom_in")}</p>;
-    }
-    if (isLoading && spotsInView.length === 0) {
+    if (isLoading) {
       return <p className="explore__hint">{t("common.loading")}</p>;
     }
     if (visibleSpots.length === 0) {
@@ -227,7 +256,7 @@ export default function Find() {
               <Tag
                 item={allTag}
                 isSelected={isAllMode}
-                count={canSearch ? spotsInView.length : undefined}
+                count={spotsInView.length}
                 onClick={handleTagClick}
               />
               {primaryTags.map((item) => (
@@ -235,7 +264,7 @@ export default function Find() {
                   key={item.name}
                   item={item}
                   isSelected={selectedTags.includes(item.name)}
-                  count={canSearch ? countByType[item.name] ?? 0 : undefined}
+                  count={countByType[item.name] ?? 0}
                   onClick={handleTagClick}
                 />
               ))}
@@ -245,7 +274,7 @@ export default function Find() {
                     key={item.name}
                     item={item}
                     isSelected={selectedTags.includes(item.name)}
-                    count={canSearch && countByType[item.name] ? countByType[item.name] : undefined}
+                    count={countByType[item.name] || undefined}
                     muted={!countByType[item.name]}
                     onClick={handleTagClick}
                   />
@@ -270,6 +299,7 @@ export default function Find() {
       </aside>
 
       <div className="explore__map">
+        <CountryJump onPick={moveToCountry} />
         <Suspense fallback={<div className="explore__map-loading">{t("find.mapLoading")}</div>}>
           <ExploreMap
             spots={mapSpots}

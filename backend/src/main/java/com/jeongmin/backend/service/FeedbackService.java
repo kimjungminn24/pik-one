@@ -25,12 +25,20 @@ public class FeedbackService {
 
     @Transactional(readOnly = true)
     public Map<Long, FeedbackCounts> countByDecorIds(Collection<Long> decorIds) {
-        Map<Long, FeedbackCounts> result = new HashMap<>();
         if (decorIds.isEmpty()) {
-            return result;
+            return new HashMap<>();
         }
+        return toCounts(feedbackRepository.countByDecorIdsGroupByType(decorIds));
+    }
 
-        for (Object[] row : feedbackRepository.countByDecorIdsGroupByType(decorIds)) {
+    @Transactional(readOnly = true)
+    public Map<Long, FeedbackCounts> countAll() {
+        return toCounts(feedbackRepository.countAllGroupByType());
+    }
+
+    private Map<Long, FeedbackCounts> toCounts(List<Object[]> rows) {
+        Map<Long, FeedbackCounts> result = new HashMap<>();
+        for (Object[] row : rows) {
             Long decorId = (Long) row[0];
             FeedbackType type = (FeedbackType) row[1];
             int count = ((Long) row[2]).intValue();
@@ -45,7 +53,7 @@ public class FeedbackService {
 
     @Transactional
     public Feedback create(FeedbackCreateRequest request, User user, Decor decor) {
-        if (existsByUserAndDecor(user.getId(), decor.getId())) {
+        if (user != null && existsByUserAndDecor(user.getId(), decor.getId())) {
             throw new RestApiException(ErrorCode.DUPLICATE_FEEDBACK);
         }
         Feedback feedback = Feedback.create(
@@ -73,7 +81,7 @@ public class FeedbackService {
                         new RestApiException(ErrorCode.FEEDBACK_NOT_FOUND)
                 );
 
-        if (!feedback.getUser().getId().equals(userId)) {
+        if (!feedback.isWrittenBy(userId)) {
             throw new RestApiException(ErrorCode.NO_PERMISSION_FEEDBACK_DELETE);
         }
 

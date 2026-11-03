@@ -42,6 +42,18 @@ public class DecorFacade {
                 .toList();
     }
 
+    // 지도는 처음에 전부 받아 브라우저에서 묶는다. 수만 개까지는 이 방식으로 충분
+    @Transactional(readOnly = true)
+    public List<DecorSearchResponse> getAllDecors() {
+        Map<Long, FeedbackCounts> counts = feedbackService.countAll();
+        return decorService.findAllActive().stream()
+                .map(decor -> DecorSearchResponse.of(
+                        decor,
+                        counts.getOrDefault(decor.getId(), FeedbackCounts.EMPTY)
+                ))
+                .toList();
+    }
+
     @Transactional(readOnly = true)
     public DecorDetailResponse getDecorById(Long decorId) {
         Decor decor = decorService.getActiveDecorById(decorId);

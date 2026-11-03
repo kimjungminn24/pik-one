@@ -1,16 +1,35 @@
+.login-page {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
 .login {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 0.625rem;
-  margin-top: 1rem;
-  border-top: 0.5rem solid var(--g50);
+  width: 100%;
+  max-width: 22rem;
+  padding: 2rem 1.5rem 1.5rem;
+  border-radius: 1rem;
+  background: #fff;
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.08);
+}
+
+.login__title {
+  margin: 0 0 0.75rem;
+  color: var(--g900);
+  font-size: 1.25rem;
+  font-weight: 700;
 }
 
 // 로그인 서비스가 제공한 버튼 이미지를 그대로 씀
 .login__btn {
   display: block;
   width: 100%;
-  max-width: 20rem;
   padding: 0;
   border: none;
   border-radius: 0.75rem;
@@ -34,7 +53,6 @@
   margin-top: 0.5rem;
   color: var(--g500);
   font-size: 0.8125rem;
-  font-weight: 700;
   text-decoration: underline;
   text-underline-offset: 0.2em;
 }

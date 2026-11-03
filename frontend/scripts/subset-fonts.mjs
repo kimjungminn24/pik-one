@@ -2,6 +2,7 @@
 // fonts-src의 TossFace에서 쓰는 이모지만 남겨 public/fonts에 woff2로 저장하고,
 // 조각별 @font-face 규칙을 src/css/_tossface.scss로 만든다.
 // 데코 종류나 이모지를 바꾼 뒤 다시 실행한다.
+import { createHash } from "node:crypto";
 import { readFile, readdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -203,11 +204,13 @@ async function buildTossFace(code) {
     const woff2 = await fontverter.convert(sfnt, "woff2");
     const file = `tossface-${chunk.name}.woff2`;
     await writeFile(path.join(FONT_OUT, file), woff2);
+    // 파일 이름이 그대로라, 내용이 바뀌면 브라우저가 예전 글꼴을 쓰지 않게 주소에 해시를 붙임
+    const version = createHash("sha1").update(woff2).digest("hex").slice(0, 8);
     rules.push(
       [
         "@font-face {",
         '  font-family: "TossFace";',
-        `  src: url("/fonts/${file}") format("woff2");`,
+        `  src: url("/fonts/${file}?v=${version}") format("woff2");`,
         "  font-display: swap;",
         `  unicode-range: ${unicodeRange(chunk.codepoints)};`,
         "}",

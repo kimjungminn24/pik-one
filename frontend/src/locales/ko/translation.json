@@ -114,9 +114,6 @@
     "MAP_COORDINATE_PARSE_ERROR": "지도 링크에서 좌표를 추출할 수 없습니다.",
     "MAP_EXTERNAL_API_ERROR": "지도 서비스와의 통신에 실패했습니다."
   },
-  "login": {
-    "quick": "간편 로그인으로 빠르게 시작하기"
-  },
   "report": {
     "nickname": "닉네임",
     "change": "바꾸기",
@@ -144,10 +141,9 @@
     "submit": "등록하기",
     "submitting": "등록 중...",
     "section_location": "위치",
-    "location_hint": "지도를 누르면 그 자리가 입력돼요. 좌표나 지도 공유 링크로도 찾을 수 있어요.",
     "section_type": "종류",
     "section_desc": "설명",
-    "anonymous_notice": "로그인하지 않으면 익명으로 등록돼요. 익명 스팟은 내 정보에 남지 않고 지울 수도 없어요.",
+    "anonymous_notice": "로그인하지 않으면 익명으로 등록돼요.",
     "anonymous_login": "로그인하기"
   },
   "coordinate": {
@@ -179,7 +175,6 @@
     "panel_label": "단독 스팟 목록",
     "search_placeholder": "지역·장소 검색",
     "search_clear": "검색어 지우기",
-    "zoom_in": "지도를 더 확대하면 이 지역 스팟이 보여요.",
     "empty": "이 지역엔 아직 등록된 스팟이 없어요.",
     "empty_register": "아는 곳이 있나요? 등록하기",
     "no_feedback": "아직 확인한 사람이 없어요",
@@ -214,7 +209,6 @@
     "submitting": "보내는 중...",
     "sent": "알려주셔서 고마워요",
     "already": "이미 이 스팟에 피드백을 남겼어요",
-    "login_cta": "로그인하고 알려주기",
     "reviews_title": "확인한 사람 {{count}}",
     "delete": "삭제",
     "like": "좋아요",
@@ -232,5 +226,22 @@
     "japan": "일본",
     "usa": "미국",
     "need_info": "정보가 필요해요!"
+  },
+  "country": {
+    "label": "나라로 이동",
+    "KR": "한국",
+    "JP": "일본",
+    "TW": "대만",
+    "HK": "홍콩",
+    "SG": "싱가포르",
+    "TH": "태국",
+    "US": "미국",
+    "CA": "캐나다",
+    "GB": "영국",
+    "FR": "프랑스",
+    "DE": "독일",
+    "ES": "스페인",
+    "IT": "이탈리아",
+    "AU": "호주"
   }
 }

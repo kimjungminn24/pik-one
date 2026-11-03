@@ -10,6 +10,11 @@ import { MapCenterUpdater } from "./MapCenterUpdater";
 import ZoomTracker from "./ZoomTracker";
 
 const NO_SPOTS = [];
+// 위아래로는 지도 끝 밖으로 못 나가게. 옆으로는 지구가 이어지니 막지 않음
+const WORLD_BOUNDS = [
+  [-85, -540],
+  [85, 540],
+];
 
 export default function MapComponent({
   searchResults = NO_SPOTS,
@@ -31,6 +36,8 @@ export default function MapComponent({
       zoom={zoom || 15}
       minZoom={2}
       maxZoom={20}
+      maxBounds={WORLD_BOUNDS}
+      maxBoundsViscosity={1}
       zoomControl={false}
       className="map__container"
     >
@@ -43,6 +50,7 @@ export default function MapComponent({
         {...TILE_OPTIONS}
         maxZoom={20}
         keepBuffer={4}
+        updateWhenIdle={false}
       />
 
       <SpotMarkers

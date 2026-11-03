@@ -114,9 +114,6 @@
     "MAP_COORDINATE_PARSE_ERROR": "地図リンクから座標を取得できません。",
     "MAP_EXTERNAL_API_ERROR": "地図サービスとの通信に失敗しました。"
   },
-  "login": {
-    "quick": "簡単ログインですぐに始める"
-  },
   "report": {
     "nickname": "ニックネーム",
     "change": "変更",
@@ -144,10 +141,9 @@
     "submit": "登録",
     "submitting": "登録中...",
     "section_location": "位置",
-    "location_hint": "地図をタップするとその場所が入力されます。座標や地図の共有リンクでも探せます。",
     "section_type": "種類",
     "section_desc": "説明",
-    "anonymous_notice": "ログインしていないと匿名で登録されます。匿名のスポットはマイページに残らず、削除もできません。",
+    "anonymous_notice": "ログインしていないと匿名で登録されます。",
     "anonymous_login": "ログインする"
   },
   "coordinate": {
@@ -179,7 +175,6 @@
     "panel_label": "単独スポット一覧",
     "search_placeholder": "地域・場所を検索",
     "search_clear": "検索語を消去",
-    "zoom_in": "地図を拡大すると、このエリアのスポットが表示されます。",
     "empty": "このエリアにはまだ登録されたスポットがありません。",
     "empty_register": "知っている場所がありますか？登録する",
     "no_feedback": "まだ確認した人はいません",
@@ -214,7 +209,6 @@
     "submitting": "送信中...",
     "sent": "教えてくれてありがとう",
     "already": "このスポットにはすでにフィードバックしました",
-    "login_cta": "ログインして教える",
     "reviews_title": "確認した人 {{count}}",
     "delete": "削除",
     "like": "いいね",
@@ -232,5 +226,22 @@
     "japan": "日本",
     "usa": "アメリカ",
     "need_info": "情報募集中！"
+  },
+  "country": {
+    "label": "国へ移動",
+    "KR": "韓国",
+    "JP": "日本",
+    "TW": "台湾",
+    "HK": "香港",
+    "SG": "シンガポール",
+    "TH": "タイ",
+    "US": "アメリカ",
+    "CA": "カナダ",
+    "GB": "イギリス",
+    "FR": "フランス",
+    "DE": "ドイツ",
+    "ES": "スペイン",
+    "IT": "イタリア",
+    "AU": "オーストラリア"
   }
 }
