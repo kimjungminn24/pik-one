@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import MascotPanel from "../components/MascotPanel";
 import "../css/page.scss";
 import "../css/login.scss";
 
@@ -18,7 +17,7 @@ export default function Login() {
   };
 
   return (
-    <div className="shell">
+    <div className="shell shell--single">
       <aside className="shell__panel">
         <h1 className="shell__title">{t("menu.login")}</h1>
 
@@ -38,8 +37,6 @@ export default function Login() {
           </Link>
         </section>
       </aside>
-
-      <MascotPanel />
     </div>
   );
 }
