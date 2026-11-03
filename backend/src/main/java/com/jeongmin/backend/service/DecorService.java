@@ -84,6 +84,10 @@ public class DecorService {
                 ) <= 50);
     }
 
+    public List<Decor> findAllActive() {
+        return decorRepository.findAllByDeletedAtIsNull();
+    }
+
     public List<Decor> findMyDecorsWithFeedbacks(Long userId) {
         return decorRepository.findWithFeedbacksByUserId(userId);
     }

@@ -25,4 +25,10 @@ public interface FeedbackRepository extends JpaRepository<Feedback, Long> {
             """)
     List<Object[]> countByDecorIdsGroupByType(@Param("decorIds") Collection<Long> decorIds);
 
+    @Query("""
+            SELECT f.decor.id, f.type, COUNT(f) FROM Feedback f
+            GROUP BY f.decor.id, f.type
+            """)
+    List<Object[]> countAllGroupByType();
+
 }

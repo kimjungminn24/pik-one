@@ -19,6 +19,11 @@ import java.util.List;
 public class DecorController {
     private final DecorFacade decorFacade;
 
+    @GetMapping
+    public ResponseEntity<List<DecorSearchResponse>> getAllDecors() {
+        return ResponseEntity.ok(decorFacade.getAllDecors());
+    }
+
     @GetMapping("/search")
     public ResponseEntity<List<DecorSearchResponse>> getDecorList(@ModelAttribute DecorSearchRequest request) {
         List<DecorSearchResponse> response = decorFacade.searchDecorInBoundary(request);
