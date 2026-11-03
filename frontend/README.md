@@ -1,3 +1,17 @@
+## 웹폰트 서브셋
+
+이모지(TossFace)와 일본어(Noto Sans JP) 폰트는 원본이 커서 실제로 쓰는 글자만 남긴 woff2를 씁니다.
+
+- 원본: `fonts-src/` (배포되지 않음)
+- 결과: `public/fonts/tossface.woff2`, `public/fonts/NotoSansJP-Bold.woff2`
+- 데코 종류, 이모지, 일본어 문구를 바꾸면 다시 만들어 커밋합니다.
+
+```bash
+npm run fonts:subset
+```
+
+TossFace는 비트맵(sbix) 폰트라 일반 서브셋 도구로는 그림이 빠집니다. 그래서 스크립트가 쓰는 이모지의 PNG만 남기고 나머지를 비우는 방식으로 줄입니다.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
