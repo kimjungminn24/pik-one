@@ -48,7 +48,7 @@ public class SecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/user/login/check", "/oauth2/**", "/decors/**", "/issue")
+                        .requestMatchers("/", "/user/login/check", "/oauth2/**", "/decors/**", "/issue", "/actuator/health")
                         .permitAll()
                         .requestMatchers(HttpMethod.POST, "/feedback")
                         .permitAll()
