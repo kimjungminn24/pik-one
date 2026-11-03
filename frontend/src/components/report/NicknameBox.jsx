@@ -12,21 +12,24 @@ export default function NicknameBox({
   const { t } = useTranslation();
   return (
     <div className="report-nickname">
-      <div
-        className="report-nickname-emoji emoji"
+      <button
+        type="button"
+        className="report-avatar report-avatar--button emoji"
         style={{ backgroundColor: bgColor }}
         onClick={onEmojiClick}
+        aria-label={t("report.change_emoji")}
       >
         {emoji}
-      </div>
+      </button>
       <input
-        className="report-nickname-input"
+        className="field report-nickname__input"
         value={nickname}
         onChange={(e) => onNicknameChange(e.target.value)}
+        aria-label={t("report.nickname")}
       />
-      <div className="report-nickname-btn" onClick={onRandomize}>
+      <button type="button" className="btn btn--secondary btn--sm" onClick={onRandomize}>
         {t("report.change")}
-      </div>
+      </button>
     </div>
   );
 }

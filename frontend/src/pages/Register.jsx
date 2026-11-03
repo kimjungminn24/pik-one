@@ -1,27 +1,41 @@
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useRef, useState } from "react";
+import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 import { decorList } from "../decorList";
 import TagListComponent from "../components/TagListComponent";
+import CoordinateRegister from "../components/CoordinateRegister";
+import SharedMapLinkSearch from "../components/report/SharedMapLinkSearch";
+import PlaceSearch from "../components/explore/PlaceSearch";
+import FlyTo from "../components/map/FlyTo";
+import MapControls from "../components/map/MapControls";
 import { useLocationStore } from "../store/useLocationStore";
 import { useCreateDecor } from "../hooks/useDecor";
-import { toast } from "react-toastify";
+import { useBottomSheet } from "../hooks/useBottomSheet";
+import "../css/explore.scss";
+import "../css/page.scss";
 import "../css/register.scss";
-import CoordinateRegister from "../components/CoordinateRegister";
-import { useTranslation } from "react-i18next";
-import SharedMapLinkSearch from "../components/report/SharedMapLinkSearch";
 
 const LazyMap = React.lazy(() => import("../components/map/MapComponent"));
 
 export default function Register() {
+  const { t } = useTranslation();
   const [content, setContent] = useState("");
-  const { lat, lng } = useLocationStore();
   const [selectedTag, setSelectedTag] = useState("");
+  const [flyTarget, setFlyTarget] = useState(null);
+  const [sheetSnap, setSheetSnap] = useState("half");
+  const { lat, lng } = useLocationStore();
   const { mutate, isPending } = useCreateDecor();
 
-  const { t } = useTranslation();
+  const panelRef = useRef(null);
+  const toggleSheet = () => setSheetSnap((prev) => (prev === "full" ? "half" : "full"));
+  const sheetDrag = useBottomSheet(
+    panelRef,
+    sheetSnap,
+    setSheetSnap,
+    toggleSheet,
+    ".explore__sheet-handle"
+  );
 
-  const handleTagClick = (item) => {
-    setSelectedTag(item.name);
-  };
   const handleSubmit = () => {
     if (!lat || !lng) {
       toast.error(t("toast.register_pos_error"));
@@ -53,37 +67,79 @@ export default function Register() {
   };
 
   return (
-    <div className="page-layout">
-      <div className="page-section">
-        <Suspense fallback={<div>{t("find.mapLoading")}</div>}>
-          <LazyMap />
-        </Suspense>
-      </div>
-      <div className="page-section">
-        <div className="form-group">
-          <CoordinateRegister lat={lat} lng={lng} />
-        </div>
-        <SharedMapLinkSearch />
+    <div className={`explore explore--sheet-${sheetSnap}`}>
+      <PlaceSearch
+        className="explore__search"
+        onFound={({ lat: fLat, lng: fLng }) =>
+          setFlyTarget({ lat: fLat, lng: fLng, zoom: 17, key: Date.now() })
+        }
+      />
 
-        <div className="form-group">
-          <input
-            className="register-form__input"
-            type="text"
-            placeholder={t("register.placeholder")}
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-          />
-        </div>
-        <TagListComponent
-          items={decorList}
-          isSelected={(item) => selectedTag === item.name}
-          onTagClick={handleTagClick}
+      <aside
+        ref={panelRef}
+        className={`explore__panel is-${sheetSnap}`}
+        aria-label={t("menu.register")}
+        {...sheetDrag}
+      >
+        <button
+          type="button"
+          className="explore__sheet-handle"
+          onClick={(e) => e.detail === 0 && toggleSheet()}
+          aria-expanded={sheetSnap === "full"}
+          aria-label={t(sheetSnap === "full" ? "explore.collapse" : "explore.expand")}
         />
-        <div className="button-box">
-          <button onClick={handleSubmit} disabled={isPending}>
-            {isPending ? t("register.submitting") : t("register.submit")}
-          </button>
+
+        <div className="explore__body">
+          <section className="panel-section">
+            <h2 className="panel-section__title">{t("register.section_location")}</h2>
+            <p className="panel-section__hint">{t("register.location_hint")}</p>
+            <CoordinateRegister />
+            <SharedMapLinkSearch />
+          </section>
+
+          <section className="panel-section">
+            <label className="panel-section__title" htmlFor="register-content">
+              {t("register.section_desc")}
+            </label>
+            <input
+              id="register-content"
+              className="field"
+              type="text"
+              placeholder={t("register.placeholder")}
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+            />
+          </section>
+
+          <section className="panel-section">
+            <h2 className="panel-section__title">{t("register.section_type")}</h2>
+            <TagListComponent
+              items={decorList}
+              isSelected={(item) => selectedTag === item.name}
+              onTagClick={(item) => setSelectedTag(item.name)}
+            />
+          </section>
         </div>
+      </aside>
+
+      <div className="explore__footer">
+        <button
+          type="button"
+          className="btn btn--primary btn--block"
+          onClick={handleSubmit}
+          disabled={isPending}
+        >
+          {isPending ? t("register.submitting") : t("register.submit")}
+        </button>
+      </div>
+
+      <div className="explore__map">
+        <Suspense fallback={<div className="explore__map-loading">{t("find.mapLoading")}</div>}>
+          <LazyMap showSearchBox={false} zoomControlPosition={null} locatePosition={null}>
+            <FlyTo target={flyTarget} />
+            <MapControls />
+          </LazyMap>
+        </Suspense>
       </div>
     </div>
   );

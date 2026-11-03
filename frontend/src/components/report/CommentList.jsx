@@ -6,30 +6,40 @@ export default function CommentList({ list = [] }) {
   const sortedList = [...list].sort(
     (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
   );
+
+  if (sortedList.length === 0) {
+    return <p className="empty">{t("report.empty")}</p>;
+  }
+
   return (
-    <div className="comment-list">
+    <ul className="comment-list">
       {sortedList.map((item, idx) => (
-        <div key={idx} className="comment-item">
-          <div className="comment-item-header">
-            <div
-              className="comment-item-emoji emoji"
-              style={{ backgroundColor: item.bgColor }}
-            >
-              {item.emoji}
+        <li key={idx} className="comment-item">
+          <span
+            className="report-avatar emoji"
+            style={{ backgroundColor: item.bgColor }}
+            aria-hidden="true"
+          >
+            {item.emoji}
+          </span>
+          <div className="comment-item__body">
+            <div className="comment-item__head">
+              <strong className="comment-item__nickname">{item.nickname}</strong>
+              <span className="comment-item__meta">
+                {t(`report.category.${item.category}`)} · {item.createdAt}
+              </span>
             </div>
-            <div className="comment-item-nickname">{item.nickname}</div>
-          </div>
-          <div className="comment-item-text">{item.comment}</div>
+            <p className="comment-item__text">{item.comment}</p>
 
-          {item.answer && (
-            <div className="comment-item-answer">{item.answer}</div>
-          )}
-
-          <div className="comment-item-meta">
-            {t(`report.category.${item.category}`)} / {item.createdAt}
+            {item.answer && (
+              <div className="comment-item__answer">
+                <strong>{t("report.answer")}</strong>
+                <p>{item.answer}</p>
+              </div>
+            )}
           </div>
-        </div>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 }

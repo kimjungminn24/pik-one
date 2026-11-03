@@ -1,18 +1,20 @@
 import React from "react";
+import "../../css/tag.scss";
 
 export default function CategorySelector({ categoryList, selected, onSelect }) {
   return (
-    <div className="report-category">
+    <div className="report-category" role="radiogroup">
       {categoryList.map((category) => (
-        <div
+        <button
           key={category.code}
-          className={`report-category-item ${
-            selected === category.code ? "active" : ""
-          }`}
+          type="button"
+          role="radio"
+          aria-checked={selected === category.code}
+          className={`tag ${selected === category.code ? "tag--selected" : ""}`}
           onClick={() => onSelect(category)}
         >
-          {category.label}
-        </div>
+          <span className="tag__name">{category.label}</span>
+        </button>
       ))}
     </div>
   );

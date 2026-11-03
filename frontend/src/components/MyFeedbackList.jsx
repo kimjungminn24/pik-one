@@ -1,45 +1,35 @@
 import { useTranslation } from "react-i18next";
-import "../css/feedback.scss";
-import { useDecorDetail } from "../hooks/useDecor";
-import { useEffect, useState } from "react";
 
-export default function MyFeedbackList({ feedbacks, onSelectDecor }) {
+export default function MyFeedbackList({ feedbacks, onSelect }) {
   const { t } = useTranslation();
-  const [selectedId, setSelectedId] = useState(null);
-  const { data: decorDetail } = useDecorDetail(selectedId, !!selectedId);
-
-  useEffect(() => {
-    if (decorDetail) {
-      onSelectDecor(decorDetail);
-    }
-  }, [decorDetail, onSelectDecor]);
-
-  const clickFeedback = (id) => {
-    setSelectedId(id);
-  };
 
   return (
-    <div className="myfeedback-list">
-      {feedbacks.map((item) => (
-        <div
-          key={item.id}
-          className="myfeedback-list__item"
-          onClick={() => clickFeedback(item.decorId)}
-        >
-          <strong
-            className={`feedback-list__label ${
-              item.type === "HELPFUL"
-                ? "feedback-list__label--helpful emoji"
-                : "feedback-list__label--not-found emoji"
-            }`}
-          >
-            {item.type === "HELPFUL"
-              ? t("feedback.found")
-              : t("feedback.not_found")}
-          </strong>
-          <span className="feedback-list__content">{item.content}</span>
-        </div>
-      ))}
-    </div>
+    <ul className="my-feedback-list">
+      {feedbacks.map((item) => {
+        const key = item.type === "HELPFUL" ? "found" : "not_found";
+        return (
+          <li key={item.id}>
+            <button
+              type="button"
+              className={`my-feedback spot-detail__review is-${key}`}
+              onClick={() => onSelect(item.decorId)}
+            >
+              <span className="spot-detail__review-emoji emoji" aria-hidden="true">
+                {item.type === "HELPFUL" ? "😊" : "😢"}
+              </span>
+              <span className="spot-detail__review-body">
+                <strong className="spot-detail__review-result">{t(`spot.${key}`)}</strong>
+                {item.content && (
+                  <span className="spot-detail__review-text">{item.content}</span>
+                )}
+              </span>
+              <span className="my-feedback__chevron" aria-hidden="true">
+                ›
+              </span>
+            </button>
+          </li>
+        );
+      })}
+    </ul>
   );
 }
