@@ -146,7 +146,9 @@
     "section_location": "Location",
     "location_hint": "Tap the map to set the spot. You can also search by coordinates or a shared map link.",
     "section_type": "Type",
-    "section_desc": "Note"
+    "section_desc": "Note",
+    "anonymous_notice": "You are not logged in, so this spot will be posted anonymously. Anonymous spots do not appear in My Page and cannot be deleted.",
+    "anonymous_login": "Log in"
   },
   "coordinate": {
     "latitude": "Latitude",
@@ -219,7 +221,9 @@
     "unlike": "Unlike",
     "people": "{{count}}",
     "mine": "Mine",
-    "delete_spot": "Delete this spot"
+    "delete_spot": "Delete this spot",
+    "anonymous": "Anonymous",
+    "anonymous_by": "Posted anonymously"
   },
   "community": {
     "title": "Find more communities",

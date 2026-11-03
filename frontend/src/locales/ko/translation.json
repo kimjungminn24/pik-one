@@ -146,7 +146,9 @@
     "section_location": "위치",
     "location_hint": "지도를 누르면 그 자리가 입력돼요. 좌표나 지도 공유 링크로도 찾을 수 있어요.",
     "section_type": "종류",
-    "section_desc": "설명"
+    "section_desc": "설명",
+    "anonymous_notice": "로그인하지 않으면 익명으로 등록돼요. 익명 스팟은 내 정보에 남지 않고 지울 수도 없어요.",
+    "anonymous_login": "로그인하기"
   },
   "coordinate": {
     "latitude": "위도",
@@ -219,7 +221,9 @@
     "unlike": "좋아요 취소",
     "people": "{{count}}명",
     "mine": "내 기록",
-    "delete_spot": "이 스팟 삭제하기"
+    "delete_spot": "이 스팟 삭제하기",
+    "anonymous": "익명",
+    "anonymous_by": "익명으로 등록된 스팟"
   },
   "community": {
     "title": "더 많은 커뮤니티를 이용하세요",

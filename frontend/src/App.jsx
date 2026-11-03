@@ -55,11 +55,7 @@ function App() {
             <Route path="/find" element={<Navigate to="/" replace />} />
             <Route
               path="/register"
-              element={
-                <PrivateRoute>
-                  <Register />
-                </PrivateRoute>
-              }
+              element={<Register />}
             />
             <Route path="/feedback" element={<Feedback />} />
             <Route path="/login" element={<Login />} />
