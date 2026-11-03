@@ -3,7 +3,8 @@ import L from "leaflet";
 import { useMap, useMapEvents } from "react-leaflet";
 import { useTranslation } from "react-i18next";
 
-function useLocate() {
+// onFound가 있으면 찾은 위치를 넘겨준다 (등록 화면은 그 자리를 바로 입력)
+function useLocate(onFound) {
   const map = useMap();
   const { t } = useTranslation();
 
@@ -19,6 +20,7 @@ function useLocate() {
         map.flyTo([latitude, longitude], 16, {
           duration: 1.5,
         });
+        onFound?.(latitude, longitude);
       },
       () => {
         alert(t("locate.error_no_position"));
@@ -42,10 +44,10 @@ function LocateIcon() {
   );
 }
 
-export default function MapControls() {
+export default function MapControls({ onLocate }) {
   const map = useMap();
   const { t } = useTranslation();
-  const locate = useLocate();
+  const locate = useLocate(onLocate);
   const ref = useRef(null);
   const [zoom, setZoom] = useState(map.getZoom());
 
