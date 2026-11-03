@@ -42,7 +42,6 @@
     "fontverter": "2.0.0",
     "harfbuzzjs": "1.6.3",
     "source-map-explorer": "^2.5.3",
-    "subset-font": "2.9.0",
     "vite": "^7.3.0"
   }
 }

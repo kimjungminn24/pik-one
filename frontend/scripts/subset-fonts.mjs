@@ -1,13 +1,12 @@
 // 웹폰트 서브셋 만들기: npm run fonts:subset
-// fonts-src의 원본 폰트에서 쓰는 글자만 남겨 public/fonts에 woff2로 저장하고,
-// TossFace는 조각별 @font-face 규칙을 src/css/_tossface.scss로 만든다.
-// 데코 종류, 이모지, 일본어 문구를 바꾼 뒤 다시 실행한다.
+// fonts-src의 TossFace에서 쓰는 이모지만 남겨 public/fonts에 woff2로 저장하고,
+// 조각별 @font-face 규칙을 src/css/_tossface.scss로 만든다.
+// 데코 종류나 이모지를 바꾼 뒤 다시 실행한다.
 import { readFile, readdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import * as hb from "harfbuzzjs";
 import fontverter from "fontverter";
-import subsetFont from "subset-font";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const SRC_DIR = path.join(root, "src");
@@ -224,17 +223,5 @@ async function buildTossFace(code) {
   );
 }
 
-/* ── Noto Sans JP: 가나·문장부호 전체 + 번역 문구에 나오는 한자만 ── */
-async function buildNotoSansJP(code) {
-  const source = await readFile(path.join(FONT_SRC, "NotoSansJP-Bold.ttf"));
-  const kanji = code.match(/[一-鿿]/gu) ?? [];
-  const chars = [...range(0x3000, 0x30ff), ...range(0xff00, 0xffef)].map((cp) => String.fromCodePoint(cp));
-  const text = [...new Set([...chars, ...kanji])].join("");
-  const woff2 = await subsetFont(source, text, { targetFormat: "woff2" });
-  await writeFile(path.join(FONT_OUT, "NotoSansJP-Bold.woff2"), woff2);
-  console.log(`Noto Sans JP: ${[...text].length} chars, ${kb(woff2.length)}`);
-}
-
 const code = await readSources(SRC_DIR);
 await buildTossFace(code);
-await buildNotoSansJP(code);
