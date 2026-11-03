@@ -143,7 +143,7 @@
     "section_location": "位置",
     "section_type": "種類",
     "section_desc": "説明",
-    "anonymous_notice": "ログインしていないと匿名で登録されます。匿名のスポットはマイページに残らず、削除もできません。",
+    "anonymous_notice": "ログインしていないと匿名で登録されます。",
     "anonymous_login": "ログインする"
   },
   "coordinate": {
