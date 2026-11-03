@@ -112,7 +112,8 @@
     "INVALID_MAP_LINK": "This is not a valid map link.",
     "MAP_LINK_NOT_FOUND": "The specified map information could not be found.",
     "MAP_COORDINATE_PARSE_ERROR": "Failed to extract coordinates from the map link.",
-    "MAP_EXTERNAL_API_ERROR": "Failed to communicate with the map service."
+    "MAP_EXTERNAL_API_ERROR": "Failed to communicate with the map service.",
+    "TOO_MANY_REQUESTS": "Too many requests. Please try again in a moment."
   },
   "report": {
     "nickname": "Nickname",
