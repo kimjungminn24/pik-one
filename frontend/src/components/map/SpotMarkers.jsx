@@ -107,7 +107,25 @@ export default function SpotMarkers({ spots, selectedId, highlightId, onSelect }
     [index, view, map]
   );
 
+  // 묶음이 보이는 줌에서는 혼자 있는 스팟도 "1" 묶음으로 보여 줘서 모양을 맞춤
+  const singleAsCluster = view.zoom <= CLUSTER_MAX_ZOOM;
+
   return items.map((item) => {
+    if (item.spot && singleAsCluster) {
+      const { spot } = item;
+      const isActive = spot.id === selectedId || spot.id === highlightId;
+      return (
+        <Marker
+          key={`${item.key}-single-${lang}`}
+          position={item.position}
+          icon={createClusterIcon(1, [spot.type], isActive)}
+          title={spotTitle(spot)}
+          zIndexOffset={isActive ? 900 : 500}
+          eventHandlers={item.handlers}
+        />
+      );
+    }
+
     if (item.spot) {
       const { spot } = item;
       const state =
