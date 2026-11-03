@@ -1,3 +1,5 @@
+import { handleFetchError } from "../utils/handleFetchError";
+
 const BASE_URL = `${import.meta.env.VITE_BACKEND_URL}/like`;
 export const postLike = async ({ id }) => {
   const res = await fetch(`${BASE_URL}/${id}`, {
