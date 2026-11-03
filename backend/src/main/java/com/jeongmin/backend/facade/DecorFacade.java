@@ -6,6 +6,7 @@ import com.jeongmin.backend.entity.User;
 import com.jeongmin.backend.exception.ErrorCode;
 import com.jeongmin.backend.exception.RestApiException;
 import com.jeongmin.backend.service.DecorService;
+import com.jeongmin.backend.service.FeedbackService;
 import com.jeongmin.backend.service.LikeService;
 import com.jeongmin.backend.service.UserService;
 import com.jeongmin.backend.utils.SecurityUtil;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -21,13 +23,22 @@ public class DecorFacade {
     private final DecorService decorService;
     private final UserService userService;
     private final LikeService likeService;
+    private final FeedbackService feedbackService;
     private final DecorCreateLockManager lockManager;
     private final DecorLockKeyGenerator lockKeyGenerator;
 
     @Transactional(readOnly = true)
-    public List<DecorResponse> searchDecorInBoundary(DecorSearchRequest request) {
-        return decorService.searchDecorInBoundary(request).stream()
-                .map(DecorResponse::from)
+    public List<DecorSearchResponse> searchDecorInBoundary(DecorSearchRequest request) {
+        List<Decor> decors = decorService.searchDecorInBoundary(request);
+        Map<Long, FeedbackCounts> counts = feedbackService.countByDecorIds(
+                decors.stream().map(Decor::getId).toList()
+        );
+
+        return decors.stream()
+                .map(decor -> DecorSearchResponse.of(
+                        decor,
+                        counts.getOrDefault(decor.getId(), FeedbackCounts.EMPTY)
+                ))
                 .toList();
     }
 

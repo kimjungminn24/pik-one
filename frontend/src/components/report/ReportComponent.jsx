@@ -13,14 +13,14 @@ import { useCreateIssue, useGetIssues } from "../../hooks/useIssue";
 import LoadingSpinner from "../LoadingSpinner";
 import { useTranslation } from "react-i18next";
 
-export default function ReportComponent({ enabled }) {
+export default function ReportComponent({ enabled, outro }) {
   const getRandomElement = (arr) => arr[Math.floor(Math.random() * arr.length)];
   const { t, i18n } = useTranslation();
   const lang = i18n.language.startsWith("ja")
     ? "ja"
     : i18n.language.startsWith("en")
-    ? "en"
-    : "ko";
+      ? "en"
+      : "ko";
   const { prefix, core } = nicknameOptions[lang];
 
   const { data: list, isLoading } = useGetIssues(enabled);
@@ -28,7 +28,7 @@ export default function ReportComponent({ enabled }) {
   const [bgColor, setBgColor] = useState(getRandomElement(randomColorList));
   const [emoji, setEmoji] = useState(getRandomElement(emojiList));
   const [nickname, setNickname] = useState(
-    `${getRandomElement(prefix)} ${getRandomElement(core)}`
+    `${getRandomElement(prefix)} ${getRandomElement(core)}`,
   );
   const [selectedCategory, setSelectedCategory] = useState("bug");
   const [commentText, setCommentText] = useState("");
@@ -62,7 +62,7 @@ export default function ReportComponent({ enabled }) {
 ${JSON.stringify(
   { emoji, category, bgColor, nickname, comment, createdAt, answer },
   null,
-  2
+  2,
 )}
 ISSUE_END -->
   `.trim();
@@ -89,37 +89,52 @@ ISSUE_END -->
   };
 
   return (
-    <div className="report">
-      <CategorySelector
-        categoryList={[
-          { code: "cheer", label: t("report.category.cheer") },
-          { code: "bug", label: t("report.category.bug") },
-          { code: "suggestion", label: t("report.category.suggestion") },
-        ]}
-        selected={selectedCategory}
-        onSelect={(c) => setSelectedCategory(c.code)}
-      />
+    <div className="shell report">
+      <aside className="shell__panel">
+        <section className="panel-section report-compose">
+          <NicknameBox
+            emoji={emoji}
+            bgColor={bgColor}
+            nickname={nickname}
+            onEmojiClick={handleEmojiClick}
+            onNicknameChange={setNickname}
+            onRandomize={handleNicknameRandomize}
+          />
 
-      <NicknameBox
-        emoji={emoji}
-        bgColor={bgColor}
-        nickname={nickname}
-        onEmojiClick={handleEmojiClick}
-        onNicknameChange={setNickname}
-        onRandomize={handleNicknameRandomize}
-      />
+          <CategorySelector
+            categoryList={[
+              { code: "cheer", label: t("report.category.cheer") },
+              { code: "bug", label: t("report.category.bug") },
+              { code: "suggestion", label: t("report.category.suggestion") },
+            ]}
+            selected={selectedCategory}
+            onSelect={(c) => setSelectedCategory(c.code)}
+          />
 
-      <CommentForm
-        text={commentText}
-        onChange={setCommentText}
-        onSubmit={handleSubmitComment}
-      />
+          <CommentForm
+            text={commentText}
+            onChange={setCommentText}
+            onSubmit={handleSubmitComment}
+          />
+        </section>
+        {outro}
+      </aside>
 
-      {isLoading ? (
-        <LoadingSpinner message="댓글을 불러오는 중이에요..." />
-      ) : (
-        <CommentList list={list} />
-      )}
+      <section className="shell__main report-feed">
+        <div className="report-feed__head">
+          <h2 className="panel-section__title report-feed__title">
+            {t("report.list_title")}
+            {!isLoading && list && (
+              <span className="panel-section__count">{list.length}</span>
+            )}
+          </h2>
+        </div>
+        {isLoading ? (
+          <LoadingSpinner message={t("report.loading")} />
+        ) : (
+          <CommentList list={list} />
+        )}
+      </section>
     </div>
   );
 }

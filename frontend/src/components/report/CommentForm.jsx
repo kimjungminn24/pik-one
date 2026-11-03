@@ -6,14 +6,20 @@ export default function CommentForm({ text, onChange, onSubmit }) {
   return (
     <div className="report-comment-form">
       <textarea
-        className="report-comment-textarea"
+        className="field"
         placeholder={t("report.form.placeholder")}
         value={text}
+        maxLength={1000}
         onChange={(e) => onChange(e.target.value)}
       />
-      <div className="report-comment-submit-button" onClick={onSubmit}>
+      <button
+        type="button"
+        className="btn btn--primary report-comment-form__submit"
+        onClick={onSubmit}
+        disabled={!text.trim()}
+      >
         {t("report.form.button")}
-      </div>
+      </button>
     </div>
   );
 }

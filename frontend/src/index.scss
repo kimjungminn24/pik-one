@@ -1,7 +1,13 @@
 @use "./css/global";
 
 body {
-  font-family: "Noto Sans KR", "Noto Sans JP", "Noto Sans", sans-serif;
+  font-family: "Pretendard Variable", Pretendard, -apple-system,
+    BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans JP", sans-serif;
+  color: var(--g900);
+  background: var(--page-bg);
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 input,
 textarea,
@@ -10,6 +16,7 @@ button,
 span,
 p {
   font-family: inherit;
+  letter-spacing: inherit;
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
@@ -21,22 +28,8 @@ code {
 }
 
 @font-face {
-  font-family: "Noto Sans";
-  src: url("/fonts/NotoSans-Bold.ttf") format("truetype");
-  font-weight: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Noto Sans KR";
-  src: url("/fonts/NotoSansKR-Bold.ttf") format("truetype");
-  font-weight: normal;
-  font-display: swap;
-}
-
-@font-face {
   font-family: "Noto Sans JP";
   src: url("/fonts/NotoSansJP-Bold.ttf") format("truetype");
-  font-weight: normal;
+  font-weight: 700;
   font-display: swap;
 }

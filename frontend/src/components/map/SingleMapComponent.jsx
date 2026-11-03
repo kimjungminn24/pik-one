@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { createCustomIcon } from "../../utils/markerIcon";
+import { TILE_ATTRIBUTION, TILE_OPTIONS, TILE_URL } from "../../utils/mapTiles";
 import "../../css/map.scss";
 function MapUpdater({ lat, lng }) {
   const map = useMap();
@@ -22,10 +23,7 @@ export default function SingleMapComponent({ lat, lng, type }) {
       doubleClickZoom={false}
       zoomControl={false}
     >
-      <TileLayer
-        attribution="&copy; OpenStreetMap contributors"
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
+      <TileLayer attribution={TILE_ATTRIBUTION} url={TILE_URL} {...TILE_OPTIONS} />
       <Marker position={[lat, lng]} icon={createCustomIcon(type)} />
       <MapUpdater lat={lat} lng={lng} />
     </MapContainer>

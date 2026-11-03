@@ -103,6 +103,7 @@ export const useCreateDecor = () => {
     mutationFn: createNewDecor,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["my-decors"] });
+      queryClient.invalidateQueries({ queryKey: ["decor"] });
     },
   });
 };
@@ -132,9 +133,13 @@ export const useDeleteDecor = () => {
   const { t } = useTranslation();
   return useMutation({
     mutationFn: deleteDecor,
-    onSuccess: () => {
+    onSuccess: (_, { id }) => {
       toast.success(t("toast.decor_delete"));
       queryClient.invalidateQueries({ queryKey: ["my-decors"] });
+      queryClient.invalidateQueries({
+        queryKey: ["decor"],
+        predicate: ({ queryKey }) => !(queryKey.length === 2 && queryKey[1] === id),
+      });
     },
   });
 };

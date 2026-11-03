@@ -5,22 +5,16 @@
     "find": "苗を探す",
     "mypage": "マイページ",
     "login": "ログイン",
-    "logout": "ログアウト"
+    "logout": "ログアウト",
+    "feedback": "ご意見",
+    "label": "メニュー",
+    "open": "メニューを開く",
+    "close": "メニューを閉じる",
+    "language": "言語"
   },
   "footer": {
-    "copyright": "© 2025 ソロスポット"
-  },
-  "home": {
-    "desc": "自分だけのスポットを登録して、他の人のスポットも見つけよう！",
-    "register": "単独スポットを登録しよう 🌿",
-    "find": "単独スポットを探そう 🔍",
-    "feedback": "あなたの意見を聞かせてください 💬",
-    "messages": [
-      "今日も新しいスポットを見つけよう！",
-      "小さな一歩が大きな地図を作ります 🗺️",
-      "良い場所は共有するほど輝きます 🌟",
-      "すべてのデコを完成させましょう 💫"
-    ]
+    "copyright": "© 2025 ソロスポット",
+    "privacy": "プライバシーポリシー"
   },
   "notfound": {
     "title": "404 ページが見つかりません 😢",
@@ -28,13 +22,9 @@
   },
   "find": {
     "mapLoading": "地図を読み込み中...",
-    "loadingMessage": "🌱 単独スポットを読み込み中です...",
-    "resultCount": "{{count}}件が見つかりました！",
-    "noResult": "検索された単独スポットがありません",
     "all": "すべて",
     "search_placeholder": "場所を検索してください",
-    "search_button": "検索",
-    "zoomInMore": "検索するには地図をもっと拡大する必要があります。"
+    "search_button": "検索"
   },
   "decor": {
     "RESTAURANT": "レストラン",
@@ -109,12 +99,15 @@
     "copyCoordinates": "座標をコピー"
   },
   "common": {
-    "loading": "読み込み中..."
+    "loading": "読み込み中...",
+    "close": "閉じる"
   },
   "mypage": {
-    "title": "見つけた場所",
-    "no_results": "登録された場所はありません。",
-    "feedback": "自分が投稿したフィードバック"
+    "title": "登録したスポット",
+    "no_results": "まだ登録したスポットがありません。",
+    "feedback": "残したフィードバック",
+    "go_register": "最初のスポットを登録",
+    "no_feedback": "まだフィードバックがありません。"
   },
   "feedback": {
     "placeholder": "フィードバックを入力してください",
@@ -162,25 +155,33 @@
       "提案": "suggestion"
     },
     "form": {
-      "placeholder": "コメントを入力してください",
-      "button": "コメントを送信"
+      "placeholder": "良かった点や不便な点を教えてください",
+      "button": "送信"
     },
     "createdAt": "作成時間",
     "content": "内容",
-    "answer": "回答",
+    "answer": "開発者の返信",
     "noAnswer": "まだありません",
-    "loading": "コメントを読み込んでいます..."
+    "loading": "コメントを読み込んでいます...",
+    "change_emoji": "絵文字を変える",
+    "list_title": "みんなの意見",
+    "empty": "まだ意見がありません。"
   },
   "register": {
     "placeholder": "簡単な説明を入力してください",
     "submit": "登録",
-    "submitting": "登録中..."
+    "submitting": "登録中...",
+    "desc": "地図をタップして位置を決め、種類と説明を入力してください。",
+    "section_location": "位置",
+    "location_hint": "地図をタップするとその場所が入力されます。座標や地図の共有リンクでも探せます。",
+    "section_type": "種類",
+    "section_desc": "説明"
   },
   "coordinate": {
     "latitude": "緯度",
     "longitude": "経度",
-    "lat_placeholder": "例: 37.5665",
-    "lng_placeholder": "例: 126.9780",
+    "lat_placeholder": "37.5665",
+    "lng_placeholder": "126.9780",
     "submit": "検索",
     "error_empty": "緯度と経度を入力してください。"
   },
@@ -190,17 +191,71 @@
     "error_no_position": "位置情報を取得できません。"
   },
   "info": {
-    "greeting": "こんにちは！韓国で開発者として就職活動中です。",
-    "bug": "バグや追加してほしい機能があれば、メイン画面の提案フォームからお知らせください。",
-    "ask": "ご不明な点があれば、気軽にメールでご連絡ください！",
     "email": "メール",
-    "friendCode": "ピクミンフレンドコード"
+    "friendCode": "ピクミンフレンドコード",
+    "go_feedback": "意見を送る"
   },
   "sharedMap": {
     "label": "地図リンクで位置検索",
-    "placeholder": "例）https://maps.google.com/...",
+    "placeholder": "地図の共有リンクを貼り付け",
     "submit": "検索",
     "loading": "検索中...",
     "help": "Googleマップ、NAVERマップ、カカオマップで共有されたリンクを貼り付けると、その位置に移動します。"
+  },
+  "explore": {
+    "panel_label": "単独スポット一覧",
+    "search_placeholder": "地域・場所を検索",
+    "search_clear": "検索語を消去",
+    "zoom_in": "地図を拡大すると、このエリアのスポットが表示されます。",
+    "empty": "このエリアにはまだ登録されたスポットがありません。",
+    "empty_register": "知っている場所がありますか？登録する",
+    "no_feedback": "まだ確認した人はいません",
+    "probability": "存在確率 {{value}}% · {{count}}人確認",
+    "distance_m": "{{value}}m",
+    "distance_km": "{{value}}km",
+    "back": "一覧",
+    "expand": "一覧を広げる",
+    "collapse": "一覧をたたむ",
+    "more_tags": "＋ ほかの種類 {{count}}",
+    "less_tags": "閉じる",
+    "empty_filtered": "選んだ種類はこのエリアにありません。地図を動かしてみてください。"
+  },
+  "map": {
+    "zoom": "地図の拡大・縮小",
+    "zoom_in": "拡大",
+    "zoom_out": "縮小"
+  },
+  "spot": {
+    "probability": "存在確率",
+    "votes": "見つけた {{found}} · なかった {{notFound}}",
+    "no_votes": "まだ確認した人はいません",
+    "coords": "座標",
+    "copy": "コピー",
+    "copied": "座標をコピーしました",
+    "ask": "ここで単独で出ましたか？",
+    "found": "見つけた",
+    "not_found": "なかった",
+    "comment_placeholder": "ひとこと (任意)",
+    "submit": "送信",
+    "submitting": "送信中...",
+    "sent": "教えてくれてありがとう",
+    "already": "このスポットにはすでにフィードバックしました",
+    "login_cta": "ログインして教える",
+    "reviews_title": "確認した人 {{count}}",
+    "delete": "削除",
+    "like": "いいね",
+    "unlike": "いいねを取り消す",
+    "people": "{{count}}人",
+    "mine": "自分",
+    "delete_spot": "このスポットを削除"
+  },
+  "community": {
+    "title": "ほかのコミュニティもどうぞ",
+    "korea": "韓国",
+    "pikmin_cafe": "ピクミン ファンカフェ",
+    "taiwan": "台湾",
+    "japan": "日本",
+    "usa": "アメリカ",
+    "need_info": "情報募集中！"
   }
 }

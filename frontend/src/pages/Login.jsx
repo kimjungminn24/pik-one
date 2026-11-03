@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 export default function Login() {
@@ -34,6 +35,9 @@ export default function Login() {
           >
             <img src="/google-btn.png" alt="google login" />
           </button>
+          <Link to="/privacy" className="login__privacy">
+            {t("footer.privacy")}
+          </Link>
         </div>
       </div>
     </div>

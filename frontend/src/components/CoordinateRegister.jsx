@@ -46,34 +46,34 @@ export default function CoordinateRegister() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="coordinate-register-form">
-      <div className="coordinate-register-form-outer">
-        <div className="coordinate-register-form-label">
-          {t("coordinate.latitude")}
-        </div>
+    <form onSubmit={handleSubmit} className="coord-form">
+      <label className="coord-form__item">
+        <span className="field-label">{t("coordinate.latitude")}</span>
         <input
           type="number"
           step="0.000001"
+          inputMode="decimal"
           value={lat}
-          className="coordinate-register-form-input"
+          className="field"
           onChange={(e) => setLat(e.target.value)}
           placeholder={t("coordinate.lat_placeholder")}
         />
-      </div>
-      <div className="coordinate-register-form-outer">
-        <div className="coordinate-register-form-label">
-          {t("coordinate.longitude")}
-        </div>
+      </label>
+      <label className="coord-form__item">
+        <span className="field-label">{t("coordinate.longitude")}</span>
         <input
           type="number"
           step="0.000001"
+          inputMode="decimal"
           value={lng}
-          className="coordinate-register-form-input"
+          className="field"
           onChange={(e) => setLng(e.target.value)}
           placeholder={t("coordinate.lng_placeholder")}
         />
-      </div>
-      <button type="submit">{t("coordinate.submit")}</button>
+      </label>
+      <button type="submit" className="btn btn--secondary coord-form__submit">
+        {t("coordinate.submit")}
+      </button>
     </form>
   );
 }

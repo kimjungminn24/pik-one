@@ -5,6 +5,7 @@ import com.jeongmin.backend.dto.DecorCreateRequest;
 import com.jeongmin.backend.dto.DecorDetailResponse;
 import com.jeongmin.backend.dto.DecorResponse;
 import com.jeongmin.backend.dto.DecorSearchRequest;
+import com.jeongmin.backend.dto.DecorSearchResponse;
 import com.jeongmin.backend.facade.DecorFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +20,8 @@ public class DecorController {
     private final DecorFacade decorFacade;
 
     @GetMapping("/search")
-    public ResponseEntity<List<DecorResponse>> getDecorList(@ModelAttribute DecorSearchRequest request) {
-        List<DecorResponse> response = decorFacade.searchDecorInBoundary(request);
+    public ResponseEntity<List<DecorSearchResponse>> getDecorList(@ModelAttribute DecorSearchRequest request) {
+        List<DecorSearchResponse> response = decorFacade.searchDecorInBoundary(request);
         return ResponseEntity.ok(response);
     }
 

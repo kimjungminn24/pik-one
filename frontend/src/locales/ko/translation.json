@@ -5,22 +5,16 @@
     "find": "모종 찾기",
     "mypage": "내 정보",
     "login": "로그인",
-    "logout": "로그아웃"
+    "logout": "로그아웃",
+    "feedback": "의견",
+    "label": "메뉴",
+    "open": "메뉴 열기",
+    "close": "메뉴 닫기",
+    "language": "언어"
   },
   "footer": {
-    "copyright": "© 2025 단독스팟"
-  },
-  "home": {
-    "desc": "나만의 단독 스팟을 등록하고, 다른 사람의 스팟도 발견해보세요!",
-    "register": "단독 스팟을 등록해보세요 🌿",
-    "find": "단독 스팟을 검색해보세요 🔍",
-    "feedback": "여러분의 의견을 들려주세요 💬",
-    "messages": [
-      "오늘도 새로운 스팟을 발견해보세요!",
-      "작은 발자국이 큰 지도를 만듭니다 🗺️",
-      "좋은 장소는 나눌수록 빛나요 🌟",
-      "모든 데코를 완성해보세요 💫"
-    ]
+    "copyright": "© 2025 단독스팟",
+    "privacy": "개인정보 처리방침"
   },
   "notfound": {
     "title": "404 페이지를 찾을 수 없습니다 😢",
@@ -28,13 +22,9 @@
   },
   "find": {
     "mapLoading": "지도를 불러오는 중...",
-    "loadingMessage": "🌱 단독 스팟을 불러오는 중이에요...",
-    "resultCount": "{{count}}개가 검색되었어요!",
-    "noResult": "검색된 단독 스팟이 없어요",
     "all": "전체",
     "search_placeholder": "장소를 검색하세요",
-    "search_button": "검색",
-    "zoomInMore": "지도를 더 확대해야 검색할 수 있어요."
+    "search_button": "검색"
   },
   "decor": {
     "RESTAURANT": "레스토랑",
@@ -109,12 +99,15 @@
     "copyCoordinates": "좌표 복사"
   },
   "common": {
-    "loading": "로딩 중..."
+    "loading": "로딩 중...",
+    "close": "닫기"
   },
   "mypage": {
-    "title": "내가 찾은 장소들",
-    "no_results": "등록한 장소가 없습니다.",
-    "feedback": "내가 작성한 피드백"
+    "title": "등록한 스팟",
+    "no_results": "아직 등록한 스팟이 없어요.",
+    "feedback": "남긴 피드백",
+    "go_register": "첫 스팟 등록하기",
+    "no_feedback": "아직 남긴 피드백이 없어요."
   },
   "feedback": {
     "placeholder": "피드백을 입력해주세요",
@@ -149,7 +142,7 @@
   },
   "report": {
     "nickname": "닉네임",
-    "change": "변경",
+    "change": "바꾸기",
     "category": {
       "title": "카테고리",
       "cheer": "응원",
@@ -162,25 +155,33 @@
       "제안": "suggestion"
     },
     "form": {
-      "placeholder": "댓글을 입력하세요",
-      "button": "댓글 남기기"
+      "placeholder": "좋았던 점, 불편했던 점을 들려주세요",
+      "button": "남기기"
     },
     "createdAt": "작성 시간",
     "content": "내용",
-    "answer": "답변",
+    "answer": "개발자 답변",
     "noAnswer": "아직 없음",
-    "loading": "댓글을 불러오는 중이에요..."
+    "loading": "댓글을 불러오는 중이에요...",
+    "change_emoji": "이모지 바꾸기",
+    "list_title": "남겨진 의견",
+    "empty": "아직 남겨진 의견이 없어요."
   },
   "register": {
     "placeholder": "간단한 설명을 입력하세요",
     "submit": "등록하기",
-    "submitting": "등록 중..."
+    "submitting": "등록 중...",
+    "desc": "지도를 눌러 위치를 찍고, 종류와 설명을 남겨 주세요.",
+    "section_location": "위치",
+    "location_hint": "지도를 누르면 그 자리가 입력돼요. 좌표나 지도 공유 링크로도 찾을 수 있어요.",
+    "section_type": "종류",
+    "section_desc": "설명"
   },
   "coordinate": {
     "latitude": "위도",
     "longitude": "경도",
-    "lat_placeholder": "ex: 37.5665",
-    "lng_placeholder": "ex: 126.9780",
+    "lat_placeholder": "37.5665",
+    "lng_placeholder": "126.9780",
     "submit": "조회",
     "error_empty": "위도와 경도를 모두 입력해주세요."
   },
@@ -190,17 +191,71 @@
     "error_no_position": "위치 정보를 가져올 수 없습니다."
   },
   "info": {
-    "greeting": "안녕하세요! 한국에 사는 취업준비생입니다.",
-    "bug": "버그나 추가했으면 하는 기능은 메인화면의 의견 제안창으로 알려주세요.",
-    "ask": "궁금한 점은 편하게 이메일로 연락 주세요!",
     "email": "이메일",
-    "friendCode": "피크민 친구 코드"
+    "friendCode": "피크민 친구 코드",
+    "go_feedback": "의견 남기러 가기"
   },
   "sharedMap": {
     "label": "지도 링크로 위치 조회",
-    "placeholder": "예) https://maps.google.com/...",
+    "placeholder": "지도 공유 링크 붙여넣기",
     "submit": "조회",
     "loading": "조회 중...",
     "help": "Google 지도, 네이버 지도, 카카오맵에서 공유한 링크를 붙여넣으면 해당 위치로 이동합니다."
+  },
+  "explore": {
+    "panel_label": "단독 스팟 목록",
+    "search_placeholder": "지역·장소 검색",
+    "search_clear": "검색어 지우기",
+    "zoom_in": "지도를 더 확대하면 이 지역 스팟이 보여요.",
+    "empty": "이 지역엔 아직 등록된 스팟이 없어요.",
+    "empty_register": "아는 곳이 있나요? 등록하기",
+    "no_feedback": "아직 확인한 사람이 없어요",
+    "probability": "존재 확률 {{value}}% · {{count}}명 확인",
+    "distance_m": "{{value}}m",
+    "distance_km": "{{value}}km",
+    "back": "목록",
+    "expand": "목록 펼치기",
+    "collapse": "목록 접기",
+    "more_tags": "＋ 다른 종류 {{count}}",
+    "less_tags": "접기",
+    "empty_filtered": "고른 종류는 이 지역에 없어요. 지도를 옮겨 보세요."
+  },
+  "map": {
+    "zoom": "지도 확대/축소",
+    "zoom_in": "확대",
+    "zoom_out": "축소"
+  },
+  "spot": {
+    "probability": "존재 확률",
+    "votes": "찾았어요 {{found}} · 없어요 {{notFound}}",
+    "no_votes": "아직 확인한 사람이 없어요",
+    "coords": "좌표",
+    "copy": "복사",
+    "copied": "좌표를 복사했어요",
+    "ask": "여기서 단독으로 나왔나요?",
+    "found": "찾았어요",
+    "not_found": "없어요",
+    "comment_placeholder": "한마디 남기기 (선택)",
+    "submit": "보내기",
+    "submitting": "보내는 중...",
+    "sent": "알려주셔서 고마워요",
+    "already": "이미 이 스팟에 피드백을 남겼어요",
+    "login_cta": "로그인하고 알려주기",
+    "reviews_title": "확인한 사람 {{count}}",
+    "delete": "삭제",
+    "like": "좋아요",
+    "unlike": "좋아요 취소",
+    "people": "{{count}}명",
+    "mine": "내 기록",
+    "delete_spot": "이 스팟 삭제하기"
+  },
+  "community": {
+    "title": "더 많은 커뮤니티를 이용하세요",
+    "korea": "한국",
+    "pikmin_cafe": "피크민 팬카페",
+    "taiwan": "대만",
+    "japan": "일본",
+    "usa": "미국",
+    "need_info": "정보가 필요해요!"
   }
 }

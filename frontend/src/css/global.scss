@@ -1,7 +1,6 @@
 :root {
-  /* Primary */
-  --color-primary: #64b5f6;
-  --color-primary-hover: #42a5f5;
+  --color-primary: var(--ink);
+  --color-primary-hover: var(--ink-hover);
 
   /* Status Colors */
   --color-success: #81c784;
@@ -45,6 +44,39 @@
   --color-shadow-strong: rgba(0, 0, 0, 0.15);
   --color-shadow-focus: rgba(56, 189, 248, 0.3);
 
+  --brand: #ffdc7d;
+  --brand-hover: #ffd35f;
+  --brand-soft: #fff8e3;
+  --brand-soft-hover: #fff0c4;
+  --brand-text: #a86f00;
+  --ink: #3b2f2a;
+  --ink-hover: #2a211d;
+
+  --g50: #faf8f5;
+  --g100: #f3efe9;
+  --g200: #e7e1d8;
+  --g300: #d6cfc5;
+  --g400: #bdb4a9;
+  --g500: #9a9087;
+  --g700: #5f554d;
+  --g800: #463c35;
+  --g900: #2e2622;
+  --page-bg: #fbf8f3;
+
+  --positive: #1fb46b;
+  --positive-soft: #e3f7ec;
+  --negative: #f0623a;
+  --negative-soft: #ffede7;
+  --danger: #e5484d;
+
+  --chip-bg: var(--g100);
+  --chip-bg-hover: var(--g200);
+  --chip-text: var(--g700);
+  --chip-count: var(--g500);
+  --chip-selected-bg: var(--brand);
+  --chip-selected-bg-hover: var(--brand-hover);
+  --chip-selected-text: var(--ink);
+
   /* Button Text */
   --color-btn-text: white;
   --color-count-bg: #e2e8f0;
@@ -63,14 +95,24 @@
 }
 
 html,
-body,
-#root {
+body {
   height: 100%;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 .main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   padding-top: 60px;
 }
 .page-layout {
@@ -115,6 +157,10 @@ body,
   }
 }
 @media (max-width: 48rem) {
+  .main {
+    padding-top: 52px;
+  }
+
   .page-layout {
     flex-direction: column;
   }
@@ -126,12 +172,13 @@ body,
 
 .emoji {
   font-family: "TossFace";
+  font-size: 20px;
 }
 
 button {
   width: fit-content;
   padding: 0.3rem 0.5rem;
-  background-color: #38bdf8;
+  background-color: var(--ink);
   color: white;
   border: none;
   border-radius: 8px;
