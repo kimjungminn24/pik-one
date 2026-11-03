@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
+import MascotPanel from "../components/MascotPanel";
 import "../css/page.scss";
 import "../css/info.scss";
 
@@ -48,25 +49,7 @@ export default function Info() {
         </section>
       </aside>
 
-      <section className="shell__main info-visual">
-        <div className="info-mascot">
-          <a
-            className="info-mascot__credit"
-            href="https://www.instagram.com/sarii_illustration/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            @sarii_illustration
-          </a>
-          <img
-            src="/cute-200.webp"
-            srcSet="/cute-200.webp 1x, /cute-320.webp 2x"
-            width="320"
-            height="320"
-            alt=""
-          />
-        </div>
-      </section>
+      <MascotPanel />
     </div>
   );
 }
