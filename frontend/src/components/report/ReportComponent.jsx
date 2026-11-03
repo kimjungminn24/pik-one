@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import CategorySelector from "./CategorySelector";
 import NicknameBox from "./NicknameBox";
 import CommentForm from "./CommentForm";
