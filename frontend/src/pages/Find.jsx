@@ -117,6 +117,8 @@ export default function Find() {
       .sort((a, b) => a.distance - b.distance);
   }, [isAllMode, spotsInView, selectedTags, center]);
 
+  const mapSpots = useMemo(() => visibleSpots.map((v) => v.spot), [visibleSpots]);
+
   const handleTagClick = (item) => {
     if (item.name === "ALL") {
       setSelectedTags([]);
@@ -269,7 +271,7 @@ export default function Find() {
       <div className="explore__map">
         <Suspense fallback={<div className="explore__map-loading">{t("find.mapLoading")}</div>}>
           <LazyMap
-            searchResults={visibleSpots.map((v) => v.spot)}
+            searchResults={mapSpots}
             showLocationMarker={false}
             showSearchBox={false}
             zoomControlPosition={null}

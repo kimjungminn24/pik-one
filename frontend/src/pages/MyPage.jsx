@@ -15,11 +15,13 @@ import "../css/tag.scss";
 
 const LazyMap = React.lazy(() => import("../components/map/MapComponent"));
 
+const NONE = [];
+
 export default function MyPage() {
   const { t } = useTranslation();
 
-  const { data: decors = [], isLoading: decorsLoading } = useMyDecorsQuery();
-  const { data: feedbacks = [], isLoading: feedbacksLoading } = useMyFeedbacksQuery();
+  const { data: decors = NONE, isLoading: decorsLoading } = useMyDecorsQuery();
+  const { data: feedbacks = NONE, isLoading: feedbacksLoading } = useMyFeedbacksQuery();
 
   const [tab, setTab] = useState("spots"); // "spots" | "feedback"
   const [selectedId, setSelectedId] = useState(null);
