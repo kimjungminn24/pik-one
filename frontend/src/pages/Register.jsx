@@ -94,15 +94,6 @@ export default function Register() {
         />
 
         <div className="explore__body">
-          {!isLogin && (
-            <p className="register-notice">
-              {t("register.anonymous_notice")}{" "}
-              <Link to="/login" className="register-notice__link">
-                {t("register.anonymous_login")}
-              </Link>
-            </p>
-          )}
-
           <section className="panel-section">
             <h2 className="panel-section__title">{t("register.section_location")}</h2>
             <CoordinateRegister />
@@ -143,6 +134,12 @@ export default function Register() {
         >
           {isPending ? t("register.submitting") : t("register.submit")}
         </button>
+        {!isLogin && (
+          <p className="register-anon">
+            {t("register.anonymous_notice")}{" "}
+            <Link to="/login">{t("register.anonymous_login")}</Link>
+          </p>
+        )}
       </div>
 
       <div className="explore__map">
