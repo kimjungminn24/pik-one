@@ -6,7 +6,6 @@ import SpotMarkers from "./SpotMarkers";
 import { TILE_ATTRIBUTION, TILE_OPTIONS, TILE_URL } from "../../utils/mapTiles";
 import "../../css/map.scss";
 import { useLocationStore } from "../../store/useLocationStore";
-import { MapCenterUpdater } from "./MapCenterUpdater";
 import ZoomTracker from "./ZoomTracker";
 
 const NO_SPOTS = [];
@@ -26,8 +25,8 @@ export default function MapComponent({
 }) {
   const { bounds, zoom } = useLocationStore();
   const initialCenter = [
-    (Number(bounds.northLat) + Number(bounds.southLat)) / 2,
-    (Number(bounds.eastLng) + Number(bounds.westLng)) / 2,
+    (bounds.northLat + bounds.southLat) / 2,
+    (bounds.eastLng + bounds.westLng) / 2,
   ];
 
   return (
@@ -42,7 +41,6 @@ export default function MapComponent({
       className="map__container"
     >
       <ZoomTracker />
-      <MapCenterUpdater />
 
       <TileLayer
         attribution={TILE_ATTRIBUTION}

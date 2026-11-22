@@ -33,9 +33,8 @@ const distanceMeters = (a, b) => {
 
 // 지도가 옆으로 이어져서 경도가 -180~180 밖일 수 있음. 한 바퀴 이상 보이면 경도는 다 통과
 const inBounds = (spot, b) => {
-  const west = Number(b.westLng);
-  const east = Number(b.eastLng);
-  if (spot.lat < Number(b.southLat) || spot.lat > Number(b.northLat)) return false;
+  const { westLng: west, eastLng: east } = b;
+  if (spot.lat < b.southLat || spot.lat > b.northLat) return false;
   if (east - west >= 360) return true;
   const lng = ((((spot.lng - west) % 360) + 360) % 360) + west;
   return lng <= east;
@@ -91,8 +90,8 @@ export default function Find() {
 
   const center = useMemo(
     () => ({
-      lat: (Number(bounds.northLat) + Number(bounds.southLat)) / 2,
-      lng: (Number(bounds.eastLng) + Number(bounds.westLng)) / 2,
+      lat: (bounds.northLat + bounds.southLat) / 2,
+      lng: (bounds.eastLng + bounds.westLng) / 2,
     }),
     [bounds]
   );

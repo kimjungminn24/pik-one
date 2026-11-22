@@ -2,47 +2,34 @@ import { useEffect, useState } from "react";
 import { useLocationStore } from "../store/useLocationStore";
 import { useTranslation } from "react-i18next";
 
-export default function CoordinateRegister() {
+// onMove(lat, lng): 입력한 위치로 지도를 옮긴다
+export default function CoordinateRegister({ onMove }) {
   const { t } = useTranslation();
 
-  const {
-    lat: storeLat,
-    lng: storeLng,
-    setLocation,
-    setBounds,
-    setIsExternalUpdate,
-  } = useLocationStore();
+  const { lat: storeLat, lng: storeLng, setLocation } = useLocationStore();
 
-  const [lat, setLat] = useState(storeLat || "");
-  const [lng, setLng] = useState(storeLng || "");
+  const [lat, setLat] = useState(storeLat ?? "");
+  const [lng, setLng] = useState(storeLng ?? "");
 
   useEffect(() => {
-    setLat(storeLat || "");
+    setLat(storeLat ?? "");
   }, [storeLat]);
 
   useEffect(() => {
-    setLng(storeLng || "");
+    setLng(storeLng ?? "");
   }, [storeLng]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!lat || !lng) {
+    const parsedLat = parseFloat(lat);
+    const parsedLng = parseFloat(lng);
+    if (Number.isNaN(parsedLat) || Number.isNaN(parsedLng)) {
       alert(t("coordinate.error_empty"));
       return;
     }
-    setIsExternalUpdate(true);
-    const parsedLat = parseFloat(lat);
-    const parsedLng = parseFloat(lng);
     setLocation(parsedLat, parsedLng);
-    const offset = 0.01;
-    setBounds({
-      northLat: parsedLat + offset,
-      southLat: parsedLat - offset,
-      eastLng: parsedLng + offset,
-      westLng: parsedLng - offset,
-    });
-    setTimeout(() => setIsExternalUpdate(false), 500);
+    onMove?.(parsedLat, parsedLng);
   };
 
   return (

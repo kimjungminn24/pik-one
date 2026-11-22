@@ -1,5 +1,5 @@
 import { useMap, useMapEvents } from "react-leaflet";
-import { useLocationStore } from "../../store/useLocationStore";
+import { round6, useLocationStore } from "../../store/useLocationStore";
 
 export function FetchOnMove() {
   const map = useMap();
@@ -10,10 +10,10 @@ export function FetchOnMove() {
       const bounds = map.getBounds();
 
       setBounds({
-        northLat: bounds.getNorth().toFixed(6),
-        southLat: bounds.getSouth().toFixed(6),
-        eastLng: bounds.getEast().toFixed(6),
-        westLng: bounds.getWest().toFixed(6),
+        northLat: round6(bounds.getNorth()),
+        southLat: round6(bounds.getSouth()),
+        eastLng: round6(bounds.getEast()),
+        westLng: round6(bounds.getWest()),
       });
     },
   });
