@@ -60,16 +60,16 @@ export default function Register() {
         content,
       },
       {
+        // 실패하면 입력은 그대로 둔다
         onSuccess: (spot) => {
+          setContent("");
+          setSelectedTag("");
           toast.success(t("toast.decor_success"));
           // 찾기 화면에서 방금 등록한 스팟을 바로 열어 준다
           navigate("/", { state: { registered: spot } });
         },
       }
     );
-
-    setContent("");
-    setSelectedTag("");
   };
 
   return (
