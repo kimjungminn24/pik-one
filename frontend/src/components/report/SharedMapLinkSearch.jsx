@@ -4,8 +4,9 @@ import { useResolveSharedLink } from "../../hooks/useLocation";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 
-export default function SharedMapLinkSearch() {
-  const { setLocation, setBounds, setIsExternalUpdate } = useLocationStore();
+// onMove(lat, lng): 찾은 위치로 지도를 옮긴다
+export default function SharedMapLinkSearch({ onMove }) {
+  const setLocation = useLocationStore((state) => state.setLocation);
 
   const [url, setUrl] = useState("");
   const { mutate, isPending } = useResolveSharedLink();
@@ -26,19 +27,9 @@ export default function SharedMapLinkSearch() {
           toast.warn(t("toast.map_link_parse_error"));
           return;
         }
-        setIsExternalUpdate(true);
         setLocation(parsedLat, parsedLng);
-
-        const offset = 0.03;
-        setBounds({
-          northLat: parsedLat + offset,
-          southLat: parsedLat - offset,
-          eastLng: parsedLng + offset,
-          westLng: parsedLng - offset,
-        });
+        onMove?.(parsedLat, parsedLng);
         toast.success(t("toast.map_link_success"));
-
-        setTimeout(() => setIsExternalUpdate(false), 500);
       },
     });
   };

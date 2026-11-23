@@ -40,8 +40,10 @@ export default function Register() {
     ".explore__sheet-handle"
   );
 
+  const moveTo = (fLat, fLng) => setFlyTarget({ lat: fLat, lng: fLng, zoom: 17, key: Date.now() });
+
   const handleSubmit = () => {
-    if (!lat || !lng) {
+    if (lat == null || lng == null) {
       toast.error(t("toast.register_pos_error"));
       return;
     }
@@ -52,31 +54,29 @@ export default function Register() {
 
     mutate(
       {
-        lat: parseFloat(lat),
-        lng: parseFloat(lng),
+        lat,
+        lng,
         type: selectedTag,
         content,
       },
       {
+        // 실패하면 입력은 그대로 둔다
         onSuccess: (spot) => {
+          setContent("");
+          setSelectedTag("");
           toast.success(t("toast.decor_success"));
           // 찾기 화면에서 방금 등록한 스팟을 바로 열어 준다
           navigate("/", { state: { registered: spot } });
         },
       }
     );
-
-    setContent("");
-    setSelectedTag("");
   };
 
   return (
     <div className={`explore explore--sheet-${sheetSnap}`}>
       <PlaceSearch
         className="explore__search"
-        onFound={({ lat: fLat, lng: fLng }) =>
-          setFlyTarget({ lat: fLat, lng: fLng, zoom: 17, key: Date.now() })
-        }
+        onFound={({ lat: fLat, lng: fLng }) => moveTo(fLat, fLng)}
       />
 
       <aside
@@ -96,8 +96,8 @@ export default function Register() {
         <div className="explore__body">
           <section className="panel-section">
             <h2 className="panel-section__title">{t("register.section_location")}</h2>
-            <CoordinateRegister />
-            <SharedMapLinkSearch />
+            <CoordinateRegister onMove={moveTo} />
+            <SharedMapLinkSearch onMove={moveTo} />
           </section>
 
           <section className="panel-section">
@@ -146,7 +146,7 @@ export default function Register() {
         <Suspense fallback={<div className="explore__map-loading">{t("find.mapLoading")}</div>}>
           <LazyMap>
             <FlyTo target={flyTarget} />
-            <MapControls onLocate={(fLat, fLng) => setLocation(fLat.toFixed(6), fLng.toFixed(6))} />
+            <MapControls onLocate={setLocation} />
           </LazyMap>
         </Suspense>
       </div>
